@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="امکانات و تجهیزات پیشرفته هنرستان دانشمند قلم چی - محیطی حرفه‌ای برای مهارت‌آموزی با استانداردهای جهانی و فناوری‌های روز">
+    <meta name="keywords" content="آزمایشگاه هوش مصنوعی, کارگاه فنی, امکانات آموزشی, هنرستان مجهز, تجهیزات پیشرفته">
+    <title>امکانات پیشرفته | هنرستان فنی حرفه‌ای دانشمند قلم چی</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-color: #006D77;
+            --secondary-color: #83C5BE;
+            --accent-color: #FFD166;
+            --light-color: #EDF6F9;
+            --dark-color: #003844;
+            --success-color: #06D6A0;
+            --gradient-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-accent: linear-gradient(135deg, var(--accent-color), #FFB347);
+            --gradient-dark: linear-gradient(135deg, var(--dark-color), #002A32);
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.8;
+            padding-top: 80px;
+        }
+        
+        /* نوار ناوبری پیشرفته */
+        .navbar-custom {
+            background: rgba(0, 109, 119, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
+            transition: all 0.4s ease;
+        }
+        
+        .navbar-custom.scrolled {
+            background: var(--primary-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            padding: 0.6rem 0;
+        }
+        
+        .navbar-custom .navbar-brand {
+            color: white;
+            font-weight: 900;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .navbar-custom .navbar-brand img {
+            height: 42px;
+            margin-left: 10px;
+            transition: transform 0.3s;
+        }
+        
+        .navbar-custom .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+        
+        .navbar-custom .navbar-brand:hover img {
+            transform: rotate(-5deg);
+        }
+        
+        .navbar-custom .nav-link {
+            color: rgba(255, 255, 255, 0.92);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            margin: 0 0.3rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        
+        .navbar-custom .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+        
+        .navbar-custom .nav-link:hover::before,
+        .navbar-custom .nav-link.active::before {
+            width: 100%;
+            left: 0;
+        }
+        
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            color: white;
+        }
+        
+        /* هدر صفحه */
+        .facilities-hero {
+            background: var(--gradient-bg);
+            color: white;
+            padding: 8rem 0 5rem;
+            position: relative;
+            overflow: hidden;
+            margin-top: -80px;
+            background-image: url('assets/images/facilities-hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+        
+        .facilities-hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 61, 68, 0.85);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 1.8rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            line-height: 1.3;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            max-width: 750px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            background: var(--gradient-accent);
+            color: var(--dark-color);
+            font-weight: 800;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(255, 180, 0, 0.3);
+        }
+        
+        .hero-cta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 180, 0, 0.4);
+        }
+        
+        .hero-cta i {
+            margin-right: 0.7rem;
+            transition: transform 0.3s;
+        }
+        
+        .hero-cta:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* بخش امکانات اصلی */
+        .facilities-section {
+            padding: 6rem 0;
+            position: relative;
+        }
+        
+        .facilities-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/dots-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-weight: 900;
+            font-size: 2.4rem;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 120px;
+            height: 6px;
+            background: var(--gradient-accent);
+            margin: 1.8rem auto;
+            border-radius: 3px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #555;
+            max-width: 750px;
+            margin: 0 auto 5rem auto;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        
+        /* کارت امکانات پیشرفته */
+        .facility-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            height: 100%;
+            margin-bottom: 2.5rem;
+            border: none;
+            position: relative;
+        }
+        
+        .facility-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-bg);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1;
+        }
+        
+        .facility-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(0, 180, 216, 0.2);
+        }
+        
+        .facility-card:hover::before {
+            opacity: 0.05;
+        }
+        
+        .facility-img-container {
+            overflow: hidden;
+            border-radius: 20px 20px 0 0;
+            height: 250px;
+            position: relative;
+        }
+        
+        .facility-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .facility-card:hover .facility-img {
+            transform: scale(1.1);
+        }
+        
+        .facility-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--gradient-accent);
+            color: var(--dark-color);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            z-index: 2;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .facility-content {
+            padding: 2.2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .facility-title {
+            font-weight: 900;
+            margin-bottom: 1.2rem;
+            color: var(--dark-color);
+            font-size: 1.5rem;
+            line-height: 1.4;
+        }
+        
+        .facility-desc {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 1.8rem;
+            line-height: 1.8;
+        }
+        
+        .facility-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+        
+        .facility-features li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .facility-features i {
+            color: var(--primary-color);
+            margin-left: 0.8rem;
+            font-size: 0.95rem;
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+        }
+        
+        .facility-feature-text {
+            flex: 1;
+        }
+        
+        .facility-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-accent);
+            color: var(--dark-color);
+            font-weight: 700;
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            width: 100%;
+            border: none;
+        }
+        
+        .facility-btn:hover {
+            background: linear-gradient(135deg, #FFC850, #FFA347);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 180, 0, 0.3);
+        }
+        
+        .facility-btn i {
+            margin-right: 0.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .facility-btn:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* بخش ویژگی‌های منحصر به فرد */
+        .unique-features {
+            padding: 6rem 0;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .unique-features::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/pattern-light.png') repeat;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+        
+        .feature-box {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            border-top: 5px solid var(--accent-color);
+            transition: all 0.5s;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .feature-box::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: var(--gradient-bg);
+            transition: height 0.3s;
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 180, 216, 0.15);
+        }
+        
+        .feature-box:hover::after {
+            height: 100%;
+        }
+        
+        .feature-icon {
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1.8rem;
+            transition: all 0.3s;
+        }
+        
+        .feature-box:hover .feature-icon {
+            transform: scale(1.1);
+            color: var(--accent-color);
+        }
+        
+        .feature-title {
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+            font-size: 1.4rem;
+        }
+        
+        .feature-desc {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        
+        /* بخش گالری تعاملی */
+        .gallery-section {
+            background-color: var(--light-color);
+            padding: 6rem 0;
+            position: relative;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s;
+            height: 280px;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 61, 68, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-icon {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            transform: translateY(20px);
+            transition: all 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-icon {
+            transform: translateY(0);
+        }
+        
+        .gallery-caption {
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-align: center;
+            transform: translateY(20px);
+            transition: all 0.3s 0.1s;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        /* بخش آمار و ارقام */
+        .stats-section {
+            padding: 6rem 0;
+            background: var(--gradient-dark);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/pattern-dark.png') repeat;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .stat-item::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: -1;
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+            color: var(--accent-color);
+            display: inline-block;
+            position: relative;
+        }
+        
+        .stat-number::after {
+            content: "+";
+            position: absolute;
+            top: 0;
+            left: -15px;
+            font-size: 2rem;
+            opacity: 0.7;
+        }
+        
+        .stat-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* بخش تماس و بازدید */
+        .visit-section {
+            padding: 6rem 0;
+            background-color: white;
+        }
+        
+        .visit-card {
+            background: var(--gradient-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            color: white;
+            box-shadow: 0 20px 50px rgba(0, 109, 119, 0.2);
+        }
+        
+        .visit-title {
+            font-weight: 900;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .visit-text {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+        
+        .visit-btn {
+            display: inline-flex;
+            align-items: center;
+            background: white;
+            color: var(--primary-color);
+            font-weight: 800;
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .visit-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            color: var(--dark-color);
+        }
+        
+        .visit-btn i {
+            margin-right: 0.7rem;
+            transition: transform 0.3s;
+        }
+        
+        .visit-btn:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* فوتر پیشرفته */
+        footer {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 5rem 0 2rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/footer-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.8rem;
+        }
+        
+        .footer-logo img {
+            height: 50px;
+            margin-left: 15px;
+        }
+        
+        .footer-logo-text {
+            font-weight: 900;
+            font-size: 1.6rem;
+        }
+        
+        .footer-about {
+            padding-right: 2rem;
+        }
+        
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.8rem;
+            line-height: 1.8;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background: var(--accent-color);
+            color: var(--dark-color);
+            transform: translateY(-3px);
+        }
+        
+        footer h5 {
+            color: var(--accent-color);
+            margin-bottom: 1.8rem;
+            font-weight: 800;
+            font-size: 1.4rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+        
+        footer h5::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-accent);
+            border-radius: 3px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .footer-links li:hover {
+            transform: translateX(-5px);
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .footer-links i {
+            margin-left: 0.8rem;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+        
+        .footer-bottom {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* انیمیشن‌های سفارشی */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        .delay-4 {
+            animation-delay: 0.8s;
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .facility-content {
+                padding: 1.8rem;
+            }
+            
+            .feature-box {
+                padding: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .facilities-hero {
+                padding: 7rem 0 4rem;
+                margin-top: -70px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title::after {
+                width: 100px;
+                height: 5px;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 4rem;
+            }
+            
+            .stat-number {
+                font-size: 3rem;
+            }
+            
+            .visit-card {
+                padding: 2rem;
+            }
+            
+            .visit-title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .facility-img-container {
+                height: 220px;
+            }
+            
+            .facility-title {
+                font-size: 1.3rem;
+            }
+            
+            .gallery-item {
+                height: 220px;
+            }
+            
+            .stat-item {
+                padding: 1.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .footer-logo-text {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- نوار ناوبری پیشرفته -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/images/logo.png" alt="هنرستان دانشمند">
+                هنرستان دانشمند
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> صفحه اصلی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i> درباره ما</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="programs.html"><i class="fas fa-list-ul me-1"></i> رشته‌های آموزشی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admissions.html"><i class="fas fa-user-plus me-1"></i> ثبت‌نام</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="teachers.html"><i class="fas fa-chalkboard-teacher me-1"></i> اساتید</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html"><i class="fas fa-blog me-1"></i> وبلاگ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="facilities.html"><i class="fas fa-building me-1"></i> امکانات</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-sm btn-outline-light me-2"><i class="fas fa-sign-in-alt me-1"></i> ورود</a>
+                    <a href="admissions.html" class="btn btn-sm btn-primary"><i class="fas fa-user-plus me-1"></i> ثبت‌نام</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- هیرو بخش امکانات -->
+    <header class="facilities-hero">
+        <div class="container hero-content">
+            <div class="text-center animate__animated animate__fadeIn">
+                <h1 class="hero-title animate">فضاهای آموزشی پیشرفته و هوشمند</h1>
+                <p class="hero-subtitle animate delay-1">محیطی حرفه‌ای با آخرین استانداردهای آموزشی جهانی برای پرورش استعدادهای فنی و مهارتی</p>
+                <a href="#facilities" class="hero-cta animate delay-2">مشاهده امکانات <i class="fas fa-arrow-left"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- بخش امکانات اصلی -->
+    <section id="facilities" class="facilities-section">
+        <div class="container">
+            <h2 class="section-title animate">امکانات آموزشی ما</h2>
+            <p class="section-subtitle animate delay-1">فضاهای یادگیری طراحی شده برای پرورش مهارت‌های حرفه‌ای دانش‌آموزان با استانداردهای جهانی</p>
+            
+            <div class="row">
+                <!-- آزمایشگاه هوش مصنوعی -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="facility-card animate delay-1">
+                        <div class="facility-img-container">
+                            <img src="assets/images/lab-ai.jpg" alt="آزمایشگاه هوش مصنوعی" class="facility-img">
+                            <span class="facility-badge">جدید</span>
+                        </div>
+                        <div class="facility-content">
+                            <h3 class="facility-title">آزمایشگاه هوش مصنوعی</h3>
+                            <p class="facility-desc">پیشرفته‌ترین آزمایشگاه هوش مصنوعی در بین هنرستان‌های کشور با سیستم‌های پردازش قوی و محیطی مناسب برای پروژه‌های یادگیری ماشین و داده‌کاوی</p>
+                            <ul class="facility-features">
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">سیستم‌های پردازش گرافیکی پیشرفته (NVIDIA RTX)</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">محیط توسعه یکپارچه هوش مصنوعی</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">امکان اجرای پروژه‌های بزرگ داده و یادگیری عمیق</span>
+                                </li>
+                            </ul>
+                            <button class="facility-btn">جزئیات بیشتر <i class="fas fa-arrow-left"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- کارگاه الکترونیک -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="facility-card animate delay-2">
+                        <div class="facility-img-container">
+                            <img src="assets/images/workshop-electronics.jpg" alt="کارگاه الکترونیک" class="facility-img">
+                        </div>
+                        <div class="facility-content">
+                            <h3 class="facility-title">کارگاه الکترونیک پیشرفته</h3>
+                            <p class="facility-desc">کارگاهی مجهز به جدیدترین دستگاه‌های اندازه‌گیری و تست الکترونیکی برای آموزش عملی مدارهای الکترونیکی، دیجیتال و سیستم‌های تعبیه شده</p>
+                            <ul class="facility-features">
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">دستگاه‌های اندازه‌گیری دیجیتال (اسیلوسکوپ، مولتی‌متر)</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">سیستم‌های شبیه‌ساز مدار (Proteus, Multisim)</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">ایستگاه‌های کاری مجهز به ابزارهای حرفه‌ای</span>
+                                </li>
+                            </ul>
+                            <button class="facility-btn">جزئیات بیشتر <i class="fas fa-arrow-left"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- استودیو طراحی دیجیتال -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="facility-card animate delay-3">
+                        <div class="facility-img-container">
+                            <img src="assets/images/studio-design.jpg" alt="استودیو طراحی دیجیتال" class="facility-img">
+                        </div>
+                        <div class="facility-content">
+                            <h3 class="facility-title">استودیو طراحی دیجیتال</h3>
+                            <p class="facility-desc">محیطی حرفه‌ای برای طراحی گرافیک، انیمیشن و تولید محتوای چندرسانه‌ای با سیستم‌های سخت‌افزاری و نرم‌افزاری پیشرفته و به‌روز</p>
+                            <ul class="facility-features">
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">تبلت‌های طراحی حرفه‌ای (Wacom Cintiq)</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">نرم‌افزارهای روز طراحی (Adobe CC, Blender)</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">سیستم‌های رندرینگ قوی با کارت گرافیک پیشرفته</span>
+                                </li>
+                            </ul>
+                            <button class="facility-btn">جزئیات بیشتر <i class="fas fa-arrow-left"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- کارگاه مکانیک خودرو -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="facility-card animate delay-2">
+                        <div class="facility-img-container">
+                            <img src="assets/images/workshop-auto.jpg" alt="کارگاه مکانیک خودرو" class="facility-img">
+                        </div>
+                        <div class="facility-content">
+                            <h3 class="facility-title">کارگاه مکانیک خودرو</h3>
+                            <p class="facility-desc">کارگاهی مدرن با تجهیزات روز صنعت خودرو برای آموزش تعمیر و نگهداری سیستم‌های مختلف خودروهای جدید و هیبریدی</p>
+                            <ul class="facility-features">
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">دستگاه‌های دیاگ پیشرفته (Autel, Launch)</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">شبیه‌سازهای تعمیرات خودرو</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">ابزارآلات تخصصی مکانیک و برق خودرو</span>
+                                </li>
+                            </ul>
+                            <button class="facility-btn">جزئیات بیشتر <i class="fas fa-arrow-left"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- آزمایشگاه شبکه -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="facility-card animate delay-3">
+                        <div class="facility-img-container">
+                            <img src="assets/images/lab-networking.jpg" alt="آزمایشگاه شبکه" class="facility-img">
+                        </div>
+                        <div class="facility-content">
+                            <h3 class="facility-title">آزمایشگاه شبکه‌های کامپیوتری</h3>
+                            <p class="facility-desc">آموزش عملی شبکه‌های کامپیوتری با تجهیزات سیسکو و میکروتیک در محیطی شبیه‌سازی شده به شبکه‌های واقعی سازمانی و دیتاسنترها</p>
+                            <ul class="facility-features">
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">روترها و سوئیچ‌های حرفه‌ای (Cisco, MikroTik)</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">سیستم‌های مانیتورینگ شبکه (PRTG, Zabbix)</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">محیط شبیه‌ساز شبکه (Packet Tracer, GNS3)</span>
+                                </li>
+                            </ul>
+                            <button class="facility-btn">جزئیات بیشتر <i class="fas fa-arrow-left"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- کتابخانه دیجیتال -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="facility-card animate delay-4">
+                        <div class="facility-img-container">
+                            <img src="assets/images/library-digital.jpg" alt="کتابخانه دیجیتال" class="facility-img">
+                            <span class="facility-badge">ویژه</span>
+                        </div>
+                        <div class="facility-content">
+                            <h3 class="facility-title">کتابخانه و منابع دیجیتال</h3>
+                            <p class="facility-desc">دسترسی به هزاران منبع آموزشی چاپی و دیجیتال در زمینه‌های فنی و حرفه‌ای با محیطی آرام و امکانات پیشرفته برای مطالعه و تحقیق</p>
+                            <ul class="facility-features">
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">پایگاه‌های اطلاعاتی تخصصی (IEEE, Springer)</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">سیستم امانت دیجیتال و کتاب‌های الکترونیکی</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="facility-feature-text">محیط مطالعه گروهی و فردی با امکانات چندرسانه‌ای</span>
+                                </li>
+                            </ul>
+                            <button class="facility-btn">جزئیات بیشتر <i class="fas fa-arrow-left"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ویژگی‌های منحصر به فرد -->
+    <section class="unique-features">
+        <div class="container">
+            <h2 class="section-title animate">چرا امکانات ما خاص است؟</h2>
+            <p class="section-subtitle animate delay-1">ویژگی‌هایی که محیط یادگیری ما را از دیگران متمایز می‌کند</p>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-box animate delay-1">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <h3 class="feature-title">امنیت و ایمنی بالا</h3>
+                        <p class="feature-desc">تمام کارگاه‌ها و آزمایشگاه‌ها با استانداردهای بالای ایمنی تجهیز شده‌اند و دانش‌آموزان تحت نظارت مربیان مجرب فعالیت می‌کنند. سیستم‌های اطفاء حریق و کمک‌های اولیه در تمام محیط‌ها وجود دارد.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-box animate delay-2">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="feature-title">یادگیری سیار و آنلاین</h3>
+                        <p class="feature-desc">امکان دسترسی به منابع آموزشی و نرم‌افزارهای تخصصی از طریق سیستم ابری هنرستان در هر زمان و مکان. پلتفرم آموزشی اختصاصی با قابلیت برگزاری کلاس‌های مجازی و دسترسی به محتوای درسی.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-box animate delay-3">
+                        <div class="feature-icon">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h3 class="feature-title">هماهنگی کامل با صنعت</h3>
+                        <p class="feature-desc">تجهیزات و استانداردهای آموزشی منطبق با نیازهای روز صنعت و همکاری با شرکت‌های معتبر برای به‌روزرسانی مستمر. دوره‌های کارآموزی در محیط‌های واقعی صنعتی برای دانش‌آموزان.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-box animate delay-2">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">پایش هوشمند پیشرفت</h3>
+                        <p class="feature-desc">سیستم‌های هوشمند تحلیل عملکرد که پیشرفت مهارتی دانش‌آموزان را به صورت مستمر ارزیابی و گزارش می‌کنند. داشبوردهای تحلیلی برای دانش‌آموزان، والدین و مربیان.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-box animate delay-3">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="feature-title">محیط‌های کار تیمی</h3>
+                        <p class="feature-desc">فضاهای طراحی شده برای کار گروهی و پروژه‌محور که مهارت‌های همکاری تیمی را تقویت می‌کند. اتاق‌های پروژه مجهز به ابزارهای همکاری دیجیتال و فیزیکی.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-box animate delay-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 class="feature-title">خلاقیت‌پروری و نوآوری</h3>
+                        <p class="feature-desc">محیطی الهام‌بخش با امکاناتی که ذهن دانش‌آموزان را برای ایده‌پردازی و نوآوری تشویق می‌کند. آزمایشگاه ایده‌پردازی و فضای استارتاپی برای پروژه‌های نوآورانه.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- گالری تصاویر تعاملی -->
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="section-title animate">گالری تصاویر</h2>
+            <p class="section-subtitle animate delay-1">نمایی از محیط آموزشی و کارگاه‌های پیشرفته هنرستان</p>
+            
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="gallery-item animate delay-1">
+                        <img src="assets/images/gallery-lab1.jpg" alt="آزمایشگاه هوش مصنوعی" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-robot gallery-icon"></i>
+                            <div class="gallery-caption">آزمایشگاه هوش مصنوعی</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="gallery-item animate delay-2">
+                        <img src="assets/images/gallery-workshop1.jpg" alt="کارگاه الکترونیک" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-microchip gallery-icon"></i>
+                            <div class="gallery-caption">کارگاه الکترونیک</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="gallery-item animate delay-3">
+                        <img src="assets/images/gallery-auto1.jpg" alt="کارگاه مکانیک خودرو" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-car gallery-icon"></i>
+                            <div class="gallery-caption">کارگاه مکانیک</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="gallery-item animate delay-4">
+                        <img src="assets/images/gallery-class1.jpg" alt="کلاس هوشمند" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-chalkboard-teacher gallery-icon"></i>
+                            <div class="gallery-caption">کلاس هوشمند</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="gallery-item animate delay-2">
+                        <img src="assets/images/gallery-library1.jpg" alt="کتابخانه دیجیتال" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-book-open gallery-icon"></i>
+                            <div class="gallery-caption">کتابخانه دیجیتال</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="gallery-item animate delay-3">
+                        <img src="assets/images/gallery-networking1.jpg" alt="آزمایشگاه شبکه" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-network-wired gallery-icon"></i>
+                            <div class="gallery-caption">آزمایشگاه شبکه</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="gallery-item animate delay-4">
+                        <img src="assets/images/gallery-studio1.jpg" alt="استودیو طراحی" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-paint-brush gallery-icon"></i>
+                            <div class="gallery-caption">استودیو طراحی</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="gallery-item animate delay-3">
+                        <img src="assets/images/gallery-campus1.jpg" alt="محیط هنرستان" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-school gallery-icon"></i>
+                            <div class="gallery-caption">محیط هنرستان</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- آمار و ارقام -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="section-title animate" style="color: white;">هنرستان در یک نگاه</h2>
+            <p class="section-subtitle animate delay-1" style="color: rgba(255,255,255,0.9);">با اعداد و ارقام ما را بهتر بشناسید</p>
+            
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-item animate delay-1">
+                        <div class="stat-number">18</div>
+                        <div class="stat-title">کارگاه تخصصی</div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-item animate delay-2">
+                        <div class="stat-number">2400</div>
+                        <div class="stat-title">متر مربع فضای آموزشی</div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-item animate delay-3">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-title">دستگاه پیشرفته</div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 col-sm-6">
+                    <div class="stat-item animate delay-4">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-title">ضریب ایمنی محیط</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش تماس و بازدید -->
+    <section class="visit-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="visit-card animate">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h3 class="visit-title">آماده‌ایم از شما میزبانی کنیم</h3>
+                                <p class="visit-text">برای بازدید از امکانات هنرستان و آشنایی بیشتر با محیط آموزشی ما، می‌توانید از طریق دکمه زیر درخواست بازدید دهید. کارشناسان ما در سریع‌ترین زمان ممکن با شما تماس خواهند گرفت.</p>
+                            </div>
+                            <div class="col-md-4 text-center text-md-end">
+                                <a href="#" class="visit-btn">درخواست بازدید <i class="fas fa-calendar-alt"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="footer-about">
+                        <div class="footer-logo">
+                            <img src="assets/images/logo-white.png" alt="هنرستان دانشمند">
+                            <span class="footer-logo-text">هنرستان دانشمند</span>
+                        </div>
+                        <p>هنرستان فنی حرفه‌ای دانشمند قلم چی با بیش از ۲۰ سال سابقه درخشان در تربیت نیروی کار ماهر، یکی از مراکز پیشرو در آموزش‌های مهارتی با استفاده از فناوری‌های نوین آموزشی است.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>لینک‌های مفید</h5>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-left"></i> سوالات متداول</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> گالری تصاویر</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> اخبار و رویدادها</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> همکاران صنعتی</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> اساتید و مربیان</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>امکانات و تجهیزات</h5>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-left"></i> آزمایشگاه‌ها</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> کارگاه‌های فنی</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> کلاس‌های هوشمند</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> کتابخانه دیجیتال</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> امکانات رفاهی</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5>خبرنامه هنرستان</h5>
+                    <p>برای دریافت آخرین اخبار، اطلاعیه‌ها و رویدادهای هنرستان در خبرنامه عضو شوید.</p>
+                    <form class="newsletter-form mt-4">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="آدرس ایمیل شما">
+                            <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="mb-0"><i class="far fa-copyright me-2"></i>۱۴۰۲ هنرستان فنی حرفه‌ای دانشمند قلم چی. تمام حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- اسکریپت‌ها -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // تغییر استایل نوار ناوبری هنگام اسکرول
+            const navbar = document.querySelector('.navbar-custom');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // فعال‌سازی انیمیشن‌ها هنگام اسکرول
+            const animateElements = document.querySelectorAll('.animate');
+            
+            function checkAnimation() {
+                animateElements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.opacity = '1';
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', checkAnimation);
+            checkAnimation();
+            
+            // اسکرول نرم برای لینک‌های داخلی
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // فعال‌سازی tooltip‌ها
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+</body>
+</html>

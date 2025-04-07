@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="تماس با هنرستان فنی حرفه‌ای دانشمند قلم چی - ارتباط مستقیم با مدیریت و مسئولان هنرستان">
+    <meta name="keywords" content="تماس با هنرستان, آدرس هنرستان, شماره تلفن هنرستان, پشتیبانی هنرستان, سوالات هنرستان">
+    <meta name="author" content="هنرستان دانشمند قلم چی">
+    <title>تماس با ما | هنرستان فنی حرفه‌ای دانشمند قلم چی</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #006D77;
+            --secondary-color: #83C5BE;
+            --accent-color: #FFD166;
+            --light-color: #EDF6F9;
+            --dark-color: #003844;
+            --gradient-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-accent: linear-gradient(135deg, var(--accent-color), #FFB347);
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        /* استایل نوار ناوبری پیشرفته */
+        .navbar-custom {
+            background: rgba(0, 109, 119, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-custom.scrolled {
+            background: var(--primary-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-custom .navbar-brand {
+            color: white;
+            font-weight: 900;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .navbar-custom .navbar-brand img {
+            height: 40px;
+            margin-left: 10px;
+        }
+        
+        .navbar-custom .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+        
+        .navbar-custom .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            margin: 0 0.3rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        
+        .navbar-custom .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+        
+        .navbar-custom .nav-link:hover::before,
+        .navbar-custom .nav-link.active::before {
+            width: 100%;
+            left: 0;
+        }
+        
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            color: white;
+        }
+        
+        /* استایل هیرو صفحه تماس */
+        .contact-hero {
+            background: var(--gradient-bg);
+            color: white;
+            padding: 6rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            background-image: url('assets/images/contact-hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+        
+        .contact-hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 61, 68, 0.7);
+        }
+        
+        .contact-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-hero-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        
+        .breadcrumb {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            display: inline-flex;
+        }
+        
+        .breadcrumb-item a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: var(--accent-color);
+        }
+        
+        .breadcrumb-item.active {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .breadcrumb-item + .breadcrumb-item::before {
+            color: rgba(255, 255, 255, 0.6);
+            content: "\f054";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            padding: 0 0.8rem;
+        }
+        
+        /* استایل بخش اصلی تماس */
+        .contact-main {
+            padding: 5rem 0;
+            position: relative;
+        }
+        
+        .contact-main::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/contact-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-weight: 900;
+            font-size: 2.2rem;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: var(--gradient-accent);
+            margin: 1.5rem auto;
+            border-radius: 3px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 4rem auto;
+            font-size: 1.1rem;
+        }
+        
+        /* استایل کارت اطلاعات تماس */
+        .contact-info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            height: 100%;
+            border-top: 5px solid var(--accent-color);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+        
+        .contact-info-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/card-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .contact-info-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 180, 216, 0.15);
+        }
+        
+        .contact-info-title {
+            font-weight: 800;
+            color: var(--dark-color);
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .contact-info-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-accent);
+            border-radius: 3px;
+        }
+        
+        /* انیمیشن برای آیتم‌های تماس */
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.8rem;
+            transition: all 0.3s;
+            padding: 0.8rem;
+            border-radius: 12px;
+        }
+        
+        .contact-info-item:hover {
+            background-color: rgba(131, 197, 190, 0.1);
+            transform: translateX(-5px);
+        }
+        
+        .contact-icon-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-left: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-text h5 {
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+            color: var(--dark-color);
+        }
+        
+        .contact-text p {
+            color: #555;
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+        
+        .contact-text a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .contact-text a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+        
+        /* استایل فرم تماس پیشرفته */
+        .contact-form-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            height: 100%;
+            transition: all 0.4s;
+        }
+        
+        .contact-form-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 180, 216, 0.15);
+        }
+        
+        .contact-form-card .form-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.8rem 2rem;
+        }
+        
+        .contact-form-card .form-header h3 {
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-form-card .form-header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+        
+        .contact-form-card .form-body {
+            padding: 2rem;
+        }
+        
+        .contact-form-card .form-floating {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-form-card .form-control {
+            background-color: rgba(237, 246, 249, 0.5);
+            border: 1px solid rgba(0, 109, 119, 0.2);
+            color: var(--dark-color);
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .contact-form-card .form-control:focus {
+            background-color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(0, 109, 119, 0.25);
+        }
+        
+        .contact-form-card .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+        
+        .contact-form-card .form-control.is-invalid:focus {
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+        }
+        
+        .contact-form-card .invalid-feedback {
+            text-align: right;
+            font-size: 0.85rem;
+        }
+        
+        .contact-form-card label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .btn-submit {
+            background: var(--gradient-accent);
+            border: none;
+            color: var(--dark-color);
+            font-weight: 700;
+            padding: 1rem;
+            border-radius: 12px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #FFC850, #FFA347);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 180, 0, 0.3);
+        }
+        
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+        
+        .btn-submit .spinner-border {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+        
+        .btn-submit.loading .submit-text {
+            visibility: hidden;
+            opacity: 0;
+        }
+        
+        .btn-submit.loading .spinner-border {
+            display: inline-block !important;
+        }
+        
+        /* استایل نقشه */
+        .contact-map {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            height: 400px;
+            margin-top: 3rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* استایل بخش سوالات متداول */
+        .faq-section {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+            position: relative;
+        }
+        
+        .faq-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/faq-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .accordion-item {
+            border: none;
+            background: white;
+            border-radius: 15px !important;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .accordion-button {
+            background-color: white;
+            font-weight: 700;
+            color: var(--dark-color);
+            padding: 1.5rem;
+            border-radius: 15px !important;
+            box-shadow: none;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        .accordion-button::after {
+            margin-right: auto;
+            margin-left: 1rem;
+        }
+        
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: rgba(0, 109, 119, 0.25);
+        }
+        
+        .accordion-body {
+            padding: 1.5rem;
+            color: #555;
+        }
+        
+        /* استایل بخش تیم پشتیبانی */
+        .team-section {
+            padding: 5rem 0;
+            background-color: white;
+            position: relative;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+            transition: all 0.4s;
+            text-align: center;
+            border-top: 5px solid var(--accent-color);
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 180, 216, 0.15);
+        }
+        
+        .team-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: -75px auto 1.5rem auto;
+            display: block;
+        }
+        
+        .team-content {
+            padding: 2rem;
+            padding-top: 0;
+        }
+        
+        .team-name {
+            font-weight: 800;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-position {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .team-contact {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+        
+        .team-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(131, 197, 190, 0.2);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .team-social a:hover {
+            background: var(--gradient-accent);
+            color: var(--dark-color);
+            transform: translateY(-3px);
+        }
+        
+        /* استایل فوتر */
+        footer {
+            background: linear-gradient(135deg, var(--dark-color), #002A32);
+            color: white;
+            padding: 4rem 0 2rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/footer-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        footer h5 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            font-size: 1.3rem;
+        }
+        
+        footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        footer a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links i {
+            margin-left: 0.8rem;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+        
+        .footer-about {
+            padding-right: 2rem;
+        }
+        
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo img {
+            height: 50px;
+            margin-left: 10px;
+        }
+        
+        .footer-logo-text {
+            font-weight: 900;
+            font-size: 1.5rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-top: 1.5rem;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.7rem 1rem;
+            border-radius: 50px 0 0 50px;
+            border-right: none;
+        }
+        
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .newsletter-form button {
+            background: var(--gradient-accent);
+            border: none;
+            color: var(--dark-color);
+            font-weight: 700;
+            padding: 0 1.5rem;
+            border-radius: 0 50px 50px 0;
+            transition: all 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background: linear-gradient(135deg, #FFC850, #FFA347);
+        }
+        
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* انیمیشن‌ها */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        .delay-4 {
+            animation-delay: 0.8s;
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 992px) {
+            .contact-hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .contact-hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .contact-info-card {
+                padding: 2rem;
+            }
+            
+            .contact-icon-circle {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .contact-hero {
+                padding: 5rem 0 3rem;
+            }
+            
+            .contact-hero-title {
+                font-size: 2rem;
+            }
+            
+            .contact-hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .contact-info-item {
+                padding: 0.6rem;
+            }
+            
+            .team-img {
+                width: 120px;
+                height: 120px;
+                margin: -60px auto 1rem auto;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .contact-hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .contact-hero-subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title::after {
+                width: 80px;
+                height: 4px;
+            }
+            
+            .breadcrumb {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- نوار ناوبری پیشرفته -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/images/logo.png" alt="هنرستان دانشمند">
+                هنرستان دانشمند
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> صفحه اصلی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i> درباره ما</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="programs.html"><i class="fas fa-list-ul me-1"></i> رشته‌های آموزشی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admissions.html"><i class="fas fa-user-plus me-1"></i> ثبت‌نام</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="teachers.html"><i class="fas fa-chalkboard-teacher me-1"></i> اساتید</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contact.html"><i class="fas fa-phone-alt me-1"></i> تماس با ما</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-sm btn-outline-light me-2"><i class="fas fa-sign-in-alt me-1"></i> ورود</a>
+                    <a href="admissions.html" class="btn btn-sm btn-primary"><i class="fas fa-user-plus me-1"></i> ثبت‌نام</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- هیرو بخش تماس -->
+    <section class="contact-hero">
+        <div class="container">
+            <div class="contact-hero-content">
+                <nav aria-label="breadcrumb" class="d-flex justify-content-center animate">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">صفحه اصلی</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">تماس با ما</li>
+                    </ol>
+                </nav>
+                <h1 class="contact-hero-title animate delay-1">ارتباط با هنرستان دانشمند</h1>
+                <p class="contact-hero-subtitle animate delay-2">ما اینجا هستیم تا به تمام سوالات شما پاسخ دهیم. از طریق راه‌های ارتباطی مختلف می‌توانید با ما در تماس باشید</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش اصلی تماس -->
+    <section class="contact-main">
+        <div class="container">
+            <h2 class="section-title">راه‌های ارتباطی</h2>
+            <p class="section-subtitle">می‌توانید از طریق فرم تماس، تلفن، ایمیل یا مراجعه حضوری با ما در ارتباط باشید</p>
+            
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="contact-info-card animate">
+                        <h3 class="contact-info-title">اطلاعات تماس</h3>
+                        <div class="contact-info-item">
+                            <div class="contact-icon-circle">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h5>آدرس هنرستان</h5>
+                                <p>اصفهان، خیابان دانشگاه صنعتی، هنرستان فنی حرفه‌ای دانشمند قلم چی، کد پستی: ۸۱۴۶۵۴۳۷۸۹</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-icon-circle">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h5>تلفن‌های تماس</h5>
+                                <p>
+                                    دفتر مدیریت: <a href="tel:+983134567890">۰۳۱-۳۴۵۶۷۸۹۰</a><br>
+                                    امور آموزشی: <a href="tel:+983134567891">۰۳۱-۳۴۵۶۷۸۹۱</a><br>
+                                    امور مالی: <a href="tel:+983134567892">۰۳۱-۳۴۵۶۷۸۹۲</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-icon-circle">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h5>پست الکترونیک</h5>
+                                <p>
+                                    ایمیل عمومی: <a href="mailto:info@daneshmand-school.ir">info@daneshmand-school.ir</a><br>
+                                    پشتیبانی: <a href="mailto:support@daneshmand-school.ir">support@daneshmand-school.ir</a><br>
+                                    ثبت‌نام: <a href="mailto:admission@daneshmand-school.ir">admission@daneshmand-school.ir</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="contact-icon-circle">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h5>ساعات کاری</h5>
+                                <p>
+                                    شنبه تا چهارشنبه: ۷:۳۰ تا ۱۵:۳۰<br>
+                                    پنجشنبه‌ها: ۸:۰۰ تا ۱۲:۰۰<br>
+                                    جمعه‌ها: تعطیل
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="contact-form-card animate delay-1">
+                        <div class="form-header">
+                            <h3>فرم تماس با ما</h3>
+                            <p>سوالات، پیشنهادات و انتقادات خود را با ما در میان بگذارید</p>
+                        </div>
+                        <form class="needs-validation" novalidate>
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="fullname" placeholder="نام و نام خانوادگی" required>
+                                            <label for="fullname">نام و نام خانوادگی *</label>
+                                            <div class="invalid-feedback">
+                                                لطفاً نام و نام خانوادگی خود را وارد کنید
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="email" placeholder="آدرس ایمیل" required>
+                                            <label for="email">آدرس ایمیل *</label>
+                                            <div class="invalid-feedback">
+                                                لطفاً یک ایمیل معتبر وارد کنید
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="tel" class="form-control" id="phone" placeholder="شماره تماس">
+                                        <label for="phone">شماره تماس</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="subject" required>
+                                            <option value="" selected disabled>انتخاب کنید</option>
+                                            <option value="admission">پرسش درباره ثبت‌نام</option>
+                                            <option value="programs">سوال درباره رشته‌ها</option>
+                                            <option value="financial">پرسش مالی و شهریه</option>
+                                            <option value="technical">پشتیبانی فنی</option>
+                                            <option value="other">سایر موارد</option>
+                                        </select>
+                                        <label for="subject">موضوع پیام *</label>
+                                        <div class="invalid-feedback">
+                                            لطفاً موضوع پیام را انتخاب کنید
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" id="message" placeholder="متن پیام" style="height: 150px" required></textarea>
+                                        <label for="message">متن پیام *</label>
+                                        <div class="invalid-feedback">
+                                            لطفاً متن پیام را وارد کنید
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="agree" required>
+                                    <label class="form-check-label" for="agree">با <a href="#" class="text-primary">قوانین و مقررات</a> هنرستان موافقم *</label>
+                                    <div class="invalid-feedback">
+                                        شما باید با قوانین موافقت کنید
+                                    </div>
+                                </div>
+                                <div class="d-grid">
+                                    <button class="btn btn-submit" type="submit">
+                                        <span class="submit-text">ارسال پیام</span>
+                                        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- نقشه گوگل -->
+            <div class="contact-map animate delay-2">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.123456789012!2d51.12345678901234!3d32.12345678901234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDA3JzI0LjQiTiA1McKwMDcnMjQuNCJF!5e0!3m2!1sen!2sir!4v1234567890123!5m2!1sen!2sir" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش سوالات متداول -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">سوالات متداول</h2>
+            <p class="section-subtitle">پاسخ به پرتکرارترین سوالات شما درباره هنرستان دانشمند</p>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item animate">
+                            <h3 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    شرایط ثبت‌نام در هنرستان چگونه است؟
+                                </button>
+                            </h3>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    ثبت‌نام در هنرستان دانشمند برای پایه دهم پس از قبولی در آزمون ورودی و مصاحبه انجام می‌شود. متقاضیان باید مدرک پایان دوره اول متوسطه (پایه نهم) را داشته باشند. ثبت‌نام برای پایه یازدهم نیز با توجه به ظرفیت و تطابق واحدهای گذرانده شده امکان‌پذیر است. برای اطلاعات دقیق‌تر می‌توانید به صفحه <a href="admissions.html">ثبت‌نام</a> مراجعه کنید.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item animate delay-1">
+                            <h3 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    آیا هنرستان دانشمند خوابگاه دانش‌آموزی دارد؟
+                                </button>
+                            </h3>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    بله، هنرستان دانشمند دارای خوابگاه‌های مجهز و تحت نظارت برای دانش‌آموزان غیربومی است. خوابگاه‌ها دارای امکاناتی مانند سالن مطالعه، سالن ورزش، اینترنت پرسرعت و اتاق‌های چندنفره استاندارد هستند. برای اطلاعات بیشتر می‌توانید با بخش خوابگاه‌ها به شماره ۰۳۱-۳۴۵۶۷۸۹۳ تماس بگیرید.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item animate delay-2">
+                            <h3 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    آیا امکان پرداخت اقساطی شهریه وجود دارد؟
+                                </button>
+                            </h3>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    بله، هنرستان دانشمند برای تسهیل پرداخت شهریه، امکان پرداخت در ۲ تا ۵ قسط را فراهم کرده است. همچنین برای دانش‌آموزان ممتاز و خانواده‌های کم‌بضاعت، تخفیف‌های ویژه و بورسیه تحصیلی در نظر گرفته شده است. برای اطلاعات دقیق‌تر می‌توانید با بخش مالی به شماره ۰۳۱-۳۴۵۶۷۸۹۲ تماس بگیرید.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item animate delay-3">
+                            <h3 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    آیا هنرستان برای فارغ‌التحصیلان شغل تضمینی دارد؟
+                                </button>
+                            </h3>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    هنرستان دانشمند با بیش از ۵۰ شرکت و سازمان صنعتی همکاری دارد و برای فارغ‌التحصیلان ممتاز، معرفی به بازار کار انجام می‌شود. همچنین جلسات مصاحبه شغلی و کارگاه‌های آمادگی برای ورود به بازار کار به صورت دوره‌ای برگزار می‌شود. بیش از ۸۵% فارغ‌التحصیلان ما در سال گذشته جذب بازار کار شده‌اند.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item animate delay-4">
+                            <h3 class="accordion-header" id="headingFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    سیستم آموزش هوش مصنوعی هنرستان چگونه عمل می‌کند؟
+                                </button>
+                            </h3>
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    سیستم هوشمند آموزشی هنرستان با استفاده از الگوریتم‌های پیشرفته یادگیری ماشین، نقاط قوت و ضعف هر دانش‌آموز را تحلیل کرده و برنامه‌های درسی شخصی‌سازی شده ارائه می‌دهد. همچنین این سیستم با تحلیل عملکرد دانش‌آموزان، به معلمان در بهبود روش‌های تدریس کمک می‌کند. تمام دانش‌آموزان پس از ثبت‌نام به پنل اختصاصی این سیستم دسترسی خواهند داشت.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش تیم پشتیبانی -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">تیم پشتیبانی هنرستان</h2>
+            <p class="section-subtitle">با مسئولان و تیم پشتیبانی هنرستان آشنا شوید</p>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="team-card animate">
+                        <img src="assets/images/team1.jpg" alt="مدیر هنرستان" class="team-img">
+                        <div class="team-content">
+                            <h4 class="team-name">دکتر محمد رضایی</h4>
+                            <span class="team-position">مدیر هنرستان</span>
+                            <p class="team-contact">
+                                تلفن: <a href="tel:+983134567894">۰۳۱-۳۴۵۶۷۸۹۴</a><br>
+                                ایمیل: <a href="mailto:director@daneshmand-school.ir">director@daneshmand-school.ir</a>
+                            </p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-telegram"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-card animate delay-1">
+                        <img src="assets/images/team2.jpg" alt="معاون آموزشی" class="team-img">
+                        <div class="team-content">
+                            <h4 class="team-name">مهندس زهرا محمدی</h4>
+                            <span class="team-position">معاون آموزشی</span>
+                            <p class="team-contact">
+                                تلفن: <a href="tel:+983134567895">۰۳۱-۳۴۵۶۷۸۹۵</a><br>
+                                ایمیل: <a href="mailto:education@daneshmand-school.ir">education@daneshmand-school.ir</a>
+                            </p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-telegram"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-card animate delay-2">
+                        <img src="assets/images/team3.jpg" alt="مسئول پشتیبانی" class="team-img">
+                        <div class="team-content">
+                            <h4 class="team-name">مهندس علی حسینی</h4>
+                            <span class="team-position">مسئول پشتیبانی و ارتباطات</span>
+                            <p class="team-contact">
+                                تلفن: <a href="tel:+983134567896">۰۳۱-۳۴۵۶۷۸۹۶</a><br>
+                                ایمیل: <a href="mailto:support@daneshmand-school.ir">support@daneshmand-school.ir</a>
+                            </p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-telegram"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="footer-about">
+                        <div class="footer-logo">
+                            <img src="assets/images/logo-white.png" alt="هنرستان دانشمند">
+                            <span class="footer-logo-text">هنرستان دانشمند</span>
+                        </div>
+                        <p>هنرستان فنی حرفه‌ای دانشمند قلم چی با بیش از ۲۰ سال سابقه درخشان در تربیت نیروی کار ماهر، یکی از مراکز پیشرو در آموزش‌های مهارتی با استفاده از فناوری‌های نوین آموزشی است.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>لینک‌های مفید</h5>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-left"></i> سوالات متداول</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> گالری تصاویر</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> اخبار و رویدادها</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> همکاران صنعتی</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> اساتید و مربیان</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>رشته‌های آموزشی</h5>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-left"></i> فناوری اطلاعات</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> حسابداری مالی</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> الکتروتکنیک</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> مکانیک خودرو</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> گرافیک دیجیتال</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5>خبرنامه</h5>
+                    <p>برای دریافت آخرین اخبار، اطلاعیه‌ها و رویدادهای هنرستان در خبرنامه عضو شوید.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="آدرس ایمیل شما">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="mb-0"><i class="far fa-copyright me-2"></i>۱۴۰۲ هنرستان فنی حرفه‌ای دانشمند قلم چی. تمام حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // تغییر استایل نوار ناوبری هنگام اسکرول
+            const navbar = document.querySelector('.navbar-custom');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // فعال سازی انیمیشن‌ها هنگام اسکرول
+            const animateElements = document.querySelectorAll('.animate');
+            
+            function checkAnimation() {
+                animateElements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.opacity = '1';
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', checkAnimation);
+            checkAnimation(); // اجرای اولیه برای عناصری که در دید هستند
+            
+            // اسکرول نرم برای لینک‌های داخلی
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // اعتبارسنجی فرم تماس
+            const contactForm = document.querySelector('.contact-form-card .needs-validation');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(event) {
+                    if (!contactForm.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    } else {
+                        event.preventDefault();
+                        const submitBtn = contactForm.querySelector('.btn-submit');
+                        submitBtn.classList.add('loading');
+                        
+                        // شبیه‌سازی ارسال فرم
+                        setTimeout(() => {
+                            submitBtn.classList.remove('loading');
+                            
+                            // نمایش پیام موفقیت
+                            const successAlert = document.createElement('div');
+                            successAlert.className = 'alert alert-success mt-3';
+                            successAlert.setAttribute('role', 'alert');
+                            successAlert.innerHTML = `
+                                <i class="fas fa-check-circle me-2"></i>
+                                پیام شما با موفقیت ارسال شد. در اسرع وقت با شما تماس خواهیم گرفت.
+                            `;
+                            contactForm.appendChild(successAlert);
+                            
+                            // پاک کردن فرم پس از 5 ثانیه
+                            setTimeout(() => {
+                                contactForm.reset();
+                                contactForm.classList.remove('was-validated');
+                                successAlert.remove();
+                            }, 5000);
+                        }, 2000);
+                    }
+                    
+                    contactForm.classList.add('was-validated');
+                }, false);
+            }
+
+            // فعال‌سازی tooltip‌ها
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+</body>
+</html>

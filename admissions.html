@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت‌نام آزمون ورودی | هنرستان فنی حرفه‌ای دانشمند</title>
+    <style>
+        :root {
+            --quantum-primary: #6e00ff;
+            --quantum-secondary: #00f7ff;
+            --quantum-accent: #ff00e6;
+            --quantum-dark: #0d0221;
+            --quantum-light: #f8f8ff;
+            --gold-gradient: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+            --neon-glow: 0 0 15px rgba(110, 0, 255, 0.7);
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --success-color: #00ff9d;
+            --error-color: #ff3860;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--quantum-dark);
+            color: var(--quantum-light);
+            line-height: 1.8;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(110, 0, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 247, 255, 0.1) 0%, transparent 20%);
+        }
+        
+        .header {
+            background: radial-gradient(ellipse at center, var(--quantum-primary) 0%, #0d0221 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--neon-glow);
+            border-bottom: 2px solid var(--quantum-secondary);
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                transparent 65%, 
+                rgba(0, 247, 255, 0.2) 75%, 
+                transparent 85%);
+            animation: shine 3s infinite;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px var(--quantum-secondary));
+            animation: pulse 2s infinite alternate;
+        }
+        
+        .announcement-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            border-top: 4px solid var(--quantum-accent);
+            transition: all 0.3s ease;
+        }
+        
+        .announcement-section:hover {
+            box-shadow: 0 8px 32px rgba(110, 0, 255, 0.5);
+        }
+        
+        .section-title {
+            color: var(--quantum-secondary);
+            border-bottom: 2px solid rgba(0, 247, 255, 0.3);
+            padding-bottom: 0.7rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 50px;
+            height: 4px;
+            background: var(--gold-gradient);
+            border-radius: 2px;
+            box-shadow: 0 0 10px #ffd700;
+        }
+        
+        .info-box {
+            background: rgba(13, 2, 33, 0.7);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--quantum-primary);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .info-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--neon-glow);
+        }
+        
+        .steps-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .step-card {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-top: 4px solid var(--quantum-secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 247, 255, 0.3);
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--gold-gradient);
+            color: var(--quantum-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px #ffd700;
+        }
+        
+        .payment-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            border-top: 4px solid var(--quantum-accent);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+        
+        .payment-amount {
+            background: rgba(13, 2, 33, 0.7);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(110, 0, 255, 0.3);
+        }
+        
+        .amount-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--quantum-secondary);
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+        }
+        
+        .gateways-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .gateway-card {
+            flex: 1;
+            min-width: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .gateway-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .gateway-card.active {
+            border-color: var(--quantum-primary);
+            background: rgba(110, 0, 255, 0.2);
+            box-shadow: 0 0 15px rgba(110, 0, 255, 0.5);
+        }
+        
+        .gateway-logo {
+            width: 70px;
+            height: 35px;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 0 5px rgba(0, 247, 255, 0.5));
+        }
+        
+        .tracking-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-top: 4px solid var(--success-color);
+            display: none;
+        }
+        
+        .tracking-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gold-gradient);
+            color: var(--quantum-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 0 25px #ffd700;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .tracking-code {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: var(--quantum-secondary);
+            background: rgba(13, 2, 33, 0.7);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            display: inline-block;
+            margin: 1rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-family: monospace;
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+            border: 1px solid rgba(0, 247, 255, 0.3);
+        }
+        
+        .btn {
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0.3) 0%,
+                rgba(255, 255, 255, 0) 60%
+            );
+            transform: rotate(30deg);
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover::before {
+            animation: shine 1.5s infinite;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--quantum-primary), var(--quantum-secondary));
+            color: white;
+            box-shadow: var(--neon-glow);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px var(--quantum-accent);
+        }
+        
+        .btn-accent {
+            background: var(--gold-gradient);
+            color: var(--quantum-dark);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+        }
+        
+        .btn-accent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.9);
+        }
+        
+        .btn-outline-secondary {
+            border: 2px solid var(--quantum-secondary);
+            color: var(--quantum-secondary);
+            background-color: transparent;
+        }
+        
+        .btn-outline-secondary:hover {
+            background-color: rgba(0, 247, 255, 0.1);
+            color: white;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-3 {
+            margin-top: 1rem;
+        }
+        
+        .mt-4 {
+            margin-top: 1.5rem;
+        }
+        
+        .w-100 {
+            width: 100%;
+        }
+        
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .alert-info {
+            background: rgba(0, 109, 119, 0.2);
+            color: var(--quantum-secondary);
+            border-left: 4px solid var(--quantum-secondary);
+        }
+        
+        .alert-success {
+            background: rgba(0, 255, 157, 0.2);
+            color: var(--success-color);
+            border-left: 4px solid var(--success-color);
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 2rem 0;
+            }
+            
+            .announcement-section, .payment-section {
+                padding: 1.5rem;
+                margin: 1.5rem;
+            }
+            
+            .steps-container {
+                flex-direction: column;
+            }
+            
+            .gateways-container {
+                flex-direction: column;
+            }
+            
+            .tracking-code {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) rotate(30deg); }
+        }
+        
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTIgMTBhMyAzIDAgMSAwIDAtNiAzIDMgMCAwIDAgMCA2WiIvPjxwYXRoIGQ9Ik0xOSAxMGE3IDcgMCAxIDAtMTQgMCA3IDcgMCAwIDAgMTQgMFoiLz48cGF0aCBkPSJtMTUuNyAxMy44LS4xLS4xYTIgMiAwIDAgMSAwLTIuOGwuMS0uMSIvPjxwYXRoIGQ9Im04LjMgMTMuOC4xLS4xYTIgMiAwIDAgMCAwLTIuOGwtLjEtLjEiLz48L3N2Zz4=" alt="لوگو هنرستان" class="logo">
+            <h1 style="font-size: 1.8rem; margin-bottom: 0.5rem; text-shadow: 0 0 15px rgba(0, 247, 255, 0.7);"> ثبت‌نام آزمون ورودی هنرستان فنی حرفه‌ای دانشمند قلم چی </h1>
+            <p style="font-size: 1.1rem; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);">سال تحصیلی ۱۴۰5-۱۴۰4</p>
+        </div>
+    </header>
+
+    <!-- Announcement Section -->
+    <section class="announcement-section" id="announcement-section">
+        <h2 class="section-title">اطلاعیه‌های مهم</h2>
+        
+        <div class="info-box">
+            <h4 style="color: var(--quantum-secondary);">درباره آزمون ورودی</h4>
+            <p>آزمون ورودی هنرستان فنی حرفه‌ای دانشمند در تاریخ ۲۰ شهریور ۱۴۰۲ برگزار خواهد شد. این آزمون شامل سوالات دروس ریاضی، علوم و هوش می‌باشد. زمان آزمون ۱۲۰ دقیقه خواهد بود.</p>
+        </div>
+        
+        <div class="info-box">
+            <h4 style="color: var(--quantum-secondary);">نحوه ثبت‌نام</h4>
+            <p>برای ثبت‌نام در آزمون، لطفاً طبق مراحل زیر اقدام نمایید. پس از پرداخت موفق، کد رهگیری دریافت خواهید کرد که برای تکمیل اطلاعات ضروری است.</p>
+        </div>
+        
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">۱</div>
+                <h4>ورود به درگاه پرداخت</h4>
+                <p>با کلیک بر روی دکمه ثبت‌نام مستقیماً به درگاه پرداخت هدایت خواهید شد.</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">۲</div>
+                <h4>پرداخت هزینه</h4>
+                <p>هزینه ثبت‌نام آزمون را از طریق درگاه پرداخت اینترنتی پرداخت کنید.</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">۳</div>
+                <h4>دریافت کد رهگیری</h4>
+                <p>پس از پرداخت موفق، کد رهگیری منحصر به فرد دریافت خواهید کرد.</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">۴</div>
+                <h4>تکمیل اطلاعات</h4>
+                <p>با استفاده از کد رهگیری، اطلاعات تکمیلی را در سیستم ثبت کنید.</p>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <button id="startPayment" class="btn btn-primary pulse">
+                ثبت‌نام و پرداخت هزینه آزمون
+            </button>
+        </div>
+    </section>
+
+    <!-- Payment Section -->
+    <div class="payment-section" id="paymentSection">
+        <h2 class="section-title">پرداخت هزینه ثبت‌نام</h2>
+        
+        <div class="alert alert-info">
+            هزینه ثبت‌نام و آزمون ورودی: <strong>250,000 تومان</strong>
+            <div class="mt-3">پس از پرداخت موفق، کد رهگیری برای شما نمایش داده خواهد شد.</div>
+        </div>
+        
+        <div class="payment-amount">
+            <p>مبلغ قابل پرداخت</p>
+            <div class="amount-value">۲۵۰,۰۰۰ تومان</div>
+        </div>
+        
+        <h4 class="mt-3">درگاه پرداخت مورد نظر را انتخاب کنید:</h4>
+        <div class="gateways-container">
+            <div class="gateway-card active" data-gateway="zarinpal">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgODAiPjxwYXRoIGZpbGw9IiMyMTk2RjMiIGQ9Ik0xNDQuOCA0MGMwLTE1LjYtMTIuNy0yOC4zLTI4LjMtMjguM1M4OC4yIDI0LjQgODguMiA0MHMxMi43IDI4LjMgMjguMyAyOC4zUzE0NC44IDU1LjYgMTQ0LjggNDB6Ii8+PHBhdGggZmlsbD0iIzFENThCNyIgZD0iTTE4OC4yIDQwYzAtMTUuNi0xMi43LTI4LjMtMjguMy0yOC4zUzEzMS42IDI0LjQgMTMxLjYgNDBzMTIuNyAyOC4zIDI4LjMgMjguM1MxODguMiA1NS42IDE4OC4yIDQweiIvPjxwYXRoIGZpbGw9IiMzODVBQTgiIGQ9Ik0yMzEuNiA0MGMwLTE1LjYtMTIuNy0yOC4zLTI4LjMtMjguM1MxNzUgMjQuNCAxNzUgNDBzMTIuNyAyOC4zIDI4LjMgMjguM1MyMzEuNiA1NS42IDIzMS42IDQweiIvPjxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik0xMTYuNiA1Mi41aC0xNi45VjI3LjVoMTYuOWM3LjEgMCAxMi44IDUuNyAxMi44IDEyLjVzLTUuNyAxMi41LTEyLjggMTIuNXptMC0yMS4zaC04LjR2MTcuNWg4LjRjNC42IDAgOC40LTMuNyA4LjQtOC40cy0zLjgtOC4xLTguNC04LjF6Ii8+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTE2MC4xIDUyLjVoLTE2LjlWMjcuNWgxNi45YzcuMSAwIDEyLjggNS43IDEyLjggMTIuNXMtNS43IDEyLjUtMTIuOCAxMi41em0wLTIxLjNoLTguNHYxNy41aDguNGM0LjYgMCA4LjQtMy43IDguNC04LjRzLTMuOC04LjEtOC40LTguMXoiLz48cGF0aCBmaWxsPSIjRkZGIiBkPSJNMjAzLjUgNTIuNWgtMTYuOVYyNy41aDE2LjljNy4xIDAgMTIuOCA1LjcgMTIuOCAxMi41cy01LjcgMTIuNS0xMi44IDEyLjV6bTAtMjEuM2gtOC40djE3LjVoOC40YzQuNiAwIDguNC0zLjcgOC40LTguNHMtMy44LTguMS04LjQtOC4xeiIvPjxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik02OC4yIDQ0LjVoLTEzLjR2OGgtNy4xdi0yMWgyMC41djdoLTEzLjR2Ni4xaDEzLjR2N3oiLz48L3N2Zz4=" alt="زرین‌پال" class="gateway-logo">
+                <span>زرین‌پال</span>
+            </div>
+            
+            <div class="gateway-card" data-gateway="parsian">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgODAiPjxwYXRoIGZpbGw9IiNEMjAwMjEiIGQ9Ik0xMjAgMTZjNTcuNSAwIDEwNCA0Ni41IDEwNCAxMDRzLTQ2LjUgMTA0LTEwNCAxMDRTMTYgMTc3LjUgMTYgMTIwIDYyLjUgMTYgMTIwIDE2eiIvPjxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik0xMjAgMzYuNWM0Ni4xIDAgODMuNSAzNy40IDgzLjUgODMuNXMtMzcuNCA4My41LTgzLjUgODMuNVMzNi41IDE2Ni4xIDM2LjUgMTIwIDczLjkgMzYuNSAxMjAgMzYuNXptMCAxNTMuOGMzOC44IDAgNzAuMy0zMS41IDcwMy03MC4zUzE1OC44IDQ5LjcgMTIwIDQ5LjcgNDkuNyA4MS4yIDQ5LjcgMTIwczMxLjUgNzAuMyA3MC4zIDcwLjN6Ii8+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTEyMCA1OS40YzMzLjQgMCA2MC42IDI3LjIgNjAuNiA2MC42cy0yNy4yIDYwLjYtNjAuNiA2MC42UzU5LjQgMTUzLjQgNTkuNCAxMjAgODYuNiA1OS40IDEyMCA1OS40em0wIDEwNy40YzI1LjggMCA0Ni44LTIxIDQ2OC00Ni44UzE0NS44IDczLjIgMTIwIDczLjIgNzMuMiA5NC4yIDczLjIgMTIwczIxIDQ2LjggNDYuOCA0Ni44eiIvPjxwYXRoIGZpbGw9IiNGQUI0MDAiIGQ9Ik0xMjAgNzcuNWMyMy43IDAgNDMgMTkuMyA0MyA0M3MtMTkuMyA0My00MyA0My00My0xOS4zLTQzLTQzIDE5LjMtNDMgNDMtNDN6Ii8+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTEyMCA4Ny41YzE4LjQgMCAzMy4zIDE0LjkgMzMuMyAzMy4zcy0xNC45IDMzLjMtMzMuMyAzMy4zUzg2LjcgMTM5LjIgODYuNyAxMjAgMTAxLjYgODcuNSAxMjAgODcuNXoiLz48cGF0aCBmaWxsPSIjRkZGIiBkPSJNMTIwIDk3LjVjMTIuNCAwIDIyLjUgMTAuMSAyMi41IDIyLjVzLTEwLjEgMjIuNS0yMi41IDIyLjUtMjIuNS0xMC4xLTIyLjUtMjIuNSAxMC4xLTIyLjUgMjIuNS0yMi41eiIvPjwvc3ZnPg==" alt="پارسیان" class="gateway-logo">
+                <span>پارسیان</span>
+            </div>
+            
+            <div class="gateway-card" data-gateway="saman">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgODAiPjxwYXRoIGZpbGw9IiMyMjhDNjYiIGQ9Ik0xMjAgMTZjNTcuNSAwIDEwNCA0Ni41IDEwNCAxMDRzLTQ2LjUgMTA0LTEwNCAxMDRTMTYgMTc3LjUgMTYgMTIwIDYyLjUgMTYgMTIwIDE2eiIvPjxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik0xMjAgMzYuNWM0Ni4xIDAgODMuNSAzNy40IDgzLjUgODMuNXMtMzcuNCA4My41LTgzLjUgODMuNVMzNi41IDE2Ni4xIDM2LjUgMTIwIDczLjkgMzYuNSAxMjAgMzYuNXptMCAxNTMuOGMzOC44IDAgNzAuMy0zMS41IDcwMy03MC4zUzE1OC44IDQ5LjcgMTIwIDQ5LjcgNDkuNyA4MS4jIDQ5LjcgMTIwczMxLjUgNzAuMyA3MC4zIDcwLjN6Ii8+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTEyMCA1OS40YzMzLjQgMCA2MC42IDI3LjIgNjAuNiA2MC42cy0yNy4yIDYwLjYtNjAuNiA2MC42UzU5LjQgMTUzLjQgNTkuNCAxMjAgODYuNiA1OS40IDEyMCA1OS40em0wIDEwNy40YzI1LjggMCA0Ni44LTIxIDQ2OC00Ni44UzE0NS44IDczLjIgMTIwIDczLjIgNzMuMiA5NC4yIDczLjIgMTIwczIxIDQ2LjggNDYuOCA0Ni44eiIvPjxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik0xMjAgNzcuNWMyMy43IDAgNDMgMTkuMyA0MyA0M3MtMTkuMyA0My00MyA0My00My0xOS4zLTQzLTQzIDE5LjMtNDMgNDMtNDN6Ii8+PHBhdGggZmlsbD0iIzIyOEM2NiIgZD0iTTEyMCA4Ny41YzE4LjQgMCAzMy4zIDE0LjkgMzMuMyAzMy4zcy0xNC45IDMzLjMtMzMuMyAzMy4zUzg2LjcgMTM5LjIgODYuNyAxMjAgMTAxLjYgODcuNSAxMjAgODcuNXoiLz48cGF0aCBmaWxsPSIjRkZGIiBkPSJNMTIwIDk3LjVjMTIuNCAwIDIyLjUgMTAuMSAyMi41IDIyLjVzLTEwLjEgMjIuNS0yMi41IDIyLjUtMjIuNS0xMC4xLTIyLjUtMjIuNSAxMC4xLTIyLjUgMjIuNS0yMi41eiIvPjwvc3ZnPg==" alt="سامان" class="gateway-logo">
+                <span>سامان</span>
+            </div>
+        </div>
+        
+        <button id="proceedToPayment" class="btn btn-accent w-100 mt-3 pulse">
+            انتقال به درگاه پرداخت
+        </button>
+        
+        <button id="backToAnnouncement" class="btn btn-outline-secondary w-100 mt-2">
+            بازگشت
+        </button>
+    </div>
+
+    <!-- Tracking Section -->
+    <div class="tracking-section" id="trackingSection">
+        <div class="tracking-icon">
+            ✓
+        </div>
+        <h2>پرداخت با موفقیت انجام شد!</h2>
+        <p>ثبت‌نام شما در آزمون ورودی هنرستان فنی حرفه‌ای دانشمند با موفقیت انجام شد.</p>
+        
+        <div class="tracking-code" id="trackingCodeDisplay">TR-142857</div>
+        
+        <p>کد رهگیری فوق را یادداشت نمایید. این کد برای تکمیل اطلاعات ثبت‌نام شما ضروری است.</p>
+        
+        <div class="alert alert-success mt-3">
+            لطفاً برای تکمیل ثبت‌نام، بر روی دکمه زیر کلیک کنید.
+        </div>
+        
+        <button id="completeRegistration" class="btn btn-primary w-100 mt-3 pulse">
+            تکمیل ثبت‌نام و ورود به فرم اطلاعات
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Start Payment Process
+            document.getElementById('startPayment').addEventListener('click', function() {
+                document.getElementById('announcement-section').style.display = 'none';
+                document.getElementById('paymentSection').style.display = 'block';
+                document.getElementById('paymentSection').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Back to Announcement
+            document.getElementById('backToAnnouncement').addEventListener('click', function() {
+                document.getElementById('paymentSection').style.display = 'none';
+                document.getElementById('announcement-section').style.display = 'block';
+                document.getElementById('announcement-section').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Select Payment Gateway
+            const gatewayCards = document.querySelectorAll('.gateway-card');
+            let selectedGateway = 'zarinpal';
+            
+            gatewayCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    gatewayCards.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedGateway = this.dataset.gateway;
+                });
+            });
+            
+            // Proceed to Payment
+            document.getElementById('proceedToPayment').addEventListener('click', function() {
+                const payBtn = this;
+                const originalBtnText = payBtn.innerHTML;
+                payBtn.innerHTML = 'در حال انتقال...';
+                payBtn.disabled = true;
+                
+                // Simulate payment processing (3 seconds)
+                setTimeout(() => {
+                    // Generate random tracking code
+                    const trackingCode = 'TR-' + Math.floor(100000 + Math.random() * 900000);
+                    document.getElementById('trackingCodeDisplay').textContent = trackingCode;
+                    
+                    // Hide payment section and show tracking section
+                    document.getElementById('paymentSection').style.display = 'none';
+                    document.getElementById('trackingSection').style.display = 'block';
+                    document.getElementById('trackingSection').scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Reset payment button
+                    payBtn.innerHTML = originalBtnText;
+                    payBtn.disabled = false;
+                }, 3000);
+            });
+            
+            // Complete Registration
+            document.getElementById('completeRegistration').addEventListener('click', function() {
+                const trackingCode = document.getElementById('trackingCodeDisplay').textContent;
+                
+                // Redirect to Google Form with tracking code
+                window.location.href = `https://docs.google.com/forms/d/e/1FAIpQLSeXp86ZmMjXIm-PLzyKFmASogGh729CWeoX_24y551k2fsbvg/viewform?entry.${trackingCode}`;
+            });
+        });
+    </script>
+</body>
+</html>

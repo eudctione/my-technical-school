@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="درباره هنرستان فنی حرفه‌ای دانشمند قلم چی - تاریخچه، اهداف و امکانات آموزشی پیشرفته">
+    <meta name="keywords" content="درباره هنرستان, تاریخچه هنرستان, امکانات آموزشی, اهداف هنرستان, هنرستان فنی حرفه‌ای, قلم چی">
+    <meta name="author" content="هنرستان دانشمند قلم چی">
+    <title>درباره ما | هنرستان فنی حرفه‌ای دانشمند قلم چی</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-color: #006D77;
+            --primary-dark: #005D66;
+            --secondary-color: #83C5BE;
+            --accent-color: #A7F3D0;
+            --light-color: #EDF6F9;
+            --dark-color: #003844;
+            --gradient-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            background-image: url('assets/images/bg-pattern.png');
+            background-attachment: fixed;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        /* استایل نوار ناوبری پیشرفته */
+        .navbar-custom {
+            background: rgba(0, 109, 119, 0.95);
+            box-shadow: var(--shadow-md);
+            padding: 0.5rem 0;
+            backdrop-filter: blur(8px);
+            transition: all 0.4s ease;
+        }
+        
+        .navbar-custom.scrolled {
+            background: rgba(0, 109, 119, 0.98);
+            padding: 0.3rem 0;
+        }
+        
+        .navbar-custom .navbar-brand {
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-custom .navbar-brand img {
+            height: 40px;
+            margin-left: 10px;
+        }
+        
+        .navbar-custom .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .navbar-custom .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 1rem;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            color: white;
+        }
+        
+        .navbar-custom .nav-link:hover::before,
+        .navbar-custom .nav-link.active::before {
+            width: calc(100% - 2rem);
+        }
+        
+        /* استایل هدر پیشرفته */
+        .header-banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+            padding: 5rem 0 3rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+        
+        .header-banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/pattern-overlay.png') repeat;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .header-banner::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, #f8f9fa, transparent);
+            z-index: 1;
+        }
+        
+        .logo-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo-img {
+            height: 100px;
+            margin-left: 20px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+            transition: all 0.5s ease;
+        }
+        
+        .logo-img:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+        
+        .page-title {
+            font-weight: 800;
+            font-size: 2.2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .page-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 120px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+        
+        /* استایل بخش‌های محتوا */
+        .about-section {
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border-top: 5px solid var(--accent-color);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(131, 197, 190, 0.3);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .about-section:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px);
+        }
+        
+        .about-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(167, 243, 208, 0.1), transparent 70%);
+            pointer-events: none;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.7rem;
+            margin-bottom: 1.8rem;
+            font-weight: 700;
+            position: relative;
+            font-size: 1.5rem;
+        }
+        
+        .section-title i {
+            margin-left: 10px;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+        
+        /* استایل کارت‌های ویژگی */
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(237, 246, 249, 0.9));
+            border: none;
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            height: 100%;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 109, 119, 0.05), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .feature-card:hover::before {
+            animation: shine 1.5s;
+        }
+        
+        .feature-icon {
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+            color: var(--primary-dark);
+        }
+        
+        .feature-card h4 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .feature-card h4::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-color);
+            transition: all 0.4s ease;
+        }
+        
+        .feature-card:hover h4::after {
+            width: 100%;
+        }
+        
+        /* استایل گالری مدرن */
+        .gallery-container {
+            position: relative;
+        }
+        
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.5s ease;
+            height: 280px;
+            position: relative;
+        }
+        
+        .gallery-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 60, 68, 0.7), transparent 60%);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 1;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s ease;
+        }
+        
+        .gallery-item:hover {
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: -50px;
+            right: 0;
+            width: 100%;
+            padding: 1rem;
+            color: white;
+            background: rgba(0, 109, 119, 0.9);
+            transition: all 0.4s ease;
+            z-index: 2;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            bottom: 0;
+        }
+        
+        /* استایل تیم مدیریت پیشرفته */
+        .team-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-align: center;
+            position: relative;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .team-card:hover .team-img {
+            transform: scale(1.05);
+        }
+        
+        .team-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 60, 68, 0.8), transparent);
+            opacity: 0;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            color: white;
+        }
+        
+        .team-card:hover .team-overlay {
+            opacity: 1;
+        }
+        
+        .team-info {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .team-info h5 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        .team-info .position {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .team-social {
+            background: var(--light-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .team-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .team-social a:hover {
+            background: var(--dark-color);
+            transform: translateY(-3px);
+        }
+        
+        /* استایل دکمه‌های دسترسی سریع */
+        .quick-link-btn {
+            background: white;
+            border: none;
+            border-radius: 12px;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            color: var(--dark-color);
+        }
+        
+        .quick-link-btn::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .quick-link-btn:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            color: var(--primary-dark);
+        }
+        
+        .quick-link-btn:hover::before {
+            height: 8px;
+            background: var(--accent-color);
+        }
+        
+        .quick-link-btn i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .quick-link-btn:hover i {
+            transform: scale(1.2);
+        }
+        
+        /* استایل کارت‌های اهداف و چشم‌انداز */
+        .vision-card {
+            border: none;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+        
+        .vision-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .vision-card .card-header {
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 1.2rem;
+            border-bottom: none;
+        }
+        
+        .vision-card .list-group-item {
+            border: none;
+            padding: 0.8rem 1.25rem;
+            background: transparent;
+            position: relative;
+            padding-right: 2rem;
+        }
+        
+        .vision-card .list-group-item::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 0.5rem;
+            top: 0.8rem;
+            color: var(--primary-color);
+        }
+        
+        /* استایل فوتر پیشرفته */
+        footer {
+            background: linear-gradient(135deg, var(--dark-color), #002A32);
+            color: white;
+            padding: 4rem 0 1.5rem;
+            position: relative;
+            clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+            margin-top: 5rem;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/footer-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        footer h5 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 0.7rem;
+        }
+        
+        footer h5::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+        
+        footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        
+        footer a:hover {
+            color: var(--accent-color);
+            transform: translateX(-5px);
+        }
+        
+        footer a i {
+            margin-left: 8px;
+        }
+        
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent-color);
+            color: var(--dark-color);
+            transform: translateY(-3px);
+        }
+        
+        /* انیمیشن‌ها و افکت‌های ویژه */
+        @keyframes shine {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%) rotate(45deg);
+            }
+            20% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(100%) rotate(45deg);
+            }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 109, 119, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 109, 119, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 109, 119, 0); }
+        }
+        
+        /* ریسپانسیو و تنظیمات موبایل */
+        @media (max-width: 992px) {
+            .header-banner {
+                padding: 4rem 0 2rem;
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .logo-img {
+                height: 80px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-banner {
+                padding: 3rem 0 1.5rem;
+                clip-path: polygon(0 0, 100% 0, 100% 97%, 0 100%);
+            }
+            
+            .logo-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-img {
+                margin-left: 0;
+                margin-bottom: 1.5rem;
+                height: 70px;
+            }
+            
+            .page-title {
+                font-size: 1.6rem;
+                text-align: center;
+            }
+            
+            .page-title::after {
+                right: 50%;
+                transform: translateX(50%);
+            }
+            
+            .about-section {
+                padding: 1.8rem;
+            }
+            
+            .team-img {
+                height: 250px;
+            }
+            
+            footer {
+                clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 100%);
+                padding: 3rem 0 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .header-banner {
+                padding: 2.5rem 0 1rem;
+            }
+            
+            .page-title {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .feature-card {
+                padding: 1.5rem 1rem;
+            }
+            
+            .quick-link-btn {
+                padding: 1.2rem 0;
+            }
+            
+            .quick-link-btn i {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- نوار ناوبری پیشرفته -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/images/logo-icon.png" alt="لوگو هنرستان">
+                هنرستان دانشمند
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> صفحه اصلی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="about.html"><i class="fas fa-info-circle me-1"></i> درباره ما</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="programs.html"><i class="fas fa-list-ul me-1"></i> رشته‌ها</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admissions.html"><i class="fas fa-user-plus me-1"></i> ثبت‌نام</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="payment.html"><i class="fas fa-money-bill-wave me-1"></i> پرداخت شهریه</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html"><i class="fas fa-phone-alt me-1"></i> تماس با ما</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="admissions.html" class="btn btn-outline-light btn-sm me-2 animate__animated animate__pulse animate__infinite animate__slower">
+                        <i class="fas fa-user-plus me-1"></i> ثبت‌نام آنلاین
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- هدر صفحه پیشرفته -->
+    <header class="header-banner">
+        <div class="container">
+            <div class="logo-header">
+                <div>
+                    <h1 class="page-title animate__animated animate__fadeInRight">درباره هنرستان فنی حرفه‌ای دانشمند</h1>
+                    <p class="text-white mt-3 animate__animated animate__fadeInRight animate__delay-1s">مرکز آموزش مهارت‌های تخصصی برای آینده‌ای درخشان</p>
+                </div>
+                <img src="assets/images/logo.png" alt="لوگو هنرستان" class="logo-img animate__animated animate__fadeInLeft">
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- بخش معرفی با انیمیشن -->
+        <div class="about-section animate__animated animate__fadeInUp">
+            <h3 class="section-title"><i class="fas fa-history"></i> تاریخچه هنرستان</h3>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <p class="lead fw-bold">هنرستان فنی حرفه‌ای دانشمند قلم چی خمینی شهر، به عنوان یکی از مراکز پیشرو در حوزه آموزش و پرورش، تحت مدیریت توانمند و دلسوز جناب مهندس پیمان هزاریان و با همراهی تیم مدیریتی مجرب فعالیت می‌کند.</p>
+                    <p>این آموزشگاه با بهره‌گیری از روش‌های نوین آموزشی، اساتید برجسته و برنامه‌ریزی دقیق، توانسته است به یکی از برترین مراکز آموزشی در منطقه و استان اصفهان تبدیل شود.</p>
+                    <p>آموزشگاه دانشمند قلم چی خمینی شهر، با همت و تلاش استاد زنده‌یاد علی هزاریان، یکی از اساتید برجسته، محققان نام‌آور و مشاوران آموزشی کشور، تأسیس شده است. ایشان با سال‌ها تجربه در حوزه آموزش، پژوهش و مشاوره، توانستند بنیان‌های محکمی برای این مرکز آموزشی بنا نهند.</p>
+                    <div class="mt-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="bg-primary text-white rounded-circle p-3 me-3">
+                                <i class="fas fa-user-graduate fa-2x"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-0">+۲۵۰۰ فارغ‌التحصیل</h5>
+                                <small class="text-muted">در طول ۲۰ سال فعالیت آموزشی</small>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary text-white rounded-circle p-3 me-3">
+                                <i class="fas fa-trophy fa-2x"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-0">+۱۵۰ مدال استانی</h5>
+                                <small class="text-muted">در مسابقات مهارتی و علمی</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                    <div class="position-relative rounded overflow-hidden shadow-lg">
+                        <img src="assets/images/history.jpg" alt="تاریخچه هنرستان" class="img-fluid rounded">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center">
+                            <a href="#" class="btn btn-primary btn-lg rounded-circle pulse" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-play fa-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- بخش معرفی مدیریت -->
+        <div class="about-section animate__animated animate__fadeInUp animate__delay-1s">
+            <h3 class="section-title"><i class="fas fa-users-cog"></i> مدیریت آموزشگاه</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4 h-100">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="assets/images/manager.jpg" class="img-fluid rounded-start h-100" alt="مدیر آموزشگاه">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">مهندس پیمان هزاریان</h5>
+                                    <p class="card-text text-muted">مدیر آموزشگاه دانشمند قلم چی</p>
+                                    <p class="card-text">جناب مهندس پیمان هزاریان، به عنوان مدیر آموزشگاه دانشمند قلم چی خمینی شهر، با الهام از اصول و ارزش‌های بنیان‌گذار این مرکز، همواره تلاش کرده است تا فضایی پویا، خلاقانه و علمی برای دانش‌آموزان فراهم کند.</p>
+                                    <ul class="list-unstyled">
+                                        <li><i class="fas fa-check-circle text-primary me-2"></i> بورسیه تحصیلی از دانشگاه نفت</li>
+                                        <li><i class="fas fa-check-circle text-primary me-2"></i> مهندسی عمران و فوق‌لیسانس عمران زلزله</li>
+                                        <li><i class="fas fa-check-circle text-primary me-2"></i> عضو نظام مهندسی استان اصفهان</li>
+                                        <li><i class="fas fa-check-circle text-primary me-2"></i> ۳۰ سال تجربه در صنعت نفت و گاز</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4 h-100">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="assets/images/manager2.jpg" class="img-fluid rounded-start h-100" alt="مدیر آموزشی">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">سرکار خانم عرب پور</h5>
+                                    <p class="card-text text-muted">مدیر آموزشی آموزشگاه دانشمند</p>
+                                    <p class="card-text">سرکار خانم عرب پور، به عنوان مدیر آموزشی آموزشگاه دانشمند، نقش کلیدی در موفقیت‌های این مرکز ایفا کرده‌اند. ایشان با دانش عمیق در حوزه آموزش و پرورش و عشق به تربیت نسل آینده، توانسته‌اند برنامه‌های آموزشی منسجم و مؤثری را طراحی و اجرا کنند.</p>
+                                    <ul class="list-unstyled">
+                                        <li><i class="fas fa-check-circle text-primary me-2"></i> ارتقای سطح علمی دانش‌آموزان</li>
+                                        <li><i class="fas fa-check-circle text-primary me-2"></i> موفقیت در المپیادها و کنکور</li>
+                                        <li><i class="fas fa-check-circle text-primary me-2"></i> ایجاد فضایی پویا و خلاقانه</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- بخش اهداف آموزشی -->
+        <div class="about-section animate__animated animate__fadeInUp animate__delay-1s">
+            <h3 class="section-title"><i class="fas fa-bullseye"></i> اهداف آموزشی</h3>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="vision-card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-flag me-2"></i>اهداف اصلی</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">تربیت نیروی متخصص همسو با نیازهای صنعت در رشته‌های فنی و مهندسی و هنرستانی</li>
+                                <li class="list-group-item">ایجاد پیوند عمیق بین آموزش‌های تئوری و عملی با استفاده از امکانات پیشرفته دانشگاهی</li>
+                                <li class="list-group-item">استفاده از فناوری‌های نوین آموزشی مانند هوش مصنوعی و آموزش‌های الکترونیکی</li>
+                                <li class="list-group-item">ارتقای مهارت‌های حرفه‌ای دانش‌آموزان با برگزاری دوره‌های مهارت‌افزایی</li>
+                                <li class="list-group-item">همکاری با اساتید و متخصصان دانشگاهی در طراحی و اجرای دوره‌های آموزشی پیشرفته</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                    <div class="vision-card h-100">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0"><i class="fas fa-eye me-2"></i>چشم‌انداز</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-start mb-4">
+                                <div class="bg-info text-white rounded-circle p-3 me-3">
+                                    <i class="fas fa-rocket fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-2">همکاری با دانشگاه صنعتی اصفهان</h5>
+                                    <p class="mb-0">این پروژه با هدف استفاده از فضای آموزشی و پژوهشی دانشگاه صنعتی اصفهان و به‌کارگیری نوآوری‌های هوش مصنوعی در آموزش هنرستانی طراحی شده است.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start">
+                                <div class="bg-info text-white rounded-circle p-3 me-3">
+                                    <i class="fas fa-star fa-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-2">آماده‌سازی دانش‌آموزان برای بازار کار</h5>
+                                    <p class="mb-0">هدف اصلی، ایجاد محیطی پویا و تعاملی است که دانش‌آموزان و هنرجویان رشته‌های مختلف را برای ورود به بازار کار و ادامه تحصیل در سطوح بالاتر آماده کند.</p>
+                                </div>
+                            </div>
+                            <div class="progress mt-4" style="height: 10px;">
+                                <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p class="text-center mt-2 mb-0 fw-bold">پیشرفت پروژه در همکاری با دانشگاه صنعتی اصفهان</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- بخش رشته‌های آموزشی -->
+        <div class="about-section animate__animated animate__fadeInUp animate__delay-2s">
+            <h3 class="section-title"><i class="fas fa-list-ul"></i> رشته‌های آموزشی</h3>
+            <p class="text-center mb-5">این پروژه بر روی رشته‌های زیر متمرکز است:</p>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h4>فناوری اطلاعات</h4>
+                        <p>آموزش مهارت‌های برنامه‌نویسی، شبکه‌های کامپیوتری و امنیت اطلاعات</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h4>حسابداری</h4>
+                        <p>آموزش اصول حسابداری مالی، حسابداری مدیریتی و نرم‌افزارهای حسابداری</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h4>مکانیک خودرو</h4>
+                        <p>آموزش تعمیر و نگهداری سیستم‌های مختلف خودروهای مدرن</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>الکتروتکنیک</h4>
+                        <p>آموزش سیستم‌های الکترونیکی، کنترل و اتوماسیون صنعتی</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-ruler-combined"></i>
+                        </div>
+                        <h4>معماری داخلی</h4>
+                        <p>آموزش طراحی داخلی، دکوراسیون و نقشه‌کشی ساختمان</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h4>گرافیک</h4>
+                        <p>آموزش طراحی گرافیک، نرم‌افزارهای طراحی و تصویرسازی</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mx-auto">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cut"></i>
+                        </div>
+                        <h4>خیاطی</h4>
+                        <p>آموزش طراحی و دوخت لباس، الگوسازی و مدلینگ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- بخش همکاری‌ها -->
+        <div class="about-section animate__animated animate__fadeInUp animate__delay-2s">
+            <h3 class="section-title"><i class="fas fa-handshake"></i> همکاری‌های استراتژیک</h3>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <p class="lead fw-bold">این پروژه با همکاری دانشگاه صنعتی اصفهان و اداره آموزش و پرورش استان اصفهان اجرا می‌شود.</p>
+                    <p>آموزشگاه دانشمند قلم چی با سابقه‌ای درخشان در حوزه آموزش و پرورش نیروی متخصص، همواره در تلاش بوده است تا با ارائه الگوهای آموزشی نوین و همسو با نیازهای صنعت و دانشگاه، گامی مؤثر در راستای ارتقای سطح علمی و مهارتی دانش‌آموزان و دانشجویان بردارد.</p>
+                    <p>این پروژه با الهام از تجربیات موفق آموزشی در سطح بین‌المللی و داخلی طراحی شده است:</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> <strong>هنرستان کالج دانشگاه برلین آلمان:</strong> الگویی که بیش از چند دهه است در دانشگاه برلین اجرا می‌شود</li>
+                        <li><i class="fas fa-check-circle text-primary me-2"></i> <strong>دانشگاه امیرکبیر تهران و خواجه نصیر مشهد:</strong> الگویی که با موفقیت در این دانشگاه‌ها اجرا شده است</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                    <div class="card border-0 shadow-lg h-100">
+                        <div class="card-body text-center p-5">
+                            <img src="assets/images/university-logo.png" alt="دانشگاه صنعتی اصفهان" class="img-fluid mb-4" style="max-height: 100px;">
+                            <h4 class="mb-3">همکاری با دانشگاه صنعتی اصفهان</h4>
+                            <p class="mb-4">استفاده از فضاهای آموزشی دانشگاه برای برگزاری کلاس‌ها و دوره‌های آموزشی و بهره‌گیری از امکانات و زیرساخت‌های دانشگاهی (آزمایشگاه‌ها، کارگاه‌ها و ...)</p>
+                            <div class="d-flex justify-content-center">
+                                <div class="mx-3 text-center">
+                                    <div class="bg-primary text-white rounded-circle p-3 d-inline-flex mb-2">
+                                        <i class="fas fa-flask fa-2x"></i>
+                                    </div>
+                                    <p class="mb-0 fw-bold">آزمایشگاه‌ها</p>
+                                </div>
+                                <div class="mx-3 text-center">
+                                    <div class="bg-primary text-white rounded-circle p-3 d-inline-flex mb-2">
+                                        <i class="fas fa-tools fa-2x"></i>
+                                    </div>
+                                    <p class="mb-0 fw-bold">کارگاه‌ها</p>
+                                </div>
+                                <div class="mx-3 text-center">
+                                    <div class="bg-primary text-white rounded-circle p-3 d-inline-flex mb-2">
+                                        <i class="fas fa-chalkboard-teacher fa-2x"></i>
+                                    </div>
+                                    <p class="mb-0 fw-bold">اساتید</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- بخش دسترسی سریع تعاملی -->
+        <div class="about-section animate__animated animate__fadeInUp animate__delay-3s">
+            <h3 class="section-title"><i class="fas fa-link"></i> دسترسی سریع</h3>
+            <p class="text-center mb-5">برای دسترسی سریع به بخش‌های مختلف هنرستان از لینک‌های زیر استفاده کنید</p>
+            
+            <div class="row g-3">
+                <div class="col-md-3 col-sm-6">
+                    <a href="programs.html" class="quick-link-btn">
+                        <i class="fas fa-list-ul"></i>
+                        رشته‌های آموزشی
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="admissions.html" class="quick-link-btn">
+                        <i class="fas fa-user-plus"></i>
+                        ثبت‌نام آنلاین
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="payment.html" class="quick-link-btn">
+                        <i class="fas fa-money-bill-wave"></i>
+                        پرداخت شهریه
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="contact.html" class="quick-link-btn">
+                        <i class="fas fa-phone-alt"></i>
+                        تماس با ما
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- فوتر پیشرفته -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5><i class="fas fa-map-marker-alt me-2"></i>تماس با ما</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> اصفهان، خمینی شهر، خیابان اصلی، کوچه آموزشگاه</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> تلفن: ۰۳۱-۱۲۳۴۵۶۷۸</li>
+                        <li class="mb-2"><i class="fas fa-fax me-2"></i> فکس: ۰۳۱-۸۷۶۵۴۳۲۱</li>
+                        <li><i class="fas fa-envelope me-2"></i> ایمیل: info@daneshmand-school.ir</li>
+                    </ul>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5><i class="fas fa-clock me-2"></i>ساعات کاری</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="far fa-sun me-2"></i> شنبه تا چهارشنبه: ۷:۳۰ صبح تا ۴ بعدازظهر</li>
+                        <li><i class="far fa-moon me-2"></i> پنجشنبه: ۷:۳۰ صبح تا ۱۲ ظهر</li>
+                    </ul>
+                    
+                    <h5 class="mt-4"><i class="fas fa-exclamation-circle me-2"></i>اطلاعیه‌ها</h5>
+                    <div class="alert alert-info p-2 mt-3">
+                        <i class="fas fa-info-circle me-2"></i> زمان ثبت‌نام سال تحصیلی جدید از ۱۵ مرداد آغاز می‌شود
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <h5><i class="fas fa-link me-2"></i>لینک‌های مفید</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#"><i class="fas fa-file-alt me-2"></i>آیین‌نامه ثبت‌نام</a></li>
+                        <li class="mb-2"><a href="#"><i class="fas fa-list-check me-2"></i>شرایط پذیرش</a></li>
+                        <li class="mb-2"><a href="#"><i class="fas fa-question-circle me-2"></i>سوالات متداول</a></li>
+                        <li class="mb-2"><a href="#"><i class="fas fa-newspaper me-2"></i>اخبار و رویدادها</a></li>
+                        <li><a href="#"><i class="fas fa-download me-2"></i>دانلود فرم‌ها</a></li>
+                    </ul>
+                    
+                    <div class="mt-4">
+                        <a href="contact.html" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-paper-plane me-2"></i>ارسال پیام
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p class="mb-0"><i class="far fa-copyright me-2"></i>۱۴۰۲ هنرستان فنی حرفه‌ای دانشمند قلم چی. تمام حقوق محفوظ است.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <a href="#" class="text-white-50 me-3">حریم خصوصی</a>
+                        <a href="#" class="text-white-50">شرایط استفاده</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- اسکریپت‌های ضروری -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script>
+        // اسکریپت برای تغییر نوار ناوبری هنگام اسکرول
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('.navbar-custom').addClass('scrolled');
+            } else {
+                $('.navbar-custom').removeClass('scrolled');
+            }
+        });
+        
+        // اسکریپت برای فعال کردن انیمیشن‌های اسکرولی
+        $(document).ready(function() {
+            $('.animate__animated').waypoint(function(direction) {
+                if (direction === 'down') {
+                    $(this.element).addClass('animate__fadeInUp');
+                }
+            }, {
+                offset: '75%'
+            });
+            
+            // اسکریپت برای باز کردن ویدیو در مدال
+            $('.pulse').click(function(e) {
+                e.preventDefault();
+                // کد نمایش مدال ویدیو
+                alert('ویدیوی معرفی هنرستان در اینجا نمایش داده می‌شود');
+            });
+            
+            // اسکریپت برای اسموت اسکرول
+            $('a[href^="#"]').on('click', function(event) {
+                var target = $(this.getAttribute('href'));
+                if (target.length) {
+                    event.preventDefault();
+                    $('html, body').stop().animate({
+                        scrollTop: target.offset().top - 70
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

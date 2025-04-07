@@ -1,0 +1,2197 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="هنرستان فنی حرفه‌ای دانشمند قلم چی - پرورش استعدادها با آموزش‌های تخصصی و استفاده از هوش مصنوعی در یادگیری">
+    <meta name="keywords" content="هنرستان فنی حرفه‌ای, ثبت‌نام هنرستان, رشته‌های فنی, آموزش مهارتی, هوش مصنوعی در آموزش">
+    <meta name="author" content="هنرستان دانشمند قلم چی">
+    <title>صفحه اصلی | هنرستان فنی حرفه‌ای دانشمند قلم چی</title>
+    
+    <!-- Preload important resources -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" as="style">
+    <link rel="preload" href="assets/images/hero-image.webp" as="image">
+    
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #006D77;
+            --primary-dark: #005a63;
+            --secondary-color: #83C5BE;
+            --accent-color: #FFD166;
+            --accent-dark: #e6b952;
+            --light-color: #EDF6F9;
+            --dark-color: #003844;
+            --text-color: #333;
+            --text-light: #555;
+            --gradient-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-accent: linear-gradient(135deg, var(--accent-color), #FFB347);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #f8f9fa;
+            color: var(--text-color);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 800;
+            line-height: 1.3;
+        }
+        
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--light-color);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid var(--primary-color);
+            border-bottom-color: var(--accent-color);
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Navigation Bar - Enhanced */
+        .navbar-custom {
+            background: rgba(0, 109, 119, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            padding: 0.8rem 0;
+            transition: var(--transition);
+        }
+        
+        .navbar-custom.scrolled {
+            background: var(--primary-color);
+            box-shadow: var(--shadow-md);
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-custom .navbar-brand {
+            color: white;
+            font-weight: 900;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .navbar-custom .navbar-brand img {
+            height: 40px;
+            margin-left: 10px;
+            transition: var(--transition);
+        }
+        
+        .navbar-custom .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+        
+        .navbar-custom .navbar-brand:hover img {
+            transform: rotate(-5deg);
+        }
+        
+        .navbar-custom .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            margin: 0 0.3rem;
+            border-radius: 6px;
+            transition: var(--transition);
+            position: relative;
+            font-size: 0.95rem;
+        }
+        
+        .navbar-custom .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+        
+        .navbar-custom .nav-link:hover::before,
+        .navbar-custom .nav-link.active::before {
+            width: 100%;
+            left: 0;
+        }
+        
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            color: white;
+        }
+        
+        .navbar-custom .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .navbar-custom .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        
+        .dropdown-menu {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 10px;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .dropdown-item {
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section - Enhanced */
+        .hero-section {
+            background: var(--gradient-bg);
+            color: white;
+            padding: 8rem 0 5rem;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            background-image: url('assets/images/hero-bg-pattern.png'), var(--gradient-bg);
+            background-blend-mode: overlay;
+            background-size: cover;
+        }
+        
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/dots-pattern.png') repeat;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            line-height: 1.3;
+            background: linear-gradient(to right, #fff, #f3f3f3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-right: auto;
+            margin-left: auto;
+            font-weight: 500;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .hero-buttons .btn {
+            margin: 0.5rem;
+            padding: 0.8rem 2.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: var(--transition);
+            font-size: 1rem;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .btn-primary {
+            background: var(--gradient-accent);
+            border: none;
+            color: var(--dark-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #FFC850, #FFA347);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 180, 0, 0.3);
+        }
+        
+        .btn-primary:hover::after {
+            transform: translateX(100%);
+        }
+        
+        .btn-outline-light {
+            border-width: 2px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-outline-light:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+        
+        .hero-image {
+            max-height: 400px;
+            margin-top: 3rem;
+            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.25));
+            animation: float 6s ease-in-out infinite;
+            border-radius: 15px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+        
+        .hero-image:hover {
+            transform: scale(1.02);
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Features Section - Enhanced */
+        .features-section {
+            padding: 5rem 0;
+            background-color: white;
+            position: relative;
+        }
+        
+        .features-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/features-bg-pattern.png') repeat;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-weight: 900;
+            font-size: 2.5rem;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: var(--gradient-accent);
+            margin: 1.5rem auto;
+            border-radius: 3px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 4rem auto;
+            font-size: 1.2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            border-top: 5px solid var(--accent-color);
+            transition: var(--transition);
+            height: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/card-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.15) rotate(5deg);
+        }
+        
+        .feature-title {
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            color: var(--dark-color);
+            font-size: 1.5rem;
+        }
+        
+        .feature-text {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+        
+        /* Programs Section - Enhanced */
+        .programs-section {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .programs-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/programs-bg-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .program-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            height: 100%;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .program-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--gradient-accent);
+            color: var(--dark-color);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            z-index: 2;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .program-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .program-card:hover .program-img {
+            transform: scale(1.05);
+        }
+        
+        .program-content {
+            padding: 1.8rem;
+        }
+        
+        .program-title {
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            color: var(--dark-color);
+            font-size: 1.4rem;
+        }
+        
+        .program-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .program-meta i {
+            color: var(--primary-color);
+            margin-left: 5px;
+        }
+        
+        .program-desc {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Innovation Section - Enhanced */
+        .innovation-section {
+            padding: 5rem 0;
+            background: var(--gradient-bg);
+            color: white;
+            position: relative;
+        }
+        
+        .innovation-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/innovation-bg-pattern.png') repeat;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .innovation-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: var(--transition);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .innovation-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0));
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .innovation-card:hover::after {
+            transform: translateX(100%);
+        }
+        
+        .innovation-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .innovation-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .innovation-card:hover .innovation-icon {
+            transform: scale(1.1);
+        }
+        
+        .innovation-title {
+            font-weight: 800;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        /* Achievements Section - Enhanced */
+        .achievements-section {
+            padding: 5rem 0;
+            background-color: white;
+            position: relative;
+        }
+        
+        .achievement-item {
+            text-align: center;
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .achievement-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .achievement-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .achievement-title {
+            font-weight: 700;
+            color: var(--dark-color);
+            font-size: 1.3rem;
+        }
+        
+        /* News Section - Enhanced */
+        .news-section {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+            position: relative;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            height: 100%;
+            margin-bottom: 2rem;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .news-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .news-card:hover .news-img {
+            transform: scale(1.05);
+        }
+        
+        .news-date {
+            background: var(--gradient-accent);
+            color: var(--dark-color);
+            padding: 0.5rem 1.2rem;
+            display: inline-block;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .news-title {
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            color: var(--dark-color);
+            font-size: 1.4rem;
+            transition: var(--transition);
+        }
+        
+        .news-card:hover .news-title {
+            color: var(--primary-color);
+        }
+        
+        .read-more {
+            color: var(--primary-color);
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .read-more::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .read-more:hover {
+            color: var(--secondary-color);
+        }
+        
+        .read-more:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .read-more i {
+            margin-right: 5px;
+            transition: var(--transition);
+        }
+        
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Quick Access Section - Enhanced */
+        .quick-access {
+            padding: 4rem 0;
+            background: white;
+            position: relative;
+        }
+        
+        .quick-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(237, 246, 249, 0.9), rgba(209, 231, 255, 0.7));
+            border-radius: 15px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            height: 100%;
+            transition: var(--transition);
+            border: 1px solid rgba(131, 197, 190, 0.3);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quick-link::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/quick-link-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .quick-link:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--secondary-color);
+            background: linear-gradient(135deg, rgba(237, 246, 249, 1), rgba(209, 231, 255, 0.9));
+        }
+        
+        .quick-icon {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .quick-link:hover .quick-icon {
+            transform: scale(1.15) rotate(5deg);
+        }
+        
+        .quick-title {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--dark-color);
+        }
+        
+        /* Contact Section - Enhanced */
+        .contact-section {
+            padding: 5rem 0;
+            background: var(--gradient-bg);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/contact-pattern.png') repeat;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .contact-info-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            height: 100%;
+            transition: var(--transition);
+        }
+        
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .contact-form-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            height: 100%;
+            transition: var(--transition);
+        }
+        
+        .contact-form-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-form-card .form-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.8rem 2rem;
+        }
+        
+        .contact-form-card .form-header h3 {
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .contact-form-card .form-header p {
+            opacity: 0.9;
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+        
+        .contact-form-card .form-floating {
+            position: relative;
+            margin-bottom: 1.2rem;
+        }
+        
+        .contact-form-card .form-control {
+            background-color: rgba(237, 246, 249, 0.5);
+            border: 1px solid rgba(0, 109, 119, 0.2);
+            color: var(--dark-color);
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+        
+        .contact-form-card .form-control:focus {
+            background-color: white;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(0, 109, 119, 0.25);
+        }
+        
+        .contact-form-card .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+        
+        .contact-form-card .form-control.is-invalid:focus {
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+        }
+        
+        .contact-form-card .invalid-feedback {
+            text-align: right;
+            font-size: 0.9rem;
+        }
+        
+        .contact-form-card label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .contact-icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-left: 1rem;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+        
+        .contact-info:hover .contact-icon-circle {
+            transform: rotate(15deg);
+        }
+        
+        .btn-submit {
+            background: var(--gradient-accent);
+            border: none;
+            color: var(--dark-color);
+            font-weight: 700;
+            padding: 1rem;
+            border-radius: 12px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #FFC850, #FFA347);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 180, 0, 0.3);
+        }
+        
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+        
+        .btn-submit .spinner-border {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+        
+        .btn-submit.loading .submit-text {
+            visibility: hidden;
+            opacity: 0;
+        }
+        
+        .btn-submit.loading .spinner-border {
+            display: inline-block !important;
+        }
+        
+        /* Contact Info Animation */
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+            padding: 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        
+        .contact-info:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-5px);
+        }
+        
+        .contact-text h5 {
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+            font-size: 1.3rem;
+            color: white;
+        }
+        
+        .contact-text p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0;
+            font-size: 1rem;
+        }
+        
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background: var(--accent-color);
+            color: var(--dark-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Footer - Enhanced */
+        footer {
+            background: linear-gradient(135deg, var(--dark-color), #002A32);
+            color: white;
+            padding: 4rem 0 2rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/footer-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        footer h5 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+        
+        footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        footer a:hover {
+            color: var(--accent-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .footer-links li:hover {
+            transform: translateX(-5px);
+        }
+        
+        .footer-links i {
+            margin-left: 0.8rem;
+            color: var(--accent-color);
+            font-size: 1rem;
+        }
+        
+        .footer-about {
+            padding-right: 2rem;
+        }
+        
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo img {
+            height: 60px;
+            margin-left: 10px;
+            transition: var(--transition);
+        }
+        
+        .footer-logo:hover img {
+            transform: rotate(-5deg);
+        }
+        
+        .footer-logo-text {
+            font-weight: 900;
+            font-size: 1.8rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-top: 1.5rem;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.8rem 1.2rem;
+            border: none;
+            outline: none;
+        }
+        
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .newsletter-form button {
+            background: var(--gradient-accent);
+            border: none;
+            color: var(--dark-color);
+            font-weight: 700;
+            padding: 0 1.8rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .newsletter-form button:hover {
+            background: linear-gradient(135deg, #FFC850, #FFA347);
+        }
+        
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-accent);
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-md);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Floating Whatsapp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: var(--shadow-md);
+            z-index: 99;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .contact-info-card {
+                padding: 2rem;
+            }
+            
+            .contact-icon-circle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 7rem 0 4rem;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons .btn {
+                display: block;
+                width: 80%;
+                margin: 0.8rem auto;
+            }
+            
+            .feature-card, .news-card, .quick-link, .program-card {
+                margin-bottom: 1.8rem;
+            }
+            
+            .navbar-custom .nav-link {
+                padding: 0.6rem;
+                margin: 0.2rem 0;
+            }
+            
+            .footer-about {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+            
+            .contact-info-card {
+                margin-bottom: 2rem;
+            }
+            
+            .contact-info {
+                padding: 0.8rem;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .back-to-top {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+                bottom: 20px;
+                left: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title::after {
+                width: 80px;
+                height: 4px;
+            }
+            
+            .hero-badge {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Floating Whatsapp Button -->
+    <a href="https://wa.me/989123456789" class="whatsapp-float" target="_blank" aria-label="ارتباط از طریق واتساپ">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" aria-label="بازگشت به بالا">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Advanced Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/images/logo.png" alt="هنرستان دانشمند" class="d-none d-lg-block">
+                <span class="d-lg-none">هنرستان دانشمند</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="منوی ناوبری">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html"><i class="fas fa-home me-1"></i> صفحه اصلی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i> درباره ما</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="programsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-list-ul me-1"></i> رشته‌های آموزشی
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="programsDropdown">
+                            <li><a class="dropdown-item" href="program-it.html"><i class="fas fa-laptop-code me-2"></i>فناوری اطلاعات</a></li>
+                            <li><a class="dropdown-item" href="program-accounting.html"><i class="fas fa-calculator me-2"></i>حسابداری مالی</a></li>
+                            <li><a class="dropdown-item" href="program-electro.html"><i class="fas fa-bolt me-2"></i>الکتروتکنیک</a></li>
+                            <li><a class="dropdown-item" href="program-mechanics.html"><i class="fas fa-car me-2"></i>مکانیک خودرو</a></li>
+                            <li><a class="dropdown-item" href="program-architecture.html"><i class="fas fa-ruler-combined me-2"></i>معماری داخلی</a></li>
+                            <li><a class="dropdown-item" href="program-graphic.html"><i class="fas fa-paint-brush me-2"></i>گرافیک دیجیتال</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admissions.html"><i class="fas fa-user-plus me-1"></i> ثبت‌نام</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="teachers.html"><i class="fas fa-chalkboard-teacher me-1"></i> اساتید</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html"><i class="fas fa-phone-alt me-1"></i> تماس با ما</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-ellipsis-h me-1"></i> بیشتر
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="moreDropdown">
+                            <li><a class="dropdown-item" href="ai-education.html"><i class="fas fa-robot me-2"></i>هوش مصنوعی</a></li>
+                            <li><a class="dropdown-item" href="blog.html"><i class="fas fa-blog me-2"></i>وبلاگ</a></li>
+                            <li><a class="dropdown-item" href="facilities.html"><i class="fas fa-building me-2"></i>امکانات</a></li>
+                            <li><a class="dropdown-item" href="gallery.html"><i class="fas fa-images me-2"></i>گالری تصاویر</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-sm btn-outline-light me-2"><i class="fas fa-sign-in-alt me-1"></i> ورود</a>
+                    <a href="admissions.html" class="btn btn-sm btn-primary"><i class="fas fa-user-plus me-1"></i> ثبت‌نام</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Particles -->
+    <section class="hero-section" id="hero">
+        <div id="particles-js"></div>
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge" data-aos="fade-down" data-aos-delay="100">پیشرو در آموزش‌های مهارتی با هوش مصنوعی</span>
+                <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">هنرستان فنی حرفه‌ای دانشمند قلم چی</h1>
+                <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="300">تربیت نیروی متخصص و کارآمد برای صنعت کشور با بهره‌گیری از آخرین فناوری‌های آموزشی و برنامه‌های درسی تطبیق‌پذیر با هوش مصنوعی</p>
+                <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
+                    <a href="programs.html" class="btn btn-primary"><i class="fas fa-list-ul me-2"></i>مشاهده رشته‌ها</a>
+                    <a href="admissions.html" class="btn btn-outline-light"><i class="fas fa-user-plus me-2"></i>ثبت‌نام آنلاین</a>
+                </div>
+                <img src="assets/images/hero-image.webp" alt="هنرستان دانشمند" class="img-fluid hero-image" data-aos="fade-up" data-aos-delay="500">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">چرا هنرستان دانشمند؟</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">با ترکیب آموزش‌های سنتی و فناوری‌های نوین، بهترین محیط یادگیری را برای دانش‌آموزان فراهم کرده‌ایم</p>
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3 class="feature-title">اساتید مجرب و متخصص</h3>
+                        <p class="feature-text">بهترین مدرسان با سابقه صنعتی و آموزشی برای تربیت نیروی کار ماهر و متخصص در رشته‌های مختلف فنی و حرفه‌ای</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3 class="feature-title">هوش مصنوعی در آموزش</h3>
+                        <p class="feature-text">استفاده از سیستم‌های هوشمند برای شخصی‌سازی آموزش، ارزیابی دقیق و ارائه بازخورد فوری به دانش‌آموزان</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3 class="feature-title">کارگاه‌های مجهز</h3>
+                        <p class="feature-text">امکانات آموزشی پیشرفته و محیطی کاملاً عملی برای یادگیری مؤثر با استانداردهای روز صنعت</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3 class="feature-title">تضمین شغلی</h3>
+                        <p class="feature-text">همکاری با شرکت‌های معتبر برای جذب فارغ‌التحصیلان مستعد و ارتباط مستقیم با بازار کار</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3 class="feature-title">سرفصل‌های به‌روز</h3>
+                        <p class="feature-text">برنامه‌های درسی منطبق با استانداردهای وزارت آموزش و پرورش و نیازهای روز صنعت</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3 class="feature-title">رتبه‌های برتر</h3>
+                        <p class="feature-text">پرورش دهنده نفرات برتر کنکور و مسابقات مهارتی در رشته‌های فنی و حرفه‌ای</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs-section" id="programs">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">رشته‌های آموزشی</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">برنامه‌های آموزشی تخصصی ما برای پایه‌های دهم و یازدهم با استفاده از هوش مصنوعی</p>
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="program-card">
+                        <span class="program-badge">پایه دهم و یازدهم</span>
+                        <img src="assets/images/program1.webp" alt="فناوری اطلاعات" class="program-img">
+                        <div class="program-content">
+                            <h3 class="program-title">فناوری اطلاعات و ارتباطات</h3>
+                            <div class="program-meta">
+                                <span><i class="fas fa-users"></i> حداکثر 30 نفر</span>
+                                <span><i class="fas fa-clock"></i> 5 روز در هفته</span>
+                            </div>
+                            <p class="program-desc">آموزش برنامه‌نویسی، شبکه‌های کامپیوتری و امنیت اطلاعات با استفاده از پلتفرم‌های هوشمند آموزشی</p>
+                            <a href="program-it.html" class="btn btn-outline-primary w-100">جزئیات بیشتر</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="program-card">
+                        <span class="program-badge">پایه دهم و یازدهم</span>
+                        <img src="assets/images/program2.webp" alt="حسابداری" class="program-img">
+                        <div class="program-content">
+                            <h3 class="program-title">حسابداری مالی</h3>
+                            <div class="program-meta">
+                                <span><i class="fas fa-users"></i> حداکثر 30 نفر</span>
+                                <span><i class="fas fa-clock"></i> 5 روز در هفته</span>
+                            </div>
+                            <p class="program-desc">آموزش اصول حسابداری، نرم‌افزارهای مالی و سیستم‌های هوشمند تحلیل مالی با رویکرد عملی</p>
+                            <a href="program-accounting.html" class="btn btn-outline-primary w-100">جزئیات بیشتر</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="program-card">
+                        <span class="program-badge">پایه دهم و یازدهم</span>
+                        <img src="assets/images/program3.webp" alt="الکتروتکنیک" class="program-img">
+                        <div class="program-content">
+                            <h3 class="program-title">الکتروتکنیک</h3>
+                            <div class="program-meta">
+                                <span><i class="fas fa-users"></i> حداکثر 30 نفر</span>
+                                <span><i class="fas fa-clock"></i> 5 روز در هفته</span>
+                            </div>
+                            <p class="program-desc">آموزش تخصصی برق صنعتی، کنترل سیستم‌های الکترونیکی و اتوماسیون با تجهیزات پیشرفته</p>
+                            <a href="program-electro.html" class="btn btn-outline-primary w-100">جزئیات بیشتر</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="program-card">
+                        <span class="program-badge">پایه دهم و یازدهم</span>
+                        <img src="assets/images/program4.webp" alt="مکانیک خودرو" class="program-img">
+                        <div class="program-content">
+                            <h3 class="program-title">مکانیک خودرو</h3>
+                            <div class="program-meta">
+                                <span><i class="fas fa-users"></i> حداکثر 30 نفر</span>
+                                <span><i class="fas fa-clock"></i> 5 روز در هفته</span>
+                            </div>
+                            <p class="program-desc">آموزش تعمیر و نگهداری خودروهای مدرن با استفاده از شبیه‌سازهای هوشمند و کارگاه‌های مجهز</p>
+                            <a href="program-mechanics.html" class="btn btn-outline-primary w-100">جزئیات بیشتر</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="program-card">
+                        <span class="program-badge">پایه دهم و یازدهم</span>
+                        <img src="assets/images/program5.webp" alt="معماری داخلی" class="program-img">
+                        <div class="program-content">
+                            <h3 class="program-title">معماری داخلی</h3>
+                            <div class="program-meta">
+                                <span><i class="fas fa-users"></i> حداکثر 30 نفر</span>
+                                <span><i class="fas fa-clock"></i> 5 روز در هفته</span>
+                            </div>
+                            <p class="program-desc">آموزش طراحی داخلی، نرم‌افزارهای تخصصی و اصول دکوراسیون با استفاده از واقعیت مجازی</p>
+                            <a href="program-architecture.html" class="btn btn-outline-primary w-100">جزئیات بیشتر</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="program-card">
+                        <span class="program-badge">پایه دهم و یازدهم</span>
+                        <img src="assets/images/program6.webp" alt="گرافیک" class="program-img">
+                        <div class="program-content">
+                            <h3 class="program-title">گرافیک و طراحی دیجیتال</h3>
+                            <div class="program-meta">
+                                <span><i class="fas fa-users"></i> حداکثر 30 نفر</span>
+                                <span><i class="fas fa-clock"></i> 5 روز در هفته</span>
+                            </div>
+                            <p class="program-desc">آموزش طراحی گرافیک، انیمیشن و رسانه‌های دیجیتال با استفاده از ابزارهای هوشمند یادگیری</p>
+                            <a href="program-graphic.html" class="btn btn-outline-primary w-100">جزئیات بیشتر</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="programs.html" class="btn btn-primary btn-lg">مشاهده همه رشته‌ها <i class="fas fa-arrow-left me-2"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Innovation Section -->
+    <section class="innovation-section" id="innovation">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">نوآوری در آموزش با هوش مصنوعی</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">استفاده از فناوری‌های پیشرفته برای بهبود کیفیت یادگیری و شخصی‌سازی آموزش</p>
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="innovation-card">
+                        <div class="innovation-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3 class="innovation-title">آموزش شخصی‌سازی شده</h3>
+                        <p>سیستم هوشمند ما با تحلیل نقاط قوت و ضعف هر دانش‌آموز، برنامه‌های درسی اختصاصی طراحی می‌کند</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="innovation-card">
+                        <div class="innovation-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="innovation-title">ارزیابی هوشمند</h3>
+                        <p>ارائه بازخورد فوری و تحلیل پیشرفت تحصیلی با استفاده از الگوریتم‌های پیشرفته یادگیری ماشین</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="innovation-card">
+                        <div class="innovation-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="innovation-title">محتوای تعاملی</h3>
+                        <p>استفاده از محتوای آموزشی تعاملی و شبیه‌سازهای هوشمند برای درک بهتر مفاهیم پیچیده</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="achievements-section" id="achievements">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">دستاوردهای ما</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">موفقیت‌های دانش‌آموزان و هنرستان در سال‌های اخیر</p>
+            <div class="row">
+                <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="achievement-item">
+                        <div class="achievement-number">95%</div>
+                        <div class="achievement-title">قبولی در دانشگاه‌های معتبر</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="achievement-item">
+                        <div class="achievement-number">42</div>
+                        <div class="achievement-title">رتبه‌های برتر کنکور</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="achievement-item">
+                        <div class="achievement-number">480</div>
+                        <div class="achievement-title">دانش‌آموز فعال</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="achievement-item">
+                        <div class="achievement-number">18</div>
+                        <div class="achievement-title">همکاری با صنایع</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section" id="news">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">اخبار و رویدادها</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">آخرین اخبار و رویدادهای هنرستان دانشمند</p>
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="news-card">
+                        <img src="assets/images/news1.webp" alt="اخبار هنرستان" class="news-img">
+                        <div class="p-4">
+                            <span class="news-date">۱۴۰۲/۰۵/۲۰</span>
+                            <h3 class="news-title">افتتاح آزمایشگاه هوش مصنوعی</h3>
+                            <p>اولین آزمایشگاه تخصصی هوش مصنوعی در هنرستان‌های فنی حرفه‌ای کشور با حضور مسئولان افتتاح شد.</p>
+                            <a href="news-single.html" class="read-more">ادامه مطلب <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="news-card">
+                        <img src="assets/images/news2.webp" alt="اخبار هنرستان" class="news-img">
+                        <div class="p-4">
+                            <span class="news-date">۱۴۰۲/۰۵/۱۲</span>
+                            <h3 class="news-title">رتبه اول مسابقات مهارتی</h3>
+                            <p>دانش‌آموزان هنرستان در مسابقات مهارتی استانی رتبه اول را در رشته‌های الکترونیک و گرافیک کسب کردند.</p>
+                            <a href="news-single.html" class="read-more">ادامه مطلب <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="news-card">
+                        <img src="assets/images/news3.webp" alt="اخبار هنرستان" class="news-img">
+                        <div class="p-4">
+                            <span class="news-date">۱۴۰۲/۰۵/۰۵</span>
+                            <h3 class="news-title">همایش آینده مشاغل فنی</h3>
+                            <p>همایش تخصصی آینده مشاغل فنی و حرفه‌ای با حضور صنعتگران و کارآفرینان برجسته برگزار می‌شود.</p>
+                            <a href="news-single.html" class="read-more">ادامه مطلب <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="news.html" class="btn btn-outline-primary btn-lg">مشاهده همه اخبار <i class="fas fa-arrow-left me-2"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Access Section -->
+    <section class="quick-access" id="quick-access">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">دسترسی سریع</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">راه‌های ارتباطی و خدمات آنلاین هنرستان</p>
+            <div class="row g-4">
+                <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+                    <a href="programs.html" class="quick-link">
+                        <div class="quick-icon">
+                            <i class="fas fa-list-ul"></i>
+                        </div>
+                        <h3 class="quick-title">رشته‌های آموزشی</h3>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="300">
+                    <a href="admissions.html" class="quick-link">
+                        <div class="quick-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <h3 class="quick-title">ثبت‌نام آنلاین</h3>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="400">
+                    <a href="payment.html" class="quick-link">
+                        <div class="quick-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h3 class="quick-title">پرداخت شهریه</h3>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="500">
+                    <a href="contact.html" class="quick-link">
+                        <div class="quick-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3 class="quick-title">تماس با ما</h3>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+                    <a href="calendar.html" class="quick-link">
+                        <div class="quick-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3 class="quick-title">تقویم آموزشی</h3>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="300">
+                    <a href="library.html" class="quick-link">
+                        <div class="quick-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3 class="quick-title">کتابخانه دیجیتال</h3>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="400">
+                    <a href="results.html" class="quick-link">
+                        <div class="quick-icon">
+                            <i class="fas fa-poll"></i>
+                        </div>
+                        <h3 class="quick-title">نتایج آزمون‌ها</h3>
+                    </a>
+                </div>
+                <div class="col-md-3 col-sm-6" data-aos="fade-up" data-aos-delay="500">
+                    <a href="kanoon.html" class="quick-link">
+                        <div class="quick-icon">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <h3 class="quick-title">نمایندگی قلم چی</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5" data-aos="fade-up">
+                    <div class="contact-info-card">
+                        <h2 class="mb-4">ارتباط با هنرستان</h2>
+                        <div class="contact-info">
+                            <div class="contact-icon-circle">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h5>آدرس</h5>
+                                <p>اصفهان، خیابان دانشگاه صنعتی، هنرستان فنی حرفه‌ای دانشمند</p>
+                            </div>
+                        </div>
+                        <div class="contact-info">
+                            <div class="contact-icon-circle">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h5>تلفن</h5>
+                                <p>۰۳۱-۳۴۵۶۷۸۹۰</p>
+                            </div>
+                        </div>
+                        <div class="contact-info">
+                            <div class="contact-icon-circle">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h5>ایمیل</h5>
+                                <p>info@daneshmand-school.ir</p>
+                            </div>
+                        </div>
+                        <div class="contact-info">
+                            <div class="contact-icon-circle">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h5>ساعات کاری</h5>
+                                <p>شنبه تا چهارشنبه: ۷:۳۰ تا ۱۵:۳۰</p>
+                            </div>
+                        </div>
+                        <div class="social-links">
+                            <a href="#" class="social-link" data-bs-toggle="tooltip" title="اینستاگرام"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link" data-bs-toggle="tooltip" title="تلگرام"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="social-link" data-bs-toggle="tooltip" title="واتساپ"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="social-link" data-bs-toggle="tooltip" title="یوتیوب"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 mt-5 mt-lg-0" data-aos="fade-up" data-aos-delay="100">
+                    <div class="contact-form-card">
+                        <div class="form-header">
+                            <h3>پیام به هنرستان</h3>
+                            <p>سوالات، پیشنهادات و انتقادات خود را با ما در میان بگذارید</p>
+                        </div>
+                        <form class="needs-validation" novalidate>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="fullname" placeholder="نام و نام خانوادگی" required>
+                                        <label for="fullname">نام و نام خانوادگی</label>
+                                        <div class="invalid-feedback">
+                                            لطفاً نام و نام خانوادگی خود را وارد کنید
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="email" placeholder="آدرس ایمیل" required>
+                                        <label for="email">آدرس ایمیل</label>
+                                        <div class="invalid-feedback">
+                                            لطفاً یک ایمیل معتبر وارد کنید
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="subject" placeholder="موضوع پیام" required>
+                                    <label for="subject">موضوع پیام</label>
+                                    <div class="invalid-feedback">
+                                        لطفاً موضوع پیام را وارد کنید
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="message" placeholder="متن پیام" style="height: 150px" required></textarea>
+                                    <label for="message">متن پیام</label>
+                                    <div class="invalid-feedback">
+                                        لطفاً متن پیام را وارد کنید
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-grid">
+                                <button class="btn btn-submit" type="submit">
+                                    <span class="submit-text">ارسال پیام</span>
+                                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="footer-about" data-aos="fade-up">
+                        <div class="footer-logo">
+                            <img src="assets/images/logo-white.png" alt="هنرستان دانشمند">
+                            <span class="footer-logo-text">هنرستان دانشمند</span>
+                        </div>
+                        <p>هنرستان فنی حرفه‌ای دانشمند قلم چی با بیش از ۲۰ سال سابقه درخشان در تربیت نیروی کار ماهر، یکی از مراکز پیشرو در آموزش‌های مهارتی با استفاده از فناوری‌های نوین آموزشی است.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 data-aos="fade-up">لینک‌های مفید</h5>
+                    <ul class="footer-links">
+                        <li data-aos="fade-up" data-aos-delay="100"><a href="faq.html"><i class="fas fa-angle-left"></i> سوالات متداول</a></li>
+                        <li data-aos="fade-up" data-aos-delay="200"><a href="gallery.html"><i class="fas fa-angle-left"></i> گالری تصاویر</a></li>
+                        <li data-aos="fade-up" data-aos-delay="300"><a href="news.html"><i class="fas fa-angle-left"></i> اخبار و رویدادها</a></li>
+                        <li data-aos="fade-up" data-aos-delay="400"><a href="partners.html"><i class="fas fa-angle-left"></i> همکاران صنعتی</a></li>
+                        <li data-aos="fade-up" data-aos-delay="500"><a href="teachers.html"><i class="fas fa-angle-left"></i> اساتید و مربیان</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 data-aos="fade-up">رشته‌های آموزشی</h5>
+                    <ul class="footer-links">
+                        <li data-aos="fade-up" data-aos-delay="100"><a href="program-it.html"><i class="fas fa-angle-left"></i> فناوری اطلاعات</a></li>
+                        <li data-aos="fade-up" data-aos-delay="200"><a href="program-accounting.html"><i class="fas fa-angle-left"></i> حسابداری مالی</a></li>
+                        <li data-aos="fade-up" data-aos-delay="300"><a href="program-electro.html"><i class="fas fa-angle-left"></i> الکتروتکنیک</a></li>
+                        <li data-aos="fade-up" data-aos-delay="400"><a href="program-mechanics.html"><i class="fas fa-angle-left"></i> مکانیک خودرو</a></li>
+                        <li data-aos="fade-up" data-aos-delay="500"><a href="program-graphic.html"><i class="fas fa-angle-left"></i> گرافیک دیجیتال</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5 data-aos="fade-up">خبرنامه</h5>
+                    <p data-aos="fade-up" data-aos-delay="100">برای دریافت آخرین اخبار، اطلاعیه‌ها و رویدادهای هنرستان در خبرنامه عضو شوید.</p>
+                    <form class="newsletter-form" data-aos="fade-up" data-aos-delay="200">
+                        <input type="email" placeholder="آدرس ایمیل شما" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    <div class="mt-4" data-aos="fade-up" data-aos-delay="300">
+                        <h5>دانلود اپلیکیشن</h5>
+                        <div class="d-flex gap-2 mt-3">
+                            <a href="#" class="btn btn-outline-light btn-sm"><i class="fab fa-google-play me-2"></i>اندروید</a>
+                            <a href="#" class="btn btn-outline-light btn-sm"><i class="fab fa-apple me-2"></i>iOS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom" data-aos="fade-up">
+                <p class="mb-0"><i class="far fa-copyright me-2"></i>۱۴۰۲ هنرستان فنی حرفه‌ای دانشمند قلم چی. تمام حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        });
+
+        // Initialize AOS Animation
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+
+        // Initialize Particles.js
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.getElementById('particles-js')) {
+                particlesJS('particles-js', {
+                    "particles": {
+                        "number": {
+                            "value": 80,
+                            "density": {
+                                "enable": true,
+                                "value_area": 800
+                            }
+                        },
+                        "color": {
+                            "value": "#ffffff"
+                        },
+                        "shape": {
+                            "type": "circle",
+                            "stroke": {
+                                "width": 0,
+                                "color": "#000000"
+                            },
+                            "polygon": {
+                                "nb_sides": 5
+                            }
+                        },
+                        "opacity": {
+                            "value": 0.3,
+                            "random": false,
+                            "anim": {
+                                "enable": false,
+                                "speed": 1,
+                                "opacity_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "size": {
+                            "value": 3,
+                            "random": true,
+                            "anim": {
+                                "enable": false,
+                                "speed": 40,
+                                "size_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#ffffff",
+                            "opacity": 0.2,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 2,
+                            "direction": "none",
+                            "random": false,
+                            "straight": false,
+                            "out_mode": "out",
+                            "bounce": false,
+                            "attract": {
+                                "enable": false,
+                                "rotateX": 600,
+                                "rotateY": 1200
+                            }
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": {
+                                "enable": true,
+                                "mode": "grab"
+                            },
+                            "onclick": {
+                                "enable": true,
+                                "mode": "push"
+                            },
+                            "resize": true
+                        },
+                        "modes": {
+                            "grab": {
+                                "distance": 140,
+                                "line_linked": {
+                                    "opacity": 1
+                                }
+                            },
+                            "bubble": {
+                                "distance": 400,
+                                "size": 40,
+                                "duration": 2,
+                                "opacity": 8,
+                                "speed": 3
+                            },
+                            "repulse": {
+                                "distance": 200,
+                                "duration": 0.4
+                            },
+                            "push": {
+                                "particles_nb": 4
+                            },
+                            "remove": {
+                                "particles_nb": 2
+                            }
+                        }
+                    },
+                    "retina_detect": true
+                });
+            }
+
+            // Navbar Scroll Effect
+            const navbar = document.querySelector('.navbar-custom');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Back to Top Button
+            const backToTopButton = document.querySelector('.back-to-top');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
+            });
+
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Smooth Scrolling for Anchor Links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Form Validation
+            const contactForm = document.querySelector('.contact-section .needs-validation');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(event) {
+                    if (!contactForm.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    } else {
+                        event.preventDefault();
+                        const submitBtn = contactForm.querySelector('.btn-submit');
+                        submitBtn.classList.add('loading');
+                        
+                        // Simulate form submission
+                        setTimeout(() => {
+                            submitBtn.classList.remove('loading');
+                            
+                            // Show success message
+                            const successAlert = document.createElement('div');
+                            successAlert.className = 'alert alert-success mt-3 mx-3';
+                            successAlert.setAttribute('role', 'alert');
+                            successAlert.innerHTML = `
+                                <i class="fas fa-check-circle me-2"></i>
+                                پیام شما با موفقیت ارسال شد. در اسرع وقت با شما تماس خواهیم گرفت.
+                            `;
+                            contactForm.appendChild(successAlert);
+                            
+                            // Reset form after 5 seconds
+                            setTimeout(() => {
+                                contactForm.reset();
+                                contactForm.classList.remove('was-validated');
+                                successAlert.remove();
+                            }, 5000);
+                        }, 2000);
+                    }
+                    
+                    contactForm.classList.add('was-validated');
+                }, false);
+            }
+
+            // Initialize Tooltips
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // Newsletter Form Submission
+            const newsletterForms = document.querySelectorAll('.newsletter-form');
+            newsletterForms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const input = form.querySelector('input');
+                    
+                    // Simulate submission
+                    input.value = '';
+                    input.placeholder = 'عضویت شما با موفقیت انجام شد!';
+                    
+                    setTimeout(() => {
+                        input.placeholder = 'آدرس ایمیل شما';
+                    }, 3000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

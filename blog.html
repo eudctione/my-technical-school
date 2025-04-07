@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="وبلاگ و مقالات تخصصی هنرستان دانشمند قلم چی - جدیدترین مطالب آموزشی، اخبار و رویدادها">
+    <meta name="keywords" content="مقالات هنرستان, وبلاگ آموزشی, مطالب فنی حرفه‌ای, آموزش مهارتی, اخبار هنرستان">
+    <meta name="author" content="هنرستان دانشمند قلم چی">
+    <title>وبلاگ و مقالات | هنرستان فنی حرفه‌ای دانشمند قلم چی</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #006D77;
+            --secondary-color: #83C5BE;
+            --accent-color: #FFD166;
+            --light-color: #EDF6F9;
+            --dark-color: #003844;
+            --gradient-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-accent: linear-gradient(135deg, var(--accent-color), #FFB347);
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        /* استایل نوار ناوبری پیشرفته */
+        .navbar-custom {
+            background: rgba(0, 109, 119, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-custom.scrolled {
+            background: var(--primary-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-custom .navbar-brand {
+            color: white;
+            font-weight: 900;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .navbar-custom .navbar-brand img {
+            height: 40px;
+            margin-left: 10px;
+        }
+        
+        .navbar-custom .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+        
+        .navbar-custom .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            margin: 0 0.3rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        
+        .navbar-custom .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+        
+        .navbar-custom .nav-link:hover::before,
+        .navbar-custom .nav-link.active::before {
+            width: 100%;
+            left: 0;
+        }
+        
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            color: white;
+        }
+        
+        /* استایل هیرو صفحه وبلاگ */
+        .blog-hero {
+            background: var(--gradient-bg);
+            color: white;
+            padding: 6rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            background-image: url('assets/images/blog-hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+        
+        .blog-hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 61, 68, 0.7);
+        }
+        
+        .blog-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .blog-hero-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .blog-hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        
+        .breadcrumb {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            display: inline-flex;
+        }
+        
+        .breadcrumb-item a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: var(--accent-color);
+        }
+        
+        .breadcrumb-item.active {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .breadcrumb-item + .breadcrumb-item::before {
+            color: rgba(255, 255, 255, 0.6);
+            content: "\f054";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            padding: 0 0.8rem;
+        }
+        
+        /* استایل بخش اصلی وبلاگ */
+        .blog-main {
+            padding: 5rem 0;
+            position: relative;
+        }
+        
+        .blog-main::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/blog-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-weight: 900;
+            font-size: 2.2rem;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: var(--gradient-accent);
+            margin: 1.5rem auto;
+            border-radius: 3px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 4rem auto;
+            font-size: 1.1rem;
+        }
+        
+        /* استایل کارت مقالات */
+        .article-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+            transition: all 0.4s;
+            height: 100%;
+            border-top: 5px solid var(--accent-color);
+        }
+        
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 180, 216, 0.15);
+        }
+        
+        .article-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .article-card:hover .article-img {
+            transform: scale(1.05);
+        }
+        
+        .article-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--gradient-accent);
+            color: var(--dark-color);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            z-index: 2;
+        }
+        
+        .article-content {
+            padding: 2rem;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .article-meta i {
+            color: var(--primary-color);
+            margin-left: 5px;
+        }
+        
+        .article-title {
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+            font-size: 1.3rem;
+            line-height: 1.4;
+        }
+        
+        .article-excerpt {
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+        
+        .read-more {
+            color: var(--primary-color);
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .read-more:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+        
+        .read-more i {
+            margin-right: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* استایل دسته‌بندی‌ها */
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .category-title {
+            font-weight: 800;
+            color: var(--dark-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+        
+        .category-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-accent);
+            border-radius: 3px;
+        }
+        
+        .category-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .category-list li {
+            margin-bottom: 0.7rem;
+        }
+        
+        .category-list a {
+            color: #555;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .category-list a:hover {
+            color: var(--primary-color);
+            transform: translateX(-5px);
+        }
+        
+        .category-list a i {
+            margin-left: 0.5rem;
+            color: var(--accent-color);
+        }
+        
+        /* استایل مقالات پرطرفدار */
+        .popular-card {
+            display: flex;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .popular-card:hover {
+            transform: translateX(-5px);
+        }
+        
+        .popular-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-left: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .popular-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .popular-date {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        /* استایل خبرنامه */
+        .newsletter-card {
+            background: linear-gradient(135deg, rgba(237, 246, 249, 0.9), rgba(209, 231, 255, 0.7));
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(131, 197, 190, 0.3);
+        }
+        
+        .newsletter-title {
+            font-weight: 800;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .newsletter-text {
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #333;
+            padding: 0.7rem 1rem;
+            border-radius: 50px 0 0 50px;
+            border-right: none;
+        }
+        
+        .newsletter-form button {
+            background: var(--gradient-accent);
+            border: none;
+            color: var(--dark-color);
+            font-weight: 700;
+            padding: 0 1.5rem;
+            border-radius: 0 50px 50px 0;
+            transition: all 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background: linear-gradient(135deg, #FFC850, #FFA347);
+        }
+        
+        /* استایل تگ‌ها */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            background: rgba(131, 197, 190, 0.2);
+            color: var(--primary-color);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .tag:hover {
+            background: var(--gradient-accent);
+            color: var(--dark-color);
+        }
+        
+        /* استایل صفحه‌بندی */
+        .pagination {
+            justify-content: center;
+            margin-top: 3rem;
+        }
+        
+        .page-item:first-child .page-link {
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        
+        .page-item:last-child .page-link {
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        
+        .page-link {
+            color: var(--primary-color);
+            border: 1px solid rgba(0, 109, 119, 0.2);
+            margin-right: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .page-link:hover {
+            color: white;
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .page-item.active .page-link {
+            background: var(--gradient-accent);
+            border-color: transparent;
+            color: var(--dark-color);
+            font-weight: 700;
+        }
+        
+        /* استایل فوتر */
+        footer {
+            background: linear-gradient(135deg, var(--dark-color), #002A32);
+            color: white;
+            padding: 4rem 0 2rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/footer-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        footer h5 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            font-size: 1.3rem;
+        }
+        
+        footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        footer a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links i {
+            margin-left: 0.8rem;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+        
+        .footer-about {
+            padding-right: 2rem;
+        }
+        
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo img {
+            height: 50px;
+            margin-left: 10px;
+        }
+        
+        .footer-logo-text {
+            font-weight: 900;
+            font-size: 1.5rem;
+        }
+        
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* انیمیشن‌ها */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        .delay-4 {
+            animation-delay: 0.8s;
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 992px) {
+            .blog-hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .blog-hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .blog-hero {
+                padding: 5rem 0 3rem;
+            }
+            
+            .blog-hero-title {
+                font-size: 2rem;
+            }
+            
+            .blog-hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .article-card {
+                margin-bottom: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .blog-hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .blog-hero-subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title::after {
+                width: 80px;
+                height: 4px;
+            }
+            
+            .breadcrumb {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .article-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- نوار ناوبری پیشرفته -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/images/logo.png" alt="هنرستان دانشمند">
+                هنرستان دانشمند
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> صفحه اصلی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i> درباره ما</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="programs.html"><i class="fas fa-list-ul me-1"></i> رشته‌های آموزشی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admissions.html"><i class="fas fa-user-plus me-1"></i> ثبت‌نام</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="teachers.html"><i class="fas fa-chalkboard-teacher me-1"></i> اساتید</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="blog.html"><i class="fas fa-blog me-1"></i> وبلاگ</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-sm btn-outline-light me-2"><i class="fas fa-sign-in-alt me-1"></i> ورود</a>
+                    <a href="admissions.html" class="btn btn-sm btn-primary"><i class="fas fa-user-plus me-1"></i> ثبت‌نام</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- هیرو بخش وبلاگ -->
+    <section class="blog-hero">
+        <div class="container">
+            <div class="blog-hero-content">
+                <nav aria-label="breadcrumb" class="d-flex justify-content-center animate">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">صفحه اصلی</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">وبلاگ و مقالات</li>
+                    </ol>
+                </nav>
+                <h1 class="blog-hero-title animate delay-1">وبلاگ و مقالات تخصصی</h1>
+                <p class="blog-hero-subtitle animate delay-2">جدیدترین مطالب آموزشی، اخبار هنرستان و مقالات تخصصی در حوزه‌های فنی و حرفه‌ای</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش اصلی وبلاگ -->
+    <section class="blog-main">
+        <div class="container">
+            <h2 class="section-title">آخرین مقالات</h2>
+            <p class="section-subtitle">مطالب آموزشی و اخبار به روز هنرستان دانشمند</p>
+            
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="row">
+                        <!-- مقاله اصلی -->
+                        <div class="col-md-12 mb-5">
+                            <div class="article-card animate">
+                                <span class="article-badge">مقاله ویژه</span>
+                                <img src="assets/images/blog-featured.jpg" alt="هوش مصنوعی در آموزش" class="article-img">
+                                <div class="article-content">
+                                    <div class="article-meta">
+                                        <span><i class="fas fa-calendar-alt"></i> ۱۴۰۲/۰۵/۲۵</span>
+                                        <span><i class="fas fa-eye"></i> ۱۲۵ بازدید</span>
+                                        <span><i class="fas fa-comments"></i> ۸ نظر</span>
+                                    </div>
+                                    <h3 class="article-title">نقش هوش مصنوعی در تحول آموزش‌های فنی و حرفه‌ای</h3>
+                                    <p class="article-excerpt">
+                                        در این مقاله به بررسی تأثیرات هوش مصنوعی بر سیستم‌های آموزشی هنرستان‌های فنی و حرفه‌ای می‌پردازیم و مزایای استفاده از این فناوری در یادگیری مهارت‌های تخصصی را تحلیل می‌کنیم...
+                                    </p>
+                                    <a href="article-detail.html" class="read-more">ادامه مطلب <i class="fas fa-arrow-left"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- مقالات دیگر -->
+                        <div class="col-md-6">
+                            <div class="article-card animate delay-1">
+                                <img src="assets/images/blog1.jpg" alt="کارگاه‌های عملی" class="article-img">
+                                <div class="article-content">
+                                    <div class="article-meta">
+                                        <span><i class="fas fa-calendar-alt"></i> ۱۴۰۲/۰۵/۲۰</span>
+                                        <span><i class="fas fa-eye"></i> ۸۹ بازدید</span>
+                                    </div>
+                                    <h3 class="article-title">اهمیت کارگاه‌های عملی در آموزش‌های فنی و حرفه‌ای</h3>
+                                    <p class="article-excerpt">
+                                        تجربه عملی یکی از ارکان اصلی آموزش‌های فنی است. در این مقاله به بررسی استانداردهای کارگاه‌های هنرستان و تأثیر آن بر مهارت‌آموزی دانش‌آموزان می‌پردازیم...
+                                    </p>
+                                    <a href="article-detail.html" class="read-more">ادامه مطلب <i class="fas fa-arrow-left"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="article-card animate delay-2">
+                                <img src="assets/images/blog2.jpg" alt="مهارت‌های آینده" class="article-img">
+                                <div class="article-content">
+                                    <div class="article-meta">
+                                        <span><i class="fas fa-calendar-alt"></i> ۱۴۰۲/۰۵/۱۸</span>
+                                        <span><i class="fas fa-eye"></i> ۷۶ بازدید</span>
+                                    </div>
+                                    <h3 class="article-title">۱۰ مهارت ضروری برای فارغ‌التحصیلان فنی در سال ۱۴۰۳</h3>
+                                    <p class="article-excerpt">
+                                        با تحولات سریع فناوری، نیازهای صنعت نیز تغییر کرده است. این مقاله به بررسی مهارت‌های کلیدی می‌پردازد که دانش‌آموزان فنی باید برای آینده شغلی خود کسب کنند...
+                                    </p>
+                                    <a href="article-detail.html" class="read-more">ادامه مطلب <i class="fas fa-arrow-left"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="article-card animate delay-3">
+                                <img src="assets/images/blog3.jpg" alt="روش‌های تدریس" class="article-img">
+                                <div class="article-content">
+                                    <div class="article-meta">
+                                        <span><i class="fas fa-calendar-alt"></i> ۱۴۰۲/۰۵/۱۵</span>
+                                        <span><i class="fas fa-eye"></i> ۶۳ بازدید</span>
+                                    </div>
+                                    <h3 class="article-title">بهترین روش‌های تدریس در هنرستان‌های فنی حرفه‌ای</h3>
+                                    <p class="article-excerpt">
+                                        تدریس در هنرستان‌های فنی نیازمند روش‌های خاصی است. در این مقاله به بررسی مؤثرترین شیوه‌های آموزش مهارت‌های عملی و نظری می‌پردازیم...
+                                    </p>
+                                    <a href="article-detail.html" class="read-more">ادامه مطلب <i class="fas fa-arrow-left"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="article-card animate delay-4">
+                                <img src="assets/images/blog4.jpg" alt="کارآفرینی" class="article-img">
+                                <div class="article-content">
+                                    <div class="article-meta">
+                                        <span><i class="fas fa-calendar-alt"></i> ۱۴۰۲/۰۵/۱۲</span>
+                                        <span><i class="fas fa-eye"></i> ۵۸ بازدید</span>
+                                    </div>
+                                    <h3 class="article-title">راهنمای جامع کارآفرینی برای فارغ‌التحصیلان فنی</h3>
+                                    <p class="article-excerpt">
+                                        چگونه با مهارت‌های فنی خود کسب‌وکار راه بیندازیم؟ این مقاله مراحل راه‌اندازی یک کسب‌وکار فنی را از صفر تا صد بررسی می‌کند...
+                                    </p>
+                                    <a href="article-detail.html" class="read-more">ادامه مطلب <i class="fas fa-arrow-left"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- صفحه‌بندی -->
+                    <nav aria-label="Page navigation" class="animate">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">قبلی</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">بعدی</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                
+                <!-- سایدبار -->
+                <div class="col-lg-4">
+                    <div class="sticky-top" style="top: 100px;">
+                        <!-- جستجو -->
+                        <div class="category-card animate delay-1">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="جستجو در مقالات..." aria-label="Search">
+                                <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                        
+                        <!-- دسته‌بندی‌ها -->
+                        <div class="category-card animate delay-2">
+                            <h4 class="category-title">دسته‌بندی مقالات</h4>
+                            <ul class="category-list">
+                                <li><a href="#"><i class="fas fa-angle-left"></i> هوش مصنوعی و فناوری</a></li>
+                                <li><a href="#"><i class="fas fa-angle-left"></i> آموزش‌های فنی</a></li>
+                                <li><a href="#"><i class="fas fa-angle-left"></i> مهارت‌های شغلی</a></li>
+                                <li><a href="#"><i class="fas fa-angle-left"></i> اخبار هنرستان</a></li>
+                                <li><a href="#"><i class="fas fa-angle-left"></i> کارآفرینی</a></li>
+                                <li><a href="#"><i class="fas fa-angle-left"></i> رویدادها</a></li>
+                                <li><a href="#"><i class="fas fa-angle-left"></i> مصاحبه با فارغ‌التحصیلان</a></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- مقالات پرطرفدار -->
+                        <div class="category-card animate delay-3">
+                            <h4 class="category-title">مقالات پرطرفدار</h4>
+                            <div class="popular-card">
+                                <img src="assets/images/blog-popular1.jpg" alt="مقاله پرطرفدار" class="popular-img">
+                                <div>
+                                    <h5 class="popular-title"><a href="#">چگونه در رشته فناوری اطلاعات موفق شویم؟</a></h5>
+                                    <div class="popular-date"><i class="fas fa-calendar-alt"></i> ۱۴۰۲/۰۵/۱۰</div>
+                                </div>
+                            </div>
+                            <div class="popular-card">
+                                <img src="assets/images/blog-popular2.jpg" alt="مقاله پرطرفدار" class="popular-img">
+                                <div>
+                                    <h5 class="popular-title"><a href="#">۱۰ پروژه عملی برای دانش‌آموزان الکترونیک</a></h5>
+                                    <div class="popular-date"><i class="fas fa-calendar-alt"></i> ۱۴۰۲/۰۵/۰۸</div>
+                                </div>
+                            </div>
+                            <div class="popular-card">
+                                <img src="assets/images/blog-popular3.jpg" alt="مقاله پرطرفدار" class="popular-img">
+                                <div>
+                                    <h5 class="popular-title"><a href="#">راهنمای انتخاب رشته برای پایه نهمی‌ها</a></h5>
+                                    <div class="popular-date"><i class="fas fa-calendar-alt"></i> ۱۴۰۲/۰۵/۰۵</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- خبرنامه -->
+                        <div class="newsletter-card animate delay-4">
+                            <h4 class="newsletter-title">عضویت در خبرنامه</h4>
+                            <p class="newsletter-text">با عضویت در خبرنامه، جدیدترین مقالات و اخبار هنرستان را در ایمیل خود دریافت کنید.</p>
+                            <form class="newsletter-form">
+                                <input type="email" placeholder="آدرس ایمیل شما">
+                                <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                            </form>
+                        </div>
+                        
+                        <!-- تگ‌ها -->
+                        <div class="category-card animate delay-4">
+                            <h4 class="category-title">برچسب‌های پرکاربرد</h4>
+                            <div class="tags-container">
+                                <a href="#" class="tag">هوش مصنوعی</a>
+                                <a href="#" class="tag">آموزش فنی</a>
+                                <a href="#" class="tag">کارآفرینی</a>
+                                <a href="#" class="tag">الکترونیک</a>
+                                <a href="#" class="tag">برنامه‌نویسی</a>
+                                <a href="#" class="tag">مکانیک</a>
+                                <a href="#" class="tag">گرافیک</a>
+                                <a href="#" class="tag">هنرستان</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="footer-about">
+                        <div class="footer-logo">
+                            <img src="assets/images/logo-white.png" alt="هنرستان دانشمند">
+                            <span class="footer-logo-text">هنرستان دانشمند</span>
+                        </div>
+                        <p>هنرستان فنی حرفه‌ای دانشمند قلم چی با بیش از ۲۰ سال سابقه درخشان در تربیت نیروی کار ماهر، یکی از مراکز پیشرو در آموزش‌های مهارتی با استفاده از فناوری‌های نوین آموزشی است.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>لینک‌های مفید</h5>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-left"></i> سوالات متداول</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> گالری تصاویر</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> اخبار و رویدادها</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> همکاران صنعتی</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> اساتید و مربیان</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>رشته‌های آموزشی</h5>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-left"></i> فناوری اطلاعات</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> حسابداری مالی</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> الکتروتکنیک</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> مکانیک خودرو</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> گرافیک دیجیتال</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5>خبرنامه</h5>
+                    <p>برای دریافت آخرین اخبار، اطلاعیه‌ها و رویدادهای هنرستان در خبرنامه عضو شوید.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="آدرس ایمیل شما">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="mb-0"><i class="far fa-copyright me-2"></i>۱۴۰۲ هنرستان فنی حرفه‌ای دانشمند قلم چی. تمام حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // تغییر استایل نوار ناوبری هنگام اسکرول
+            const navbar = document.querySelector('.navbar-custom');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // فعال سازی انیمیشن‌ها هنگام اسکرول
+            const animateElements = document.querySelectorAll('.animate');
+            
+            function checkAnimation() {
+                animateElements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.opacity = '1';
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', checkAnimation);
+            checkAnimation(); // اجرای اولیه برای عناصری که در دید هستند
+            
+            // اسکرول نرم برای لینک‌های داخلی
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // فعال‌سازی tooltip‌ها
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+</body>
+</html>

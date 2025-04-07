@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="هوش مصنوعی در آموزش هنرستان دانشمند قلم چی - تحول در یادگیری با فناوری‌های پیشرفته">
+    <meta name="keywords" content="هوش مصنوعی در آموزش, آموزش هوشمند, یادگیری تطبیقی, فناوری آموزشی, هنرستان هوشمند">
+    <meta name="author" content="هنرستان دانشمند قلم چی">
+    <title>هوش مصنوعی در آموزش | هنرستان فنی حرفه‌ای دانشمند قلم چی</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #006D77;
+            --secondary-color: #83C5BE;
+            --accent-color: #FFD166;
+            --light-color: #EDF6F9;
+            --dark-color: #003844;
+            --gradient-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-accent: linear-gradient(135deg, var(--accent-color), #FFB347);
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        /* استایل نوار ناوبری پیشرفته */
+        .navbar-custom {
+            background: rgba(0, 109, 119, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-custom.scrolled {
+            background: var(--primary-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-custom .navbar-brand {
+            color: white;
+            font-weight: 900;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .navbar-custom .navbar-brand img {
+            height: 40px;
+            margin-left: 10px;
+        }
+        
+        .navbar-custom .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+        
+        .navbar-custom .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            margin: 0 0.3rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        
+        .navbar-custom .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+        
+        .navbar-custom .nav-link:hover::before,
+        .navbar-custom .nav-link.active::before {
+            width: 100%;
+            left: 0;
+        }
+        
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            color: white;
+        }
+        
+        /* استایل هیرو صفحه هوش مصنوعی */
+        .ai-hero {
+            background: var(--gradient-bg);
+            color: white;
+            padding: 6rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            background-image: url('assets/images/ai-hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+        
+        .ai-hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 61, 68, 0.7);
+        }
+        
+        .ai-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .ai-hero-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .ai-hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        
+        .breadcrumb {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            display: inline-flex;
+        }
+        
+        .breadcrumb-item a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: var(--accent-color);
+        }
+        
+        .breadcrumb-item.active {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .breadcrumb-item + .breadcrumb-item::before {
+            color: rgba(255, 255, 255, 0.6);
+            content: "\f054";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            padding: 0 0.8rem;
+        }
+        
+        /* استایل بخش اصلی هوش مصنوعی */
+        .ai-main {
+            padding: 5rem 0;
+            position: relative;
+        }
+        
+        .ai-main::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/ai-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-weight: 900;
+            font-size: 2.2rem;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: var(--gradient-accent);
+            margin: 1.5rem auto;
+            border-radius: 3px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 4rem auto;
+            font-size: 1.1rem;
+        }
+        
+        /* استایل معرفی سیستم */
+        .ai-intro {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            margin-bottom: 5rem;
+            position: relative;
+            overflow: hidden;
+            border-top: 5px solid var(--accent-color);
+        }
+        
+        .ai-intro::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/ai-card-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .ai-intro-title {
+            font-weight: 800;
+            color: var(--dark-color);
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+        
+        .ai-intro-text {
+            color: #555;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+        
+        .ai-video-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 3rem;
+        }
+        
+        .ai-video-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+        
+        /* استایل ویژگی‌های سیستم */
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+            height: 100%;
+            transition: all 0.4s;
+            border-top: 5px solid var(--accent-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/ai-feature-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 180, 216, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.15);
+        }
+        
+        .feature-title {
+            font-weight: 800;
+            color: var(--dark-color);
+            margin-bottom: 1.2rem;
+            font-size: 1.3rem;
+        }
+        
+        .feature-text {
+            color: #555;
+            font-size: 0.95rem;
+        }
+        
+        /* استایل بخش نمونه‌ها */
+        .demo-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+            transition: all 0.4s;
+            height: 100%;
+        }
+        
+        .demo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 180, 216, 0.15);
+        }
+        
+        .demo-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .demo-card:hover .demo-img {
+            transform: scale(1.05);
+        }
+        
+        .demo-content {
+            padding: 1.5rem;
+        }
+        
+        .demo-title {
+            font-weight: 800;
+            color: var(--dark-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        
+        .demo-btn {
+            background: var(--gradient-accent);
+            border: none;
+            color: var(--dark-color);
+            font-weight: 700;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            transition: all 0.3s;
+            display: inline-block;
+            margin-top: 1rem;
+            text-decoration: none;
+        }
+        
+        .demo-btn:hover {
+            background: linear-gradient(135deg, #FFC850, #FFA347);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 180, 0, 0.3);
+            color: var(--dark-color);
+        }
+        
+        /* استایل بخش آماری */
+        .stats-section {
+            background: var(--gradient-bg);
+            color: white;
+            padding: 5rem 0;
+            position: relative;
+            margin: 5rem 0;
+        }
+        
+        .stats-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/ai-stats-pattern.png') repeat;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+        
+        .stat-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        /* استایل فوتر */
+        footer {
+            background: linear-gradient(135deg, var(--dark-color), #002A32);
+            color: white;
+            padding: 4rem 0 2rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/images/footer-pattern.png') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        footer h5 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            font-size: 1.3rem;
+        }
+        
+        footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        footer a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links i {
+            margin-left: 0.8rem;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+        
+        .footer-about {
+            padding-right: 2rem;
+        }
+        
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo img {
+            height: 50px;
+            margin-left: 10px;
+        }
+        
+        .footer-logo-text {
+            font-weight: 900;
+            font-size: 1.5rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-top: 1.5rem;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.7rem 1rem;
+            border-radius: 50px 0 0 50px;
+            border-right: none;
+        }
+        
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .newsletter-form button {
+            background: var(--gradient-accent);
+            border: none;
+            color: var(--dark-color);
+            font-weight: 700;
+            padding: 0 1.5rem;
+            border-radius: 0 50px 50px 0;
+            transition: all 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background: linear-gradient(135deg, #FFC850, #FFA347);
+        }
+        
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* انیمیشن‌ها */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        .delay-4 {
+            animation-delay: 0.8s;
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 992px) {
+            .ai-hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .ai-hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .ai-video-container iframe {
+                height: 350px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .ai-hero {
+                padding: 5rem 0 3rem;
+            }
+            
+            .ai-hero-title {
+                font-size: 2rem;
+            }
+            
+            .ai-hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .ai-intro {
+                padding: 2rem;
+            }
+            
+            .ai-video-container iframe {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .ai-hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .ai-hero-subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title::after {
+                width: 80px;
+                height: 4px;
+            }
+            
+            .breadcrumb {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .ai-video-container iframe {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- نوار ناوبری پیشرفته -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+           
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> صفحه اصلی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i> درباره ما</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="programs.html"><i class="fas fa-list-ul me-1"></i> رشته‌های آموزشی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admissions.html"><i class="fas fa-user-plus me-1"></i> ثبت‌نام</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="teachers.html"><i class="fas fa-chalkboard-teacher me-1"></i> اساتید</a>
+                    </li>
+ 
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html"><i class="fas fa-phone-alt me-1"></i> تماس با ما</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="ai-education.html"><i class="fas fa-robot me-1"></i> هوش مصنوعی</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-sm btn-outline-light me-2"><i class="fas fa-sign-in-alt me-1"></i> ورود</a>
+                    <a href="admissions.html" class="btn btn-sm btn-primary"><i class="fas fa-user-plus me-1"></i> ثبت‌نام</a>
+                </div>
+            </div>
+        </div>
+ <a class="navbar-brand" href="index.html">
+                <img src="assets/images/logo.png" alt="هنرستان دانشمند">
+                
+            </a>
+    </nav>
+
+    <!-- هیرو بخش هوش مصنوعی -->
+    <section class="ai-hero">
+        <div class="container">
+            <div class="ai-hero-content">
+                <nav aria-label="breadcrumb" class="d-flex justify-content-center animate">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">صفحه اصلی</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">هوش مصنوعی در آموزش</li>
+                    </ol>
+                </nav>
+                <h1 class="ai-hero-title animate delay-1">تحول آموزش با هوش مصنوعی</h1>
+                <p class="ai-hero-subtitle animate delay-2">سیستم آموزشی هوشمند هنرستان دانشمند، انقلابی در یادگیری مهارت‌های فنی و حرفه‌ای ایجاد کرده است</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش اصلی هوش مصنوعی -->
+    <section class="ai-main">
+        <div class="container">
+            <div class="ai-intro animate">
+                <h2 class="ai-intro-title">سیستم آموزش هوشمند دانشمند</h2>
+                <p class="ai-intro-text">
+                    هنرستان دانشمند قلم چی با بهره‌گیری از پیشرفته‌ترین فناوری‌های هوش مصنوعی، سیستم آموزشی انقلابی خود را طراحی کرده است. این سیستم با تحلیل رفتار یادگیری هر دانش‌آموز، برنامه‌های درسی شخصی‌سازی شده ارائه می‌دهد و نقاط ضعف و قوت هر فرد را به دقت شناسایی می‌کند.
+                </p>
+                <p class="ai-intro-text">
+                    با استفاده از الگوریتم‌های پیشرفته یادگیری ماشین و پردازش زبان طبیعی، سیستم ما نه تنها به دانش‌آموزان در یادگیری بهتر کمک می‌کند، بلکه به معلمان نیز در بهبود روش‌های تدریس یاری می‌رساند.
+                </p>
+                
+                <div class="ai-video-container">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="سیستم آموزش هوشمند دانشمند" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <h2 class="section-title">ویژگی‌های کلیدی سیستم</h2>
+            <p class="section-subtitle">مزایای استفاده از هوش مصنوعی در آموزش‌های فنی و حرفه‌ای</p>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card animate delay-1">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <h3 class="feature-title">یادگیری شخصی‌سازی شده</h3>
+                        <p class="feature-text">
+                            سیستم با تحلیل رفتار یادگیری هر دانش‌آموز، مسیر آموزشی منحصر به فردی برای او طراحی می‌کند و محتوا را بر اساس سطح درک و سرعت یادگیری تنظیم می‌نماید.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card animate delay-2">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">ارزیابی هوشمند پیشرفت</h3>
+                        <p class="feature-text">
+                            با استفاده از الگوریتم‌های پیشرفته، سیستم به صورت مداوم پیشرفت دانش‌آموزان را ارزیابی کرده و بازخورد فوری ارائه می‌دهد.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card animate delay-3">
+                        <div class="feature-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 class="feature-title">شناسایی نقاط ضعف</h3>
+                        <p class="feature-text">
+                            سیستم به دقت نقاط ضعف هر دانش‌آموز را شناسایی کرده و تمرینات و محتوای آموزشی هدفمند برای رفع این ضعف‌ها پیشنهاد می‌دهد.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card animate delay-1">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3 class="feature-title">پشتیبانی هوشمند</h3>
+                        <p class="feature-text">
+                            چت‌بات هوشمند هنرستان به سوالات دانش‌آموزان 24 ساعته پاسخ می‌دهد و راهنمایی‌های تخصصی ارائه می‌کند.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card animate delay-2">
+                        <div class="feature-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h3 class="feature-title">شبیه‌سازهای هوشمند</h3>
+                        <p class="feature-text">
+                            شبیه‌سازهای تعاملی مبتنی بر هوش مصنوعی، محیطی امن برای تمرین مهارت‌های عملی فراهم می‌کنند.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card animate delay-3">
+                        <div class="feature-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3 class="feature-title">کمک به معلمان</h3>
+                        <p class="feature-text">
+                            سیستم با ارائه تحلیل‌های دقیق از عملکرد کلاس، به معلمان در بهبود روش‌های تدریس کمک می‌کند.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- بخش آماری -->
+            <div class="stats-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="stat-item animate">
+                                <div class="stat-number">95%</div>
+                                <div class="stat-title">رضایت دانش‌آموزان</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="stat-item animate delay-1">
+                                <div class="stat-number">40%</div>
+                                <div class="stat-title">افزایش سرعت یادگیری</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="stat-item animate delay-2">
+                                <div class="stat-number">78%</div>
+                                <div class="stat-title">کاهش اشتباهات عملی</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="stat-item animate delay-3">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-title">پوشش سرفصل‌ها</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title">نمونه‌هایی از سیستم در عمل</h2>
+            <p class="section-subtitle">چگونه هوش مصنوعی تجربه یادگیری را متحول می‌کند</p>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="demo-card animate delay-1">
+                        <img src="assets/images/ai-demo1.jpg" alt="شخصی‌سازی آموزش" class="demo-img">
+                        <div class="demo-content">
+                            <h3 class="demo-title">پنل یادگیری شخصی‌سازی شده</h3>
+                            <p>هر دانش‌آموز پنل اختصاصی با برنامه درسی متناسب با سطح خود دارد.</p>
+                            <a href="#" class="demo-btn">مشاهده دمو <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="demo-card animate delay-2">
+                        <img src="assets/images/ai-demo2.jpg" alt="ارزیابی هوشمند" class="demo-img">
+                        <div class="demo-content">
+                            <h3 class="demo-title">سیستم ارزیابی هوشمند</h3>
+                            <p>ارائه بازخورد فوری و تحلیل پیشرفت با نمودارهای تعاملی.</p>
+                            <a href="#" class="demo-btn">مشاهده دمو <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="demo-card animate delay-3">
+                        <img src="assets/images/ai-demo3.jpg" alt="شبیه‌ساز عملی" class="demo-img">
+                        <div class="demo-content">
+                            <h3 class="demo-title">شبیه‌سازهای عملی هوشمند</h3>
+                            <p>تمرین مهارت‌های فنی در محیط مجازی با راهنمایی هوشمند.</p>
+                            <a href="#" class="demo-btn">مشاهده دمو <i class="fas fa-arrow-left"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="footer-about">
+                        <div class="footer-logo">
+                            <img src="assets/images/logo-white.png" alt="هنرستان دانشمند">
+                            <span class="footer-logo-text">هنرستان دانشمند</span>
+                        </div>
+                        <p>هنرستان فنی حرفه‌ای دانشمند قلم چی با بیش از ۲۰ سال سابقه درخشان در تربیت نیروی کار ماهر، یکی از مراکز پیشرو در آموزش‌های مهارتی با استفاده از فناوری‌های نوین آموزشی است.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>لینک‌های مفید</h5>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-left"></i> سوالات متداول</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> گالری تصاویر</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> اخبار و رویدادها</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> همکاران صنعتی</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> اساتید و مربیان</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>رشته‌های آموزشی</h5>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-left"></i> فناوری اطلاعات</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> حسابداری مالی</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> الکتروتکنیک</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> مکانیک خودرو</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> گرافیک دیجیتال</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5>خبرنامه</h5>
+                    <p>برای دریافت آخرین اخبار، اطلاعیه‌ها و رویدادهای هنرستان در خبرنامه عضو شوید.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="آدرس ایمیل شما">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="mb-0"><i class="far fa-copyright me-2"></i>۱۴۰۲ هنرستان فنی حرفه‌ای دانشمند قلم چی. تمام حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // تغییر استایل نوار ناوبری هنگام اسکرول
+            const navbar = document.querySelector('.navbar-custom');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // فعال سازی انیمیشن‌ها هنگام اسکرول
+            const animateElements = document.querySelectorAll('.animate');
+            
+            function checkAnimation() {
+                animateElements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.opacity = '1';
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', checkAnimation);
+            checkAnimation(); // اجرای اولیه برای عناصری که در دید هستند
+            
+            // اسکرول نرم برای لینک‌های داخلی
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // فعال‌سازی tooltip‌ها
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+</body>
+</html>
