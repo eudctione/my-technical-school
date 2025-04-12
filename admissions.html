@@ -3,21 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ثبت‌نام آزمون ورودی | هنرستان فنی حرفه‌ای دانشمند</title>
+    <title>سیستم ثبت نام در هنرستان فنی حرفه‌ای دانشمند قلم چی</title>
     <style>
+        /* 1. تعریف متغیرهای CSS در :root با استفاده از HSL */
         :root {
-            --quantum-primary: #6e00ff;
-            --quantum-secondary: #00f7ff;
-            --quantum-accent: #ff00e6;
-            --quantum-dark: #0d0221;
-            --quantum-light: #f8f8ff;
-            --gold-gradient: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
-            --neon-glow: 0 0 15px rgba(110, 0, 255, 0.7);
-            --glass-bg: rgba(255, 255, 255, 0.15);
-            --success-color: #00ff9d;
-            --error-color: #ff3860;
+            /* رنگ‌های اصلی */
+            --qnt-primary-h: 172;
+            --qnt-primary-s: 100%;
+            --qnt-primary-l: 25%;
+            --qnt-primary: hsl(var(--qnt-primary-h), var(--qnt-primary-s), var(--qnt-primary-l));
+            --qnt-primary-dark: hsl(var(--qnt-primary-h), var(--qnt-primary-s), calc(var(--qnt-primary-l) - 10%));
+            --qnt-primary-light: hsl(var(--qnt-primary-h), calc(var(--qnt-primary-s) - 30%), calc(var(--qnt-primary-l) + 40%));
+            --qnt-primary-ultralight: hsl(var(--qnt-primary-h), calc(var(--qnt-primary-s) - 50%), calc(var(--qnt-primary-l) + 60%));
+            
+            /* رنگ مکمل (طلایی) */
+            --qnt-accent-h: 43;
+            --qnt-accent-s: 100%;
+            --qnt-accent-l: 70%;
+            --qnt-accent: hsl(var(--qnt-accent-h), var(--qnt-accent-s), var(--qnt-accent-l));
+            --qnt-accent-dark: hsl(var(--qnt-accent-h), var(--qnt-accent-s), calc(var(--qnt-accent-l) - 15%));
+            --qnt-accent-light: hsl(var(--qnt-accent-h), var(--qnt-accent-s), calc(var(--qnt-accent-l) + 15%));
+            
+            /* رنگ ثانویه */
+            --qnt-secondary-h: 165;
+            --qnt-secondary-s: 40%;
+            --qnt-secondary-l: 65%;
+            --qnt-secondary: hsl(var(--qnt-secondary-h), var(--qnt-secondary-s), var(--qnt-secondary-l));
+            
+            /* رنگ‌های پس‌زمینه و متن */
+            --qnt-bg-dark: hsl(192, 100%, 8%);
+            --qnt-bg: hsl(192, 100%, 12%);
+            --qnt-bg-light: hsl(192, 30%, 20%);
+            --qnt-text: hsl(192, 30%, 95%);
+            --qnt-text-light: hsl(192, 30%, 99%);
+            --qnt-text-muted: hsla(192, 30%, 95%, 0.7);
+            
+            /* گرادیان‌های پویا */
+            --qnt-gradient-primary: linear-gradient(
+                135deg,
+                var(--qnt-primary),
+                var(--qnt-secondary)
+            );
+            --qnt-gradient-accent: linear-gradient(
+                135deg,
+                var(--qnt-accent),
+                var(--qnt-primary)
+            );
+            --qnt-gradient-bg: linear-gradient(
+                to bottom,
+                var(--qnt-bg-dark),
+                var(--qnt-bg)
+            );
+            
+            /* سایه‌های نئونی کوانتومی */
+            --qnt-glow-primary: 0 0 15px hsla(var(--qnt-primary-h), 100%, 50%, 0.8);
+            --qnt-glow-accent: 0 0 20px hsla(var(--qnt-accent-h), 100%, 50%, 0.7);
+            --qnt-glow-secondary: 0 0 18px hsla(var(--qnt-secondary-h), 100%, 50%, 0.6);
+            
+            /* انیمیشن‌های کوانتومی */
+            --qnt-transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+            --qnt-transition-fast: all 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
         
+        /* 2. تنظیمات پایه */
         * {
             margin: 0;
             padding: 0;
@@ -26,573 +74,747 @@
         
         body {
             font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--quantum-dark);
-            color: var(--quantum-light);
+            background: var(--qnt-gradient-bg);
+            color: var(--qnt-text);
             line-height: 1.8;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(110, 0, 255, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 247, 255, 0.1) 0%, transparent 20%);
+            min-height: 100vh;
+            padding: 2rem;
+            direction: rtl;
+            overflow-x: hidden;
         }
         
-        .header {
-            background: radial-gradient(ellipse at center, var(--quantum-primary) 0%, #0d0221 100%);
+        /* 3. کلاس‌های ابزاری */
+        /* کلاس‌های رنگ */
+        .qnt-text-primary { color: var(--qnt-primary); }
+        .qnt-text-accent { color: var(--qnt-accent); }
+        .qnt-text-secondary { color: var(--qnt-secondary); }
+        
+        .qnt-bg-primary { background-color: var(--qnt-primary); }
+        .qnt-bg-accent { background-color: var(--qnt-accent); }
+        .qnt-bg-secondary { background-color: var(--qnt-secondary); }
+        
+        /* کلاس‌های گرادیان */
+        .qnt-gradient-primary {
+            background: var(--qnt-gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        
+        .qnt-gradient-accent {
+            background: var(--qnt-gradient-accent);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        
+        /* کلاس‌های سایه نئونی کوانتومی */
+        .qnt-glow-primary {
+            box-shadow: var(--qnt-glow-primary);
+            filter: drop-shadow(var(--qnt-glow-primary));
+        }
+        
+        .qnt-glow-accent {
+            box-shadow: var(--qnt-glow-accent);
+            filter: drop-shadow(var(--qnt-glow-accent));
+        }
+        
+        /* 4. جلوه‌های ویژه کوانتومی */
+        /* انیمیشن‌های کلیدی کوانتومی */
+        @keyframes qnt-pulse {
+            0%, 100% { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.7; 
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes qnt-shimmer {
+            0% { background-position: -100% 0; }
+            100% { background-position: 100% 0; }
+        }
+        
+        @keyframes qnt-hue-rotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        @keyframes qnt-underline {
+            0% { transform: scaleX(0); }
+            100% { transform: scaleX(1); }
+        }
+        
+        @keyframes qnt-particle-move {
+            0% { 
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% { 
+                transform: translate(var(--tx), var(--ty));
+                opacity: 0;
+            }
+        }
+        
+        @keyframes qnt-quantum-ripple {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* دکمه بازگشت کوانتومی */
+        .qnt-back-btn {
+            position: fixed;
+            top: 80px;
+            right: 1500px;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: var(--qnt-gradient-primary);
             color: white;
-            padding: 3rem 0;
-            text-align: center;
-            position: relative;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: var(--qnt-glow-primary);
+            transition: var(--qnt-transition);
             overflow: hidden;
-            box-shadow: var(--neon-glow);
-            border-bottom: 2px solid var(--quantum-secondary);
+            animation: qnt-pulse 3s infinite;
         }
         
-        .header::before {
-            content: "";
+        .qnt-back-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 25px hsla(var(--qnt-primary-h), 100%, 50%, 0.6);
+        }
+        
+        .qnt-back-btn::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, 
-                transparent 65%, 
-                rgba(0, 247, 255, 0.2) 75%, 
-                transparent 85%);
-            animation: shine 3s infinite;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                hsla(var(--qnt-accent-h), 100%, 80%, 0.3),
+                transparent
+            );
+            transform: translateX(-100%);
+            transition: var(--qnt-transition);
         }
         
-        .logo {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 0 10px var(--quantum-secondary));
-            animation: pulse 2s infinite alternate;
+        .qnt-back-btn:hover::before {
+            transform: translateX(100%);
         }
         
-        .announcement-section {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            padding: 2rem;
-            margin: 2rem auto;
-            max-width: 800px;
-            border-top: 4px solid var(--quantum-accent);
-            transition: all 0.3s ease;
-        }
-        
-        .announcement-section:hover {
-            box-shadow: 0 8px 32px rgba(110, 0, 255, 0.5);
-        }
-        
-        .section-title {
-            color: var(--quantum-secondary);
-            border-bottom: 2px solid rgba(0, 247, 255, 0.3);
-            padding-bottom: 0.7rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-            position: relative;
-            font-size: 1.5rem;
-            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
-        }
-        
-        .section-title::after {
-            content: "";
-            position: absolute;
-            bottom: -2px;
-            right: 0;
-            width: 50px;
-            height: 4px;
-            background: var(--gold-gradient);
-            border-radius: 2px;
-            box-shadow: 0 0 10px #ffd700;
-        }
-        
-        .info-box {
-            background: rgba(13, 2, 33, 0.7);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid var(--quantum-primary);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .info-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px var(--neon-glow);
-        }
-        
-        .steps-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .step-card {
-            flex: 1;
-            min-width: 200px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            border-top: 4px solid var(--quantum-secondary);
-            transition: all 0.3s ease;
-        }
-        
-        .step-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 247, 255, 0.3);
-        }
-        
-        .step-number {
-            width: 50px;
-            height: 50px;
-            background: var(--gold-gradient);
-            color: var(--quantum-dark);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-bottom: 1rem;
+        .qnt-back-btn::after {
+            content: '←';
+            margin-right: 8px;
             font-size: 1.2rem;
-            box-shadow: 0 0 15px #ffd700;
+            transition: var(--qnt-transition);
         }
         
-        .payment-section {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
+        .qnt-back-btn:hover::after {
+            transform: translateX(-5px);
+        }
+        
+        /* 5. کامپوننت‌های نمونه با جلوه‌های کوانتومی */
+        /* هدر */
+        .qnt-header {
+            background: var(--qnt-bg-dark);
             padding: 2rem;
-            margin: 2rem auto;
-            max-width: 600px;
-            border-top: 4px solid var(--quantum-accent);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            display: none;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 4px solid var(--qnt-primary);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
         
-        .payment-amount {
-            background: rgba(13, 2, 33, 0.7);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            margin: 1.5rem 0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(110, 0, 255, 0.3);
+        .qnt-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                hsla(var(--qnt-primary-h), 100%, 50%, 0.15),
+                transparent
+            );
+            animation: qnt-shimmer 3s infinite;
         }
         
-        .amount-value {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--quantum-secondary);
-            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+        /* اضافه کردن ذرات کوانتومی به هدر */
+        .qnt-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at var(--x) var(--y),
+                hsla(var(--qnt-accent-h), 100%, 80%, 0.1) 0%,
+                transparent 20%
+            );
+            pointer-events: none;
+            z-index: 0;
         }
         
-        .gateways-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-        
-        .gateway-card {
-            flex: 1;
-            min-width: 120px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            border-radius: 12px;
-            padding: 1.5rem 1rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            text-align: center;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-        
-        .gateway-card:hover {
-            transform: scale(1.05);
-        }
-        
-        .gateway-card.active {
-            border-color: var(--quantum-primary);
-            background: rgba(110, 0, 255, 0.2);
-            box-shadow: 0 0 15px rgba(110, 0, 255, 0.5);
-        }
-        
-        .gateway-logo {
-            width: 70px;
-            height: 35px;
-            object-fit: contain;
-            margin-bottom: 0.5rem;
-            filter: drop-shadow(0 0 5px rgba(0, 247, 255, 0.5));
-        }
-        
-        .tracking-section {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 2rem auto;
-            max-width: 600px;
-            text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border-top: 4px solid var(--success-color);
-            display: none;
-        }
-        
-        .tracking-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gold-gradient);
-            color: var(--quantum-dark);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .qnt-title {
             font-size: 2.5rem;
-            margin: 0 auto 1.5rem;
-            box-shadow: 0 0 25px #ffd700;
-            animation: pulse 1.5s infinite;
-        }
-        
-        .tracking-code {
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: 3px;
-            color: var(--quantum-secondary);
-            background: rgba(13, 2, 33, 0.7);
-            padding: 1rem 2rem;
-            border-radius: 12px;
+            margin-bottom: 1rem;
+            background: var(--qnt-gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: var(--qnt-glow-primary);
+            position: relative;
             display: inline-block;
-            margin: 1rem 0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            font-family: monospace;
-            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
-            border: 1px solid rgba(0, 247, 255, 0.3);
+            animation: qnt-hue-rotate 10s infinite alternate;
         }
         
-        .btn {
-            border-radius: 8px;
-            padding: 0.75rem 1.5rem;
+        .qnt-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--qnt-gradient-accent);
+            transform-origin: right;
+            animation: qnt-underline 0.8s ease-out forwards;
+        }
+        
+        /* دکمه‌های کوانتومی */
+        .qnt-btn {
+            display: inline-block;
+            padding: 0.75rem 1.75rem;
+            border-radius: 0.5rem;
             font-weight: 600;
-            transition: all 0.3s ease;
+            text-decoration: none;
+            transition: var(--qnt-transition);
             border: none;
             cursor: pointer;
-            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .qnt-btn-primary {
+            background: var(--qnt-gradient-primary);
+            color: var(--qnt-text-light);
+            box-shadow: var(--qnt-glow-primary);
+        }
+        
+        .qnt-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 25px hsla(var(--qnt-primary-h), 100%, 50%, 0.6);
+        }
+        
+        .qnt-btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--qnt-gradient-accent);
+            opacity: 0;
+            transition: var(--qnt-transition);
+            z-index: -1;
+        }
+        
+        .qnt-btn-primary:hover::before {
+            opacity: 1;
+        }
+        
+        /* اضافه کردن ذرات به دکمه */
+        .qnt-btn-primary::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(
+                circle at center,
+                hsla(var(--qnt-accent-h), 100%, 80%, 0.3) 0%,
+                transparent 70%
+            );
+            opacity: 0;
+            transition: var(--qnt-transition);
+        }
+        
+        .qnt-btn-primary:hover::after {
+            opacity: 1;
+        }
+        
+        .qnt-btn-accent {
+            background: var(--qnt-accent);
+            color: var(--qnt-bg-dark);
+            box-shadow: var(--qnt-glow-accent);
+        }
+        
+        .qnt-btn-accent:hover {
+            background: var(--qnt-accent-dark);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px hsla(var(--qnt-accent-h), 100%, 50%, 0.7);
+        }
+        
+        /* افکت موج کوانتومی برای دکمه */
+        .qnt-btn-accent::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%, -50%);
+            transform-origin: 50% 50%;
+            pointer-events: none;
+        }
+        
+        .qnt-btn-accent:hover::after {
+            animation: qnt-quantum-ripple 0.6s ease-out forwards;
+        }
+        
+        /* کارت‌های کوانتومی */
+        .qnt-card {
+            background: var(--qnt-bg-light);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: var(--qnt-transition);
+            border: 1px solid transparent;
             position: relative;
             overflow: hidden;
         }
         
-        .btn::before {
-            content: "";
+        .qnt-card:hover {
+            transform: translateY(-5px) rotate(1deg);
+            border-color: var(--qnt-primary);
+            box-shadow: var(--qnt-glow-primary);
+        }
+        
+        .qnt-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--qnt-gradient-primary);
+            z-index: -1;
+            border-radius: 1rem;
+            opacity: 0;
+            transition: var(--qnt-transition);
+        }
+        
+        .qnt-card:hover::before {
+            opacity: 0.3;
+        }
+        
+        /* اضافه کردن ذرات کوانتومی به کارت */
+        .qnt-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at var(--x) var(--y),
+                hsla(var(--qnt-primary-h), 100%, 80%, 0.05) 0%,
+                transparent 30%
+            );
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .qnt-card-title {
+            color: var(--qnt-primary-light);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .qnt-card-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 50%;
+            height: 2px;
+            background: var(--qnt-accent);
+            transform-origin: right;
+            transition: var(--qnt-transition);
+        }
+        
+        .qnt-card:hover .qnt-card-title::after {
+            width: 100%;
+        }
+        
+        /* لیست‌های کوانتومی */
+        .qnt-list {
+            list-style: none;
+        }
+        
+        .qnt-list-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid hsla(var(--qnt-primary-h), 30%, 50%, 0.2);
+            position: relative;
+            padding-right: 1.5rem;
+            transition: var(--qnt-transition-fast);
+        }
+        
+        .qnt-list-item:hover {
+            transform: translateX(-5px);
+        }
+        
+        .qnt-list-item::before {
+            content: '›';
+            position: absolute;
+            right: 0;
+            color: var(--qnt-accent);
+            font-size: 1.5rem;
+            line-height: 1;
+            transition: var(--qnt-transition-fast);
+        }
+        
+        .qnt-list-item:hover::before {
+            transform: scale(1.5);
+            text-shadow: var(--qnt-glow-accent);
+        }
+        
+        /* لینک‌های کوانتومی */
+        .qnt-link {
+            color: var(--qnt-secondary);
+            text-decoration: none;
+            position: relative;
+            transition: var(--qnt-transition-fast);
+        }
+        
+        .qnt-link:hover {
+            color: var(--qnt-accent);
+        }
+        
+        .qnt-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--qnt-accent);
+            transition: var(--qnt-transition-fast);
+        }
+        
+        .qnt-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        /* 6. جلوه‌های پویا کوانتومی */
+        .qnt-pulse {
+            animation: qnt-pulse 2s infinite;
+        }
+        
+        .qnt-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .qnt-shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                hsla(var(--qnt-accent-h), 100%, 80%, 0.3),
+                transparent
+            );
+            animation: qnt-shimmer 1.5s infinite;
+        }
+        
+        /* ذرات کوانتومی */
+        .quantum-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--qnt-accent);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: qnt-particle-move 2s forwards;
+            filter: drop-shadow(0 0 5px var(--qnt-accent));
+        }
+        
+        /* 7. رسپانسیو بودن */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .qnt-title {
+                font-size: 1.75rem;
+            }
+            
+            .qnt-btn {
+                padding: 0.6rem 1.25rem;
+                font-size: 0.9rem;
+            }
+            
+            .qnt-back-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+                top: 15px;
+                right: 15px;
+            }
+        }
+        
+        /* 8. حالت RTL */
+        [dir="rtl"] .qnt-list-item::before {
+            right: auto;
+            left: 0;
+            transform: rotate(180deg);
+        }
+        
+        /* 9. نمونه‌های عملی */
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: hsla(var(--qnt-primary-h), 100%, 10%, 0.2);
+            border-radius: 1rem;
+            margin-top: 2rem;
+            border: 1px solid hsla(var(--qnt-primary-h), 100%, 50%, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .demo-container::before {
+            content: '';
             position: absolute;
             top: -50%;
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                rgba(255, 255, 255, 0.3) 0%,
-                rgba(255, 255, 255, 0) 60%
+            background: radial-gradient(
+                circle at center,
+                hsla(var(--qnt-primary-h), 100%, 50%, 0.03) 0%,
+                transparent 70%
             );
-            transform: rotate(30deg);
-            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: -1;
         }
         
-        .btn:hover::before {
-            animation: shine 1.5s infinite;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--quantum-primary), var(--quantum-secondary));
-            color: white;
-            box-shadow: var(--neon-glow);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 25px var(--quantum-accent);
-        }
-        
-        .btn-accent {
-            background: var(--gold-gradient);
-            color: var(--quantum-dark);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
-        }
-        
-        .btn-accent:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.9);
-        }
-        
-        .btn-outline-secondary {
-            border: 2px solid var(--quantum-secondary);
-            color: var(--quantum-secondary);
-            background-color: transparent;
-        }
-        
-        .btn-outline-secondary:hover {
-            background-color: rgba(0, 247, 255, 0.1);
-            color: white;
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-        
-        .mt-3 {
-            margin-top: 1rem;
-        }
-        
-        .mt-4 {
-            margin-top: 1.5rem;
-        }
-        
-        .w-100 {
-            width: 100%;
-        }
-        
-        .alert {
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-        
-        .alert-info {
-            background: rgba(0, 109, 119, 0.2);
-            color: var(--quantum-secondary);
-            border-left: 4px solid var(--quantum-secondary);
-        }
-        
-        .alert-success {
-            background: rgba(0, 255, 157, 0.2);
-            color: var(--success-color);
-            border-left: 4px solid var(--success-color);
-        }
-        
-        @media (max-width: 768px) {
-            .header {
-                padding: 2rem 0;
-            }
-            
-            .announcement-section, .payment-section {
-                padding: 1.5rem;
-                margin: 1.5rem;
-            }
-            
-            .steps-container {
-                flex-direction: column;
-            }
-            
-            .gateways-container {
-                flex-direction: column;
-            }
-            
-            .tracking-code {
-                font-size: 1.5rem;
-            }
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes shine {
-            0% { transform: translateX(-100%) rotate(30deg); }
-            100% { transform: translateX(100%) rotate(30deg); }
-        }
-        
-        .pulse {
-            animation: pulse 1.5s infinite;
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTIgMTBhMyAzIDAgMSAwIDAtNiAzIDMgMCAwIDAgMCA2WiIvPjxwYXRoIGQ9Ik0xOSAxMGE3IDcgMCAxIDAtMTQgMCA3IDcgMCAwIDAgMTQgMFoiLz48cGF0aCBkPSJtMTUuNyAxMy44LS4xLS4xYTIgMiAwIDAgMSAwLTIuOGwuMS0uMSIvPjxwYXRoIGQ9Im04LjMgMTMuOC4xLS4xYTIgMiAwIDAgMCAwLTIuOGwtLjEtLjEiLz48L3N2Zz4=" alt="لوگو هنرستان" class="logo">
-            <h1 style="font-size: 1.8rem; margin-bottom: 0.5rem; text-shadow: 0 0 15px rgba(0, 247, 255, 0.7);"> ثبت‌نام آزمون ورودی هنرستان فنی حرفه‌ای دانشمند قلم چی </h1>
-             <h2 class="section-title">سال تحصیلی 1404-1405</h2>
-        </div>
-    </header>
-
-    <!-- Announcement Section -->
-    <section class="announcement-section" id="announcement-section">
-        <h2 class="section-title">اطلاعیه‌های مهم</h2>
-        
-        <div class="info-box">
-            <h4 style="color: var(--quantum-secondary);">درباره آزمون ورودی</h4>
-            <p>آزمون ورودی هنرستان فنی حرفه‌ای دانشمند در تاریخ ۱۲ شهریور ۱۴۰۴ برگزار خواهد شد. این آزمون شامل سوالات دروس ریاضی، علوم و هوش ومهارت های فنی  می‌باشد. زمان آزمون ۱۲۰ دقیقه خواهد بود.</p>
-        </div>
-        
-        <div class="info-box">
-            <h4 style="color: var(--quantum-secondary);">نحوه ثبت‌نام</h4>
-            <p>برای ثبت‌نام در آزمون، لطفاً طبق مراحل زیر اقدام نمایید. پس از پرداخت موفق، کد رهگیری دریافت خواهید کرد که برای تکمیل اطلاعات ضروری است.</p>
-        </div>
-        
-        <div class="steps-container">
-            <div class="step-card">
-                <div class="step-number">۱</div>
-                <h4>ورود به درگاه پرداخت</h4>
-                <p>با کلیک بر روی دکمه ثبت‌نام مستقیماً به درگاه پرداخت هدایت خواهید شد.</p>
-            </div>
-            
-            <div class="step-card">
-                <div class="step-number">۲</div>
-                <h4>پرداخت هزینه</h4>
-                <p>هزینه ثبت‌نام آزمون را از طریق درگاه پرداخت اینترنتی پرداخت کنید.</p>
-            </div>
-            
-            <div class="step-card">
-                <div class="step-number">۳</div>
-                <h4>دریافت کد رهگیری</h4>
-                <p>پس از پرداخت موفق، کد رهگیری منحصر به فرد دریافت خواهید کرد.</p>
-            </div>
-            
-            <div class="step-card">
-                <div class="step-number">۴</div>
-                <h4>تکمیل اطلاعات</h4>
-                <p>با استفاده از کد رهگیری، اطلاعات تکمیلی را در سیستم ثبت کنید.</p>
-            </div>
-        </div>
-        
-        <div class="text-center mt-4">
-            <button id="startPayment" class="btn btn-primary pulse">
-                ثبت‌نام و پرداخت هزینه آزمون
-            </button>
-        </div>
-    </section>
-
-    <!-- Payment Section -->
-    <div class="payment-section" id="paymentSection">
-        <h2 class="section-title">💎✨ رایگان💎 ✨پرداخت هزینه ثبت‌نام</h2>
-        
-        <div class="alert alert-info">
-            هزینه ثبت‌نام و آزمون ورودی: <strong>250,000 تومان</strong>
-            <div class="mt-3">پس از پرداخت موفق، کد رهگیری برای شما نمایش داده خواهد شد.</div>
-        </div>
-        
-        <div class="payment-amount">
-            <p>مبلغ قابل پرداخت</p>
-            <div class="amount-value">۲۵۰,۰۰۰ تومان</div>
-        </div>
-        
-        <h4 class="mt-3">درگاه پرداخت مورد نظر را انتخاب کنید:</h4>
-        <div class="gateways-container">
-            <div class="gateway-card active" data-gateway="zarinpal">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgODAiPjxwYXRoIGZpbGw9IiMyMTk2RjMiIGQ9Ik0xNDQuOCA0MGMwLTE1LjYtMTIuNy0yOC4zLTI4LjMtMjguM1M4OC4yIDI0LjQgODguMiA0MHMxMi43IDI4LjMgMjguMyAyOC4zUzE0NC44IDU1LjYgMTQ0LjggNDB6Ii8+PHBhdGggZmlsbD0iIzFENThCNyIgZD0iTTE4OC4yIDQwYzAtMTUuNi0xMi43LTI4LjMtMjguMy0yOC4zUzEzMS42IDI0LjQgMTMxLjYgNDBzMTIuNyAyOC4zIDI4LjMgMjguM1MxODguMiA1NS42IDE4OC4yIDQweiIvPjxwYXRoIGZpbGw9IiMzODVBQTgiIGQ9Ik0yMzEuNiA0MGMwLTE1LjYtMTIuNy0yOC4zLTI4LjMtMjguM1MxNzUgMjQuNCAxNzUgNDBzMTIuNyAyOC4zIDI4LjMgMjguM1MyMzEuNiA1NS42IDIzMS42IDQweiIvPjxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik0xMTYuNiA1Mi41aC0xNi45VjI3LjVoMTYuOWM3LjEgMCAxMi44IDUuNyAxMi44IDEyLjVzLTUuNyAxMi41LTEyLjggMTIuNXptMC0yMS4zaC04LjR2MTcuNWg4LjRjNC42IDAgOC40LTMuNyA4LjQtOC40cy0zLjgtOC4xLTguNC04LjF6Ii8+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTE2MC4xIDUyLjVoLTE2LjlWMjcuNWgxNi45YzcuMSAwIDEyLjggNS43IDEyLjggMTIuNXMtNS43IDEyLjUtMTIuOCAxMi41em0wLTIxLjNoLTguNHYxNy41aDguNGM0LjYgMCA4LjQtMy43IDguNC04LjRzLTMuOC04LjEtOC40LTguMXoiLz48cGF0aCBmaWxsPSIjRkZGIiBkPSJNMjAzLjUgNTIuNWgtMTYuOVYyNy41aDE2LjljNy4xIDAgMTIuOCA1LjcgMTIuOCAxMi41cy01LjcgMTIuNS0xMi44IDEyLjV6bTAtMjEuM2gtOC40djE3LjVoOC40YzQuNiAwIDguNC0zLjcgOC40LTguNHMtMy44LTguMS04LjQtOC4xeiIvPjxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik02OC4yIDQ0LjVoLTEzLjR2OGgtNy4xdi0yMWgyMC41djdoLTEzLjR2Ni4xaDEzLjR2N3oiLz48L3N2Zz4=" alt="زرین‌پال" class="gateway-logo">
-                <span>زرین‌پال</span>
-            </div>
-            
-            <div class="gateway-card" data-gateway="parsian">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgODAiPjxwYXRoIGZpbGw9IiNEMjAwMjEiIGQ9Ik0xMjAgMTZjNTcuNSAwIDEwNCA0Ni41IDEwNCAxMDRzLTQ2LjUgMTA0LTEwNCAxMDRTMTYgMTc3LjUgMTYgMTIwIDYyLjUgMTYgMTIwIDE2eiIvPjxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik0xMjAgMzYuNWM0Ni4xIDAgODMuNSAzNy40IDgzLjUgODMuNXMtMzcuNCA4My41LTgzLjUgODMuNVMzNi41IDE2Ni4xIDM2LjUgMTIwIDczLjkgMzYuNSAxMjAgMzYuNXptMCAxNTMuOGMzOC44IDAgNzAuMy0zMS41IDcwMy03MC4zUzE1OC44IDQ5LjcgMTIwIDQ5LjcgNDkuNyA4MS4yIDQ5LjcgMTIwczMxLjUgNzAuMyA3MC4zIDcwLjN6Ii8+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTEyMCA1OS40YzMzLjQgMCA2MC42IDI3LjIgNjAuNiA2MC42cy0yNy4yIDYwLjYtNjAuNiA2MC42UzU5LjQgMTUzLjQgNTkuNCAxMjAgODYuNiA1OS40IDEyMCA1OS40em0wIDEwNy40YzI1LjggMCA0Ni44LTIxIDQ2OC00Ni44UzE0NS44IDczLjIgMTIwIDczLjIgNzMuMiA5NC4yIDczLjIgMTIwczIxIDQ2LjggNDYuOCA0Ni44eiIvPjxwYXRoIGZpbGw9IiNGQUI0MDAiIGQ9Ik0xMjAgNzcuNWMyMy43IDAgNDMgMTkuMyA0MyA0M3MtMTkuMyA0My00MyA0My00My0xOS4zLTQzLTQzIDE5LjMtNDMgNDMtNDN6Ii8+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTEyMCA4Ny41YzE4LjQgMCAzMy4zIDE0LjkgMzMuMyAzMy4zcy0xNC45IDMzLjMtMzMuMyAzMy4zUzg2LjcgMTM5LjIgODYuNyAxMjAgMTAxLjYgODcuNSAxMjAgODcuNXoiLz48cGF0aCBmaWxsPSIjRkZGIiBkPSJNMTIwIDk3LjVjMTIuNCAwIDIyLjUgMTAuMSAyMi41IDIyLjVzLTEwLjEgMjIuNS0yMi41IDIyLjUtMjIuNS0xMC4xLTIyLjUtMjIuNSAxMC4xLTIyLjUgMjIuNS0yMi41eiIvPjwvc3ZnPg==" alt="پارسیان" class="gateway-logo">
-                <span>پارسیان</span>
-            </div>
-            
-            <div class="gateway-card" data-gateway="saman">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgODAiPjxwYXRoIGZpbGw9IiMyMjhDNjYiIGQ9Ik0xMjAgMTZjNTcuNSAwIDEwNCA0Ni41IDEwNCAxMDRzLTQ2LjUgMTA0LTEwNCAxMDRTMTYgMTc3LjUgMTYgMTIwIDYyLjUgMTYgMTIwIDE2eiIvPjxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik0xMjAgMzYuNWM0Ni4xIDAgODMuNSAzNy40IDgzLjUgODMuNXMtMzcuNCA4My41LTgzLjUgODMuNVMzNi41IDE2Ni4xIDM2LjUgMTIwIDczLjkgMzYuNSAxMjAgMzYuNXptMCAxNTMuOGMzOC44IDAgNzAuMy0zMS41IDcwMy03MC4zUzE1OC44IDQ5LjcgMTIwIDQ5LjcgNDkuNyA4MS4jIDQ5LjcgMTIwczMxLjUgNzAuMyA3MC4zIDcwLjN6Ii8+PHBhdGggZmlsbD0iI0ZGRiIgZD0iTTEyMCA1OS40YzMzLjQgMCA2MC42IDI3LjIgNjAuNiA2MC42cy0yNy4yIDYwLjYtNjAuNiA2MC42UzU5LjQgMTUzLjQgNTkuNCAxMjAgODYuNiA1OS40IDEyMCA1OS40em0wIDEwNy40YzI1LjggMCA0Ni44LTIxIDQ2OC00Ni44UzE0NS44IDczLjIgMTIwIDczLjIgNzMuMiA5NC4yIDczLjIgMTIwczIxIDQ2LjggNDYuOCA0Ni44eiIvPjxwYXRoIGZpbGw9IiNGRkYiIGQ9Ik0xMjAgNzcuNWMyMy43IDAgNDMgMTkuMyA0MyA0M3MtMTkuMyA0My00MyA0My00My0xOS4zLTQzLTQzIDE5LjMtNDMgNDMtNDN6Ii8+PHBhdGggZmlsbD0iIzIyOEM2NiIgZD0iTTEyMCA4Ny41YzE4LjQgMCAzMy4zIDE0LjkgMzMuMyAzMy4zcy0xNC45IDMzLjMtMzMuMyAzMy4zUzg2LjcgMTM5LjIgODYuNyAxMjAgMTAxLjYgODcuNSAxMjAgODcuNXoiLz48cGF0aCBmaWxsPSIjRkZGIiBkPSJNMTIwIDk3LjVjMTIuNCAwIDIyLjUgMTAuMSAyMi41IDIyLjVzLTEwLjEgMjIuNS0yMi41IDIyLjUtMjIuNS0xMC4xLTIyLjUtMjIuNSAxMC4xLTIyLjUgMjIuNS0yMi41eiIvPjwvc3ZnPg==" alt="سامان" class="gateway-logo">
-                <span>سامان</span>
-            </div>
-        </div>
-        
-        <button id="proceedToPayment" class="btn btn-accent w-100 mt-3 pulse">
-            انتقال به درگاه پرداخت
-        </button>
-        
-        <button id="backToAnnouncement" class="btn btn-outline-secondary w-100 mt-2">
-            بازگشت
-        </button>
+    <!-- دکمه بازگشت کوانتومی -->
+    <button href="index.html" class="qnt-back-btn" onclick="window.location.href='index.html'">  بازگشت به صفحه اصلی
+    </button>
+    
+    <!-- هدر نمونه -->
+ <header class="qnt-header">
+    <div style="display: flex; align-items: center; justify-content: flex-cent; gap: 10px;">
+        <h1 class="qnt-title">سیستم ثبت نام در هنرستان فنی حرفه‌ای دانشگاه صنعتی  دانشمند قلم‌چی🎓</h1>
+        <img src="images/logo.png" alt="لوگو" style="max-width: 80px;">
     </div>
+</header>
 
-    <!-- Tracking Section -->
-    <div class="tracking-section" id="trackingSection">
-        <div class="tracking-icon">
-            ✓
+    <!-- دموی عملی -->
+    <div class="demo-container">
+        <h2 class="qnt-card-title qnt-gradient-accent">مراحل ورود به هنرستان دانشمند قلم چی🏛️</h2>
+        
+        <div class="demo-grid">
+            <!-- دکمه‌های نمونه -->
+            <div class="qnt-card">
+                <h3 class="qnt-card-title">فرایند ثبت نام 📚</h3>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="qnt-btn qnt-btn-primary">ثبت نام آزمون👈</button>
+                    <button class="qnt-btn qnt-btn-accent">نمره قبولی</button>
+                    <button class="qnt-btn qnt-btn-primary qnt-pulse">👈شروع سال جدید تحصیلی 1404-1405</button>
+                </div>
+            </div>
+            
+            <!-- کارت نمونه -->
+            <div class="qnt-card qnt-shimmer">
+                <h3 class="qnt-card-title">برتری ما 💯</h3>
+                <p>کارنامه ما  .</p>
+               <p>نفرات برتر ما </p>
+<p>ما افتخار آفریده ایم!! تکرار خواهیم کرد!! </p>
+                <a href="#" class="qnt-link qnt-text-accent" style="display: inline-block; margin-top: 1rem;">🏆  افتخار ما 🏆لطفا"کلیک کنید </a>
+            </div>
+            
+            <!-- لیست نمونه -->
+            <div class="qnt-card">
+                <h3 class="qnt-card-title">تضمین ما🔒</h3>
+                <ul class="qnt-list">
+                    <li class="qnt-card-title">عدم افت تحصیلی </li>
+                    <li class="qnt-card-title">ورود به دانشگاه ها معتبر </li>
+                    <li class="qnt-card-title">استخدام و جذب سریع بازارکار </li>
+                </ul>
+            </div>
+            
+            <!-- متن‌های نمونه -->
+            <div class="qnt-card">
+                <h3 class="qnt-card-title">اهداف ما💎 </h3>
+                <p class="qnt-card-title">طبیق سرفصلهای آموزش و پرورش با تکنیک های جدید .</p>
+                <p class="qnt-card-title"> یادگیری مبتنی بر هوش مصنوعی </p>
+                                       </div>
+  <!-- دکمه‌های نمونه -->
+            <div class="qnt-card">
+                <h3 class="qnt-card-title"> ثبت نام آزمون ورودی👇👇 </h3>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                      <a class="qnt-card-title"> ✨ حرفه‌ای یاد بگیر، آینده بساز ✨  </a> 
+<button onclick="window.location.href='admissions1.html'" class="qnt-btn qnt-btn-accent">ثبت نام آنلاین🎯 اینجا را کلیک کنید</button>
+
+ <h3 class="qnt-card-title">  </h3>
+
+ 
+      </div>
+
+
+  </div>
+  <!-- دکمه‌های نمونه -->
+            <div class="qnt-card">
+                <h3 class="qnt-card-title">اطلاعات آزمون📑 </h3>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <button class="qnt-btn qnt-btn-primary">ضرایب</button>
+                    <button class="qnt-btn qnt-btn-accent">(Open-Book Exam)</button>
+                    <button class="qnt-btn qnt-btn-primary qnt-pulse"> ✏️سوالات امتحانی آزمون ورودی ✏️ </button>
+                </div>
+
         </div>
-        <h2>پرداخت با موفقیت انجام شد!</h2>
-        <p>ثبت‌نام شما در آزمون ورودی هنرستان فنی حرفه‌ای دانشمند با موفقیت انجام شد.</p>
-        
-        <div class="tracking-code" id="trackingCodeDisplay">TR-142857</div>
-        
-        <p>کد رهگیری فوق را یادداشت نمایید. این کد برای تکمیل اطلاعات ثبت‌نام شما ضروری است.</p>
-        
-        <div class="alert alert-success mt-3">
-            لطفاً برای تکمیل ثبت‌نام، بر روی دکمه زیر کلیک کنید.
-        </div>
-        
-        <button id="completeRegistration" class="btn btn-primary w-100 mt-3 pulse">
-            تکمیل ثبت‌نام و ورود به فرم اطلاعات
-        </button>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Start Payment Process
-            document.getElementById('startPayment').addEventListener('click', function() {
-                document.getElementById('announcement-section').style.display = 'none';
-                document.getElementById('paymentSection').style.display = 'block';
-                document.getElementById('paymentSection').scrollIntoView({ behavior: 'smooth' });
-            });
+        // افزودن ذرات کوانتومی پویا
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() > 0.7) {
+                createParticle(e.clientX, e.clientY);
+            }
+        });
+
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'quantum-particle';
             
-            // Back to Announcement
-            document.getElementById('backToAnnouncement').addEventListener('click', function() {
-                document.getElementById('paymentSection').style.display = 'none';
-                document.getElementById('announcement-section').style.display = 'block';
-                document.getElementById('announcement-section').scrollIntoView({ behavior: 'smooth' });
-            });
+            // تنظیم موقعیت اولیه
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
             
-            // Select Payment Gateway
-            const gatewayCards = document.querySelectorAll('.gateway-card');
-            let selectedGateway = 'zarinpal';
+            // تنظیم حرکت تصادفی
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 50 + Math.random() * 100;
+            const tx = Math.cos(angle) * distance;
+            const ty = Math.sin(angle) * distance;
             
-            gatewayCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    gatewayCards.forEach(c => c.classList.remove('active'));
-                    this.classList.add('active');
-                    selectedGateway = this.dataset.gateway;
-                });
-            });
+            particle.style.setProperty('--tx', tx + 'px');
+            particle.style.setProperty('--ty', ty + 'px');
             
-            // Proceed to Payment
-            document.getElementById('proceedToPayment').addEventListener('click', function() {
-                const payBtn = this;
-                const originalBtnText = payBtn.innerHTML;
-                payBtn.innerHTML = 'در حال انتقال...';
-                payBtn.disabled = true;
+            // تنظیم اندازه و شفافیت تصادفی
+            const size = 2 + Math.random() * 3;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.opacity = 0.5 + Math.random() * 0.5;
+            
+            document.body.appendChild(particle);
+            
+            // حذف ذره پس از پایان انیمیشن
+            setTimeout(() => {
+                particle.remove();
+            }, 2000);
+        }
+
+        // افزودن اثر تعاملی به کارت‌ها و دکمه‌ها
+        document.querySelectorAll('.qnt-card, .qnt-btn').forEach(element => {
+            element.addEventListener('mousemove', (e) => {
+                const rect = element.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
                 
-                // Simulate payment processing (3 seconds)
-                setTimeout(() => {
-                    // Generate random tracking code
-                    const trackingCode = 'TR-' + Math.floor(100000 + Math.random() * 900000);
-                    document.getElementById('trackingCodeDisplay').textContent = trackingCode;
-                    
-                    // Hide payment section and show tracking section
-                    document.getElementById('paymentSection').style.display = 'none';
-                    document.getElementById('trackingSection').style.display = 'block';
-                    document.getElementById('trackingSection').scrollIntoView({ behavior: 'smooth' });
-                    
-                    // Reset payment button
-                    payBtn.innerHTML = originalBtnText;
-                    payBtn.disabled = false;
-                }, 3000);
-            });
-            
-            // Complete Registration
-            document.getElementById('completeRegistration').addEventListener('click', function() {
-                const trackingCode = document.getElementById('trackingCodeDisplay').textContent;
-                
-                // Redirect to Google Form with tracking code
-                window.location.href = `https://docs.google.com/forms/d/e/1FAIpQLSeXp86ZmMjXIm-PLzyKFmASogGh729CWeoX_24y551k2fsbvg/viewform?entry.${trackingCode}`;
+                element.style.setProperty('--x', x + 'px');
+                element.style.setProperty('--y', y + 'px');
             });
         });
+
+        // افکت‌های دکمه بازگشت
+        const backBtn = document.querySelector('.qnt-back-btn');
+        
+        backBtn.addEventListener('mouseenter', function() {
+            // ایجاد ذرات کوانتومی
+            for (let i = 0; i < 5; i++) {
+                createQuantumParticle(this);
+            }
+        });
+        
+        function createQuantumParticle(button) {
+            const particle = document.createElement('div');
+            particle.style.position = 'absolute';
+            particle.style.width = '5px';
+            particle.style.height = '5px';
+            particle.style.backgroundColor = 'var(--qnt-accent)';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.boxShadow = '0 0 10px var(--qnt-accent)';
+            
+            const rect = button.getBoundingClientRect();
+            const x = rect.left + rect.width/2;
+            const y = rect.top + rect.height/2;
+            
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            
+            document.body.appendChild(particle);
+            
+            // انیمیشن ذره
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 50 + Math.random() * 50;
+            const duration = 800 + Math.random() * 500;
+            
+            const animation = particle.animate([
+                { 
+                    transform: 'translate(0, 0) scale(1)',
+                    opacity: 1
+                },
+                { 
+                    transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`,
+                    opacity: 0
+                }
+            ], {
+                duration: duration,
+                easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+            });
+            
+            animation.onfinish = () => particle.remove();
+        }
     </script>
 </body>
 </html>
