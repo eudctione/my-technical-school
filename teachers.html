@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="اساتید هنرستان فنی حرفه‌ای دانشمند قلم چی - تیم آموزشی متخصص و با تجربه">
+    <meta name="keywords" content="اساتید هنرستان, معلمان فنی حرفه‌ای, مدرسان دانشمند قلم چی, تیم آموزشی هنرستان">
+    <meta name="author" content="هنرستان دانشمند قلم چی">
+    <title>اساتید | هنرستان فنی حرفه‌ای دانشمند قلم چی</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-color: #006D77;
+            --primary-dark: #005D66;
+            --secondary-color: #83C5BE;
+            --accent-color: #FFD166;
+            --light-color: #EDF6F9;
+            --dark-color: #003844;
+            --gradient-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            background-color: rgba(248, 249, 250, 0.9);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        /* استایل نوار ناوبری پیشرفته */
+        .navbar-custom {
+            background: rgba(0, 109, 119, 0.95);
+            box-shadow: var(--shadow-md);
+            padding: 0.5rem 0;
+            backdrop-filter: blur(8px);
+            transition: all 0.4s ease;
+        }
+        
+        .navbar-custom.scrolled {
+            background: rgba(0, 109, 119, 0.98);
+            padding: 0.3rem 0;
+        }
+        
+        .navbar-custom .navbar-brand {
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-custom .navbar-brand img {
+            height: 40px;
+            margin-left: 10px;
+        }
+        
+        .navbar-custom .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .navbar-custom .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 1rem;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            color: white;
+        }
+        
+        .navbar-custom .nav-link:hover::before,
+        .navbar-custom .nav-link.active::before {
+            width: calc(100% - 2rem);
+        }
+        
+        /* استایل هدر صفحه اساتید */
+        .teachers-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
+            padding: 6rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: 3rem;
+            background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+        
+        .teachers-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 61, 68, 0.8);
+        }
+        
+        .teachers-header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .teachers-title {
+            font-weight: 800;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1.5rem;
+        }
+        
+        .teachers-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+        }
+        
+        /* استایل بخش معرفی اساتید */
+        .teachers-intro {
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            padding: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            border-top: 5px solid var(--accent-color);
+        }
+        
+        .teachers-intro::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/pattern1.png');
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-weight: 800;
+            font-size: 2.2rem;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: var(--accent-color);
+            margin: 1.5rem auto;
+            border-radius: 3px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 4rem auto;
+            font-size: 1.1rem;
+        }
+        
+        /* استایل کارت اساتید */
+        .teacher-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            margin-bottom: 2rem;
+            height: 100%;
+            position: relative;
+        }
+        
+        .teacher-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .teacher-img-container {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .teacher-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .teacher-card:hover .teacher-img {
+            transform: scale(1.1);
+        }
+        
+        .teacher-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 60, 68, 0.8), transparent 60%);
+            opacity: 0;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            color: white;
+        }
+        
+        .teacher-card:hover .teacher-overlay {
+            opacity: 1;
+        }
+        
+        .teacher-info {
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .teacher-name {
+            font-weight: 800;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+        
+        .teacher-position {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .teacher-bio {
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .teacher-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .skill-badge {
+            background: var(--light-color);
+            color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .teacher-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--light-color);
+        }
+        
+        .teacher-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .teacher-social a:hover {
+            background: var(--dark-color);
+            transform: translateY(-3px);
+        }
+        
+        /* استایل بخش ویژگی‌های تدریس */
+        .teaching-features {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 5rem 0;
+            margin: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .teaching-features::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/pattern2.png');
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+        
+        .feature-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .feature-desc {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+        
+        /* استایل بخش گالری اساتید */
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.5s ease;
+            height: 250px;
+            position: relative;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s ease;
+        }
+        
+        .gallery-item:hover {
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: -100%;
+            right: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: rgba(0, 109, 119, 0.9);
+            color: white;
+            transition: all 0.4s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            bottom: 0;
+        }
+        
+        /* استایل فوتر پیشرفته */
+        footer {
+            background: linear-gradient(135deg, var(--dark-color), #002A32);
+            color: white;
+            padding: 4rem 0 1.5rem;
+            position: relative;
+            clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+            margin-top: 5rem;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/pattern3.png');
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        footer h5 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 0.7rem;
+        }
+        
+        footer h5::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+        
+        footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        
+        footer a:hover {
+            color: var(--accent-color);
+            transform: translateX(-5px);
+        }
+        
+        footer a i {
+            margin-left: 8px;
+        }
+        
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent-color);
+            color: var(--dark-color);
+            transform: translateY(-3px);
+        }
+        
+        /* انیمیشن‌ها و افکت‌های ویژه */
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        /* ریسپانسیو و تنظیمات موبایل */
+        @media (max-width: 992px) {
+            .teachers-header {
+                padding: 5rem 0 3rem;
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            }
+            
+            .teachers-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .teachers-header {
+                padding: 4rem 0 2rem;
+                clip-path: polygon(0 0, 100% 0, 100% 97%, 0 100%);
+            }
+            
+            .teachers-title {
+                font-size: 1.8rem;
+            }
+            
+            .teachers-intro {
+                padding: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .teacher-img-container {
+                height: 250px;
+            }
+            
+            footer {
+                clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 100%);
+                padding: 3rem 0 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .teachers-header {
+                padding: 3.5rem 0 1.5rem;
+            }
+            
+            .teachers-title {
+                font-size: 1.6rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .teachers-intro {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- نوار ناوبری پیشرفته -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logox.png" alt="لوگو هنرستان">
+               
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> صفحه اصلی</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i> درباره ما</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="programs.html"><i class="fas fa-list-ul me-1"></i> رشته‌ها</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admissions.html"><i class="fas fa-user-plus me-1"></i> ثبت‌نام</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="teachers.html"><i class="fas fa-chalkboard-teacher me-1"></i> اساتید</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html"><i class="fas fa-phone-alt me-1"></i> تماس با ما</a>
+                    </li>
+
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.png" alt="لوگو هنرستان">
+           
+            </a>
+
+                </ul>
+                <div class="d-flex">
+                    <a href="admissions.html" class="btn btn-outline-light btn-sm me-2">
+                        <i class="fas fa-user-plus me-1"></i> ثبت‌نام آنلاین
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- هدر صفحه اساتید -->
+    <header class="teachers-header">
+        <div class="container">
+            <div class="teachers-header-content text-center animate__animated animate__fadeIn">
+                <h1 class="teachers-title animate__animated animate__fadeInDown">تیم آموزشی هنرستان دانشمند</h1>
+                <p class="teachers-subtitle animate__animated animate__fadeInDown animate__delay-1s">اساتید مجرب و متخصص ما با سال‌ها تجربه در آموزش فنی و حرفه‌ای، همراه شما در مسیر یادگیری هستند</p>
+                <div class="breadcrumb bg-transparent p-3 rounded-pill d-inline-flex animate__animated animate__fadeInDown animate__delay-2s">
+                   <div class="d-inline">
+    <style>
+    /* رنگ آبی یشمی برای دکمه صفحه اصلی */
+    .btn-teal {
+        background-color: #008080;
+        color: white;
+        border: none;
+        transition: all 0.3s;
+    }
+    .btn-teal:hover {
+        background-color: #006666;
+        color: white;
+    }
+    
+    /* استایل شیشه‌ای برای دکمه اساتید */
+    .btn-glass {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+    }
+    .btn-glass:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+    
+    /* استایل کلی برای هر دو دکمه */
+    .breadcrumb-btn {
+        padding: 0.35rem 1rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        margin: 0 3px;
+    }
+</style>
+
+<div class="d-inline-flex align-items-center">
+    <a href="index.html" class="btn btn-teal breadcrumb-btn">صفحه اصلی</a>
+    <button class="btn btn-glass breadcrumb-btn active" aria-current="page">اساتید</button>
+</div>
+</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- بخش معرفی اساتید -->
+        <div class="teachers-intro animate__animated animate__fadeInUp">
+            <h3 class="section-title"><i class="fas fa-users me-2"></i>معرفی اساتید</h3>
+            <div class="row">
+                <div class="col-lg-6">
+                    <p class="lead fw-bold">هنرستان فنی حرفه‌ای دانشمند قلم چی با بهره‌گیری از اساتید مجرب و متخصص، محیطی پویا و علمی برای یادگیری مهارت‌های فنی و حرفه‌ای فراهم کرده است.</p>
+                    <p>اساتید ما با سال‌ها تجربه در صنعت و آموزش، دانش‌آموزان را برای ورود به بازار کار و ادامه تحصیل در سطوح بالاتر آماده می‌کنند. تیم آموزشی ما شامل متخصصان رشته‌های مختلف فنی و مهندسی است که با روش‌های نوین آموزشی، یادگیری را برای دانش‌آموزان لذت‌بخش و مؤثر می‌سازند.</p>
+                    <div class="d-flex align-items-center mt-4">
+                        <div class="bg-primary text-white rounded-circle p-3 me-3">
+                            <i class="fas fa-award fa-2x"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-0">+۲۰ سال سابقه آموزشی</h5>
+                            <small class="text-muted">تجربه تدریس اساتید ما</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                    <div class="card border-0 shadow-lg h-100">
+                        <div class="card-body text-center p-5">
+                            <img src="https://via.placeholder.com/150x150" alt="تیم اساتید" class="img-fluid mb-4 rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                            <h4 class="mb-3">تیم آموزشی متخصص</h4>
+                            <p class="mb-4">اساتید ما با مدارک دانشگاهی معتبر و تجربه کاری در صنعت، دانش‌آموزان را برای چالش‌های آینده آماده می‌کنند.</p>
+                            <div class="d-flex justify-content-center">
+                                <div class="mx-3 text-center">
+                                    <div class="bg-primary text-white rounded-circle p-3 d-inline-flex mb-2">
+                                        <i class="fas fa-graduation-cap fa-2x"></i>
+                                    </div>
+                                    <p class="mb-0 fw-bold">مدارک دانشگاهی</p>
+                                </div>
+                                <div class="mx-3 text-center">
+                                    <div class="bg-primary text-white rounded-circle p-3 d-inline-flex mb-2">
+                                        <i class="fas fa-briefcase fa-2x"></i>
+                                    </div>
+                                    <p class="mb-0 fw-bold">تجربه صنعتی</p>
+                                </div>
+                                <div class="mx-3 text-center">
+                                    <div class="bg-primary text-white rounded-circle p-3 d-inline-flex mb-2">
+                                        <i class="fas fa-chalkboard-teacher fa-2x"></i>
+                                    </div>
+                                    <p class="mb-0 fw-bold">روش‌های نوین</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- بخش اساتید -->
+        <h2 class="section-title animate__animated animate__fadeInUp">اساتید برجسته هنرستان</h2>
+        <p class="section-subtitle animate__animated animate__fadeInUp animate__delay-1s">با تیم آموزشی متخصص و با تجربه ما آشنا شوید</p>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6 animate__animated animate__fadeInUp">
+                <div class="teacher-card">
+                    <div class="teacher-img-container">
+                        <img src="images/teacher1.jpg" alt="استاد فناوری اطلاعات" class="teacher-img">
+                        <div class="teacher-overlay">
+                            <h4 class="teacher-name">دکتر محمد رضایی</h4>
+                            <span class="teacher-position">استاد فناوری اطلاعات</span>
+                            <p class="teacher-bio">دکترای مهندسی نرم‌افزار از دانشگاه صنعتی شریف با ۱۵ سال سابقه تدریس و فعالیت در صنعت IT</p>
+                        </div>
+                    </div>
+                    <div class="teacher-info">
+                        <h4 class="teacher-name">دکتر محمد رضایی</h4>
+                        <span class="teacher-position">استاد فناوری اطلاعات</span>
+                        <p class="teacher-bio">متخصص در زمینه برنامه‌نویسی پیشرفته، هوش مصنوعی و امنیت اطلاعات با سابقه تدریس در دانشگاه‌های معتبر کشور</p>
+                        <div class="teacher-skills">
+                            <span class="skill-badge">برنامه‌نویسی</span>
+                            <span class="skill-badge">هوش مصنوعی</span>
+                            <span class="skill-badge">امنیت</span>
+                        </div>
+                    </div>
+                    <div class="teacher-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="teacher-card">
+                    <div class="teacher-img-container">
+                        <img src="images/teacher2.jpg" alt="استاد حسابداری" class="teacher-img">
+                        <div class="teacher-overlay">
+                            <h4 class="teacher-name">امیر سعادت نیا</h4>
+                            <span class="teacher-position">استاد حسابداری</span>
+                            <p class="teacher-bio">کارشناس ارشد حسابداری با ۲۰ سال سابقه تدریس و مشاوره مالی در شرکت‌های بزرگ</p>
+                        </div>
+                    </div>
+                    <div class="teacher-info">
+                        <h4 class="teacher-name">امیر سعادت نیا </h4>
+                        <span class="teacher-position">استاد حسابداری</span>
+                        <p class="teacher-bio">متخصص در زمینه حسابداری مالی، حسابرسی و نرم‌افزارهای حسابداری با سابقه تدریس در مراکز آموزشی معتبر</p>
+                        <div class="teacher-skills">
+                            <span class="skill-badge">حسابداری مالی</span>
+                            <span class="skill-badge">حسابرسی</span>
+                            <span class="skill-badge">نرم‌افزارها</span>
+                        </div>
+                    </div>
+                    <div class="teacher-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="teacher-card">
+                    <div class="teacher-img-container">
+                        <img src="images/teacher3.jpg" alt="استاد الکترونیک" class="teacher-img">
+                        <div class="teacher-overlay">
+                            <h4 class="teacher-name">مهندس علی محمدی</h4>
+                            <span class="teacher-position">استاد الکترونیک</span>
+                            <p class="teacher-bio">کارشناس ارشد مهندسی برق با ۱۲ سال سابقه تدریس و فعالیت در صنعت الکترونیک</p>
+                        </div>
+                    </div>
+                    <div class="teacher-info">
+                        <h4 class="teacher-name">مهندس علی محمدی</h4>
+                        <span class="teacher-position">استاد الکترونیک</span>
+                        <p class="teacher-bio">متخصص در زمینه مدارهای الکترونیکی، کنترل صنعتی و رباتیک با سابقه کار در شرکت‌های معتبر الکترونیکی</p>
+                        <div class="teacher-skills">
+                            <span class="skill-badge">مدارهای الکترونیک</span>
+                            <span class="skill-badge">کنترل صنعتی</span>
+                            <span class="skill-badge">رباتیک</span>
+                        </div>
+                    </div>
+                    <div class="teacher-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 animate__animated animate__fadeInUp">
+                <div class="teacher-card">
+                    <div class="teacher-img-container">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="استاد مکانیک خودرو" class="teacher-img">
+                        <div class="teacher-overlay">
+                            <h4 class="teacher-name">مهندس حسین احمدی</h4>
+                            <span class="teacher-position">استاد مکانیک خودرو</span>
+                            <p class="teacher-bio">کارشناس ارشد مهندسی مکانیک با ۱۸ سال سابقه تدریس و فعالیت در صنعت خودروسازی</p>
+                        </div>
+                    </div>
+                    <div class="teacher-info">
+                        <h4 class="teacher-name">مهندس حسین احمدی</h4>
+                        <span class="teacher-position">استاد مکانیک خودرو</span>
+                        <p class="teacher-bio">متخصص در زمینه تعمیر و نگهداری خودروهای مدرن، سیستم‌های الکترونیکی خودرو و مدیریت تعمیرگاه‌ها</p>
+                        <div class="teacher-skills">
+                            <span class="skill-badge">تعمیر خودرو</span>
+                            <span class="skill-badge">الکترونیک خودرو</span>
+                            <span class="skill-badge">مدیریت تعمیرگاه</span>
+                        </div>
+                    </div>
+                    <div class="teacher-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="teacher-card">
+                    <div class="teacher-img-container">
+                        <img src="images/teacher4.jpg" alt="استاد گرافیک" class="teacher-img">
+                        <div class="teacher-overlay">
+                            <h4 class="teacher-name">مهندس حامد سینا</h4>
+                            <span class="teacher-position">استاد گرافیک</span>
+                            <p class="teacher-bio">کارشناس ارشد طراحی گرافیک با ۱۰ سال سابقه تدریس و فعالیت در آژانس‌های تبلیغاتی معتبر</p>
+                        </div>
+                    </div>
+                    <div class="teacher-info">
+                        <h4 class="teacher-name">مهندس حامد سینا </h4>
+                        <span class="teacher-position">استاد گرافیک</span>
+                        <p class="teacher-bio">متخصص در زمینه طراحی گرافیک، تصویرسازی، طراحی رابط کاربری و نرم‌افزارهای طراحی</p>
+                        <div class="teacher-skills">
+                            <span class="skill-badge">طراحی گرافیک</span>
+                            <span class="skill-badge">تصویرسازی</span>
+                            <span class="skill-badge">UI/UX</span>
+                        </div>
+                    </div>
+                    <div class="teacher-social">
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="teacher-card">
+                    <div class="teacher-img-container">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="استاد معماری" class="teacher-img">
+                        <div class="teacher-overlay">
+                            <h4 class="teacher-name">مهندس رضا کریمی</h4>
+                            <span class="teacher-position">استاد معماری</span>
+                            <p class="teacher-bio">کارشناس ارشد معماری با ۱۵ سال سابقه تدریس و فعالیت در دفاتر معماری معتبر</p>
+                        </div>
+                    </div>
+                    <div class="teacher-info">
+                        <h4 class="teacher-name">مهندس رضا کریمی</h4>
+                        <span class="teacher-position">استاد معماری</span>
+                        <p class="teacher-bio">متخصص در زمینه طراحی معماری، نقشه‌کشی ساختمان، دکوراسیون داخلی و نرم‌افزارهای طراحی</p>
+                        <div class="teacher-skills">
+                            <span class="skill-badge">طراحی معماری</span>
+                            <span class="skill-badge">دکوراسیون</span>
+                            <span class="skill-badge">نرم‌افزارها</span>
+                        </div>
+                    </div>
+                    <div class="teacher-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- بخش ویژگی‌های تدریس -->
+        <div class="teaching-features animate__animated animate__fadeIn">
+            <div class="container">
+                <h2 class="section-title text-white">چرا اساتید ما متفاوت هستند؟</h2>
+                <p class="section-subtitle text-white-80">ویژگی‌های منحصر به فرد روش تدریس اساتید هنرستان دانشمند</p>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <h3 class="feature-title">تدریس عملی و پروژه‌محور</h3>
+                            <p class="feature-desc">اساتید ما با تمرکز بر یادگیری عملی و انجام پروژه‌های واقعی، دانش‌آموزان را برای بازار کار آماده می‌کنند</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <h3 class="feature-title">تجربه صنعتی</h3>
+                            <p class="feature-desc">تمامی اساتید ما علاوه بر سابقه تدریس، تجربه کاری در صنعت مربوطه را نیز دارند</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <h3 class="feature-title">پشتیبانی مستمر</h3>
+                            <p class="feature-desc">اساتید ما حتی پس از اتمام دوره نیز پاسخگوی سوالات و راهنمای دانش‌آموزان هستند</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3 class="feature-title">روش‌های نوین آموزشی</h3>
+                            <p class="feature-desc">استفاده از هوش مصنوعی و فناوری‌های جدید در فرآیند تدریس و ارزشیابی</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3 class="feature-title">مدارک معتبر دانشگاهی</h3>
+                            <p class="feature-desc">تمامی اساتید دارای مدارک دانشگاهی معتبر از مراکز آموزشی برتر کشور هستند</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <h3 class="feature-title">افتخارات علمی</h3>
+                            <p class="feature-desc">اساتید ما دارای جوایز و افتخارات علمی و صنعتی در سطح ملی و بین‌المللی هستند</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- بخش گالری اساتید -->
+        <h2 class="section-title animate__animated animate__fadeInUp">گالری فعالیت‌های اساتید</h2>
+        <p class="section-subtitle animate__animated animate__fadeInUp animate__delay-1s">تصاویری از محیط آموزشی و فعالیت‌های اساتید هنرستان</p>
+        
+        <div class="row g-3">
+            <div class="col-lg-3 col-md-6 animate__animated animate__fadeInUp">
+                <div class="gallery-item">
+                    <img src="images/classroom.jpg" alt="کلاس درس">
+                    <div class="gallery-caption">
+                        <h5>کلاس درس فناوری اطلاعات</h5>
+                        <p class="mb-0">تدریس عملی برنامه‌نویسی</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="gallery-item">
+                    <img src="images/workshop.jpg" alt="کارگاه عملی">
+                    <div class="gallery-caption">
+                        <h5>کارگاه عملی الکترونیک</h5>
+                        <p class="mb-0">آموزش مدارهای الکترونیکی</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="gallery-item">
+                    <img src="https://iimages/seminar.jpg" alt="سمینار آموزشی">
+                    <div class="gallery-caption">
+                        <h5>سمینار آموزشی</h5>
+                        <p class="mb-0">ارائه جدیدترین روش‌های تدریس</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 animate__animated animate__fadeInUp animate__delay-3s">
+                <div class="gallery-item">
+                    <img src="images/conference.jpg" alt="همایش سالانه">
+                    <div class="gallery-caption">
+                        <h5>همایش سالانه اساتید</h5>
+                        <p class="mb-0">بررسی روش‌های نوین آموزشی</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- فوتر پیشرفته -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5><i class="fas fa-map-marker-alt me-2"></i>تماس با ما</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> اصفهان، خمینی شهر، خیابان اصلی، کوچه آموزشگاه</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> تلفن: ۰۳۱-۱۲۳۴۵۶۷۸</li>
+                        <li class="mb-2"><i class="fas fa-fax me-2"></i> فکس: ۰۳۱-۸۷۶۵۴۳۲۱</li>
+                        <li><i class="fas fa-envelope me-2"></i> ایمیل: info@daneshmand-school.ir</li>
+                    </ul>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5><i class="fas fa-clock me-2"></i>ساعات کاری</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="far fa-sun me-2"></i> شنبه تا چهارشنبه: ۷:۳۰ صبح تا ۴ بعدازظهر</li>
+                        <li><i class="far fa-moon me-2"></i> پنجشنبه: ۷:۳۰ صبح تا ۱۲ ظهر</li>
+                    </ul>
+                    
+                    <h5 class="mt-4"><i class="fas fa-exclamation-circle me-2"></i>اطلاعیه‌ها</h5>
+                    <div class="alert alert-info p-2 mt-3">
+                        <i class="fas fa-info-circle me-2"></i> زمان ثبت‌نام سال تحصیلی جدید از ۱۵ مرداد آغاز می‌شود
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <h5><i class="fas fa-link me-2"></i>لینک‌های مفید</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="programs.html"><i class="fas fa-list-ul me-2"></i>رشته‌های آموزشی</a></li>
+                        <li class="mb-2"><a href="admissions.html"><i class="fas fa-user-plus me-2"></i>ثبت‌نام آنلاین</a></li>
+                        <li class="mb-2"><a href="payment.html"><i class="fas fa-money-bill-wave me-2"></i>پرداخت شهریه</a></li>
+                        <li class="mb-2"><a href="about.html"><i class="fas fa-info-circle me-2"></i>درباره هنرستان</a></li>
+                        <li><a href="contact.html"><i class="fas fa-phone-alt me-2"></i>تماس با ما</a></li>
+                    </ul>
+                    
+                    <div class="mt-4">
+                        <a href="contact.html" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-paper-plane me-2"></i>ارسال پیام
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p class="mb-0"><i class="far fa-copyright me-2"></i>۱۴۰۲ هنرستان فنی حرفه‌ای دانشمند قلم چی. تمام حقوق محفوظ است.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <a href="#" class="text-white-50 me-3">حریم خصوصی</a>
+                        <a href="#" class="text-white-50">شرایط استفاده</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- اسکریپت‌های ضروری -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script>
+        // اسکریپت برای تغییر نوار ناوبری هنگام اسکرول
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('.navbar-custom').addClass('scrolled');
+            } else {
+                $('.navbar-custom').removeClass('scrolled');
+            }
+        });
+        
+        // اسکریپت برای فعال کردن انیمیشن‌های اسکرولی
+        $(document).ready(function() {
+            $('.animate__animated').waypoint(function(direction) {
+                if (direction === 'down') {
+                    $(this.element).addClass($(this.element).data('animate'));
+                }
+            }, {
+                offset: '75%'
+            });
+            
+            // اسکریپت برای اسموت اسکرول
+            $('a[href^="#"]').on('click', function(event) {
+                var target = $(this.getAttribute('href'));
+                if (target.length) {
+                    event.preventDefault();
+                    $('html, body').stop().animate({
+                        scrollTop: target.offset().top - 70
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
