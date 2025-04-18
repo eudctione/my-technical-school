@@ -637,17 +637,16 @@
 </head>
 <body>
     <!-- دکمه بازگشت کوانتومی -->
-    <button href="index.html" class="qnt-back-btn" onclick="window.location.href='index.html'">  بازگشت به صفحه اصلی
+    <button href="index.html" class="qnt-back-btn" onclick="window.location.href='index.html'">
+                                                                                        بازگشت به صفحه اصلی
     </button>
     
     <!-- هدر نمونه -->
- <header class="qnt-header">
-    <div style="display: flex; align-items: center; justify-content: flex-cent; gap: 10px;">
-        <h1 class="qnt-title">سیستم ثبت نام در هنرستان فنی حرفه‌ای دانشگاه صنعتی  دانشمند قلم‌چی🎓</h1>
-        <img src="images/logo.png" alt="لوگو" style="max-width: 80px;">
-    </div>
-</header>
-
+    <header class="qnt-header">
+        <h1 class="qnt-title">سیستم ثبت نام در هنرستان فنی حرفه ای دانشمند قلم چی🎓 </h1>
+        <p class="qnt-text-muted"></p>
+    </header>
+    
     <!-- دموی عملی -->
     <div class="demo-container">
         <h2 class="qnt-card-title qnt-gradient-accent">مراحل ورود به هنرستان دانشمند قلم چی🏛️</h2>
@@ -657,9 +656,170 @@
             <div class="qnt-card">
                 <h3 class="qnt-card-title">فرایند ثبت نام 📚</h3>
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <button class="qnt-btn qnt-btn-primary">ثبت نام آزمون👈</button>
-                    <button class="qnt-btn qnt-btn-accent">نمره قبولی</button>
-                    <button class="qnt-btn qnt-btn-primary qnt-pulse">👈شروع سال جدید تحصیلی 1404-1405</button>
+                  <button class="qnt-btn qnt-btn-primary" onclick="document.getElementById('examInfoDialog').showModal()">ثبت نام آزمون👈</button>
+
+<!-- این کد را در قسمت پایین تگ <body> قرار دهید -->
+<dialog id="examInfoDialog" class="qnt-dialog">
+  <div class="qnt-dialog-content">
+    <h3>شرایط و توضیحات آزمون</h3>
+    <p>• زمان برگزاری: پنجشنبه 12 تیر ۱۴۰4 از ساعت ۹ صبح</p>
+    <p>• مدت آزمون: ۱۲۰ دقیقه</p>
+    <p>• هزینه ثبت نام: ۱۵۰,۰۰۰ تومان</p>
+    <p>• منابع آزمون: کتاب‌های مرجع رشته مربوطه</p>
+    <button 
+      onclick="document.getElementById('examInfoDialog').close()" 
+      class="qnt-btn qnt-btn-primary"
+      style="margin-top: 15px; width: 100%;"
+    >
+      متوجه شدم
+    </button>
+  </div>
+</dialog>
+
+<style>
+  #examInfoDialog {
+    border: none;
+    border-radius: 8px;
+    padding: 25px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  
+  #examInfoDialog::backdrop {
+    background-color: rgba(0,0,0,0.5);
+  }
+  
+  #examInfoDialog h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+  
+  #examInfoDialog p {
+    margin-bottom: 12px;
+    color: #34495e;
+    line-height: 1.6;
+  }
+</style>
+                    <button class="qnt-btn qnt-btn-accent" onclick="document.getElementById('passingScoreDialog').showModal()">نمره قبولی</button>
+
+<!-- این کد را در قسمت پایین تگ <body> قرار دهید -->
+<dialog id="passingScoreDialog" class="qnt-dialog">
+  <div class="qnt-dialog-content">
+    <h3>شرایط نمره قبولی</h3>
+    <p>• حداقل نمره قبولی: ۱۴ از ۲۰</p>
+    <p>• نمره A: ۱۸ به بالا</p>
+    <p>• نمره B: ۱۶ تا ۱۷.۹۹</p>
+    <p>• نمره C: ۱۴ تا ۱۵.۹۹</p>
+    <p>• نمرات زیر ۱۴ مردود محسوب می‌شوند</p>
+    <button 
+      onclick="document.getElementById('passingScoreDialog').close()" 
+      class="qnt-btn qnt-btn-accent"
+      style="margin-top: 15px; width: 100%;"
+    >
+      متوجه شدم
+    </button>
+  </div>
+</dialog>
+
+<style>
+  #passingScoreDialog {
+    border: none;
+    border-radius: 8px;
+    padding: 25px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  
+  #passingScoreDialog::backdrop {
+    background-color: rgba(0,0,0,0.5);
+  }
+  
+  #passingScoreDialog h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+  
+  #passingScoreDialog p {
+    margin-bottom: 12px;
+    color: #34495e;
+    line-height: 1.6;
+  }
+</style>
+                   <button 
+  class="qnt-btn qnt-btn-primary qnt-pulse" 
+  onclick="document.getElementById('academicYearDialog').showModal()">
+  👈شروع سال جدید تحصیلی 1404-1405
+</button>
+
+<!-- این کد را در قسمت پایین تگ <body> قرار دهید -->
+<dialog id="academicYearDialog" class="qnt-dialog">
+  <div class="qnt-dialog-content">
+    <h3>اطلاعات سال تحصیلی 1404-1405</h3>
+    <p>• شروع ترم پاییز: ۱ مهر ۱۴۰۴</p>
+    <p>• شروع ترم بهار: ۱۰ فروردین ۱۴۰۵</p>
+    <p>• آخرین مهلت ثبت نام: ۱۵ شهریور ۱۴۰۴</p>
+    <p>• آغاز کلاس‌ها: هفته اول مهرماه</p>
+    <p>• تعطیلات ترم: ۲۰ دی تا ۱۰ بهمن</p>
+    <button 
+      onclick="document.getElementById('academicYearDialog').close()" 
+      class="qnt-btn qnt-btn-primary qnt-pulse"
+      style="margin-top: 15px; width: 100%;"
+    >
+      تأیید و ادامه
+    </button>
+  </div>
+</dialog>
+
+<style>
+  #academicYearDialog {
+    border: none;
+    border-radius: 8px;
+    padding: 25px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+  }
+  
+  #academicYearDialog::backdrop {
+    background-color: rgba(0,0,0,0.6);
+  }
+  
+  #academicYearDialog h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3498db;
+  }
+  
+  #academicYearDialog p {
+    margin-bottom: 15px;
+    color: #34495e;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+  
+  .qnt-pulse {
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+</style>
                 </div>
             </div>
             
@@ -693,7 +853,66 @@
                 <h3 class="qnt-card-title"> ثبت نام آزمون ورودی👇👇 </h3>
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
                       <a class="qnt-card-title"> ✨ حرفه‌ای یاد بگیر، آینده بساز ✨  </a> 
-<button onclick="window.location.href='admissions1.html'" class="qnt-btn qnt-btn-accent">ثبت نام آنلاین🎯 اینجا را کلیک کنید</button>
+<button 
+  class="qnt-btn qnt-btn-accent" 
+  onclick="document.getElementById('registrationInfoDialog').showModal()">
+  ثبت نام آنلاین🎯 اینجا را کلیک کنید
+</button>
+
+<!-- این کد را در قسمت پایین تag <body> قرار دهید -->
+<dialog id="registrationInfoDialog" class="qnt-dialog">
+  <div class="qnt-dialog-content">
+    <div style="text-align:center;margin-bottom:20px;">
+      <span style="font-size:2rem;">🎯</span>
+      <h3>ثبت نام آزمون ورودی</h3>
+    </div>
+    
+    <div style="background-color:#f8f9fa; padding:15px; border-radius:8px; margin-bottom:20px;">
+      <p style="text-align:center; font-weight:bold; color:#e74c3c;">
+        متقاضیان محترم می‌توانند از اول خرداد ماه ۱۴۰۴<br>
+        از طریق این دکمه نسبت به پر کردن فرم درخواست<br>
+        شرکت در آزمون ورودی اقدام نمایند
+      </p>
+    </div>
+    
+    <div style="text-align:center; margin-top:20px;">
+      <button 
+        onclick="document.getElementById('registrationInfoDialog').close()" 
+        class="qnt-btn qnt-btn-accent"
+        style="padding:10px 25px;"
+      >
+      تائید
+      </button>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  #registrationInfoDialog {
+    border: none;
+    border-radius: 10px;
+    padding: 25px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background-color: #fff;
+  }
+  
+  #registrationInfoDialog::backdrop {
+    background-color: rgba(0,0,0,0.5);
+  }
+  
+  #registrationInfoDialog h3 {
+    margin: 10px 0 15px;
+    color: #2c3e50;
+    font-size: 1.4rem;
+  }
+  
+  #registrationInfoDialog p {
+    line-height: 1.8;
+    margin: 0;
+  }
+</style>
 
  <h3 class="qnt-card-title">  </h3>
 
