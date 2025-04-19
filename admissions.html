@@ -662,7 +662,7 @@
 <dialog id="examInfoDialog" class="qnt-dialog">
   <div class="qnt-dialog-content">
     <h3>شرایط و توضیحات آزمون</h3>
-    <p>• زمان برگزاری: پنجشنبه 12 تیر ۱۴۰4 از ساعت ۹ صبح</p>
+    <p>• زمان برگزاری: شنبه ۱۵ مرداد ۱۴۰۳ از ساعت ۹ صبح</p>
     <p>• مدت آزمون: ۱۲۰ دقیقه</p>
     <p>• هزینه ثبت نام: ۱۵۰,۰۰۰ تومان</p>
     <p>• منابع آزمون: کتاب‌های مرجع رشته مربوطه</p>
@@ -925,9 +925,277 @@
             <div class="qnt-card">
                 <h3 class="qnt-card-title">اطلاعات آزمون📑 </h3>
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <button class="qnt-btn qnt-btn-primary">ضرایب</button>
-                    <button class="qnt-btn qnt-btn-accent">(Open-Book Exam)</button>
-                    <button class="qnt-btn qnt-btn-primary qnt-pulse"> ✏️سوالات امتحانی آزمون ورودی ✏️ </button>
+                    <button class="qnt-btn qnt-btn-primary" onclick="document.getElementById('coefficientsDialog').showModal()">ضرایب</button>
+
+<!-- این کد را در قسمت پایین تگ <body> قرار دهید -->
+<dialog id="coefficientsDialog" class="qnt-dialog">
+  <div class="qnt-dialog-content">
+    <h3>جدول ضرایب دروس آزمون</h3>
+    
+    <div class="table-container">
+      <table class="coefficients-table">
+        <thead>
+          <tr>
+            <th>گروه درسی</th>
+            <th>ضریب</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>علوم تجربی</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>ریاضیات</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>زبان انگلیسی</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>اطلاعات عمومی</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>مهارت</td>
+            <td>4</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div style="margin-top:20px; text-align:center;">
+      <button 
+        onclick="document.getElementById('coefficientsDialog').close()" 
+        class="qnt-btn qnt-btn-primary"
+      >
+        فهمیدم
+      </button>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  #coefficientsDialog {
+    border: none;
+    border-radius: 10px;
+    padding: 25px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background-color: #fff;
+  }
+  
+  #coefficientsDialog::backdrop {
+    background-color: rgba(0,0,0,0.5);
+  }
+  
+  #coefficientsDialog h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    text-align: center;
+    font-size: 1.4rem;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  .coefficients-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+  }
+  
+  .coefficients-table th, 
+  .coefficients-table td {
+    padding: 12px 15px;
+    text-align: right;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .coefficients-table th {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    font-weight: 600;
+  }
+  
+  .coefficients-table tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .coefficients-table td:nth-child(2) {
+    text-align: center;
+    font-weight: bold;
+    color: #e74c3c;
+  }
+</style>
+                    <button class="qnt-btn qnt-btn-accent" onclick="document.getElementById('examRulesDialog').showModal()">📚Open-Book🔍</button>
+
+<!-- این کد را در قسمت پایین تگ <body> قرار دهید -->
+<dialog id="examRulesDialog" class="qnt-dialog">
+  <div class="qnt-dialog-content">
+    <div style="text-align:center; margin-bottom:20px;">
+      <span style="font-size:2rem;">🎯</span>
+      <h3> قوانین آزمون ورودی </h3>
+    </div>
+    
+    <div style="background:linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%); padding:20px; border-radius:10px; margin-bottom:20px; border-left:4px solid #3498db;">
+      <div style="display:flex; align-items:center; margin-bottom:15px;">
+        <span style="font-size:1.8rem; margin-left:10px;">📚</span>
+        <div>
+          <h4 style="margin:0; color:#2c3e50;">مرحله اول: آزمون Open-Book</h4>
+          <p style="margin:5px 0 0; color:#34495e; line-height:1.6;">
+            شما مجاز به استفاده از <span style="color:#27ae60; font-weight:bold;">جزوات و منابع چاپی</span> هستید<br>
+            ❌ استفاده از <span style="color:#e74c3c; font-weight:bold;">دستگاه‌های هوشمند و اینترنت</span> ممنوع است
+          </p>
+        </div>
+      </div>
+      
+      <div style="height:1px; background:linear-gradient(to right, transparent, #3498db, transparent); margin:15px 0;"></div>
+      
+      <div style="display:flex; align-items:center;">
+        <span style="font-size:1.8rem; margin-left:10px;">💻</span>
+        <div>
+          <h4 style="margin:0; color:#2c3e50;">مرحله دوم: آزمون مهارتی</h4>
+          <p style="margin:5px 0 0; color:#34495e; line-height:1.6;">
+            پس از قبولی، آزمون <span style="color:#9b59b6; font-weight:bold;">حضوری و کاملاً عملی</span> خواهد بود<br>
+            ✅ فقط مجاز به استفاده از <span style="color:#3498db; font-weight:bold;">دستگاه‌های هوشمند</span> هستید<br>
+            ❌ استفاده از <span style="color:#e74c3c; font-weight:bold;">جزوات و منابع چاپی</span> ممنوع است
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <p style="text-align:center; font-style:italic; color:#7f8c8d;">
+      "چالش را بپذیرید و مهارت‌های واقعی خود را نشان دهید!"
+    </p>
+    
+    <div style="text-align:center; margin-top:25px;">
+      <button 
+        onclick="document.getElementById('examRulesDialog').close()" 
+        class="qnt-btn qnt-btn-accent"
+        style="padding:10px 30px; font-weight:bold;"
+      >
+        آماده ام! 🔥
+      </button>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  #examRulesDialog {
+    border: none;
+    border-radius: 12px;
+    padding: 30px;
+    width: 90%;
+    max-width: 550px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    background-color: #fff;
+    animation: fadeIn 0.4s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  #examRulesDialog::backdrop {
+    background-color: rgba(0,0,0,0.6);
+  }
+  
+  #examRulesDialog h3 {
+    margin: 10px 0 20px;
+    color: #2c3e50;
+    font-size: 1.6rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  #examRulesDialog h4 {
+    font-size: 1.2rem;
+  }
+  
+  .qnt-btn-accent {
+    background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+  }
+  
+  .qnt-btn-accent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+  }
+</style>
+                   <button 
+  class="qnt-btn qnt-btn-primary qnt-pulse" 
+  onclick="document.getElementById('examQuestionsDialog').showModal()">
+  ✏️ سوالات امتحانی آزمون ورودی ✏️
+</button>
+
+<!-- این کد را در قسمت پایین تگ <body> قرار دهید -->
+<dialog id="examQuestionsDialog" class="qnt-dialog">
+  <div class="qnt-dialog-content">
+    <div style="text-align:center; margin-bottom:20px;">
+      <span style="font-size:2rem;">✏️</span>
+      <h3>سوالات آزمون ورودی</h3>
+    </div>
+    
+    <div style="background-color:#f8f9fa; padding:20px; border-radius:8px; margin-bottom:20px;">
+      <p style="text-align:center; font-size:1.1rem; line-height:1.8; color:#2c3e50;">
+        <strong>به اطلاع کلیه داوطلبان می‌رساند:</strong><br><br>
+        تمامی سوالات آزمون ورودی <span style="color:#e74c3c; font-weight:bold;">پیش از آزمون</span> در اختیار شما قرار خواهد گرفت.<br>
+        <span style="color:#27ae60; font-weight:bold;">100% سوالات آزمون</span> از میان همین سوالات انتخاب می‌شوند.<br><br>
+        با <span style="color:#3498db; font-weight:bold;">تمرکز و مطالعه دقیق</span> این سوالات،<br>
+        می‌توانید به راحتی <span style="color:#e74c3c; font-weight:bold;">نمره قبولی</span> را کسب نمایید.
+      </p>
+    </div>
+    
+    <div style="text-align:center; margin-top:20px;">
+      <button 
+        onclick="document.getElementById('examQuestionsDialog').close()" 
+        class="qnt-btn qnt-btn-primary qnt-pulse"
+        style="padding:10px 30px;"
+      >
+        متوجه شدم
+      </button>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  #examQuestionsDialog {
+    border: none;
+    border-radius: 10px;
+    padding: 25px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background-color: #fff;
+  }
+  
+  #examQuestionsDialog::backdrop {
+    background-color: rgba(0,0,0,0.5);
+  }
+  
+  #examQuestionsDialog h3 {
+    margin: 10px 0 15px;
+    color: #2c3e50;
+    font-size: 1.5rem;
+  }
+  
+  .qnt-pulse {
+    animation: pulse 1.5s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+  }
+</style>
                 </div>
 
         </div>
