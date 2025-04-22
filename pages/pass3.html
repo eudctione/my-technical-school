@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سیستم مدیریت نمایندگان | نسخه پیشرفته</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #10b981;
+            --secondary-dark: #059669;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --light: #f8fafc;
+            --danger: #dc2626;
+            --danger-dark: #b91c1c;
+            --success: #16a34a;
+            --warning: #d97706;
+            --info: #0ea5e9;
+            --quantum-blue: #00d4ff;
+            --quantum-purple: #6e00ff;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+        }
+        
+        * {
+            font-family: 'Vazirmatn', sans-serif;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--quantum-purple) 0%, var(--quantum-blue) 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .quantum-particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 15s infinite linear;
+            z-index: 1;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 0.7; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+        
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .login-container {
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            position: relative;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.5s ease;
+            margin: 0 auto;
+        }
+        
+        .login-container:hover {
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 8s infinite linear;
+            z-index: 1;
+        }
+        
+        @keyframes pulse {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .login-header h1 {
+            font-size: 1.5rem;
+            margin: 0 0 5px 0;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+        
+        .login-header p {
+            position: relative;
+            z-index: 2;
+            opacity: 0.9;
+        }
+        
+        .login-body {
+            padding: 25px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: rgba(255,255,255,0.8);
+        }
+        
+        .input-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+            outline: none;
+            background: white;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 5px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255,255,255,0) 45%,
+                rgba(255,255,255,0.3) 50%,
+                rgba(255,255,255,0) 55%
+            );
+            transform: rotate(30deg);
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
+        }
+        
+        .btn:hover::after {
+            left: 100%;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-dark {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+        }
+        
+        .btn-dark:hover {
+            box-shadow: 0 5px 15px rgba(30, 41, 59, 0.4);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger) 0%, var(--danger-dark) 100%);
+        }
+        
+        .btn-danger:hover {
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.4);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning) 0%, #b45309 100%);
+        }
+        
+        .btn-warning:hover {
+            box-shadow: 0 5px 15px rgba(217, 119, 6, 0.4);
+        }
+        
+        .btn-sm {
+            padding: 8px 12px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+            position: relative;
+        }
+        
+        .error-message {
+            color: var(--danger);
+            background: rgba(220, 38, 38, 0.1);
+            animation: shake 0.5s;
+        }
+        
+        .success-message {
+            color: var(--success);
+            background: rgba(22, 163, 74, 0.1);
+        }
+        
+        .warning-message {
+            color: var(--warning);
+            background: rgba(217, 119, 6, 0.1);
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .admin-panel {
+            background: rgba(241, 245, 249, 0.95);
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 1px dashed var(--gray-400);
+            display: none;
+            animation: fadeIn 0.5s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .admin-code-group {
+            position: relative;
+        }
+        
+        .admin-code-feedback {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            display: none;
+        }
+        
+        .valid-feedback {
+            color: var(--success);
+        }
+        
+        .invalid-feedback {
+            color: var(--danger);
+        }
+        
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .codes-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            min-width: 600px;
+        }
+        
+        .codes-table th, .codes-table td {
+            padding: 12px 15px;
+            border: 1px solid var(--gray-300);
+            text-align: center;
+        }
+        
+        .codes-table th {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+            font-weight: 500;
+        }
+        
+        .codes-table tr:nth-child(even) {
+            background: rgba(241, 245, 249, 0.5);
+        }
+        
+        .codes-table tr:hover {
+            background: rgba(199, 210, 254, 0.3);
+        }
+        
+        .table-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .admin-tools {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .admin-tools h4 {
+            margin: 0;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+        
+        .toolbar {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .login-loader {
+            display: none;
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .loader {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(79, 70, 229, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            display: inline-block;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .user-panel {
+            display: none;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .user-panel h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .user-panel p {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .user-panel .btn {
+            max-width: 250px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+        
+        .edit-agent-form {
+            display: none;
+            padding: 20px;
+            background: rgba(241, 245, 249, 0.8);
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid var(--gray-300);
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .login-container {
+                margin: 0 10px;
+            }
+            
+            .login-header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .admin-tools {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .toolbar {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .login-body {
+                padding: 20px 15px;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .form-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ذرات کوانتومی در پس‌زمینه -->
+    <div id="quantumParticles"></div>
+    
+    <div class="main-container">
+        <div class="login-container">
+            <div class="login-header">
+                <h1><i class="fas fa-user-shield"></i> سیستم مدیریت نمایندگان</h1>
+                <p>ورود به پنل اختصاصی نمایندگان</p>
+            </div>
+            
+            <div class="login-body">
+                <!-- پیام‌های سیستم -->
+                <div class="message error-message" id="errorMessage">
+                    <i class="fas fa-exclamation-circle"></i> <span id="errorText"></span>
+                </div>
+                
+                <div class="message success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i> <span id="successText"></span>
+                </div>
+                
+                <div class="message warning-message" id="warningMessage">
+                    <i class="fas fa-exclamation-triangle"></i> <span id="warningText"></span>
+                </div>
+                
+                <!-- فرم ورود نمایندگان -->
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label for="username"><i class="fas fa-user-tag"></i> نام کاربری</label>
+                        <input type="text" id="username" placeholder="نام نمایندگی" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="password"><i class="fas fa-key"></i> کد اختصاصی</label>
+                        <input type="password" id="password" placeholder="XXXX-XXXX" required>
+                    </div>
+                    
+                    <div class="login-loader" id="loginLoader">
+                        <div class="loader"></div>
+                        <span>در حال بررسی اطلاعات...</span>
+                    </div>
+                    
+                    <button type="submit" class="btn"><i class="fas fa-sign-in-alt"></i> ورود به پنل</button>
+                </form>
+                
+                <!-- پنل کاربر پس از ورود -->
+                <div class="user-panel" id="userPanel">
+                    <h3><i class="fas fa-user-circle"></i> خوش آمدید، <span id="welcomeUsername"></span></h3>
+                    <p>شما با موفقیت به سیستم وارد شده‌اید. برای دسترسی به پنل نمایندگی خود روی دکمه زیر کلیک کنید.</p>
+                    <a href="#" class="btn btn-secondary" id="userFormLink">
+                        <i class="fas fa-external-link-alt"></i> رفتن به پنل نمایندگی
+                    </a>
+                    <p style="margin-top: 20px;">
+                        <a href="#" class="btn btn-sm btn-danger" id="logoutLink">
+                            <i class="fas fa-sign-out-alt"></i> خروج از سیستم
+                        </a>
+                    </p>
+                </div>
+                
+                <!-- دسترسی مدیریت -->
+                <div class="admin-access" id="adminAccess">
+                    <button class="btn btn-dark" id="viewCodesBtn">
+                        <i class="fas fa-eye"></i> نمایش کدهای نمایندگان
+                    </button>
+                </div>
+                
+                <!-- پنل مدیریت -->
+                <div class="admin-panel" id="adminPanel">
+                    <h3><i class="fas fa-user-cog"></i> پنل مدیریت پیشرفته</h3>
+                    <p>برای مشاهده و مدیریت اطلاعات نمایندگان، لطفا کد مدیریت را وارد کنید:</p>
+                    
+                    <div class="input-group admin-code-group">
+                        <label for="adminCode"><i class="fas fa-lock"></i> کد مدیریت</label>
+                        <input type="password" id="adminCode" placeholder="کد اختصاصی مدیریت" required>
+                        <i class="fas fa-check-circle valid-feedback admin-code-feedback" id="validFeedback"></i>
+                        <i class="fas fa-times-circle invalid-feedback admin-code-feedback" id="invalidFeedback"></i>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button class="btn" id="showCodesBtn"><i class="fas fa-unlock"></i> نمایش کدها</button>
+                        <button class="btn btn-dark" id="backToLoginBtn">
+                            <i class="fas fa-arrow-right"></i> بازگشت به صفحه ورود
+                        </button>
+                    </div>
+                    
+                    <!-- فرم ویرایش نماینده -->
+                    <div class="edit-agent-form" id="editAgentForm">
+                        <h4><i class="fas fa-user-edit"></i> ویرایش نماینده</h4>
+                        <div class="input-group">
+                            <label for="editUsername"><i class="fas fa-user-tag"></i> نام کاربری</label>
+                            <input type="text" id="editUsername" disabled>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="editPassword"><i class="fas fa-key"></i> کد اختصاصی</label>
+                            <input type="text" id="editPassword" placeholder="XXXX-XXXX">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="editFormUrl"><i class="fas fa-link"></i> آدرس فرم</label>
+                            <input type="text" id="editFormUrl" placeholder="form.html">
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button class="btn btn-secondary" id="saveEditBtn">
+                                <i class="fas fa-save"></i> ذخیره تغییرات
+                            </button>
+                            <button class="btn btn-danger" id="cancelEditBtn">
+                                <i class="fas fa-times"></i> انصراف
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- جدول کدهای نمایندگان -->
+                    <div id="codesTableContainer" style="display: none;">
+                        <div class="admin-tools">
+                            <h4><i class="fas fa-list"></i> لیست نمایندگان سیستم</h4>
+                            <div class="toolbar">
+                                <button class="btn btn-sm btn-secondary" id="addAgentBtn">
+                                    <i class="fas fa-plus"></i> افزودن نماینده
+                                </button>
+                                <button class="btn btn-sm" id="copyAllCodesBtn">
+                                    <i class="far fa-copy"></i> کپی همه
+                                </button>
+                                <button class="btn btn-sm btn-secondary" id="refreshCodesBtn">
+                                    <i class="fas fa-sync-alt"></i> بروزرسانی
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="table-container">
+                            <table class="codes-table">
+                                <thead>
+                                    <tr>
+                                        <th>ردیف</th>
+                                        <th>نام کاربری</th>
+                                        <th>کد اختصاصی</th>
+                                        <th>آدرس فرم</th>
+                                        <th>عملیات</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="codesTableBody">
+                                    <!-- کدها اینجا نمایش داده می‌شوند -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==============================================
+        // داده‌های سیستم
+        // ==============================================
+        const systemData = {
+            adminPassword: "admin123", // پسورد مدیریت
+            users: {
+                "Saeid.Jolaei": { password: "S111-J222", formUrl: "form1.html" },
+                "Rasoul.Abdollahi": { password: "R111-A222", formUrl: "form2.html" },
+                "namayande3": { password: "J3K4-L5M6", formUrl: "form3.html" },
+                "namayande4": { password: "N7O8-P9Q0", formUrl: "form4.html" },
+                "namayande5": { password: "R1S2-T3U4", formUrl: "form5.html" },
+                "namayande6": { password: "V5W6-X7Y8", formUrl: "form6.html" },
+                "namayande7": { password: "Z9A1-B2C3", formUrl: "form7.html" },
+                "namayande8": { password: "D4E5-F6G7", formUrl: "form8.html" }
+            }
+        };
+
+        // ==============================================
+        // عناصر DOM
+        // ==============================================
+        // پیام‌های سیستم
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+        const successMessage = document.getElementById('successMessage');
+        const successText = document.getElementById('successText');
+        const warningMessage = document.getElementById('warningMessage');
+        const warningText = document.getElementById('warningText');
+        
+        // فرم ورود
+        const loginForm = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginLoader = document.getElementById('loginLoader');
+        
+        // پنل کاربر
+        const userPanel = document.getElementById('userPanel');
+        const welcomeUsername = document.getElementById('welcomeUsername');
+        const userFormLink = document.getElementById('userFormLink');
+        const logoutLink = document.getElementById('logoutLink');
+        
+        // پنل مدیریت
+        const adminAccess = document.getElementById('adminAccess');
+        const viewCodesBtn = document.getElementById('viewCodesBtn');
+        const adminPanel = document.getElementById('adminPanel');
+        const adminCodeInput = document.getElementById('adminCode');
+        const validFeedback = document.getElementById('validFeedback');
+        const invalidFeedback = document.getElementById('invalidFeedback');
+        const showCodesBtn = document.getElementById('showCodesBtn');
+        const backToLoginBtn = document.getElementById('backToLoginBtn');
+        const codesTableContainer = document.getElementById('codesTableContainer');
+        const codesTableBody = document.getElementById('codesTableBody');
+        const copyAllCodesBtn = document.getElementById('copyAllCodesBtn');
+        const refreshCodesBtn = document.getElementById('refreshCodesBtn');
+        const addAgentBtn = document.getElementById('addAgentBtn');
+        
+        // فرم ویرایش
+        const editAgentForm = document.getElementById('editAgentForm');
+        const editUsername = document.getElementById('editUsername');
+        const editPassword = document.getElementById('editPassword');
+        const editFormUrl = document.getElementById('editFormUrl');
+        const saveEditBtn = document.getElementById('saveEditBtn');
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
+        
+        // ذرات کوانتومی
+        const quantumParticles = document.getElementById('quantumParticles');
+        
+        // ==============================================
+        // توابع عمومی
+        // ==============================================
+        
+        /**
+         * ایجاد ذرات کوانتومی در پس‌زمینه
+         */
+        function createQuantumParticles() {
+            const particleCount = 20;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('quantum-particle');
+                
+                // اندازه تصادفی
+                const size = Math.random() * 10 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // موقعیت تصادفی
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // تاخیر تصادفی برای انیمیشن
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                
+                // شفافیت تصادفی
+                particle.style.opacity = Math.random() * 0.5;
+                
+                quantumParticles.appendChild(particle);
+            }
+        }
+        
+        /**
+         * نمایش پیام خطا
+         * @param {string} message - متن پیام خطا
+         */
+        function showError(message) {
+            errorText.textContent = message;
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+            warningMessage.style.display = 'none';
+            
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 5000);
+        }
+        
+        /**
+         * نمایش پیام موفقیت
+         * @param {string} message - متن پیام موفقیت
+         */
+        function showSuccess(message) {
+            successText.textContent = message;
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+            warningMessage.style.display = 'none';
+            
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        }
+        
+        /**
+         * نمایش پیام هشدار
+         * @param {string} message - متن پیام هشدار
+         */
+        function showWarning(message) {
+            warningText.textContent = message;
+            warningMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+            
+            setTimeout(() => {
+                warningMessage.style.display = 'none';
+            }, 5000);
+        }
+        
+        /**
+         * کپی متن به کلیپ‌بورد
+         * @param {string} text - متنی که باید کپی شود
+         */
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showSuccess('متن با موفقیت کپی شد!');
+            }).catch(err => {
+                showError('خطا در کپی متن!');
+                console.error('Could not copy text: ', err);
+            });
+        }
+        
+        /**
+         * اعتبارسنجی کد مدیریت
+         * @returns {boolean} - true اگر کد معتبر باشد
+         */
+        function validateAdminCode() {
+            const code = adminCodeInput.value.trim();
+            if (code === systemData.adminPassword) {
+                adminCodeInput.style.borderColor = '#16a34a';
+                validFeedback.style.display = 'block';
+                invalidFeedback.style.display = 'none';
+                return true;
+            } else {
+                adminCodeInput.style.borderColor = '#dc2626';
+                validFeedback.style.display = 'none';
+                invalidFeedback.style.display = code ? 'block' : 'none';
+                return false;
+            }
+        }
+        
+        /**
+         * نمایش جدول کدهای نمایندگان
+         */
+        function showAgentCodes() {
+            if (!validateAdminCode()) {
+                showError("کد مدیریت معتبر نیست!");
+                return;
+            }
+
+            codesTableBody.innerHTML = '';
+            let rowNumber = 1;
+            
+            for (const [username, data] of Object.entries(systemData.users)) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${rowNumber++}</td>
+                    <td>${username}</td>
+                    <td>
+                        <span class="code-value">${data.password}</span>
+                        <button class="btn btn-sm" onclick="copyToClipboard('${data.password}')" title="کپی کد">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <span class="form-url">${data.formUrl}</span>
+                        <button class="btn btn-sm" onclick="copyToClipboard('${data.formUrl}')" title="کپی آدرس">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </td>
+                    <td class="table-actions">
+                        <button class="btn btn-sm btn-secondary" onclick="viewAgentForm('${data.formUrl}')" title="مشاهده فرم">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-warning" onclick="editAgent('${username}')" title="ویرایش">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteAgent('${username}')" title="حذف">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                `;
+                codesTableBody.appendChild(row);
+            }
+            
+            codesTableContainer.style.display = 'block';
+            showSuccess('دسترسی مدیریت تایید شد! اطلاعات بارگذاری شد.');
+        }
+        
+        /**
+         * بازگشت به صفحه ورود از پنل مدیریت
+         */
+        function backToLogin() {
+            adminPanel.style.display = 'none';
+            viewCodesBtn.style.display = 'block';
+            loginForm.style.display = 'block';
+            codesTableContainer.style.display = 'none';
+            editAgentForm.style.display = 'none';
+            adminCodeInput.value = '';
+            validFeedback.style.display = 'none';
+            invalidFeedback.style.display = 'none';
+            adminCodeInput.style.borderColor = '#e2e8f0';
+        }
+        
+        /**
+         * نمایش فرم ویرایش نماینده
+         * @param {string} username - نام کاربری نماینده
+         */
+        function editAgent(username) {
+            if (!validateAdminCode()) {
+                showError("برای ویرایش نیاز به کد مدیریت دارید!");
+                return;
+            }
+            
+            const agentData = systemData.users[username];
+            if (!agentData) {
+                showError("نماینده مورد نظر یافت نشد!");
+                return;
+            }
+            
+            editUsername.value = username;
+            editPassword.value = agentData.password;
+            editFormUrl.value = agentData.formUrl;
+            
+            editAgentForm.style.display = 'block';
+            codesTableContainer.style.display = 'none';
+            
+            // اسکرول به فرم ویرایش
+            editAgentForm.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        /**
+         * مشاهده فرم نماینده
+         * @param {string} formUrl - آدرس فرم نماینده
+         */
+        function viewAgentForm(formUrl) {
+            window.open(formUrl, '_blank');
+        }
+        
+        /**
+         * حذف نماینده
+         * @param {string} username - نام کاربری نماینده
+         */
+        function deleteAgent(username) {
+            if (!validateAdminCode()) {
+                showError("برای حذف نیاز به کد مدیریت دارید!");
+                return;
+            }
+            
+            if (!confirm(`آیا از حذف نماینده "${username}" اطمینان دارید؟`)) {
+                return;
+            }
+            
+            delete systemData.users[username];
+            showSuccess(`نماینده "${username}" با موفقیت حذف شد!`);
+            showAgentCodes();
+        }
+        
+        /**
+         * ذخیره تغییرات ویرایش نماینده
+         */
+        function saveAgentChanges() {
+            const username = editUsername.value;
+            const newPassword = editPassword.value.trim();
+            const newFormUrl = editFormUrl.value.trim();
+            
+            if (!newPassword || !newFormUrl) {
+                showError("لطفا تمام فیلدها را پر کنید!");
+                return;
+            }
+            
+            systemData.users[username] = {
+                password: newPassword,
+                formUrl: newFormUrl
+            };
+            
+            showSuccess(`تغییرات نماینده "${username}" با موفقیت ذخیره شد!`);
+            editAgentForm.style.display = 'none';
+            showAgentCodes();
+        }
+        
+        /**
+         * افزودن نماینده جدید
+         */
+        function addNewAgent() {
+            if (!validateAdminCode()) {
+                showError("برای افزودن نماینده نیاز به کد مدیریت دارید!");
+                return;
+            }
+            
+            const newUsername = prompt("نام کاربری نماینده جدید را وارد کنید:");
+            if (!newUsername) return;
+            
+            if (systemData.users[newUsername]) {
+                showError("این نام کاربری قبلا استفاده شده است!");
+                return;
+            }
+            
+            const newPassword = prompt("کد اختصاصی نماینده را وارد کنید (فرمت: XXXX-XXXX):");
+            if (!newPassword) return;
+            
+            const newFormUrl = prompt("آدرس فرم نماینده را وارد کنید (مثال: form.html):");
+            if (!newFormUrl) return;
+            
+            systemData.users[newUsername] = {
+                password: newPassword,
+                formUrl: newFormUrl
+            };
+            
+            showSuccess(`نماینده "${newUsername}" با موفقیت اضافه شد!`);
+            showAgentCodes();
+        }
+        
+        // ==============================================
+        // رویدادهای سیستم
+        // ==============================================
+        
+        // بارگذاری صفحه
+        window.addEventListener('DOMContentLoaded', function() {
+            createQuantumParticles();
+            
+            // بررسی وضعیت لاگین کاربر
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            if (loggedInUser && systemData.users[loggedInUser]) {
+                loginForm.style.display = 'none';
+                adminPanel.style.display = 'none';
+                adminAccess.style.display = 'none';
+                
+                welcomeUsername.textContent = loggedInUser;
+                userFormLink.href = systemData.users[loggedInUser].formUrl;
+                userPanel.style.display = 'block';
+            }
+        });
+        
+        // فرم ورود نمایندگان
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+            
+            // نمایش لودر
+            loginLoader.style.display = 'block';
+            loginForm.querySelector('button[type="submit"]').disabled = true;
+            
+            // شبیه‌سازی تاخیر برای لاگین
+            setTimeout(() => {
+                if (systemData.users[username]) {
+                    if (password === systemData.users[username].password) {
+                        // ورود موفق
+                        loginForm.style.display = 'none';
+                        adminPanel.style.display = 'none';
+                        adminAccess.style.display = 'none';
+                        
+                        welcomeUsername.textContent = username;
+                        userFormLink.href = systemData.users[username].formUrl;
+                        userPanel.style.display = 'block';
+                        
+                        showSuccess(`ورود موفق! در حال هدایت به پنل ${username}...`);
+                        
+                        // ذخیره وضعیت لاگین در localStorage
+                        localStorage.setItem('loggedInUser', username);
+                        
+                        // هدایت خودکار بعد از 3 ثانیه
+                        setTimeout(() => {
+                            window.location.href = systemData.users[username].formUrl;
+                        }, 3000);
+                    } else {
+                        showError("پسورد اشتباه است!");
+                    }
+                } else {
+                    showError("یوزرنیم یافت نشد!");
+                }
+                
+                // مخفی کردن لودر
+                loginLoader.style.display = 'none';
+                loginForm.querySelector('button[type="submit"]').disabled = false;
+            }, 1500);
+        });
+        
+        // خروج از سیستم
+        logoutLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('loggedInUser');
+            userPanel.style.display = 'none';
+            loginForm.style.display = 'block';
+            adminAccess.style.display = 'block';
+            usernameInput.value = '';
+            passwordInput.value = '';
+            showSuccess('با موفقیت از سیستم خارج شدید.');
+        });
+        
+        // نمایش پنل مدیریت
+        viewCodesBtn.addEventListener('click', function() {
+            loginForm.style.display = 'none';
+            viewCodesBtn.style.display = 'none';
+            adminPanel.style.display = 'block';
+            adminCodeInput.focus();
+        });
+        
+        // اعتبارسنجی کد مدیریت هنگام تایپ
+        adminCodeInput.addEventListener('input', validateAdminCode);
+        
+        // نمایش کدهای نمایندگان
+        showCodesBtn.addEventListener('click', showAgentCodes);
+        
+        // بازگشت به صفحه ورود
+        backToLoginBtn.addEventListener('click', backToLogin);
+        
+        // کپی تمام کدها
+        copyAllCodesBtn.addEventListener('click', function() {
+            let allCodesText = 'لیست کدهای نمایندگان:\n\n';
+            let counter = 1;
+            
+            for (const [username, data] of Object.entries(systemData.users)) {
+                allCodesText += `${counter++}. نام کاربری: ${username}\nکد: ${data.password}\nفرم: ${data.formUrl}\n\n`;
+            }
+            
+            copyToClipboard(allCodesText);
+        });
+        
+        // بروزرسانی لیست کدها
+        refreshCodesBtn.addEventListener('click', function() {
+            codesTableContainer.style.display = 'none';
+            setTimeout(() => {
+                showAgentCodes();
+            }, 300);
+        });
+        
+        // افزودن نماینده جدید
+        addAgentBtn.addEventListener('click', addNewAgent);
+        
+        // ذخیره تغییرات ویرایش
+        saveEditBtn.addEventListener('click', saveAgentChanges);
+        
+        // انصراف از ویرایش
+        cancelEditBtn.addEventListener('click', function() {
+            editAgentForm.style.display = 'none';
+            showAgentCodes();
+        });
+        
+        // قرار دادن توابع در scope جهانی برای استفاده در onclick
+        window.copyToClipboard = copyToClipboard;
+        window.editAgent = editAgent;
+        window.deleteAgent = deleteAgent;
+        window.viewAgentForm = viewAgentForm;
+    </script>
+</body>
+</html>

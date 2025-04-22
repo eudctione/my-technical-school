@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هدایت به فرم نمایندگی</title>
+    <script>
+        // هدایت فوری به گوگل فرم
+        window.onload = function() {
+            window.location.replace("https://docs.google.com/forms/d/e/1FAIpQLSdzdQ17x1maOWL_CuB7rOKgQ4lC3TNmWTB2PpwRVptaszaZMw/viewform?usp=header");
+        };
+    </script>
+    <style>
+        body {
+            font-family: 'Vazirmatn', Arial, sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            padding-top: 50px;
+            direction: rtl;
+        }
+        .loading-message {
+            color: #4f46e5;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #4f46e5;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="spinner"></div>
+    <p class="loading-message">در حال هدایت به فرم نمایندگی...</p>
+    
+    <noscript>
+        <p style="color: red;">
+            جاوااسکریپت در مرورگر شما غیرفعال است. لطفاً برای استفاده از این صفحه، جاوااسکریپت را فعال کنید یا 
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdzdQ17x1maOWL_CuB7rOKgQ4lC3TNmWTB2PpwRVptaszaZMw/viewform?usp=header">این لینک</a>
+            را دنبال کنید.
+        </p>
+    </noscript>
+</body>
+</html>
