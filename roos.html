@@ -26,8 +26,216 @@
             background-color: #f8f9fa;
             color: #333;
             line-height: 1.8;
+            padding-top: 80px;
         }
         
+        /* استایل نوار ناوبری کوانتومی */
+        .navbar-quantum {
+            background: rgba(0, 13, 26, 0.95);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 30px rgba(0, 180, 216, 0.15);
+            padding: 0.8rem 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-bottom: 1px solid rgba(0, 180, 216, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar-quantum.scrolled {
+            background: rgba(0, 20, 40, 0.98);
+            padding: 0.5rem 0;
+            box-shadow: 0 8px 32px rgba(0, 119, 182, 0.3);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: -0.5px;
+            transition: all 0.3s;
+        }
+
+        .quantum-logo {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantum-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            filter: drop-shadow(0 0 6px rgba(255, 209, 102, 0.7));
+            animation: quantumFloat 4s infinite ease-in-out;
+        }
+
+        .qd-1 {
+            top: 5px;
+            left: 5px;
+            animation-delay: 0s;
+        }
+
+        .qd-2 {
+            top: 5px;
+            right: 5px;
+            animation-delay: 0.5s;
+        }
+
+        .qd-3 {
+            bottom: 5px;
+            left: 16px;
+            animation-delay: 1s;
+        }
+
+        .logo-text {
+            font-family: 'Vazirmatn', sans-serif;
+            font-weight: 900;
+            background: linear-gradient(90deg, #83C5BE, #FFD166);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        /* استایل منوی همبرگر کوانتومی */
+        .quantum-toggler {
+            border: none;
+            padding: 0.5rem;
+            background: transparent;
+            position: relative;
+            width: 40px;
+            height: 40px;
+        }
+
+        .quantum-line {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: white;
+            margin: 6px auto;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .ql-1, .ql-3 {
+            width: 20px;
+        }
+
+        .quantum-toggler[aria-expanded="true"] .ql-1 {
+            transform: translateY(8px) rotate(45deg);
+            width: 25px;
+            background: var(--accent-color);
+        }
+
+        .quantum-toggler[aria-expanded="true"] .ql-2 {
+            opacity: 0;
+        }
+
+        .quantum-toggler[aria-expanded="true"] .ql-3 {
+            transform: translateY(-8px) rotate(-45deg);
+            width: 25px;
+            background: var(--accent-color);
+        }
+
+        /* استایل لینک‌های نوار ناوبری */
+        .navbar-quantum .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            padding: 0.8rem 1.2rem;
+            margin: 0 0.5rem;
+            border-radius: 8px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-quantum .nav-link .quantum-icon {
+            font-size: 1.1rem;
+            margin-left: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .navbar-quantum .nav-link .nav-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .quantum-hover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0, 109, 119, 0.3), rgba(255, 209, 102, 0.2));
+            transform: translateX(-110%);
+            transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+            z-index: 1;
+            border-radius: 8px;
+        }
+
+        .navbar-quantum .nav-link:hover .quantum-hover,
+        .navbar-quantum .nav-link.active .quantum-hover {
+            transform: translateX(0);
+        }
+
+        .navbar-quantum .nav-link:hover,
+        .navbar-quantum .nav-link.active {
+            color: white;
+        }
+
+        .navbar-quantum .nav-link:hover .quantum-icon,
+        .navbar-quantum .nav-link.active .quantum-icon {
+            transform: rotate(15deg);
+            color: var(--accent-color);
+        }
+
+        /* استایل دکمه‌ها */
+        .btn-quantum {
+            background: linear-gradient(90deg, #006D77, #00B4D8);
+            border: none;
+            color: white;
+            font-weight: 700;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 180, 216, 0.3);
+        }
+
+        .btn-quantum:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 180, 216, 0.4);
+            color: white;
+        }
+
+        .btn-quantum-outline {
+            background: transparent;
+            border: 2px solid #00B4D8;
+            color: white;
+            font-weight: 600;
+            padding: 0.4rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.4s;
+        }
+
+        .btn-quantum-outline:hover {
+            background: rgba(0, 180, 216, 0.15);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
         /* استایل هیرو صفحه */
         .policy-hero {
             background: var(--gradient-bg);
@@ -279,6 +487,28 @@
             color: rgba(255, 255, 255, 0.7);
         }
         
+        /* انیمیشن‌ها */
+        @keyframes quantumFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+                box-shadow: 0 0 12px rgba(255, 209, 102, 0.9);
+            }
+        }
+
+        @keyframes quantumPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+        
         /* ریسپانسیو */
         @media (max-width: 992px) {
             .policy-hero-title {
@@ -291,6 +521,20 @@
             
             .section-title {
                 font-size: 2rem;
+            }
+            
+            .navbar-quantum .navbar-nav {
+                padding-top: 1rem;
+            }
+            
+            .navbar-quantum .nav-link {
+                margin: 0.3rem 0;
+                padding: 0.8rem 1rem;
+            }
+            
+            .navbar-quantum .d-flex {
+                margin-top: 1rem;
+                padding-bottom: 1rem;
             }
         }
         
@@ -334,6 +578,78 @@
     </style>
 </head>
 <body>
+    <!-- نوار ناوبری -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-quantum fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="quantum-logo">
+                    <span class="quantum-dot qd-1"></span>
+                    <span class="quantum-dot qd-2"></span>
+                    <span class="quantum-dot qd-3"></span>
+                </span>
+                <span class="logo-text">هنرستان دانشمند</span>
+            </a>
+            <button class="navbar-toggler quantum-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarQuantum">
+                <span class="quantum-line ql-1"></span>
+                <span class="quantum-line ql-2"></span>
+                <span class="quantum-line ql-3"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarQuantum">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home quantum-icon"></i>
+                            <span class="nav-text">صفحه اصلی</span>
+                            <span class="quantum-hover"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">
+                            <i class="fas fa-info-circle quantum-icon"></i>
+                            <span class="nav-text">درباره ما</span>
+                            <span class="quantum-hover"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="programs.html">
+                            <i class="fas fa-list-ul quantum-icon"></i>
+                            <span class="nav-text">رشته‌ها</span>
+                            <span class="quantum-hover"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="admission-policy.html">
+                            <i class="fas fa-file-contract quantum-icon"></i>
+                            <span class="nav-text">آیین نامه</span>
+                            <span class="quantum-hover"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="teachers.html">
+                            <i class="fas fa-chalkboard-teacher quantum-icon"></i>
+                            <span class="nav-text">اساتید</span>
+                            <span class="quantum-hover"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">
+                            <i class="fas fa-phone-alt quantum-icon"></i>
+                            <span class="nav-text">تماس با ما</span>
+                            <span class="quantum-hover"></span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-sm btn-quantum-outline me-2">
+                        <i class="fas fa-sign-in-alt me-1"></i> ورود
+                    </a>
+                    <a href="admissions.html" class="btn btn-sm btn-quantum">
+                        <i class="fas fa-user-plus me-1"></i> ثبت‌نام
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <!-- هیرو بخش -->
     <section class="policy-hero">
@@ -740,6 +1056,16 @@
             const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
             tooltipTriggerList.map(function(tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // افزودن کلاس scrolled به نوار ناوبری هنگام اسکرول
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar-quantum');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
             });
         });
     </script>
