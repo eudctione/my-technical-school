@@ -1092,18 +1092,44 @@
                <span class="hero-badge animate" style="background: linear-gradient(90deg, #6e48aa, #9d50bb); color: white; text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); box-shadow: 0 0 15px #9d50bb; border: 1px solid #ffffff30; padding: 8px 15px; border-radius: 20px; font-weight: bold; display: inline-block;">پذیرش از دانش‌آموزان شهرستان‌های اصفهان، خمینی‌شهر و شاهین‌شهر درسال تحصیلی جدید</span>
                 <h1 class="hero-title animate delay-1">هنرستان فنی حرفه‌ای دانشگاه صنعتی دانشمند قلم چی</h1>
                 <p class="hero-subtitle animate delay-2">تربیت نیروی متخصص و کارآمد برای صنعت کشور با بهره‌گیری از آخرین فناوری‌های آموزشی و برنامه‌های درسی تطبیق‌پذیر با هوش مصنوعی</p>
-                <div class="hero-buttons animate delay-3">
-                    <a href="programs.html" class="btn btn-primary"><i class="fas fa-list-ul me-2"></i>مشاهده رشته‌ها</a>
-                    <a href="admissions.html" class="btn btn-outline-light"><i class="fas fa-user-plus me-2"></i>ثبت‌نام آنلاین</a>
-   <a class="navbar-brand" href="pages/pass3.html">
-               <img src="assets/images/logo.png" alt="هنرستان دانشمند">
-            </a>
+                  <div class="hero-buttons animate delay-3">
+  <div class="d-flex justify-content-center align-items-center position-relative" 
+       style="width: 100%; --offset: -100px;"> <!-- تغییر این مقدار برای تنظیم موقعیت -->
+       
+    <div style="transform: translateX(var(--offset)); display: flex; align-items: center; gap: 15px;">
+      <!-- دکمه مشاهده رشته‌ها -->
+      <a href="programs.html" class="btn btn-primary">
+        <i class="fas fa-list-ul me-2"></i>مشاهده رشته‌ها
+      </a>
+      
+      <!-- دکمه ثبت‌نام آنلاین -->
+      <a href="admissions.html" class="btn btn-outline-light">
+        <i class="fas fa-user-plus me-2"></i>ثبت‌نام آنلاین
+      </a>
+      
+      <!-- لوگو و ورود نمایندگی -->
+      <div class="position-relative" style="margin-left: 30px;">
+        <a class="navbar-brand" href="pass3.html">
+          <img src="assets/images/logo.png" alt="هنرستان دانشمند" 
+               style="height: auto; max-height: 150px; width: auto;">
+        </a>
+        <a href="pass3.html" class="btn btn-outline-light position-absolute start-50 translate-middle-x mt-1 px-3 py-1" 
+           style="font-size: 0.8rem; white-space: nowrap; min-width: 120px; text-decoration: none;
+                  animation: fadeInOut 3s infinite;">
+          <i class="fas fa-sign-in-alt me-1"></i>ورود نمایندگی
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
-                </div>
+<style>
+  @keyframes fadeInOut {
+    0%,100% { opacity:0.7; transform: translateX(-50%) translateY(2px); }
+    50% { opacity:1; transform: translateX(-50%) translateY(0); }
+  }
+</style>
 
-                <img src="assets/images/hero-image.png" alt="هنرستان دانشمند" class="img-fluid hero-image animate delay-4">
-            </div>
-        </div>
     </section>
 
     <!-- بخش ویژگی‌ها -->
