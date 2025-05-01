@@ -3,67 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="معرفی رشته‌های هنرستان فنی حرفه‌ای دانشمند قلم چی - فناوری اطلاعات، حسابداری، الکتروتکنیک، معماری داخلی و...">
-    <meta name="keywords" content="رشته‌های هنرستانی, فنی حرفه‌ای, برنامه‌نویسی, حسابداری, الکتروتکنیک, معماری">
+    <meta name="description" content="معرفی پیشرفته رشته‌های هنرستان فنی حرفه‌ای دانشمند قلم چی با رابط کاربری مدرن">
+    <meta name="keywords" content="هنرستان, رشته فنی, برنامه‌نویسی, حسابداری, الکترونیک, معماری, طراحی">
     <meta name="author" content="هنرستان دانشمند قلم چی">
     <title>رشته‌های آموزشی | هنرستان فنی حرفه‌ای دانشمند قلم چی</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #006D77;
-            --secondary-color: #83C5BE;
+            --primary-dark: #005D66;
+            --primary-light: #83C5BE;
+            --secondary-color: #FF9F1C;
             --accent-color: #A7F3D0;
             --light-color: #EDF6F9;
             --dark-color: #003844;
-            --gradient-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --text-color: #2B2D42;
+            --text-light: #8D99AE;
+            --gradient-bg: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            --card-shadow: 0 10px 30px -15px rgba(0, 109, 119, 0.3);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         
         body {
             font-family: 'Vazirmatn', sans-serif;
             background-color: #f8f9fa;
-            color: #333;
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
             background-image: url('assets/images/bg-pattern.png');
             background-attachment: fixed;
         }
         
-        /* استایل نوار ناوبری */
+        /* استایل پیشرفته نوار ناوبری */
         .navbar-custom {
-            background: var(--primary-color);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: rgba(0, 109, 119, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(131, 197, 190, 0.3);
+        }
+        
+        .navbar-custom.scrolled {
             padding: 0.5rem 0;
+            background: rgba(0, 109, 119, 0.98);
         }
         
         .navbar-custom .navbar-brand {
             color: white;
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .navbar-custom .navbar-brand i {
+            margin-left: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .navbar-custom .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+        
+        .navbar-custom .navbar-brand:hover i {
+            transform: rotate(-15deg);
         }
         
         .navbar-custom .nav-link {
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255, 255, 255, 0.9);
             font-weight: 500;
             padding: 0.5rem 1rem;
             margin: 0 0.2rem;
-            border-radius: 4px;
-            transition: all 0.3s;
+            border-radius: 6px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .navbar-custom .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
         }
         
         .navbar-custom .nav-link:hover,
         .navbar-custom .nav-link.active {
             color: white;
-            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
         }
         
-        /* استایل هدر */
-        .header-banner {
-            background: var(--primary-color);
+        .navbar-custom .nav-link:hover::before,
+        .navbar-custom .nav-link.active::before {
+            width: 100%;
+            right: auto;
+            left: 0;
+        }
+        
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            font-size: 1.2rem;
             color: white;
-            padding: 3rem 0;
-            margin-bottom: 2rem;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        
+        /* استایل پیشرفته هدر صفحه */
+        .header-banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            padding: 5rem 0 4rem;
+            margin-bottom: 3rem;
             position: relative;
             overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
         }
         
         .header-banner::before {
@@ -74,8 +138,19 @@
             width: 100%;
             height: 100%;
             background: url('assets/images/pattern-overlay.png') repeat;
-            opacity: 0.1;
+            opacity: 0.08;
             pointer-events: none;
+        }
+        
+        .header-banner::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, #f8f9fa, transparent);
+            z-index: 1;
         }
         
         .logo-header {
@@ -84,34 +159,56 @@
             justify-content: space-between;
             position: relative;
             z-index: 2;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .logo-header h1 {
+            font-weight: 800;
+            font-size: 2.2rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 0;
+            line-height: 1.3;
         }
         
         .logo-img {
-            height: 80px;
-            margin-left: 20px;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            height: 100px;
+            margin-left: 30px;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+            transition: var(--transition);
+            animation: pulse 2s infinite alternate;
+        }
+        
+        .logo-img:hover {
+            transform: rotate(5deg) scale(1.05);
         }
         
         /* استایل بخش‌های محتوا */
         .programs-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-            padding: 2.5rem;
-            margin-bottom: 2.5rem;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            padding: 3rem;
+            margin-bottom: 3rem;
             border-top: 5px solid var(--accent-color);
             backdrop-filter: blur(5px);
             border: 1px solid rgba(131, 197, 190, 0.3);
+            transition: var(--transition);
+        }
+        
+        .programs-section:hover {
+            box-shadow: 0 15px 40px -15px rgba(0, 109, 119, 0.4);
+            transform: translateY(-5px);
         }
         
         .section-title {
             color: var(--primary-color);
             border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 0.7rem;
-            margin-bottom: 1.8rem;
-            font-weight: 700;
+            padding-bottom: 0.8rem;
+            margin-bottom: 2rem;
+            font-weight: 800;
             position: relative;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
+            display: inline-block;
         }
         
         .section-title::after {
@@ -119,28 +216,42 @@
             position: absolute;
             bottom: -2px;
             right: 0;
-            width: 80px;
-            height: 3px;
+            width: 100px;
+            height: 4px;
             background: var(--accent-color);
+            border-radius: 2px;
         }
         
-        /* استایل کارت‌های رشته‌ها */
+        /* استایل پیشرفته کارت‌های رشته‌ها */
         .program-card {
-            background: linear-gradient(135deg, rgba(237, 246, 249, 0.9), rgba(209, 231, 255, 0.7));
-            border: 1px solid var(--secondary-color);
-            border-radius: 12px;
-            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(237, 246, 249, 0.9));
+            border: none;
+            border-radius: 16px;
+            padding: 2rem;
             text-align: center;
-            box-shadow: 0 8px 20px rgba(0, 180, 216, 0.12);
+            box-shadow: var(--card-shadow);
             height: 100%;
-            transition: all 0.3s;
+            transition: var(--transition);
             position: relative;
             overflow: hidden;
+            border-left: 5px solid var(--primary-light);
+        }
+        
+        .program-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 109, 119, 0.03), rgba(131, 197, 190, 0.05));
+            pointer-events: none;
         }
         
         .program-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 180, 216, 0.2);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px -15px rgba(0, 109, 119, 0.5);
+            border-left-color: var(--secondary-color);
         }
         
         .program-card::after {
@@ -156,70 +267,184 @@
         }
         
         .program-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--primary-color);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .program-card:hover .program-icon {
+            transform: rotate(15deg) scale(1.2);
+            color: var(--secondary-color);
         }
         
         .program-img {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            transition: transform 0.5s;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
         
         .program-card:hover .program-img {
-            transform: scale(1.05);
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
         }
         
-        /* فیلتر رشته‌ها */
+        .program-card h4 {
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .program-card h4::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: var(--transition);
+        }
+        
+        .program-card:hover h4::after {
+            width: 100%;
+        }
+        
+        .program-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+        
+        .program-card ul {
+            text-align: right;
+            padding-right: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .program-card ul li {
+            position: relative;
+            padding-right: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        
+        .program-card ul li::before {
+            content: "•";
+            position: absolute;
+            right: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        /* فیلتر رشته‌ها - پیشرفته */
+        .filter-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 109, 119, 0.1);
+        }
+        
         .filter-buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
             justify-content: center;
+            align-items: center;
         }
         
         .filter-btn {
-            background-color: var(--light-color);
-            border: 1px solid var(--secondary-color);
-            color: var(--dark-color);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            transition: all 0.3s;
-            font-weight: 500;
+            background-color: white;
+            border: 2px solid var(--primary-light);
+            color: var(--primary-dark);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            transition: var(--transition);
+            font-weight: 600;
+            box-shadow: 0 3px 10px rgba(0, 109, 119, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-btn i {
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
         }
         
         .filter-btn:hover, .filter-btn.active {
             background-color: var(--primary-color);
             color: white;
             border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 109, 119, 0.2);
         }
         
-        /* استایل دکمه‌ها */
+        .filter-btn.active {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        .filter-results {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        
+        /* استایل دکمه‌ها - پیشرفته */
         .btn-primary {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
             font-weight: 600;
-            padding: 0.5rem 1.5rem;
-            transition: all 0.3s;
+            padding: 0.6rem 1.8rem;
+            border-radius: 50px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 4px 15px rgba(0, 109, 119, 0.3);
+            border: none;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+            z-index: -1;
         }
         
         .btn-primary:hover {
-            background-color: #005D66;
-            border-color: #005D66;
-            transform: translateY(-2px);
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 109, 119, 0.4);
         }
         
-        /* استایل فوتر */
+        .btn-primary:hover::before {
+            width: 100%;
+        }
+        
+        /* استایل فوتر - پیشرفته */
         footer {
             background: linear-gradient(135deg, var(--dark-color), #002A32);
             color: white;
-            padding: 3rem 0 1.5rem;
+            padding: 4rem 0 2rem;
             position: relative;
+            margin-top: 5rem;
+            clip-path: polygon(0 10%, 100% 0, 100% 100%, 0% 100%);
         }
         
         footer::before {
@@ -230,72 +455,197 @@
             width: 100%;
             height: 100%;
             background: url('assets/images/footer-pattern.png') repeat;
-            opacity: 0.05;
+            opacity: 0.08;
             pointer-events: none;
         }
         
         footer h5 {
             color: var(--accent-color);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
             font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        footer h5::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary-color);
         }
         
         footer a {
-            color: var(--secondary-color);
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: var(--transition);
+            display: inline-block;
+            margin-bottom: 0.8rem;
         }
         
         footer a:hover {
             color: var(--accent-color);
-            text-decoration: underline;
+            transform: translateX(-5px);
+        }
+        
+        footer a i {
+            margin-left: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        footer a:hover i {
+            transform: rotate(-15deg);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
         }
         
         .footer-bottom {
-            margin-top: 2rem;
+            margin-top: 3rem;
             padding-top: 1.5rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* انیمیشن‌ها */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.05);
+            }
         }
         
         /* ریسپانسیو */
+        @media (max-width: 992px) {
+            .header-banner {
+                padding: 4rem 0 3rem;
+                clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+            }
+            
+            .logo-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo-img {
+                height: 80px;
+                margin-left: 20px;
+            }
+            
+            .programs-section {
+                padding: 2rem;
+            }
+        }
+        
         @media (max-width: 768px) {
+            .header-banner {
+                padding: 3rem 0 2.5rem;
+                clip-path: polygon(0 0, 100% 0, 100% 97%, 0 100%);
+            }
+            
             .logo-header {
                 flex-direction: column-reverse;
                 text-align: center;
             }
             
+            .logo-header h1 {
+                font-size: 1.6rem;
+                margin-top: 1rem;
+            }
+            
             .logo-img {
                 margin-left: 0;
-                margin-bottom: 1rem;
-                height: 60px;
+                height: 70px;
             }
             
             .programs-section {
                 padding: 1.5rem;
             }
             
-            .navbar-custom .nav-link {
-                padding: 0.5rem;
-                margin: 0.1rem 0;
+            .section-title {
+                font-size: 1.4rem;
             }
             
             .filter-buttons {
                 justify-content: flex-start;
             }
+            
+            footer {
+                clip-path: polygon(0 5%, 100% 0, 100% 100%, 0% 100%);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .header-banner {
+                padding: 2.5rem 0 2rem;
+            }
+            
+            .logo-header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .logo-img {
+                height: 60px;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .program-card {
+                padding: 1.5rem;
+            }
+            
+            footer {
+                clip-path: polygon(0 3%, 100% 0, 100% 100%, 0% 100%);
+                padding: 3rem 0 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- نوار ناوبری -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <!-- نوار ناوبری پیشرفته -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="fas fa-graduation-cap me-2"></i>هنرستان دانشمند
+            <a class="navbar-brand" href="tablnew.html">
+                <i class="fas fa-graduation-cap"></i>سیستم جامع هنرستان
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -313,43 +663,64 @@
                         <a class="nav-link" href="admissions.html"><i class="fas fa-user-plus me-1"></i> ثبت‌نام</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="payment.html"><i class="fas fa-money-bill-wave me-1"></i> پرداخت شهریه</a>
+                        <a class="nav-link" href="tablnew9.html"><i class="fas fa-business-time me-1"></i> کسب و کار</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html"><i class="fas fa-phone-alt me-1"></i> تماس با ما</a>
                     </li>
                 </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-outline-light btn-sm me-2"><i class="fas fa-sign-in-alt me-1"></i> ورود</a>
+                    <a href="register.html" class="btn btn-light btn-sm"><i class="fas fa-user-plus me-1"></i> ثبت‌نام</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- هدر صفحه -->
-    <header class="header-banner">
+    <!-- هدر صفحه پیشرفته -->
+    <header class="header-banner mt-5">
         <div class="container">
             <div class="logo-header">
-                <h1 class="text-center mb-0">رشته‌های آموزشی هنرستان فنی حرفه‌ای دانشمند</h1>
-                <img src="assets/images/logo.png" alt="لوگو هنرستان" class="logo-img">
+                <div>
+                    <h1 class="text-white">رشته‌های آموزشی هنرستان فنی حرفه‌ای دانشمند</h1>
+                    <p class="lead text-white mt-3 opacity-75">آینده حرفه‌ای خود را با بهترین رشته‌های فنی و حرفه‌ای شروع کنید</p>
+                </div>
+                <img src="assets/images/logo.png" alt="لوگو هنرستان" class="logo-img d-none d-md-block">
             </div>
         </div>
     </header>
 
     <div class="container">
-        <!-- فیلتر رشته‌ها -->
-        <div class="programs-section">
+        <!-- فیلتر رشته‌های پیشرفته -->
+        <div class="filter-section">
+            <h3 class="section-title mb-4"><i class="fas fa-filter me-2"></i> فیلتر رشته‌ها</h3>
             <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">همه رشته‌ها</button>
-                <button class="filter-btn" data-filter="technical">فنی و مهندسی</button>
-                <button class="filter-btn" data-filter="art">هنر و طراحی</button>
-                <button class="filter-btn" data-filter="business">مدیریت و کسب‌وکار</button>
-                <button class="filter-btn" data-filter="sport">ورزشی</button>
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-layer-group"></i> همه رشته‌ها
+                </button>
+                <button class="filter-btn" data-filter="technical">
+                    <i class="fas fa-cogs"></i> فنی و مهندسی
+                </button>
+                <button class="filter-btn" data-filter="art">
+                    <i class="fas fa-paint-brush"></i> هنر و طراحی
+                </button>
+                <button class="filter-btn" data-filter="business">
+                    <i class="fas fa-chart-line"></i> مدیریت و کسب‌وکار
+                </button>
+                <button class="filter-btn" data-filter="sport">
+                    <i class="fas fa-running"></i> ورزشی
+                </button>
+            </div>
+            <div class="filter-results">
+                <span id="filter-count">8</span> رشته یافت شد
             </div>
         </div>
 
-        <!-- لیست رشته‌ها -->
+        <!-- لیست رشته‌های پیشرفته -->
         <div class="programs-section">
             <h3 class="section-title"><i class="fas fa-graduation-cap me-2"></i> رشته‌های هنرستانی</h3>
             
-            <div class="row g-4">
+            <div class="row g-4 program-container">
                 <!-- فناوری اطلاعات -->
                 <div class="col-md-4 col-sm-6" data-category="technical">
                     <div class="program-card">
@@ -358,13 +729,16 @@
                             <i class="fas fa-laptop-code"></i>
                         </div>
                         <h4>فناوری اطلاعات</h4>
-                        <p>آموزش برنامه‌نویسی، شبکه‌های کامپیوتری، امنیت اطلاعات و توسعه نرم‌افزار</p>
-                        <ul class="text-start text-muted">
-                            <li>برنامه‌نویسی وب و موبایل</li>
-                            <li>شبکه‌های کامپیوتری</li>
-                            <li>امنیت سایبری</li>
+                        <p>آموزش جامع برنامه‌نویسی، شبکه‌های کامپیوتری و امنیت اطلاعات برای بازار کار پویا</p>
+                        <ul>
+                            <li>برنامه‌نویسی وب و موبایل (Python, JavaScript)</li>
+                            <li>شبکه‌های کامپیوتری و امنیت سایبری</li>
+                            <li>پایگاه داده و هوش مصنوعی</li>
+                            <li>طراحی و توسعه نرم‌افزار</li>
                         </ul>
-                        <a href="admissions.html" class="btn btn-primary mt-3">ثبت‌نام در این رشته</a>
+                        <a href="admissions.html" class="btn btn-primary mt-3">
+                            <i class="fas fa-arrow-left me-2"></i>ثبت‌نام در این رشته
+                        </a>
                     </div>
                 </div>
                 
@@ -375,14 +749,17 @@
                         <div class="program-icon">
                             <i class="fas fa-calculator"></i>
                         </div>
-                        <h4>حسابداری</h4>
-                        <p>آموزش اصول حسابداری، نرم‌افزارهای مالی، مدیریت مالی و حسابرسی</p>
-                        <ul class="text-start text-muted">
-                            <li>حسابداری مالی و صنعتی</li>
-                            <li>نرم‌افزارهای حسابداری</li>
-                            <li>مدیریت مالی</li>
+                        <h4>حسابداری مالی</h4>
+                        <p>آموزش اصول حسابداری، نرم‌افزارهای مالی و مدیریت مالی برای بازار کار</p>
+                        <ul>
+                            <li>حسابداری مالی و صنعتی پیشرفته</li>
+                            <li>نرم‌افزارهای حسابداری (همکاران سیستم، سپیدار)</li>
+                            <li>مدیریت مالی و حسابرسی</li>
+                            <li>مالیات و قوانین تجارت</li>
                         </ul>
-                        <a href="admissions.html" class="btn btn-primary mt-3">ثبت‌نام در این رشته</a>
+                        <a href="admissions.html" class="btn btn-primary mt-3">
+                            <i class="fas fa-arrow-left me-2"></i>ثبت‌نام در این رشته
+                        </a>
                     </div>
                 </div>
                 
@@ -393,14 +770,17 @@
                         <div class="program-icon">
                             <i class="fas fa-bolt"></i>
                         </div>
-                        <h4>الکتروتکنیک</h4>
-                        <p>آموزش برق صنعتی، کنترل سیستم‌ها، اتوماسیون و تعمیرات الکتریکی</p>
-                        <ul class="text-start text-muted">
-                            <li>برق صنعتی و ساختمان</li>
-                            <li>کنترل و اتوماسیون</li>
-                            <li>تعمیرات الکتریکی</li>
+                        <h4>الکتروتکنیک صنعتی</h4>
+                        <p>آموزش برق صنعتی، کنترل سیستم‌ها و اتوماسیون برای صنعت مدرن</p>
+                        <ul>
+                            <li>برق صنعتی و ساختمان پیشرفته</li>
+                            <li>کنترل و اتوماسیون صنعتی</li>
+                            <li>تعمیرات تخصصی الکتریکی</li>
+                            <li>PLC و سیستم‌های هوشمند</li>
                         </ul>
-                        <a href="admissions.html" class="btn btn-primary mt-3">ثبت‌نام در این رشته</a>
+                        <a href="admissions.html" class="btn btn-primary mt-3">
+                            <i class="fas fa-arrow-left me-2"></i>ثبت‌نام در این رشته
+                        </a>
                     </div>
                 </div>
                 
@@ -411,14 +791,17 @@
                         <div class="program-icon">
                             <i class="fas fa-couch"></i>
                         </div>
-                        <h4>معماری داخلی</h4>
-                        <p>آموزش طراحی دکوراسیون داخلی، نورپردازی، چیدمان فضا و نقشه‌کشی</p>
-                        <ul class="text-start text-muted">
-                            <li>طراحی دکوراسیون</li>
-                            <li>نورپردازی و رنگ</li>
-                            <li>نرم‌افزارهای طراحی</li>
+                        <h4>معماری و دکوراسیون داخلی</h4>
+                        <p>آموزش طراحی دکوراسیون داخلی، نورپردازی و چیدمان فضاهای مدرن</p>
+                        <ul>
+                            <li>طراحی دکوراسیون مسکونی و تجاری</li>
+                            <li>نورپردازی و رنگ‌شناسی حرفه‌ای</li>
+                            <li>نرم‌افزارهای طراحی (3D Max, AutoCAD)</li>
+                            <li>مدیریت پروژه‌های معماری</li>
                         </ul>
-                        <a href="admissions.html" class="btn btn-primary mt-3">ثبت‌نام در این رشته</a>
+                        <a href="admissions.html" class="btn btn-primary mt-3">
+                            <i class="fas fa-arrow-left me-2"></i>ثبت‌نام در این رشته
+                        </a>
                     </div>
                 </div>
                 
@@ -429,14 +812,17 @@
                         <div class="program-icon">
                             <i class="fas fa-palette"></i>
                         </div>
-                        <h4>گرافیک</h4>
-                        <p>آموزش طراحی گرافیک، نرم‌افزارهای طراحی، تصویرسازی و تبلیغات</p>
-                        <ul class="text-start text-muted">
-                            <li>طراحی گرافیک دیجیتال</li>
+                        <h4>گرافیک دیجیتال</h4>
+                        <p>آموزش طراحی گرافیک، نرم‌افزارهای طراحی و تبلیغات دیجیتال</p>
+                        <ul>
+                            <li>طراحی گرافیک دیجیتال و چاپ</li>
                             <li>تصویرسازی و نقاشی دیجیتال</li>
-                            <li>تبلیغات و برندینگ</li>
+                            <li>تبلیغات و برندینگ حرفه‌ای</li>
+                            <li>نرم‌افزارهای Adobe Creative Suite</li>
                         </ul>
-                        <a href="admissions.html" class="btn btn-primary mt-3">ثبت‌نام در این رشته</a>
+                        <a href="admissions.html" class="btn btn-primary mt-3">
+                            <i class="fas fa-arrow-left me-2"></i>ثبت‌نام در این رشته
+                        </a>
                     </div>
                 </div>
                 
@@ -447,14 +833,17 @@
                         <div class="program-icon">
                             <i class="fas fa-car"></i>
                         </div>
-                        <h4>مکانیک خودرو</h4>
-                        <p>آموزش تعمیر و نگهداری خودرو، سیستم‌های الکترونیکی و مکانیکی خودرو</p>
-                        <ul class="text-start text-muted">
-                            <li>تعمیرات موتور و گیربکس</li>
-                            <li>سیستم‌های الکترونیکی خودرو</li>
-                            <li>عیب‌یابی و تعمیرات</li>
+                        <h4>مکانیک خودروهای مدرن</h4>
+                        <p>آموزش تعمیر و نگهداری خودروهای هیبریدی و الکترونیکی</p>
+                        <ul>
+                            <li>تعمیرات موتور و گیربکس پیشرفته</li>
+                            <li>سیستم‌های الکترونیکی و دیجیتال خودرو</li>
+                            <li>عیب‌یابی کامپیوتری خودرو</li>
+                            <li>فناوری‌های خودروهای آینده</li>
                         </ul>
-                        <a href="admissions.html" class="btn btn-primary mt-3">ثبت‌نام در این رشته</a>
+                        <a href="admissions.html" class="btn btn-primary mt-3">
+                            <i class="fas fa-arrow-left me-2"></i>ثبت‌نام در این رشته
+                        </a>
                     </div>
                 </div>
                 
@@ -465,32 +854,17 @@
                         <div class="program-icon">
                             <i class="fas fa-tshirt"></i>
                         </div>
-                        <h4>خیاطی و مد</h4>
-                        <p>آموزش طراحی و دوخت لباس، الگوسازی، هنرهای نمایشی مد و مدیریت فشن</p>
-                        <ul class="text-start text-muted">
-                            <li>طراحی و دوخت لباس</li>
-                            <li>الگوسازی و مدلینگ</li>
-                            <li>مدیریت فشن و برندینگ</li>
+                        <h4>طراحی مد و فشن</h4>
+                        <p>آموزش طراحی و دوخت لباس، الگوسازی و مدیریت برندهای مد</p>
+                        <ul>
+                            <li>طراحی و دوخت لباس‌های مدرن</li>
+                            <li>الگوسازی و مدلینگ پیشرفته</li>
+                            <li>مدیریت فشن و برندینگ دیجیتال</li>
+                            <li>بازاریابی در صنعت مد</li>
                         </ul>
-                        <a href="admissions.html" class="btn btn-primary mt-3">ثبت‌نام در این رشته</a>
-                    </div>
-                </div>
-                
-                <!-- معماری ساختمان -->
-                <div class="col-md-4 col-sm-6" data-category="technical">
-                    <div class="program-card">
-                        <img src="assets/images/architecture.jpg" alt="معماری ساختمان" class="program-img">
-                        <div class="program-icon">
-                            <i class="fas fa-building"></i>
-                        </div>
-                        <h4>معماری ساختمان</h4>
-                        <p>آموزش طراحی سازه، نقشه‌کشی ساختمان، متره و برآورد و اجرای ساختمان</p>
-                        <ul class="text-start text-muted">
-                            <li>نقشه‌کشی معماری</li>
-                            <li>متریال و مصالح ساختمانی</li>
-                            <li>اجرا و نظارت ساختمان</li>
-                        </ul>
-                        <a href="admissions.html" class="btn btn-primary mt-3">ثبت‌نام در این رشته</a>
+                        <a href="admissions.html" class="btn btn-primary mt-3">
+                            <i class="fas fa-arrow-left me-2"></i>ثبت‌نام در این رشته
+                        </a>
                     </div>
                 </div>
                 
@@ -501,64 +875,193 @@
                         <div class="program-icon">
                             <i class="fas fa-running"></i>
                         </div>
-                        <h4>تربیت بدنی</h4>
-                        <p>آموزش علوم ورزشی، مربیگری، مدیریت رویدادهای ورزشی و تغذیه ورزشی</p>
-                        <ul class="text-start text-muted">
-                            <li>مربیگری ورزشی</li>
-                            <li>مدیریت رویدادهای ورزشی</li>
+                        <h4>تربیت بدنی و علوم ورزشی</h4>
+                        <p>آموزش علوم ورزشی، مربیگری و مدیریت رویدادهای ورزشی</p>
+                        <ul>
+                            <li>مربیگری تخصصی ورزشی</li>
+                            <li>مدیریت رویدادها و اماکن ورزشی</li>
                             <li>تغذیه و فیزیولوژی ورزشی</li>
+                            <li>آسیب‌شناسی و حرکات اصلاحی</li>
                         </ul>
-                        <a href="admissions.html" class="btn btn-primary mt-3">ثبت‌نام در این رشته</a>
+                        <a href="admissions.html" class="btn btn-primary mt-3">
+                            <i class="fas fa-arrow-left me-2"></i>ثبت‌نام در این رشته
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- بخش مشاوره -->
+        <!-- بخش مشاوره پیشرفته -->
         <div class="programs-section">
-            <h3 class="section-title"><i class="fas fa-headset me-2"></i> نیاز به مشاوره دارید؟</h3>
+            <h3 class="section-title"><i class="fas fa-headset me-2"></i> مشاوره تخصصی انتخاب رشته</h3>
             <div class="row align-items-center">
-                <div class="col-md-8">
-                    <p class="lead">تیم مشاوره هنرستان آماده پاسخگویی به سوالات شما درباره انتخاب رشته، شرایط ثبت‌نام و آینده شغلی هر رشته می‌باشد.</p>
-                    <div class="d-flex align-items-center mt-4">
-                        <i class="fas fa-phone-alt fa-2x me-3 text-primary"></i>
-                        <div>
-                            <h5 class="mb-1">شماره تماس مشاوره</h5>
-                            <p class="mb-0">۰۳۱-۳۳۵۸۲۱۵۰</p>
+                <div class="col-lg-8">
+                    <div class="alert alert-primary bg-gradient" role="alert">
+                        <h5 class="alert-heading"><i class="fas fa-lightbulb me-2"></i>راهنمای انتخاب رشته</h5>
+                        <p class="mb-0">برای انتخاب بهترین رشته، علایق، استعدادها و بازار کار آینده را در نظر بگیرید. مشاوران ما آماده راهنمایی شما هستند.</p>
+                    </div>
+                    
+                    <div class="row g-4 mt-3">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start p-3 bg-light rounded-3">
+                                <i class="fas fa-user-tie fa-2x me-3 text-primary"></i>
+                                <div>
+                                    <h5 class="mb-2">مشاوره تخصصی</h5>
+                                    <p class="mb-0">گفتگو با مشاوران متخصص برای انتخاب بهترین رشته متناسب با استعداد شما</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start p-3 bg-light rounded-3">
+                                <i class="fas fa-chart-pie fa-2x me-3 text-primary"></i>
+                                <div>
+                                    <h5 class="mb-2">تحلیل بازار کار</h5>
+                                    <p class="mb-0">بررسی آینده شغلی هر رشته و نیازهای بازار کار برای تصمیم‌گیری بهتر</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="#" class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-calendar-alt me-2"></i>رزرو وقت مشاوره
+                        </a>
+                        <a href="#" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-download me-2"></i>دانلود راهنمای رشته‌ها
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center mt-4 mt-lg-0">
+                    <div class="position-relative">
+                        <img src="assets/images/advisor.png" alt="مشاوره تحصیلی" class="img-fluid rounded-3 shadow" style="max-height: 300px;">
+                        <div class="position-absolute bottom-0 start-0 bg-primary text-white p-3 rounded-end" style="transform: translateY(50%);">
+                            <h6 class="mb-0">پاسخگویی 24/7</h6>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 text-center">
-                    <img src="assets/images/advisor.png" alt="مشاوره تحصیلی" class="img-fluid" style="max-height: 200px;">
+            </div>
+        </div>
+        
+        <!-- بخش سوالات متداول -->
+        <div class="programs-section">
+            <h3 class="section-title"><i class="fas fa-question-circle me-2"></i> سوالات متداول</h3>
+            
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item border-0 mb-3 rounded-3 overflow-hidden">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true">
+                            <i class="fas fa-question me-2 text-primary"></i> چگونه بهترین رشته را انتخاب کنم؟
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            برای انتخاب بهترین رشته باید به علاقه، استعداد و بازار کار آینده توجه کنید. مشاوران ما می‌توانند با انجام تست‌های استعدادیابی و بررسی شرایط شما، بهترین گزینه‌ها را پیشنهاد دهند. همچنین می‌توانید از جلسات مشاوره رایگان ما استفاده کنید.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item border-0 mb-3 rounded-3 overflow-hidden">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                            <i class="fas fa-question me-2 text-primary"></i> شرایط ثبت‌نام در هنرستان چگونه است؟
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            ثبت‌نام در هنرستان پس از اتمام پایه نهم امکان‌پذیر است. دانش‌آموزان باید در آزمون ورودی شرکت کرده و پس از مصاحبه تخصصی، در رشته مورد نظر ثبت‌نام کنند. مدارک مورد نیاز شامل شناسنامه، کارنامه پایه نهم و 6 قطعه عکس می‌باشد.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item border-0 rounded-3 overflow-hidden">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                            <i class="fas fa-question me-2 text-primary"></i> آیا پس از فارغ‌التحصیلی امکان ادامه تحصیل وجود دارد؟
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            بله، فارغ‌التحصیلان هنرستان می‌توانند در دانشگاه‌های فنی و حرفه‌ای، علمی کاربردی و حتی دانشگاه‌های سراسری در رشته‌های مرتبط ادامه تحصیل دهند. همچنین امکان شرکت در دوره‌های کاردانی پیوسته و کارشناسی ناپیوسته وجود دارد.
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- فوتر پیشرفته -->
     <footer class="bg-dark text-white py-4 mt-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-lg-4 mb-4 mb-lg-0">
                     <h5><i class="fas fa-map-marker-alt me-2"></i>تماس با ما</h5>
-                    <p>اصفهان، خیابان دانشگاه، کوچه هنرستان</p>
-                    <p><i class="fas fa-phone me-2"></i>تلفن: ۰۳۱-۳۳۵۸۲۱۵۰</p>
+                    <div class="mb-3">
+                        <i class="fas fa-building me-2"></i>
+                        <span>اصفهان، خیابان دانشگاه، کوچه هنرستان، پلاک ۱۲۳</span>
+                    </div>
+                    <div class="mb-3">
+                        <i class="fas fa-phone me-2"></i>
+                        <span>تلفن: ۰۳۱-۱۲۳۴۵۶۷۸</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-envelope me-2"></i>
+                        <span>info@daneshmand-school.ir</span>
+                    </div>
+                    
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
-                <div class="col-md-4">
+                
+                <div class="col-lg-4 mb-4 mb-lg-0">
                     <h5><i class="fas fa-clock me-2"></i>ساعات کاری</h5>
-                    <p>شنبه تا چهارشنبه: ۸ صبح تا ۴ بعدازظهر</p>
-                    <p>پنجشنبه: ۸ صبح تا ۱۲ ظهر</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="far fa-clock me-2"></i>
+                            <span>شنبه تا چهارشنبه: ۷:۳۰ صبح تا ۴:۳۰ بعدازظهر</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="far fa-clock me-2"></i>
+                            <span>پنجشنبه: ۷:۳۰ صبح تا ۱۲ ظهر</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-info-circle me-2"></i>
+                            <span>جمعه‌ها و تعطیلات رسمی هنرستان تعطیل است</span>
+                        </li>
+                    </ul>
+                    
+                    <h5 class="mt-4"><i class="fas fa-exclamation-circle me-2"></i>اطلاعیه‌ها</h5>
+                    <div class="alert alert-warning p-2 mb-0 mt-2">
+                        <i class="fas fa-bell me-2"></i>
+                        <small>مهلت ثبت‌نام تا پایان خرداد ماه تمدید شد</small>
+                    </div>
                 </div>
-                <div class="col-md-4">
+                
+                <div class="col-lg-4">
                     <h5><i class="fas fa-link me-2"></i>لینک‌های مفید</h5>
                     <ul class="list-unstyled">
-                        <li><a href="roos.html" class="text-white"><i class="fas fa-file-alt me-2"></i>آیین‌نامه ثبت‌نام</a></li>
-                        <li><a href="roos.html" class="text-white"><i class="fas fa-list-check me-2"></i>شرایط پذیرش</a></li>
-                        <li><a href="#" class="text-white"><i class="fas fa-question-circle me-2"></i>سوالات متداول</a></li>
+                        <li><a href="#"><i class="fas fa-file-alt me-2"></i>آیین‌نامه ثبت‌نام و شرایط پذیرش</a></li>
+                        <li><a href="#"><i class="fas fa-list-check me-2"></i>برنامه هفتگی کلاس‌ها</a></li>
+                        <li><a href="#"><i class="fas fa-calendar-alt me-2"></i>تقویم آموزشی سال تحصیلی</a></li>
+                        <li><a href="#"><i class="fas fa-question-circle me-2"></i>سوالات متداول</a></li>
+                        <li><a href="#"><i class="fas fa-newspaper me-2"></i>اخبار و رویدادها</a></li>
+                        <li><a href="#"><i class="fas fa-images me-2"></i>گالری تصاویر هنرستان</a></li>
                     </ul>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p class="text-center mb-0"><i class="far fa-copyright me-2"></i>۱۴۰۲ هنرستان فنی حرفه‌ای دانشمند قلم چی. تمام حقوق محفوظ است.</p>
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p class="mb-0"><i class="far fa-copyright me-2"></i>۱۴۰۲ هنرستان فنی حرفه‌ای دانشمند قلم چی. تمام حقوق محفوظ است.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <img src="assets/images/logo-white.png" alt="لوگو هنرستان" style="height: 40px; filter: brightness(0) invert(1);">
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
@@ -567,9 +1070,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // فیلتر رشته‌ها
+            // تغییر نوار ناوبری هنگام اسکرول
+            const navbar = document.querySelector('.navbar-custom');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // فیلتر رشته‌های پیشرفته
             const filterButtons = document.querySelectorAll('.filter-btn');
             const programCards = document.querySelectorAll('[data-category]');
+            const filterCount = document.getElementById('filter-count');
+            const programContainer = document.querySelector('.program-container');
             
             filterButtons.forEach(button => {
                 button.addEventListener('click', () => {
@@ -579,14 +1094,28 @@
                     button.classList.add('active');
                     
                     const filterValue = button.getAttribute('data-filter');
+                    let visibleCount = 0;
                     
-                    programCards.forEach(card => {
-                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
+                    // انیمیشن محو کردن
+                    programContainer.style.opacity = '0.5';
+                    programContainer.style.transition = 'opacity 0.3s';
+                    
+                    setTimeout(() => {
+                        programCards.forEach(card => {
+                            if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                                card.style.display = 'block';
+                                visibleCount++;
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                        
+                        // به‌روزرسانی تعداد نتایج
+                        filterCount.textContent = visibleCount;
+                        
+                        // انیمیشن ظاهر شدن
+                        programContainer.style.opacity = '1';
+                    }, 300);
                 });
             });
             
@@ -600,12 +1129,35 @@
                     
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        targetElement.scrollIntoView({
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
                             behavior: 'smooth'
                         });
                     }
                 });
             });
+            
+            // انیمیشن کارت‌ها هنگام لود صفحه
+            const animateCards = () => {
+                const cards = document.querySelectorAll('.program-card');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            };
+            
+            // تنظیم حالت اولیه برای انیمیشن
+            const programCardsAll = document.querySelectorAll('.program-card');
+            programCardsAll.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease';
+            });
+            
+            // اجرای انیمیشن پس از لود صفحه
+            window.addEventListener('load', animateCards);
         });
     </script>
 </body>
