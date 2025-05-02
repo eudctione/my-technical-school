@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سیستم جامع رشته‌های تحصیلی هنرستان</title>
+    <style>
+        /* فونت‌های فارسی */
+        @font-face {
+            font-family: 'Vazir';
+            src: url('fonts/Vazir-Regular.woff2') format('woff2'),
+                 url('fonts/Vazir-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'Vazir';
+            src: url('fonts/Vazir-Bold.woff2') format('woff2'),
+                 url('fonts/Vazir-Bold.woff') format('woff');
+            font-weight: bold;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'IranSans';
+            src: url('fonts/IRANSansWeb.woff2') format('woff2'),
+                 url('fonts/IRANSansWeb.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazir', 'IranSans', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #4b6cb7;
+            --secondary-color: #182848;
+            --accent-color: #3a86ff;
+            --light-bg: #f8f9fa;
+            --dark-text: #2d3748;
+            --light-text: #f8f9fa;
+            --success-color: #38a169;
+            --warning-color: #dd6b20;
+            --danger-color: #e53e3e;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--dark-text);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: var(--light-text);
+            padding: 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .logo {
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo span {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px;
+            background-color: var(--light-bg);
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .select-wrapper {
+            position: relative;
+        }
+        
+        .select-wrapper::after {
+            content: "▼";
+            font-size: 12px;
+            color: var(--dark-text);
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        
+        select {
+            width: 100%;
+            padding: 10px 15px 10px 35px;
+            border: 1px solid #cbd5e0;
+            border-radius: var(--border-radius);
+            background-color: white;
+            appearance: none;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.2);
+        }
+        
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 10px 25px;
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        .btn-outline {
+            background: white;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(75, 108, 183, 0.1);
+        }
+        
+        .table-container {
+            padding: 20px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        th {
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            padding: 15px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        tr:nth-child(even) {
+            background-color: var(--light-bg);
+        }
+        
+        tr:hover {
+            background-color: #e9f0ff;
+        }
+        
+        .rank {
+            font-weight: 700;
+            color: var(--secondary-color);
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            line-height: 25px;
+            text-align: center;
+            background-color: rgba(75, 108, 183, 0.1);
+            border-radius: 50%;
+        }
+        
+        .rank-1 {
+            background-color: rgba(255, 215, 0, 0.2);
+            color: #daa520;
+        }
+        
+        .rank-2 {
+            background-color: rgba(192, 192, 192, 0.2);
+            color: #a0a0a0;
+        }
+        
+        .rank-3 {
+            background-color: rgba(205, 127, 50, 0.2);
+            color: #cd7f32;
+        }
+        
+        .code {
+            font-family: monospace;
+            background-color: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #2d3748;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .badge-technical {
+            background-color: rgba(56, 161, 105, 0.1);
+            color: var(--success-color);
+        }
+        
+        .badge-professional {
+            background-color: rgba(221, 107, 32, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .badge-art {
+            background-color: rgba(147, 51, 234, 0.1);
+            color: #9333ea;
+        }
+        
+        .badge-knowledge {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+        
+        .footer {
+            background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .social-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* استایل‌های مودال */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 90%;
+            max-width: 700px;
+            position: relative;
+            animation: modalopen 0.4s;
+        }
+        
+        @keyframes modalopen {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #718096;
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            color: var(--danger-color);
+        }
+        
+        .modal-header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .modal-header h2 {
+            color: var(--primary-color);
+            font-size: 24px;
+        }
+        
+        .modal-body {
+            margin-bottom: 30px;
+        }
+        
+        /* استایل‌های ریسپانسیو */
+        @media (max-width: 768px) {
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 22px;
+            }
+            
+            .logo {
+                position: static;
+                margin: 0 auto 15px;
+                transform: none;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .btn-container {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .btn {
+                flex: 1;
+                justify-content: center;
+            }
+            
+            th, td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+            
+            .footer {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        /* استایل‌های پرینت */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            
+            .container, .container * {
+                visibility: visible;
+            }
+            
+            .container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                max-width: 100%;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .controls, .btn-container, .footer, .logo {
+                display: none;
+            }
+            
+            table {
+                page-break-inside: auto;
+            }
+            
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="content">
+        <div class="header">
+            <div class="logo">
+                <span>آ</span>
+            </div>
+            <h1>سیستم جامع رشته‌های تحصیلی هنرستان</h1>
+            <p>بررسی و انتخاب رشته‌های فنی، حرفه‌ای، کاردانش و هنر</p>
+        </div>
+        
+        <div class="controls">
+            <div class="filter-group">
+                <label for="field-category">رسته تحصیلی</label>
+                <div class="select-wrapper">
+                    <select id="field-category">
+                        <option value="all">همه رسته‌ها</option>
+                        <option value="technical">فنی و مهندسی</option>
+                        <option value="professional">حرفه‌ای</option>
+                        <option value="knowledge">کاردانش</option>
+                        <option value="art">هنر</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <label for="field-subcategory">زیرگروه</label>
+                <div class="select-wrapper">
+                    <select id="field-subcategory">
+                        <option value="all">همه زیرگروه‌ها</option>
+                        <!-- زیرگروه‌ها به صورت داینامیک پر می‌شوند -->
+                    </select>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <label for="field-search">جستجوی رشته</label>
+                <div class="select-wrapper">
+                    <input type="text" id="field-search" placeholder="جستجوی نام رشته یا کد..." style="width: 100%; padding: 10px 15px; border: 1px solid #cbd5e0; border-radius: var(--border-radius); font-size: 14px;">
+                </div>
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn btn-primary" id="btn-download">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                    </svg>
+                    دانلود جدول
+                </button>
+                
+                <button class="btn btn-outline" id="btn-print">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
+                        <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                    </svg>
+                    چاپ
+                </button>
+            </div>
+        </div>
+        
+        <div class="table-container">
+            <table id="fields-table">
+                <thead>
+                    <tr>
+                        <th width="60px">رتبه</th>
+                        <th>نام رشته</th>
+                        <th width="100px">کد رشته</th>
+                        <th>حوزه فعالیت</th>
+                        <th width="120px">رسته</th>
+                        <th width="120px">زیرگروه</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- داده‌ها به صورت داینامیک پر می‌شوند -->
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="footer">
+            <div>تمامی حقوق محفوظ است © ۱۴۰۳ - وزارت آموزش و پرورش</div>
+            <div class="social-icons">
+                <div class="social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#3b5998" viewBox="0 0 16 16">
+                        <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                    </svg>
+                </div>
+                <div class="social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#1DA1F2" viewBox="0 0 16 16">
+                        <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                    </svg>
+                </div>
+                <div class="social-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#E1306C" viewBox="0 0 16 16">
+                        <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- مودال دانلود -->
+    <div id="download-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2>تنظیمات دانلود جدول</h2>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">فرمت خروجی</label>
+                    <div style="display: flex; gap: 10px;">
+                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                            <input type="radio" name="format" value="pdf" checked> PDF
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                            <input type="radio" name="format" value="excel"> Excel
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                            <input type="radio" name="format" value="image"> تصویر
+                        </label>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">گزینه‌های محتوا</label>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                            <input type="checkbox" name="options" value="header" checked> عنوان و لوگو
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                            <input type="checkbox" name="options" value="footer" checked> پاورقی
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                            <input type="checkbox" name="options" value="filters" checked> فیلترهای اعمال شده
+                        </label>
+                    </div>
+                </div>
+                
+                <div>
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600;">رزولوشن تصویر (DPI)</label>
+                    <input type="range" id="dpi-slider" min="72" max="300" value="150" style="width: 100%;">
+                    <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                        <span>72 (پایین)</span>
+                        <span id="dpi-value">150</span>
+                        <span>300 (بالا)</span>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <button class="btn btn-primary" id="confirm-download" style="padding: 12px 30px; font-size: 16px;">
+                    تایید و دانلود
+                </button>
+            </div>
+        </div>
+    </div>
+
+     <script>
+        // داده‌های رشته‌های تحصیلی با کدهای جدید
+        const fieldsData = [
+            // فنی و مهندسی - الکترونیک و برق
+            { id: 1, name: "الکترونیک", code: "101", category: "technical", subcategory: "الکترونیک و برق", description: "شامل مدارهای الکترونیکی، تجهیزات الکترونیکی و سیستم‌های دیجیتال", rank: 1 },
+            { id: 2, name: "برق صنعتی", code: "102", category: "technical", subcategory: "الکترونیک و برق", description: "شامل نصب و راه‌اندازی تجهیزات برق صنعتی", rank: 2 },
+            { id: 3, name: "شبکه‌های برق", code: "103", category: "technical", subcategory: "الکترونیک و برق", description: "شامل طراحی و نگهداری شبکه‌های برق", rank: 3 },
+            { id: 4, name: "مخابرات", code: "104", category: "technical", subcategory: "الکترونیک و برق", description: "شامل نصب و راه‌اندازی سیستم‌های مخابراتی", rank: 4 },
+            { id: 5, name: "الکتروتکنیک ", code: "105", category: "technical", subcategory: "الکترونیک و برق", description: "شامل طراحی، نصب و تعمیر سیستم‌های الکتریکی و الکترونیکی", rank: 5 },
+            // فنی و مهندسی - مکانیک
+            { id: 5, name: "مکانیک", code: "201", category: "technical", subcategory: "مکانیک", description: "شامل ماشین‌آلات، موتورها و سیستم‌های مکانیکی", rank: 5 },
+            { id: 6, name: "تعمیرات خودرو", code: "202", category: "technical", subcategory: "مکانیک", description: "شامل تعمیر و نگهداری خودروها و سیستم‌های مکانیکی و الکتریکی", rank: 6 },
+            { id: 7, name: "تأسیسات مکانیکی", code: "203", category: "technical", subcategory: "مکانیک", description: "شامل نصب و راه‌اندازی سیستم‌های حرارتی، سرمایشی و تهویه مطبوع", rank: 7 },
+            { id: 8, name: "جوشکاری", code: "204", category: "technical", subcategory: "مکانیک", description: "شامل جوشکاری و ساخت قطعات فلزی", rank: 8 },
+            
+            // فنی و مهندسی - کامپیوتر
+            { id: 9, name: "کامپیوتر (نرم‌افزار)", code: "301", category: "technical", subcategory: "کامپیوتر", description: "شامل برنامه‌نویسی، شبکه‌های کامپیوتری و طراحی وب", rank: 9 },
+            { id: 10, name: "کامپیوتر (سخت‌افزار)", code: "302", category: "technical", subcategory: "کامپیوتر", description: "شامل نصب و راه‌اندازی قطعات کامپیوتری و شبکه‌سازی", rank: 10 },
+            { id: 11, name: "شبکه‌های کامپیوتری", code: "303", category: "technical", subcategory: "کامپیوتر", description: "شامل طراحی و نگهداری شبکه‌های کامپیوتری", rank: 11 },
+            
+            // حرفه‌ای - خدمات
+            { id: 12, name: "حسابداری", code: "401", category: "professional", subcategory: "خدمات", description: "شامل مباحث حسابداری، امور مالی و مدیریت مالی", rank: 12 },
+            { id: 13, name: "گرافیک", code: "402", category: "professional", subcategory: "خدمات", description: "شامل طراحی گرافیکی، عکاسی و چاپ دیجیتال", rank: 13 },
+            { id: 14, name: "خیاطی و مد", code: "403", category: "professional", subcategory: "خدمات", description: "شامل طراحی و دوخت لباس، مدیریت خط تولید پوشاک", rank: 14 },
+            { id: 15, name: "آرایش و زیبایی", code: "404", category: "professional", subcategory: "خدمات", description: "شامل آرایش، مراقبت از مو و پوست", rank: 15 },
+            
+            // حرفه‌ای - صنایع
+            { id: 16, name: "نجاری", code: "501", category: "professional", subcategory: "صنایع", description: "شامل ساخت و نصب مبلمان و تجهیزات چوبی", rank: 16 },
+            { id: 17, name: "فلزکاری", code: "502", category: "professional", subcategory: "صنایع", description: "شامل کار با فلزات، جوشکاری و ساخت قطعات فلزی", rank: 17 },
+            { id: 18, name: "لوله‌کشی", code: "503", category: "professional", subcategory: "صنایع", description: "شامل نصب و تعمیر سیستم‌های لوله‌کشی آب و گاز", rank: 18 },
+            { id: 19, name: "نقشه‌کشی معماری", code: "504", category: "professional", subcategory: "صنایع", description: "شامل طراحی نقشه‌های معماری و ساختمانی", rank: 19 },
+            
+            // حرفه‌ای - غذایی و بهداشتی
+            { id: 20, name: "صنایع غذایی", code: "601", category: "professional", subcategory: "غذایی و بهداشتی", description: "شامل آشپزی، تولید مواد غذایی و مدیریت کیفیت مواد غذایی", rank: 20 },
+            { id: 21, name: "خدمات بهداشتی و درمانی", code: "602", category: "professional", subcategory: "غذایی و بهداشتی", description: "شامل مراقبت‌های بهداشتی، پرستاری و امور درمانی", rank: 21 },
+            
+            // کاردانش - صنایع دستی
+            { id: 22, name: "سفالگری", code: "701", category: "knowledge", subcategory: "صنایع دستی", description: "شامل ساخت و طراحی سفال‌های دستی", rank: 22 },
+            { id: 23, name: "قالی‌بافی", code: "702", category: "knowledge", subcategory: "صنایع دستی", description: "شامل بافندگی و طراحی قالی‌های دستی", rank: 23 },
+            { id: 24, name: "مجسمه‌سازی", code: "703", category: "knowledge", subcategory: "صنایع دستی", description: "شامل ساخت و طراحی مجسمه‌های دستی", rank: 24 },
+            
+            // کاردانش - کشاورزی
+            { id: 25, name: "باغبانی", code: "801", category: "knowledge", subcategory: "کشاورزی", description: "شامل کاشت و داشت انواع گیاهان و میوه‌ها", rank: 25 },
+            { id: 26, name: "دامپروری", code: "802", category: "knowledge", subcategory: "کشاورزی", description: "شامل پرورش و نگهداری دام‌ها و طیور", rank: 26 },
+            
+            // هنر - هنرهای تجسمی
+            { id: 27, name: "نقاشی", code: "901", category: "art", subcategory: "هنرهای تجسمی", description: "شامل طراحی و نقاشی با استفاده از روش‌های مختلف", rank: 27 },
+            { id: 28, name: "مجسمه‌سازی", code: "902", category: "art", subcategory: "هنرهای تجسمی", description: "شامل ساخت مجسمه‌های دستی و صنعتی", rank: 28 },
+            { id: 29, name: "طراحی داخلی", code: "903", category: "art", subcategory: "هنرهای تجسمی", description: "شامل طراحی فضاهای داخلی ساختمان‌ها", rank: 29 },
+            
+            // هنر - هنرهای نمایشی
+            { id: 30, name: "تئاتر", code: "904", category: "art", subcategory: "هنرهای نمایشی", description: "شامل بازیگری، کارگردانی و نویسندگی تئاتر", rank: 30 },
+            { id: 31, name: "سینما", code: "905", category: "art", subcategory: "هنرهای نمایشی", description: "شامل فیلمسازی، کارگردانی و تدوین", rank: 31 },
+            { id: 32, name: "رقص", code: "906", category: "art", subcategory: "هنرهای نمایشی", description: "شامل آموزش و اجرای سبک‌های مختلف رقص", rank: 32 },
+            
+            // هنر - موسیقی
+            { id: 33, name: "موسیقی", code: "907", category: "art", subcategory: "موسیقی", description: "شامل آموزش ساز، خوانندگی و تئوری موسیقی", rank: 33 },
+            { id: 34, name: "نوازندگی", code: "908", category: "art", subcategory: "موسیقی", description: "شامل آموزش نوازندگی سازهای مختلف (مثل گیتار، پیانو، ویولن و ...)", rank: 34 },
+            { id: 35, name: "آهنگسازی", code: "909", category: "art", subcategory: "موسیقی", description: "شامل آموزش آهنگسازی و تنظیم موسیقی", rank: 35 },
+            
+            // هنر - هنرهای دستی
+            { id: 36, name: "سفالگری", code: "910", category: "art", subcategory: "هنرهای دستی", description: "شامل ساخت و طراحی سفال‌های هنری", rank: 36 },
+            { id: 37, name: "قالی‌بافی", code: "911", category: "art", subcategory: "هنرهای دستی", description: "شامل بافندگی و طراحی قالی‌های دستی", rank: 37 },
+            { id: 38, name: "کار با چرم", code: "912", category: "art", subcategory: "هنرهای دستی", description: "شامل ساخت و طراحی محصولات چرمی", rank: 38 }
+        ];
+
+
+        // دسته‌بندی‌ها و زیرگروه‌های جدید
+        const categories = {
+            technical: "فنی و مهندسی",
+            professional: "حرفه‌ای",
+            knowledge: "کاردانش",
+            art: "هنر"
+        };
+
+        const subcategories = {
+            technical: ["الکترونیک و برق", "مکانیک", "کامپیوتر"],
+            professional: ["خدمات", "صنایع", "غذایی و بهداشتی"],
+            knowledge: ["صنایع دستی", "کشاورزی"],
+            art: ["هنرهای تجسمی", "هنرهای نمایشی", "موسیقی", "هنرهای دستی"]
+        };
+
+
+        // تابع برای پر کردن جدول
+        function populateTable(data) {
+            const tableBody = document.querySelector("#fields-table tbody");
+            tableBody.innerHTML = "";
+            
+            data.forEach(field => {
+                const row = document.createElement("tr");
+                
+                // تعیین کلاس رتبه
+                let rankClass = "rank";
+                if (field.rank === 1) rankClass += " rank-1";
+                else if (field.rank === 2) rankClass += " rank-2";
+                else if (field.rank === 3) rankClass += " rank-3";
+                
+                // تعیین بج برای رسته
+                let badgeClass = "badge";
+                if (field.category === "technical") badgeClass += " badge-technical";
+                else if (field.category === "professional") badgeClass += " badge-professional";
+                else if (field.category === "art") badgeClass += " badge-art";
+                else if (field.category === "knowledge") badgeClass += " badge-knowledge";
+                
+                row.innerHTML = `
+                    <td><span class="${rankClass}">${field.rank}</span></td>
+                    <td>${field.name}</td>
+                    <td><span class="code">${field.code}</span></td>
+                    <td>${field.description}</td>
+                    <td><span class="${badgeClass}">${categories[field.category]}</span></td>
+                    <td>${field.subcategory}</td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+        }
+
+        // تابع برای پر کردن زیرگروه‌ها بر اساس رسته انتخاب شده
+        function populateSubcategories(category) {
+            const subcategorySelect = document.getElementById("field-subcategory");
+            subcategorySelect.innerHTML = "<option value='all'>همه زیرگروه‌ها</option>";
+            
+            if (category && category !== "all") {
+                subcategories[category].forEach(sub => {
+                    const option = document.createElement("option");
+                    option.value = sub;
+                    option.textContent = sub;
+                    subcategorySelect.appendChild(option);
+                });
+            }
+        }
+
+        // تابع فیلتر کردن داده‌ها
+        function filterData() {
+            const category = document.getElementById("field-category").value;
+            const subcategory = document.getElementById("field-subcategory").value;
+            const searchTerm = document.getElementById("field-search").value.toLowerCase();
+            
+            let filteredData = fieldsData;
+            
+            // فیلتر بر اساس رسته
+            if (category !== "all") {
+                filteredData = filteredData.filter(field => field.category === category);
+            }
+            
+            // فیلتر بر اساس زیرگروه
+            if (subcategory !== "all") {
+                filteredData = filteredData.filter(field => field.subcategory === subcategory);
+            }
+            
+            // فیلتر بر اساس جستجو
+            if (searchTerm) {
+                filteredData = filteredData.filter(field => 
+                    field.name.toLowerCase().includes(searchTerm) || 
+                    field.code.includes(searchTerm) ||
+                    field.description.toLowerCase().includes(searchTerm) ||
+                    field.subcategory.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            // مرتب‌سازی بر اساس رتبه
+            filteredData.sort((a, b) => a.rank - b.rank);
+            
+            populateTable(filteredData);
+        }
+
+        // تابع برای تولید PDF با html2pdf.js
+        function generatePDF(options = {}) {
+            const element = document.getElementById("content");
+            const opt = {
+                margin: options.margin || 10,
+                filename: options.filename || "رشته_های_تحصیلی.pdf",
+                image: { type: "jpeg", quality: options.quality || 0.98 },
+                html2canvas: { 
+                    scale: options.scale || 2,
+                    dpi: options.dpi || 192,
+                    letterRendering: true,
+                    useCORS: true
+                },
+                jsPDF: { 
+                    unit: "mm", 
+                    format: "a4", 
+                    orientation: "portrait",
+                    hotfixes: ["px_scaling"]
+                }
+            };
+            
+            // نمایش وضعیت دانلود
+            const btn = document.getElementById("btn-download");
+            btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg> در حال آماده‌سازی...';
+            btn.disabled = true;
+            
+            // کپی از محتوا برای PDF
+            const contentClone = element.cloneNode(true);
+            
+            // حذف دکمه‌ها و کنترل‌ها برای PDF
+            if (!options.includeControls) {
+                const controls = contentClone.querySelector(".controls");
+                if (controls) controls.remove();
+                
+                const btnContainer = contentClone.querySelector(".btn-container");
+                if (btnContainer) btnContainer.remove();
+            }
+            
+            // حذف هدر برای PDF
+            if (!options.includeHeader) {
+                const header = contentClone.querySelector(".header");
+                if (header) header.remove();
+            }
+            
+            // حذف فوتر برای PDF
+            if (!options.includeFooter) {
+                const footer = contentClone.querySelector(".footer");
+                if (footer) footer.remove();
+            }
+            
+            // اضافه کردن تاریخ به PDF
+            if (options.includeDate) {
+                const dateElement = document.createElement("div");
+                dateElement.style.textAlign = "center";
+                dateElement.style.margin = "10px 0";
+                dateElement.style.fontSize = "12px";
+                dateElement.style.color = "#666";
+                
+                const now = new Date();
+                const persianDate = new Intl.DateTimeFormat("fa-IR", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric"
+                }).format(now);
+                
+                dateElement.textContent = `تاریخ استخراج: ${persianDate}`;
+                contentClone.insertBefore(dateElement, contentClone.firstChild);
+            }
+            
+            // ایجاد یک عنصر موقت برای PDF
+            const tempDiv = document.createElement("div");
+            tempDiv.appendChild(contentClone);
+            tempDiv.style.position = "absolute";
+            tempDiv.style.left = "-9999px";
+            document.body.appendChild(tempDiv);
+            
+            // تولید PDF
+            html2pdf()
+                .set(opt)
+                .from(tempDiv)
+                .save()
+                .then(() => {
+                    btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg> دانلود جدول';
+                    btn.disabled = false;
+                    document.body.removeChild(tempDiv);
+                });
+        }
+
+        // تابع برای دانلود به صورت Excel
+        function downloadExcel() {
+            const table = document.getElementById("fields-table");
+            const rows = table.querySelectorAll("tr");
+            let csv = [];
+            
+            for (let i = 0; i < rows.length; i++) {
+                const row = [], cols = rows[i].querySelectorAll("td, th");
+                
+                for (let j = 0; j < cols.length; j++) {
+                    // حذف تگ‌های HTML از محتوا
+                    let content = cols[j].textContent.trim();
+                    content = content.replace(/(\r\n|\n|\r)/gm, "");
+                    row.push(content);
+                }
+                
+                csv.push(row.join(","));
+            }
+            
+            const csvContent = csv.join("\n");
+            const blob = new Blob(["\uFEFF" + csvContent], { type: "text/csv;charset=utf-8;" });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", "رشته_های_تحصیلی.csv");
+            link.style.visibility = "hidden";
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // تابع برای دانلود به صورت تصویر
+        function downloadImage(dpi = 150) {
+            const element = document.getElementById("content");
+            const btn = document.getElementById("btn-download");
+            
+            btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg> در حال ذخیره تصویر...';
+            btn.disabled = true;
+            
+            html2canvas(element, {
+                scale: dpi / 96, // تبدیل DPI به مقیاس
+                logging: false,
+                useCORS: true,
+                allowTaint: true,
+                letterRendering: true
+            }).then(canvas => {
+                const link = document.createElement("a");
+                link.download = "رشته_های_تحصیلی.png";
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+                
+                btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg> دانلود جدول';
+                btn.disabled = false;
+            });
+        }
+
+        // مدیریت مودال دانلود
+        const modal = document.getElementById("download-modal");
+        const btnDownload = document.getElementById("btn-download");
+        const btnPrint = document.getElementById("btn-print");
+        const closeModal = document.querySelector(".close-modal");
+        const confirmDownload = document.getElementById("confirm-download");
+        const dpiSlider = document.getElementById("dpi-slider");
+        const dpiValue = document.getElementById("dpi-value");
+        
+        // نمایش مودال هنگام کلیک روی دکمه دانلود
+        btnDownload.addEventListener("click", () => {
+            modal.style.display = "block";
+        });
+        
+        // بستن مودال
+        closeModal.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+        
+        // بستن مودال هنگام کلیک خارج از آن
+        window.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+        
+        // نمایش مقدار DPI
+        dpiSlider.addEventListener("input", () => {
+            dpiValue.textContent = dpiSlider.value;
+        });
+        
+        // تایید دانلود
+        confirmDownload.addEventListener("click", () => {
+            const format = document.querySelector("input[name='format']:checked").value;
+            const includeHeader = document.querySelector("input[name='options'][value='header']").checked;
+            const includeFooter = document.querySelector("input[name='options'][value='footer']").checked;
+            const includeControls = document.querySelector("input[name='options'][value='filters']").checked;
+            const dpi = parseInt(dpiSlider.value);
+            
+            modal.style.display = "none";
+            
+            if (format === "pdf") {
+                generatePDF({
+                    includeHeader,
+                    includeFooter,
+                    includeControls,
+                    dpi,
+                    scale: dpi / 96
+                });
+            } else if (format === "excel") {
+                downloadExcel();
+            } else if (format === "image") {
+                downloadImage(dpi);
+            }
+        });
+        
+        // چاپ جدول
+        btnPrint.addEventListener("click", () => {
+            window.print();
+        });
+        
+        // رویدادهای فیلتر
+        document.getElementById("field-category").addEventListener("change", function() {
+            populateSubcategories(this.value);
+            filterData();
+        });
+        
+        document.getElementById("field-subcategory").addEventListener("change", filterData);
+        document.getElementById("field-search").addEventListener("input", filterData);
+        
+        // مقداردهی اولیه
+        populateTable(fieldsData);
+    </script>
+</body>
+</html>
