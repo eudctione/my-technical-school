@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سامانه مدیریت آموزشی هوشمند</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #7c3aed;
+            --admin: #dc2626;
+            --student: #2563eb;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --success: #10b981;
+            --error: #ef4444;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .login-container {
+            display: flex;
+            width: 950px;
+            height: 600px;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .graphic-side {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .graphic-side::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .graphic-side::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -30px;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .logo i {
+            margin-left: 10px;
+            font-size: 28px;
+        }
+
+        .graphic-content {
+            z-index: 2;
+            margin-top: -40px;
+        }
+
+        .graphic-content h1 {
+            font-size: 2.3rem;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .graphic-content p {
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .features {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .features li {
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        .features i {
+            margin-left: 10px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-side {
+            flex: 1;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .form-header h2 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            color: #6b7280;
+        }
+
+        .user-type-selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        .user-type-btn {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .user-type-btn i {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .user-type-btn.active {
+            border-color: var(--primary);
+            background: rgba(79, 70, 229, 0.05);
+            color: var(--primary);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.1);
+        }
+
+        .user-type-btn.admin.active {
+            border-color: var(--admin);
+            background: rgba(220, 38, 38, 0.05);
+            color: var(--admin);
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.1);
+        }
+
+        .user-type-btn.student.active {
+            border-color: var(--student);
+            background: rgba(37, 99, 235, 0.05);
+            color: var(--student);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 45px 15px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+            outline: none;
+        }
+
+        .form-control::placeholder {
+            color: #9ca3af;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input {
+            margin-left: 8px;
+        }
+
+        .forgot-password {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .forgot-password:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .divider::before {
+            margin-left: 15px;
+        }
+
+        .divider::after {
+            margin-right: 15px;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 1px solid #e5e7eb;
+            color: var(--dark);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .social-btn:hover {
+            background: #f3f4f6;
+            transform: translateY(-2px);
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+
+        .signup-link a {
+            color: var(--primary);
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+                width: 95%;
+                height: auto;
+                margin: 20px 0;
+            }
+            
+            .graphic-side {
+                padding: 30px;
+            }
+            
+            .form-side {
+                padding: 40px 30px;
+            }
+
+            .user-type-selector {
+                flex-direction: column;
+            }
+        }
+
+        /* Micro-interactions */
+        .form-control:focus + .input-wrapper i {
+            color: var(--primary);
+        }
+
+        .checkbox:checked {
+            accent-color: var(--primary);
+        }
+
+        /* Persian specific styles */
+        .rtl-direction {
+            direction: rtl;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="graphic-side">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>سامانه هوشمند آموزشی</span>
+            </div>
+            <div class="graphic-content">
+                <h1>به سامانه مدیریت آموزشی خوش آمدید!</h1>
+                <p>با ورود به سیستم می‌توانید به تمامی امکانات سامانه دسترسی داشته باشید</p>
+                <ul class="features">
+                    <li><i class="fas fa-check-circle"></i> مدیریت پیشرفته کلاس‌های درس</li>
+                    <li><i class="fas fa-check-circle"></i> ارتباط مستقیم با دانش‌آموزان</li>
+                    <li><i class="fas fa-check-circle"></i> گزارش‌گیری دقیق و آنی</li>
+                    <li><i class="fas fa-check-circle"></i> محیطی امن و محافظت شده</li>
+                </ul>
+            </div>
+            <div class="floating" style="position: absolute; bottom: 20px; left: 20px; opacity: 0.7;">
+                <svg width="120" height="120" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="rgba(255,255,255,0.2)" d="M45.5,-45.2C58.8,-32,69.4,-16,70.2,1.1C71,18.2,62,36.4,48.7,50.3C35.4,64.2,17.7,73.8,-1.5,75.3C-20.7,76.8,-41.4,70.2,-55.1,56.3C-68.8,42.4,-75.5,21.2,-74.8,0.7C-74.1,-19.8,-66.1,-39.6,-52.4,-52.8C-38.7,-66,-19.4,-72.5,-1.6,-70.9C16.2,-69.3,32.3,-59.6,45.5,-45.2Z" transform="translate(100 100)"/>
+                </svg>
+            </div>
+        </div>
+        <div class="form-side">
+            <div class="form-header">
+                <h2>ورود به سامانه</h2>
+                <p>لطفاً اطلاعات حساب کاربری خود را وارد نمایید</p>
+            </div>
+            
+            <div class="user-type-selector">
+                <button type="button" class="user-type-btn admin" data-type="admin">
+                    <i class="fas fa-user-shield"></i>
+                    <span>ورود مدیران</span>
+                </button>
+                <button type="button" class="user-type-btn student active" data-type="student">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>ورود دانش‌آموزان</span>
+                </button>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">نام کاربری</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="username" class="form-control" placeholder="نام کاربری خود را وارد کنید" required>
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">رمز عبور</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" class="form-control" placeholder="رمز عبور خود را وارد کنید" required>
+                        <i class="fas fa-lock"></i>
+                    </div>
+                </div>
+                <div class="options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember" class="checkbox">
+                        <label for="remember">مرا به خاطر بسپار</label>
+                    </div>
+                    <a href="#" class="forgot-password">رمز عبور را فراموش کرده‌ام</a>
+                </div>
+                <button type="submit" class="btn btn-primary">ورود به سیستم</button>
+                <div class="divider">یا ورود با</div>
+                <div class="social-login">
+                    <button type="button" class="social-btn">
+                        <i class="fab fa-google"></i>
+                    </button>
+                    <button type="button" class="social-btn">
+                        <i class="fab fa-microsoft"></i>
+                    </button>
+                    <button type="button" class="social-btn">
+                        <i class="fas fa-envelope"></i>
+                    </button>
+                </div>
+                <div class="signup-link">
+                    حساب کاربری ندارید؟ <a href="#">ثبت نام کنید</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // انتخاب نوع کاربر
+        const userTypeButtons = document.querySelectorAll('.user-type-btn');
+        userTypeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                userTypeButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // تغییر رنگ دکمه ورود بر اساس نوع کاربر
+                const loginBtn = document.querySelector('.btn-primary');
+                if(this.dataset.type === 'admin') {
+                    loginBtn.style.background = 'var(--admin)';
+                    loginBtn.style.boxShadow = '0 5px 15px rgba(220, 38, 38, 0.3)';
+                } else {
+                    loginBtn.style.background = 'var(--student)';
+                    loginBtn.style.boxShadow = '0 5px 15px rgba(37, 99, 235, 0.3)';
+                }
+            });
+        });
+
+        // مدیریت فرم ورود
+
+       // مدیریت فرم ورود
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const btn = this.querySelector('button[type="submit"]');
+    const originalText = btn.textContent;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ورود...';
+    btn.disabled = true;
+    
+    // شبیه‌سازی فرآیند ورود
+    setTimeout(() => {
+        const activeType = document.querySelector('.user-type-btn.active').dataset.type;
+        let successMessage = '';
+        
+        if(activeType === 'admin') {
+            successMessage = 'ورود به پنل مدیریت با موفقیت انجام شد!';
+            // تغییر این بخش برای انتقال به داشبورد مدیر
+            window.location.href = 'admin/dashboard.html';
+            return; // از ادامه اجرای کد جلوگیری می‌کند
+        } else {
+            successMessage = 'ورود به پنل دانش‌آموزی با موفقیت انجام شد!';
+            // در اینجا می‌توانید آدرس پنل دانش‌آموز را اضافه کنید
+            // window.location.href = 'student/dashboard.html';
+        }
+        
+        btn.innerHTML = '<i class="fas fa-check"></i> ' + successMessage;
+        
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.disabled = false;
+            
+            // نمایش پیام موفقیت (این بخش فقط برای دمو است و در حالت عادی اجرا نمی‌شود)
+            if(activeType !== 'admin') {
+                alert(successMessage + '\n\nاین یک نمونه نمایشی است.');
+            }
+        }, 1500);
+    }, 2000);
+});
+
+        // افکت‌های فوکوس روی فیلدها
+        const inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.querySelector('i').style.color = '#4f46e5';
+            });
+            input.addEventListener('blur', function() {
+                this.parentElement.querySelector('i').style.color = '#9ca3af';
+            });
+        });
+    </script>
+</body>
+</html>
