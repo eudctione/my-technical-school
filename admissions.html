@@ -865,24 +865,63 @@
     <div style="text-align:center;margin-bottom:20px;">
       <span style="font-size:2rem;">🎯</span>
       <h3>ثبت نام آزمون ورودی</h3>
-    </div>
-    
-    <div style="background-color:#f8f9fa; padding:15px; border-radius:8px; margin-bottom:20px;">
-      <p style="text-align:center; font-weight:bold; color:#e74c3c;">
-        متقاضیان محترم می‌توانند از اول خرداد ماه ۱۴۰۴<br>
-        از طریق این دکمه نسبت به پر کردن فرم درخواست<br>
-        شرکت در آزمون ورودی اقدام نمایند
-      </p>
-    </div>
-    
-    <div style="text-align:center; margin-top:20px;">
-      <button 
-        onclick="document.getElementById('registrationInfoDialog').close()" 
-        class="qnt-btn qnt-btn-accent"
-        style="padding:10px 25px;"
-      >
-      تائید
-      </button>
+  <div style="background-color:#f8f9fa; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center;">
+  <p style="font-weight:bold; color:#e74c3c; line-height:1.6;">
+    به اطلاع متقاضیان محترم می‌رساند:<br>
+    <span style="color:#2c3e50;">ثبت‌نام آزمون ورودی از تاریخ <strong>۱ خردادماه ۱۴۰۴</strong> آغاز شده است.</span><br>
+    لطفاً جهت <strong>تکمیل فرم درخواست شرکت در آزمون</strong> و <strong>انتخاب رشته تحصیلی</strong><br>
+    از دکمه زیر (<strong>ثبت‌نام آنلاین</strong>) اقدام نمایید.
+  </p>
+</div>
+</div>
+<div style="text-align:center; margin-top:20px; display: flex; justify-content: center; gap: 15px;">
+  <button 
+    onclick="document.getElementById('registrationInfoDialog').close()" 
+    class="qnt-btn qnt-btn-accent"
+    style="padding:10px 25px;"
+  >
+    تائید
+  </button>
+  
+  <button
+    onclick="window.location.href='code.html'"
+    style="
+      padding: 10px 25px;
+      background: linear-gradient(135deg, #ffd700 0%, #daa520 50%, #ffd700 100%);
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(218, 165, 32, 0.6);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    "
+    onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 20px rgba(218, 165, 32, 0.8)'"
+    onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(218, 165, 32, 0.6)'"
+  >
+    ثبت نام آنلاین
+    <span style="
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(30deg);
+      animation: shine 3s infinite;
+    "></span>
+  </button>
+</div>
+
+<style>
+  @keyframes shine {
+    0% { left: -100%; top: -100%; }
+    20% { left: 100%; top: 100%; }
+    100% { left: 100%; top: 100%; }
+  }
+</style>
     </div>
   </div>
 </dialog>
@@ -914,10 +953,10 @@
   }
 </style>
 
- <h3 class="qnt-card-title">  </h3>
+
 
  
-      </div>
+   
 
 
   </div>
@@ -1153,15 +1192,67 @@
       </p>
     </div>
     
-    <div style="text-align:center; margin-top:20px;">
-      <button 
-        onclick="document.getElementById('examQuestionsDialog').close()" 
-        class="qnt-btn qnt-btn-primary qnt-pulse"
-        style="padding:10px 30px;"
-      >
-        متوجه شدم
-      </button>
-    </div>
+    <div style="text-align:center; margin-top:20px; display:flex; justify-content:center; gap:15px;">
+  <button 
+    onclick="document.getElementById('examQuestionsDialog').close()" 
+    class="qnt-btn qnt-btn-primary qnt-pulse"
+    style="padding:10px 30px;"
+  >
+    متوجه شدم
+  </button>
+  
+  <a href="سوالات-آزمون.pdf" download style="text-decoration:none;">
+    <button class="golden-btn" style="padding:10px 30px;">
+      دریافت سوالات PDF
+      <span class="golden-glow"></span>
+    </button>
+  </a>
+</div>
+
+<style>
+  .golden-btn {
+    position: relative;
+    background: linear-gradient(135deg, #ffd700 0%, #daa520 50%, #ffd700 100%);
+    color: #000;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(218, 165, 32, 0.4);
+    transition: all 0.3s ease;
+  }
+  
+  .golden-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(218, 165, 32, 0.6);
+  }
+  
+  .golden-btn:active {
+    transform: translateY(1px);
+  }
+  
+  .golden-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to bottom right,
+      rgba(255, 255, 255, 0) 45%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0) 55%
+    );
+    transform: rotate(30deg);
+    animation: golden-shine 3s infinite;
+  }
+  
+  @keyframes golden-shine {
+    0% { left: -50%; }
+    100% { left: 150%; }
+  }
+</style>
   </div>
 </dialog>
 

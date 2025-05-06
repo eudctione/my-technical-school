@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت نام آنلاین - هنرستان فنی حرفه‌ای دانشمند قلم چی</title>
+    <style>
+        :root {
+            --primary: #06b6d4;
+            --primary-dark: #0e7490;
+            --accent: #facc15;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --quantum-blue: #00f7ff;
+            --quantum-purple: #b400ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(250, 204, 21, 0.15) 0%, transparent 50%),
+                linear-gradient(to bottom, rgba(11, 15, 25, 0.9), rgba(11, 15, 25, 1));
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* جلوه ذرات کوانتومی */
+        .quantum-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: var(--quantum-blue);
+            box-shadow: 0 0 10px 2px var(--quantum-blue);
+            animation: quantum-float 15s infinite linear;
+            opacity: 0.7;
+        }
+
+        .quantum-particle:nth-child(2n) {
+            background: var(--quantum-purple);
+            box-shadow: 0 0 10px 2px var(--quantum-purple);
+            animation-duration: 20s;
+        }
+
+        .quantum-particle:nth-child(3n) {
+            background: var(--accent);
+            box-shadow: 0 0 10px 2px var(--accent);
+            animation-duration: 25s;
+        }
+
+        @keyframes quantum-float {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translate(100px, 150px) scale(1.5);
+                opacity: 0.3;
+            }
+            100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.7;
+            }
+        }
+
+        /* جلوه نورپردازی پویا */
+        .dynamic-light {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, transparent 70%);
+            filter: blur(60px);
+            animation: light-move 20s infinite alternate ease-in-out;
+            z-index: -1;
+        }
+
+        .dynamic-light:nth-child(2) {
+            background: radial-gradient(circle, rgba(250, 204, 21, 0.2) 0%, transparent 70%);
+            animation-delay: -5s;
+            animation-duration: 25s;
+            right: 10%;
+            top: 60%;
+        }
+
+        @keyframes light-move {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(100px, 100px);
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .registration-card {
+            width: 100%;
+            background: rgba(8, 47, 73, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(6, 182, 212, 0.3),
+                0 0 40px rgba(6, 182, 212, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.5);
+            transition: all 0.4s ease;
+            animation: glow-pulse 4s infinite alternate, quantum-flicker 8s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* جلوه کوانتومی چشمک زن */
+        @keyframes quantum-flicker {
+            0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+                box-shadow: 
+                    0 10px 30px rgba(0, 0, 0, 0.5),
+                    0 0 20px rgba(6, 182, 212, 0.3),
+                    0 0 40px rgba(6, 182, 212, 0.1);
+            }
+            20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+                box-shadow: 
+                    0 10px 30px rgba(0, 0, 0, 0.5),
+                    0 0 30px rgba(6, 182, 212, 0.6),
+                    0 0 60px rgba(6, 182, 212, 0.3);
+            }
+        }
+
+        @keyframes glow-pulse {
+            0% {
+                box-shadow: 
+                    0 10px 30px rgba(0, 0, 0, 0.5),
+                    0 0 20px rgba(6, 182, 212, 0.3),
+                    0 0 40px rgba(6, 182, 212, 0.1);
+                border-color: rgba(6, 182, 212, 0.5);
+            }
+            100% {
+                box-shadow: 
+                    0 10px 40px rgba(0, 0, 0, 0.6),
+                    0 0 30px rgba(6, 182, 212, 0.5),
+                    0 0 60px rgba(6, 182, 212, 0.2);
+                border-color: rgba(6, 182, 212, 0.8);
+            }
+        }
+
+        /* جلوه نور پس زمینه کارت */
+        .card-light {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, transparent 70%);
+            filter: blur(40px);
+            animation: card-light-move 15s infinite alternate ease-in-out;
+            z-index: -1;
+        }
+
+        .card-light:nth-child(2) {
+            background: radial-gradient(circle, rgba(250, 204, 21, 0.3) 0%, transparent 70%);
+            animation-delay: -3s;
+            animation-duration: 12s;
+        }
+
+        @keyframes card-light-move {
+            0% {
+                transform: translate(-50px, -50px);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .title {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+
+        /* جلوه نور زیر عنوان */
+        .title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: right;
+            animation: title-underline 3s infinite alternate;
+        }
+
+        @keyframes title-underline {
+            0% {
+                transform: scaleX(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scaleX(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scaleX(0);
+                opacity: 0;
+            }
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            animation: subtitle-flicker 5s infinite;
+        }
+
+        @keyframes subtitle-flicker {
+            0%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 5px rgba(148, 163, 184, 0.3);
+            }
+            50% {
+                opacity: 0.8;
+                text-shadow: 0 0 10px rgba(148, 163, 184, 0.5);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--light);
+            font-weight: 500;
+            font-size: 1.05rem;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(8, 145, 178, 0.1);
+            border: 1px solid rgba(6, 182, 212, 0.5);
+            border-radius: 10px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.1);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.3), 
+                        0 0 20px rgba(250, 204, 21, 0.2);
+            background: rgba(8, 145, 178, 0.2);
+            animation: input-glow 1.5s infinite alternate;
+        }
+
+        @keyframes input-glow {
+            0% {
+                box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.3), 
+                            0 0 20px rgba(250, 204, 21, 0.2);
+            }
+            100% {
+                box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.5), 
+                            0 0 30px rgba(250, 204, 21, 0.3);
+            }
+        }
+
+        /* جلوه کوانتومی برای دکمه‌ها */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4), 
+                        0 0 10px rgba(6, 182, 212, 0.3);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.6), 
+                        0 0 15px rgba(6, 182, 212, 0.4);
+            animation: btn-pulse 1.5s infinite alternate;
+        }
+
+        .btn-accent {
+            background: linear-gradient(to right, var(--accent), #eab308);
+            color: var(--dark);
+            box-shadow: 0 4px 15px rgba(250, 204, 21, 0.4), 
+                        0 0 10px rgba(250, 204, 21, 0.3);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(250, 204, 21, 0.6), 
+                        0 0 15px rgba(250, 204, 21, 0.4);
+            animation: btn-pulse 1.5s infinite alternate;
+        }
+
+        @keyframes btn-pulse {
+            0% {
+                transform: translateY(-3px) scale(1);
+            }
+            100% {
+                transform: translateY(-3px) scale(1.02);
+            }
+        }
+
+        /* بخش نتایج با جلوه ویژه */
+        .result-section {
+            width: 100%;
+            background: rgba(8, 47, 73, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(250, 204, 21, 0.4),
+                0 0 40px rgba(250, 204, 21, 0.1);
+            border: 1px solid rgba(250, 204, 21, 0.5);
+            display: none;
+            animation: fadeIn 0.5s ease forwards, 
+                       glow-pulse-gold 4s infinite alternate,
+                       quantum-flicker-gold 8s infinite;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes quantum-flicker-gold {
+            0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+                box-shadow: 
+                    0 10px 30px rgba(0, 0, 0, 0.5),
+                    0 0 20px rgba(250, 204, 21, 0.4),
+                    0 0 40px rgba(250, 204, 21, 0.1);
+            }
+            20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+                box-shadow: 
+                    0 10px 30px rgba(0, 0, 0, 0.5),
+                    0 0 30px rgba(250, 204, 21, 0.7),
+                    0 0 60px rgba(250, 204, 21, 0.3);
+            }
+        }
+
+        @keyframes glow-pulse-gold {
+            0% {
+                box-shadow: 
+                    0 10px 30px rgba(0, 0, 0, 0.5),
+                    0 0 20px rgba(250, 204, 21, 0.4),
+                    0 0 40px rgba(250, 204, 21, 0.1);
+                border-color: rgba(250, 204, 21, 0.5);
+            }
+            100% {
+                box-shadow: 
+                    0 10px 40px rgba(0, 0, 0, 0.6),
+                    0 0 30px rgba(250, 204, 21, 0.6),
+                    0 0 60px rgba(250, 204, 21, 0.2);
+                border-color: rgba(250, 204, 21, 0.8);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* جلوه ویژه برای کد رهگیری */
+        .info-title {
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-size: 1.4rem;
+            text-align: center;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(250, 204, 21, 0.3);
+            position: relative;
+        }
+
+        .info-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 3px;
+            animation: title-line-grow 2s infinite;
+        }
+
+        @keyframes title-line-grow {
+            0% {
+                width: 60px;
+                opacity: 0.7;
+            }
+            50% {
+                width: 120px;
+                opacity: 1;
+            }
+            100% {
+                width: 60px;
+                opacity: 0.7;
+            }
+        }
+
+        .tracking-code {
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            letter-spacing: 3px;
+            color: var(--accent);
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            background: rgba(250, 204, 21, 0.1);
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            border: 1px solid rgba(250, 204, 21, 0.5);
+            box-shadow: 0 0 15px rgba(250, 204, 21, 0.2);
+            text-shadow: 0 0 10px rgba(250, 204, 21, 0.3);
+            animation: code-glow 2s infinite alternate;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes code-glow {
+            0% {
+                box-shadow: 0 0 15px rgba(250, 204, 21, 0.2);
+                text-shadow: 0 0 10px rgba(250, 204, 21, 0.3);
+            }
+            100% {
+                box-shadow: 0 0 25px rgba(250, 204, 21, 0.4);
+                text-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
+            }
+        }
+
+        .tracking-code::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                transparent,
+                transparent,
+                transparent,
+                rgba(250, 204, 21, 0.1),
+                transparent,
+                transparent,
+                transparent
+            );
+            transform: rotate(30deg);
+            animation: code-shine 3s infinite;
+        }
+
+        @keyframes code-shine {
+            0% {
+                left: -50%;
+            }
+            100% {
+                left: 150%;
+            }
+        }
+
+        .payment-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(6, 182, 212, 0.5);
+            position: relative;
+        }
+
+        .payment-item:last-child {
+            border-bottom: none;
+        }
+
+        .payment-item::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .payment-item:hover::after {
+            width: 100%;
+        }
+
+        .payment-label {
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .payment-item:hover .payment-label {
+            color: var(--primary);
+            text-shadow: 0 0 5px rgba(6, 182, 212, 0.3);
+        }
+
+        .payment-value {
+            color: var(--light);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .payment-item:hover .payment-value {
+            color: var(--accent);
+            text-shadow: 0 0 5px rgba(250, 204, 21, 0.3);
+        }
+
+        .payment-card {
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            color: var(--accent);
+            direction: ltr;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(250, 204, 21, 0.3);
+            position: relative;
+        }
+
+        .payment-card::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .payment-card:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .note {
+            margin-top: 24px;
+            padding: 16px;
+            background: rgba(250, 204, 21, 0.1);
+            border-right: 4px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            box-shadow: 0 0 10px rgba(250, 204, 21, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .note::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+            opacity: 0.3;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(6, 182, 212, 0.3);
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+
+        .footer-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+            text-shadow: 0 0 5px rgba(6, 182, 212, 0.3);
+        }
+
+        .footer-link:hover::after {
+            width: 100%;
+        }
+
+        /* جلوه انتقال کوانتومی */
+        .quantum-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, var(--quantum-blue), var(--quantum-purple));
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 0;
+            }
+            
+            .registration-card, .result-section {
+                padding: 30px;
+            }
+            
+            .title {
+                font-size: 1.8rem;
+            }
+            
+            .tracking-code {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .registration-card, .result-section {
+                padding: 20px;
+            }
+            
+            .title {
+                font-size: 1.6rem;
+            }
+            
+            .form-input, .btn {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ذرات کوانتومی -->
+    <div class="quantum-particle" style="top: 20%; left: 15%;"></div>
+    <div class="quantum-particle" style="top: 70%; left: 80%;"></div>
+    <div class="quantum-particle" style="top: 40%; left: 60%;"></div>
+    <div class="quantum-particle" style="top: 80%; left: 30%;"></div>
+    <div class="quantum-particle" style="top: 30%; left: 75%;"></div>
+    <div class="quantum-particle" style="top: 60%; left: 20%;"></div>
+
+    <!-- نورپردازی پویا -->
+    <div class="dynamic-light" style="top: 10%; left: 10%;"></div>
+    <div class="dynamic-light"></div>
+
+    <!-- جلوه انتقال -->
+    <div class="quantum-transition" id="quantumTransition"></div>
+
+    <div class="container">
+        <div class="registration-card" id="registrationCard">
+            <!-- نور پس زمینه کارت -->
+            <div class="card-light" style="top: -50px; right: -50px;"></div>
+            <div class="card-light" style="bottom: -50px; left: -50px;"></div>
+
+            <div class="header">
+                <h1 class="title">ثبت نام آنلاین</h1>
+                <p class="subtitle">هنرستان فنی حرفه‌ای دانشمند قلم چی</p>
+            </div>
+            
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="fullname" class="form-label">نام و نام خانوادگی</label>
+                    <input type="text" id="fullname" class="form-input" placeholder="نام کامل خود را وارد کنید" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="nationalId" class="form-label">کد ملی</label>
+                    <input type="text" id="nationalId" class="form-input" placeholder="کد ملی 10 رقمی" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone" class="form-label">شماره تماس</label>
+                    <input type="tel" id="phone" class="form-input" placeholder="09xxxxxxxxx" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="field" class="form-label">رشته مورد نظر</label>
+                    <select id="field" class="form-input" required>
+                        <option value="" disabled selected>-- انتخاب کنید --</option>
+                        <option value="computer">شبکه و نرم‌افزار رایانه‌ای</option>
+                        <option value="electronics">الکتروتکنیک (برق صنعتی)</option>
+                        <option value="mechanics">مکانیک خودرو</option>
+                        <option value="construction">حسابداری مالی</option>
+                        <option value="computer">گرافیک کامپیوتری</option>
+                        <option value="electronics">معماری ساختمان</option>
+                        <option value="mechanics">دکوراسیون داخلی</option>
+                        <option value="construction">خیاطی و مدلینگ</option>
+                        <option value="construction">تربیت بدنی و مربی</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">تکمیل ثبت نام</button>
+            </form>
+        </div>
+        
+        <div class="result-section" id="resultSection">
+            <!-- نور پس زمینه کارت -->
+            <div class="card-light" style="top: -50px; right: -50px; background: radial-gradient(circle, rgba(250, 204, 21, 0.3) 0%, transparent 70%);"></div>
+            <div class="card-light" style="bottom: -50px; left: -50px; background: radial-gradient(circle, rgba(250, 204, 21, 0.3) 0%, transparent 70%);"></div>
+
+            <div class="header">
+                <h1 class="title">ثبت نام شما تکمیل شد</h1>
+                <p class="subtitle">اطلاعات ثبت نام و پرداخت</p>
+            </div>
+            
+            <div id="trackingSection">
+                <h3 class="info-title">کد رهگیری ثبت نام شما</h3>
+                <div id="trackingCode" class="tracking-code">
+                    <span id="trackingLetters">AB</span>-<span id="trackingNumbers">1234</span>
+                </div>
+                <p style="text-align: center; color: var(--text-muted); margin-top: 15px; animation: text-flicker 3s infinite;">
+                    این کد را یادداشت کنید و در صورت نیاز به پشتیبانی ارائه دهید.
+                </p>
+            </div>
+            
+            <div id="paymentSection">
+                <h3 class="info-title">اطلاعات پرداخت شهریه</h3>
+                
+                <div class="payment-details">
+                    <div class="payment-item">
+                        <span class="payment-label">مبلغ قابل پرداخت:</span>
+                        <span class="payment-value">2,500,000 تومان</span>
+                    </div>
+                    <div class="payment-item">
+                        <span class="payment-label">مهلت پرداخت:</span>
+                        <span class="payment-value">تا 72 ساعت پس از ثبت نام</span>
+                    </div>
+                    <div class="payment-item">
+                        <span class="payment-label">شماره کارت:</span>
+                        <span class="payment-value">
+                            <span class="payment-card">5859 8310 1234 5678</span>
+                        </span>
+                    </div>
+                    <div class="payment-item">
+                        <span class="payment-label">به نام:</span>
+                        <span class="payment-value">موسس آموزشی قلم چی</span>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    لطفاً شماره پیگیری پرداخت و کد رهگیری ثبت نام را در بخش توضیحات پرداخت ذکر کنید.
+                    فیش پرداخت شهریه را نیز در فرم ثبت نام اپلود نمائید.
+                </div>
+            </div>
+            
+            <button id="continueToGoogleForm" class="btn btn-accent">
+                تکمیل فرم ثبت نام در گوگل فرم
+            </button>
+        </div>
+        
+        <div class="footer">
+            <p>قبلاً ثبت‌نام کرده‌اید؟ <a href="index.html" class="footer-link">ورود به حساب کاربری</a></p>
+        </div>
+    </div>
+
+    <script>
+        // ایجاد ذرات کوانتومی پویا
+        function createQuantumParticles() {
+            const particlesCount = 12;
+            const container = document.body;
+            
+            for (let i = 0; i < particlesCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('quantum-particle');
+                
+                // موقعیت تصادفی
+                const top = Math.random() * 100;
+                const left = Math.random() * 100;
+                particle.style.top = `${top}%`;
+                particle.style.left = `${left}%`;
+                
+                // اندازه تصادفی
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // مدت زمان انیمیشن تصادفی
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // تأخیر تصادفی
+                const delay = Math.random() * 10;
+                particle.style.animationDelay = `-${delay}s`;
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // تابع تولید کد رهگیری تصادفی
+        function generateTrackingCode() {
+            const letters = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+            const numbers = '0123456789';
+            
+            let codeLetters = '';
+            for (let i = 0; i < 2; i++) {
+                codeLetters += letters.charAt(Math.floor(Math.random() * letters.length));
+            }
+            
+            let codeNumbers = '';
+            for (let i = 0; i < 4; i++) {
+                codeNumbers += numbers.charAt(Math.floor(Math.random() * numbers.length));
+            }
+            
+            return {
+                letters: codeLetters,
+                numbers: codeNumbers
+            };
+        }
+
+        // مدیریت ارسال فرم
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // افکت انتقال کوانتومی
+            const transition = document.getElementById('quantumTransition');
+            transition.style.opacity = '1';
+            transition.style.pointerEvents = 'auto';
+            
+            setTimeout(() => {
+                // تولید کد رهگیری
+                const trackingCode = generateTrackingCode();
+                document.getElementById('trackingLetters').textContent = trackingCode.letters;
+                document.getElementById('trackingNumbers').textContent = trackingCode.numbers;
+                
+                // مخفی کردن فرم و نمایش نتایج
+                document.getElementById('registrationCard').style.display = 'none';
+                document.getElementById('resultSection').style.display = 'block';
+                
+                // اسکرول به بالای صفحه نتایج
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                
+                // پنهان کردن افکت انتقال
+                setTimeout(() => {
+                    transition.style.opacity = '0';
+                    transition.style.pointerEvents = 'none';
+                }, 500);
+            }, 500);
+        });
+
+        // هدایت به گوگل فرم
+        document.getElementById('continueToGoogleForm').addEventListener('click', function() {
+            // افکت انتقال کوانتومی
+            const transition = document.getElementById('quantumTransition');
+            transition.style.opacity = '1';
+            transition.style.pointerEvents = 'auto';
+            
+            setTimeout(() => {
+                window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSeXp86ZmMjXIm-PLzyKFmASogGh729CWeoX_24y551k2fsbvg/viewform?usp=header';
+            }, 500);
+        });
+
+        // ایجاد ذرات کوانتومی هنگام بارگذاری صفحه
+        window.addEventListener('load', function() {
+            createQuantumParticles();
+            
+            // افکت ورود تدریجی
+            const container = document.querySelector('.container');
+            container.style.opacity = '0';
+            container.style.animation = 'fadeIn 1s ease forwards';
+        });
+    </script>
+</body>
+</html>
