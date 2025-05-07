@@ -565,57 +565,467 @@
     </style>
 </head>
 <body>
+   <!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اساتید | هنرستان فنی حرفه‌ای دانشمند قلم‌چی</title>
+    <!-- Bootstrap 5 RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Vazirmatn Font -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts.css" rel="stylesheet" type="text/css" />
+    <style>
+        :root {
+            --primary-color: #00A19D; /* سبز آینه‌ای */
+            --secondary-color: #007872; /* سبز آینه‌ای تیره */
+            --accent-color: #FFB344; /* رنگ طلایی برای تاکید */
+            --text-color: #1f2937;
+            --light-color: #f9fafb;
+            --dark-color: #111827;
+            --glass-effect: rgba(255, 255, 255, 0.95);
+        }
+        
+        body {
+            font-family: Vazirmatn, sans-serif;
+            padding-top: 75px;
+        }
+        
+        /* نوار ناوبری سفارشی */
+        .navbar-teachers {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            padding: 1rem 0;
+            min-height: 75px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-teachers.scrolled {
+            background: var(--glass-effect) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            padding: 0.7rem 0;
+        }
+        
+        .navbar-teachers .navbar-brand img {
+            height: 50px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-teachers.scrolled .navbar-brand img {
+            height: 45px;
+            filter: none;
+        }
+        
+        /* آیتم‌های منو */
+        .navbar-nav-teachers {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            white-space: nowrap;
+        }
+        
+        .nav-item-teachers {
+            margin: 0 0.3rem;
+        }
+        
+        .nav-link-teachers {
+            color: white;
+            font-weight: 750;
+            font-size: 1rem;
+            padding: 0.6rem 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            border-radius: 6px;
+            transition: all 0.25s ease;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .nav-link-teachers i {
+            margin-left: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .nav-link-teachers:hover {
+            background-color: rgba(255, 255, 255, 0.18);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link-teachers.active {
+            color: var(--accent-color) !important;
+            font-weight: 800;
+            background-color: rgba(255, 179, 68, 0.15);
+        }
+        
+        /* دکمه‌ها */
+        .auth-buttons-teachers {
+            display: flex;
+            margin-right: 1rem;
+        }
+        
+        .btn-teachers {
+            padding: 0.6rem 1.5rem;
+            font-weight: 750;
+            font-size: 0.95rem;
+            border-radius: 50px;
+            transition: all 0.25s ease;
+        }
+        
+        .btn-login-teachers {
+            border: 2px solid white;
+            color: white;
+            margin-left: 0.8rem;
+        }
+        
+        .btn-login-teachers:hover {
+            background-color: white;
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn-register-teachers {
+            background-color: var(--accent-color);
+            color: #2D2727;
+            border: none;
+            box-shadow: 0 4px 12px rgba(255, 179, 68, 0.3);
+        }
+        
+        .btn-register-teachers:hover {
+            background-color: #f0a62b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 179, 68, 0.4);
+        }
+        
+        /* همبرگر منو */
+        .navbar-toggler-teachers {
+            border: none;
+            color: white;
+            font-size: 1.4rem;
+            padding: 0.5rem;
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 992px) {
+            .navbar-teachers {
+                padding: 0.8rem 0;
+            }
+            
+            .navbar-nav-teachers {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                padding: 1rem 0;
+            }
+            
+            .nav-item-teachers {
+                width: 100%;
+                margin: 0.2rem 0;
+            }
+            
+            .nav-link-teachers {
+                width: 100%;
+                padding: 0.8rem 1.5rem !important;
+            }
+            
+            .auth-buttons-teachers {
+                flex-direction: column;
+                width: 100%;
+                margin: 1rem 0 0.5rem;
+            }
+            
+            .btn-teachers {
+                width: 100%;
+                margin: 0.4rem 0 !important;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
     <!-- نوار ناوبری پیشرفته -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+   <!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اساتید | هنرستان فنی حرفه‌ای دانشمند قلم‌چی</title>
+    <!-- Bootstrap 5 RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Vazirmatn Font -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts.css" rel="stylesheet" type="text/css" />
+    <style>
+        :root {
+            --metalic-green: #009688; /* سبز متالیک */
+            --metalic-dark: #00695C; /* سبز متالیک تیره */
+            --metalic-accent: #FFD700; /* طلایی متالیک */
+            --text-on-metal: #FFFFFF; /* سفید خالص */
+            --text-on-glass: #212121; /* مشکی برای حالت شفاف */
+            --glass-effect: rgba(255, 255, 255, 0.92);
+        }
+        
+        body {
+            font-family: Vazirmatn, sans-serif;
+            padding-top: 80px;
+            background-color: #f5f5f5;
+        }
+        
+        /* نوار ناوبری متالیک */
+        .navbar-metalic {
+            background: linear-gradient(145deg, var(--metalic-green), var(--metalic-dark));
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+            padding: 1.2rem 0;
+            min-height: 80px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .navbar-metalic.scrolled {
+            background: var(--glass-effect) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 3px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* متن روی پس‌زمینه متالیک */
+        .navbar-metalic:not(.scrolled) .nav-link-metalic,
+        .navbar-metalic:not(.scrolled) .navbar-brand,
+        .navbar-metalic:not(.scrolled) .btn-metalic {
+            color: var(--text-on-metal);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* متن روی پس‌زمینه شیشه‌ای */
+        .navbar-metalic.scrolled .nav-link-metalic,
+        .navbar-metalic.scrolled .navbar-brand,
+        .navbar-metalic.scrolled .btn-metalic-outline {
+            color: var(--text-on-glass);
+        }
+        
+        /* لوگو */
+        .navbar-brand img {
+            height: 55px;
+            transition: all 0.4s ease;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        
+        .navbar-metalic.scrolled .navbar-brand img {
+            height: 50px;
+            filter: none;
+        }
+        
+        /* آیتم‌های منو */
+        .nav-link-metalic {
+            font-weight: 800;
+            font-size: 1.05rem;
+            padding: 0.7rem 1.3rem;
+            margin: 0 0.2rem;
+            border-radius: 6px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+        
+        /* جلوه متالیک برای لینک‌ها */
+        .nav-link-metalic::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0.3),
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+        
+        .nav-link-metalic:hover::before {
+            opacity: 1;
+            animation: metalShine 1.5s ease infinite;
+        }
+        
+        .nav-link-metalic.active {
+            color: var(--metalic-accent) !important;
+            font-weight: 900;
+        }
+        
+        .nav-link-metalic i {
+            margin-left: 0.6rem;
+            font-size: 1.15rem;
+        }
+        
+        @keyframes metalShine {
+            0% { transform: rotate(30deg) translateX(-100%); }
+            100% { transform: rotate(30deg) translateX(100%); }
+        }
+        
+        /* دکمه‌های متالیک */
+        .btn-metalic {
+            padding: 0.7rem 1.8rem;
+            font-weight: 800;
+            font-size: 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-metalic-outline {
+            border: 2px solid currentColor;
+            background: transparent;
+        }
+        
+        .btn-metalic-outline:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .btn-metalic-primary {
+            background: linear-gradient(145deg, var(--metalic-accent), #FFC000);
+            color: #2D2727;
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+        
+        .btn-metalic-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 1200px) {
+            .nav-link-metalic {
+                padding: 0.6rem 1rem;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .navbar-metalic {
+                padding: 1rem 0;
+            }
+            
+            .navbar-collapse {
+                background: linear-gradient(145deg, var(--metalic-green), var(--metalic-dark));
+                padding: 1rem;
+                border-radius: 0 0 12px 12px;
+                margin-top: 0.5rem;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            }
+            
+            .nav-link-metalic {
+                width: 100%;
+                margin: 0.3rem 0;
+                text-align: right;
+            }
+            
+            .btn-metalic {
+                width: 100%;
+                margin: 0.5rem 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- نوار ناوبری متالیک -->
+    <nav class="navbar navbar-expand-lg navbar-metalic fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="images/logox.png" alt="">
-               
+                <img src="assets/images/logo-white.png" alt="">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMetalic">
+                <i class="fas fa-bars" style="color: var(--text-on-metal); font-size: 1.8rem;"></i>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            
+            <div class="collapse navbar-collapse" id="navbarMetalic">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> صفحه اصلی</a>
+                        <a class="nav-link nav-link-metalic" href="index.html"><i class="fas fa-home"></i> صفحه اصلی</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html"><i class="fas fa-info-circle me-1"></i> درباره ما</a>
+                        <a class="nav-link nav-link-metalic" href="about.html"><i class="fas fa-info-circle"></i> درباره ما</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="programs.html"><i class="fas fa-list-ul me-1"></i> رشته‌ها</a>
+                        <a class="nav-link nav-link-metalic active" href="teachers.html"><i class="fas fa-chalkboard-teacher"></i> اساتید</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="consultation.html"><i class="fas fa-headset"></i> مشاوره تحصیلی</a>
+                        <a class="nav-link nav-link-metalic" href="programs.html"><i class="fas fa-list-ul"></i> رشته‌ها تحصیلی </a>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link active" href="teachers.html"><i class="fas fa-chalkboard-teacher me-1"></i> اساتید</a>
+                        <a class="nav-link nav-link-metalic" href="consultation.html"><i class="fas fa-headset"></i> تحصیلی  مشاوره</a>
                     </li>
-<li class="nav-item">
-                        <a class="nav-link" href="roos.html"> <i class="fas fa-file-contract"></i> آیین نامه  </a>
-                    </li>
-
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html"><i class="fas fa-phone-alt me-1"></i> تماس با ما</a>
+                        <a class="nav-link nav-link-metalic" href="ai-education.html"><i class="fas fa-robot"></i> هوش مصنوعی</a>
                     </li>
-
-            <a class="navbar-brand" href="index.html">
-                <img src="images/logo.png" alt="لوگو هنرستان">
-           
-            </a>
-
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-metalic" href="blog.html"><i class="fas fa-blog"></i> وبلاگ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-metalic" href="contact.html"><i class="fas fa-phone-alt"></i> تماس با ما</a>
+                    </li>
                 </ul>
-                <div class="d-flex">
-                    <a href="admissions.html" class="btn btn-outline-light btn-sm me-2">
-                        <i class="fas fa-user-plus me-1"></i> ثبت‌نام آنلاین
-                    </a>
-
+                
+                <div class="d-flex ms-3">
+                    <a href="login.html" class="btn btn-metalic btn-metalic-outline me-2"><i class="fas fa-sign-in-alt"></i> ورود</a>
+                    <a href="register.html" class="btn btn-metalic btn-metalic-primary"><i class="fas fa-user-edit"></i> ثبت‌نام</a>
                 </div>
             </div>
         </div>
     </nav>
+
+    <!-- اسکریپت‌ها -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // تغییر استایل نوار هنگام اسکرول
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar-metalic');
+            if (window.scrollY > 30) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // اطمینان از عدم شکست خطوط
+        document.querySelectorAll('.nav-link-metalic').forEach(link => {
+            link.style.whiteSpace = 'nowrap';
+        });
+    </script>
+</body>
+</html>
+    <!-- اسکریپت‌ها -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // تغییر استایل نوار هنگام اسکرول
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar-teachers');
+            if (window.scrollY > 20) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // برای اطمینان از عدم شکست خطوط
+        document.querySelectorAll('.nav-link-teachers').forEach(link => {
+            link.style.whiteSpace = 'nowrap';
+        });
+    </script>
+</body>
+</html>
 
     <!-- هدر صفحه اساتید -->
     <header class="teachers-header">
