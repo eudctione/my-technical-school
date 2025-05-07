@@ -2436,225 +2436,83 @@
         });
     </script>
     <!-- شمارنده کوانتومی - قرار دهید در انتهای فایل قبل از </body> -->
-<div class="quantum-counter-container">
-    <div class="quantum-counter">
-        <div class="quantum-glow"></div>
-        <div class="quantum-wave" style="animation-delay: 0s"></div>
-        <div class="quantum-wave" style="animation-delay: 2s"></div>
-        <div class="quantum-wave" style="animation-delay: 4s"></div>
-        <div class="counter-content">
-            <div class="counter-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="9" cy="7" r="4"></circle>
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                </svg>
-            </div>
-            <div class="counter-text">
-                <span class="counter-label">بازدیدهای کوانتومی</span>
-                <span class="counter-number" id="quantum-count">0</span>
-            </div>
-        </div>
+<!-- منوی شمارش بازدیدکنندگان -->
+<div id="visitor-counter-container">
+    <div id="visitor-counter">
+        <span id="counter-icon">👁️</span>
+        <span id="counter-number">0</span>
+        <span id="counter-text">بازدید</span>
     </div>
 </div>
 
 <style>
-    .quantum-counter-container {
+    #visitor-counter-container {
         position: fixed;
-        bottom: 30px;
-        right: 30px;
+        bottom: 20px;
+        left: 20px;
         z-index: 9999;
-        perspective: 1000px;
     }
     
-    .quantum-counter {
-        position: relative;
-        width: 180px;
-        height: 80px;
-        background: rgba(10, 10, 30, 0.7);
-        border-radius: 20px;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 0 30px rgba(0, 247, 255, 0.2);
-        overflow: hidden;
-        transform-style: preserve-3d;
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        --quantum-blue: #00f7ff;
-        --quantum-purple: #bd00ff;
-        --quantum-pink: #ff00f7;
-    }
-    
-    .quantum-counter:hover {
-        transform: translateY(-5px) rotateX(5deg);
-        box-shadow: 0 0 50px rgba(0, 247, 255, 0.4);
-    }
-    
-    .counter-content {
-        position: relative;
-        z-index: 2;
-        padding: 15px;
+    #visitor-counter {
+        background: linear-gradient(135deg, #6e8efb, #a777e3);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        font-family: 'Arial', sans-serif;
         display: flex;
         align-items: center;
-        height: 100%;
+        gap: 10px;
+        animation: pulse 2s infinite;
+        transition: all 0.3s ease;
     }
     
-    .counter-icon {
-        margin-left: 15px;
+    #visitor-counter:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     }
     
-    .counter-icon svg {
-        width: 30px;
-        height: 30px;
-        filter: drop-shadow(0 0 5px var(--quantum-blue));
+    #counter-icon {
+        font-size: 20px;
     }
     
-    .counter-text {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .counter-label {
-        font-size: 12px;
-        color: rgba(255, 255, 255, 0.7);
-        margin-bottom: 5px;
-        text-shadow: 0 0 5px rgba(0, 247, 255, 0.5);
-    }
-    
-    .counter-number {
-        font-size: 24px;
+    #counter-number {
         font-weight: bold;
-        color: white;
-        text-shadow: 0 0 10px var(--quantum-blue);
-        letter-spacing: 1px;
+        font-size: 18px;
     }
     
-    .quantum-particle {
-        position: absolute;
-        border-radius: 50%;
-        background: radial-gradient(circle, var(--quantum-blue), transparent 70%);
-        opacity: 0;
-        animation: quantum-float 8s infinite;
-        filter: blur(1px);
+    #counter-text {
+        font-size: 14px;
     }
     
-    .quantum-wave {
-        position: absolute;
-        width: 200%;
-        height: 200%;
-        top: -50%;
-        left: -50%;
-        background: radial-gradient(circle, transparent, rgba(0, 247, 255, 0.1) 70%);
-        border-radius: 50%;
-        animation: quantum-pulse 6s infinite;
-        opacity: 0;
-    }
-    
-    .quantum-glow {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background: radial-gradient(circle at center, rgba(0, 247, 255, 0.1), transparent 70%);
-        animation: quantum-glow 4s alternate infinite;
-    }
-    
-    @keyframes quantum-float {
-        0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
-        20% { opacity: 0.7; }
-        100% { transform: translate(var(--tx), var(--ty)) scale(1.5); opacity: 0; }
-    }
-    
-    @keyframes quantum-pulse {
-        0% { transform: scale(0.5); opacity: 0; }
-        50% { opacity: 0.3; }
-        100% { transform: scale(1.5); opacity: 0; }
-    }
-    
-    @keyframes quantum-glow {
-        0% { opacity: 0.3; }
-        100% { opacity: 0.7; }
-    }
-    
-    @keyframes digit-pop {
-        0% { transform: scale(1); text-shadow: 0 0 10px var(--quantum-blue); }
-        50% { transform: scale(1.2); text-shadow: 0 0 20px var(--quantum-pink); }
-        100% { transform: scale(1); text-shadow: 0 0 10px var(--quantum-blue); }
-    }
-    
-    .digit-animate {
-        display: inline-block;
-        animation: digit-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(167, 119, 227, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(167, 119, 227, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(167, 119, 227, 0); }
     }
 </style>
 
 <script>
-    // ایجاد ذرات کوانتومی
-    function createQuantumParticles() {
-        const counter = document.querySelector('.quantum-counter');
-        const colors = ['var(--quantum-blue)', 'var(--quantum-purple)', 'var(--quantum-pink)'];
-        
-        for (let i = 0; i < 15; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'quantum-particle';
-            
-            const size = Math.random() * 5 + 2;
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-            
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.top = `${Math.random() * 100}%`;
-            
-            particle.style.background = `radial-gradient(circle, ${colors[Math.floor(Math.random() * colors.length)]}, transparent 70%)`;
-            
-            particle.style.setProperty('--tx', `${(Math.random() - 0.5) * 200}px`);
-            particle.style.setProperty('--ty', `${(Math.random() - 0.5) * 200}px`);
-            
-            particle.style.animationDelay = `${Math.random() * 8}s`;
-            
-            counter.appendChild(particle);
-        }
+    // بررسی آیا مقدار شمارنده در localStorage وجود دارد
+    if(localStorage.getItem('visitorCount') === null) {
+        // اگر وجود نداشت، مقدار اولیه را 0 قرار می‌دهیم
+        localStorage.setItem('visitorCount', '0');
     }
     
-    // انیمیشن شمارنده
-    function animateCounter(finalNumber) {
-        const counterElement = document.getElementById('quantum-count');
-        const digits = finalNumber.toString().split('');
-        
-        counterElement.innerHTML = '';
-        
-        digits.forEach((digit, index) => {
-            const digitSpan = document.createElement('span');
-            digitSpan.textContent = digit;
-            digitSpan.className = 'digit-animate';
-            digitSpan.style.animationDelay = `${index * 0.1}s`;
-            counterElement.appendChild(digitSpan);
-        });
-        
-        const counter = document.querySelector('.quantum-counter');
-        counter.style.transform = 'translateY(30px) rotateX(90deg)';
-        counter.style.opacity = '0';
-        
-        setTimeout(() => {
-            counter.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            counter.style.transform = 'translateY(0) rotateX(0)';
-            counter.style.opacity = '1';
-        }, 300);
-    }
+    // افزایش شمارنده و ذخیره آن
+    let currentCount = parseInt(localStorage.getItem('visitorCount'));
+    currentCount++;
+    localStorage.setItem('visitorCount', currentCount.toString());
     
-    // راه اندازی شمارنده پس از لود صفحه
-    document.addEventListener('DOMContentLoaded', function() {
-        createQuantumParticles();
-        
-        let count = localStorage.getItem('quantumVisitCount') || 1000;
-        count = parseInt(count);
-        
-        count++;
-        localStorage.setItem('quantumVisitCount', count);
-        
-        animateCounter(count);
-    });
+    // نمایش شمارنده در صفحه
+    document.getElementById('counter-number').textContent = currentCount.toLocaleString('fa-IR');
+    
+    // انیمیشن هنگام تغییر عدد
+    const counterElement = document.getElementById('counter-number');
+    counterElement.style.transform = 'scale(1.2)';
+    setTimeout(() => {
+        counterElement.style.transform = 'scale(1)';
+    }, 300);
 </script>
 </body>
 </html>
