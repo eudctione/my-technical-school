@@ -1511,11 +1511,179 @@
         
         .nav-link:hover {
             background-color: rgba(255, 255, 255, 0.15);
+			
         }
         
         .nav-link.active {
             color: var(--accent-color) !important;
             font-weight: 800;
+        }
+        
+        /* دکمه‌ها */
+        .auth-buttons {
+            display: flex;
+            flex-shrink: 0;
+            margin-right: 10px;
+        }
+        
+        .btn-nav {
+            padding: 0.5rem 1.2rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            white-space: nowrap;
+        }
+        
+        .btn-login {
+            border: 2px solid white;
+            color: white;
+            margin-left: 0.5rem;
+        }
+        
+        .btn-login:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        .btn-register {
+            background-color: var(--accent-color);
+            color: #2D2727;
+            border: none;
+        }
+        
+        .btn-register:hover {
+            background-color: #f0b53a;
+        }
+        
+        /* همبرگر منو */
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 992px) {
+            .navbar-nav {
+                padding: 10px 0;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-item {
+                width: 100%;
+            }
+            
+            .nav-link {
+                padding: 0.8rem 1.5rem !important;
+                width: 100%;
+            }
+            
+            .auth-buttons {
+                margin: 10px 0;
+                width: 100%;
+                flex-direction: column;
+            }
+            
+            .btn-nav {
+                width: 100%;
+                margin: 5px 0;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- نوار ناوبری پیشرفته -->
+    <!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هنرستان فنی حرفه‌ای دانشمند قلم‌چی</title>
+    <!-- Bootstrap 5 RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Vazirmatn Font -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts.css" rel="stylesheet" type="text/css" />
+    <style>
+        :root {
+            --primary-color: #2D9596; /* سبز یشمی */
+            --secondary-color: #1A5F7A; /* سبز یشمی تیره */
+            --accent-color: #F7C04A; /* رنگ طلایی برای تاکید */
+            --text-color: #1f2937;
+            --light-color: #f9fafb;
+            --dark-color: #111827;
+            --glass-effect: rgba(255, 255, 255, 0.95);
+        }
+        
+        body {
+            font-family: Vazirmatn, sans-serif;
+            padding-top: 70px;
+        }
+        
+        /* نوار ناوبری سفارشی */
+        .navbar-custom {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
+            min-height: 70px;
+        }
+        
+        .navbar-custom .container {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+        
+        /* لوگو */
+        .navbar-brand img {
+            height: 45px;
+            width: auto;
+        }
+        
+        /* آیتم‌های منو */
+        .navbar-nav {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            white-space: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 0 10px;
+        }
+        
+        .nav-item {
+            flex-shrink: 0;
+        }
+        
+        .nav-link {
+            color: white;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            margin: 0 2px;
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link i {
+            margin-left: 5px;
+            font-size: 1rem;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+			
+        }
+        
+        nav-link.active {
+    color: #7CFC00 !important; /* سبز فسفری روشن */
+    font-weight: 800;
+}
         }
         
         /* دکمه‌ها */
@@ -1545,6 +1713,7 @@
         }
         
         .btn-register {
+		 
             background-color: var(--accent-color);
             color: #2D2727;
            border: 2px solid black;
@@ -1597,7 +1766,7 @@
     <!-- نوار ناوبری پیشرفته -->
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
         <div class="container">
-            
+           
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
                 <i class="fas fa-bars text-white"></i>
@@ -1632,12 +1801,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html"><i class="fas fa-phone-alt"></i> تماس با ما</a>
                     </li>
-                    
                 </ul>
-               
+                 <a class="navbar-brand" href="index.html">
+                <img src="assets/images/logo.png" alt="هنرستان دانشمند">
+            </a>
                 <div class="auth-buttons">
                     <a href="login.html" class="btn btn-login btn-nav"><i class="fas fa-sign-in-alt"></i> ورود</a>
-                    <a href="admissions.html" class="btn btn-register btn-nav"><i class="fas fa-user-edit"></i> ثبت‌نام</a>
+                    <a href="register.html" class="btn btn-register btn-nav"><i class="fas fa-user-edit"></i> ثبت‌نام</a>
                 </div>
             </div>
         </div>
@@ -2434,135 +2604,5 @@
             });
         });
     </script>
-    <!-- شمارنده کوانتومی - قرار دهید در انتهای فایل قبل از </body> -->
-<script>
-// تابع برای اصلاح خودکار نمایش ریسپانسیو
-function fixResponsiveIssues() {
-    // تنظیم viewport اگر وجود ندارد (برای صفحات قدیمی)
-    if (!document.querySelector('meta[name="viewport"]')) {
-        const meta = document.createElement('meta');
-        meta.name = "viewport";
-        meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
-        document.head.appendChild(meta);
-    }
-
-    // اضافه کردن CSS پایه اگر وجود ندارد
-    if (!document.getElementById('responsive-fix-styles')) {
-        const style = document.createElement('style');
-        style.id = 'responsive-fix-styles';
-        style.textContent = `
-            * { box-sizing: border-box !important; }
-            body { width: 100% !important; overflow-x: hidden !important; }
-            img, video, iframe { max-width: 100% !important; height: auto !important; }
-            .container, .wrapper, .content { max-width: 100% !important; padding-left: 15px !important; padding-right: 15px !important; }
-            @media (max-width: 768px) {
-                body { font-size: 14px !important; }
-                .container { padding-left: 10px !important; padding-right: 10px !important; }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    // اصلاح المان‌های خاص با عرض ثابت
-    document.querySelectorAll('[style*="width"]').forEach(el => {
-        const width = el.style.width;
-        if (width && !width.includes('%') && !width.includes('vw')) {
-            el.style.width = '100%';
-            el.style.maxWidth = width;
-        }
-    });
-}
-
-// اجرای تابع پس از لود صفحه
-document.addEventListener('DOMContentLoaded', fixResponsiveIssues);
-window.addEventListener('resize', fixResponsiveIssues); //         
-    برای تغییر سایز پنجره
-</script>
-        
-    <script>
-// تابع برای اصلاح خودکار نمایش ریسپانسیو
-function fixResponsiveIssues() {
-    // تنظیم viewport اگر وجود ندارد (برای صفحات قدیمی)
-    if (!document.querySelector('meta[name="viewport"]')) {
-        const meta = document.createElement('meta');
-        meta.name = "viewport";
-        meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
-        document.head.appendChild(meta);
-    }
-
-    // اضافه کردن CSS پایه اگر وجود ندارد
-    if (!document.getElementById('responsive-fix-styles')) {
-        const style = document.createElement('style');
-        style.id = 'responsive-fix-styles';
-        style.textContent = `
-            * { box-sizing: border-box !important; }
-            body { width: 100% !important; overflow-x: hidden !important; }
-            img, video, iframe { max-width: 100% !important; height: auto !important; }
-            .container, .wrapper, .content { max-width: 100% !important; padding-left: 15px !important; padding-right: 15px !important; }
-            @media (max-width: 768px) {
-                body { font-size: 14px !important; }
-                .container { padding-left: 10px !important; padding-right: 10px !important; }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    // اصلاح المان‌های خاص با عرض ثابت
-    document.querySelectorAll('[style*="width"]').forEach(el => {
-        const width = el.style.width;
-        if (width && !width.includes('%') && !width.includes('vw')) {
-            el.style.width = '100%';
-            el.style.maxWidth = width;
-        }
-    });
-}
-
-// اجرای تابع پس از لود صفحه
-document.addEventListener('DOMContentLoaded', fixResponsiveIssues);
-window.addEventListener('resize', fixResponsiveIssues); // برای تغییر سایز پنجره
-
-</script>
-    
-// تابع برای اصلاح خودکار نمایش ریسپانسیو
-function fixResponsiveIssues() {
-    // تنظیم viewport اگر وجود ندارد (برای صفحات قدیمی)
-    if (!document.querySelector('meta[name="viewport"]')) {
-        const meta = document.createElement('meta');
-        meta.name = "viewport";
-        meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
-        document.head.appendChild(meta);
-    }
-
-    // اضافه کردن CSS پایه اگر وجود ندارد
-    if (!document.getElementById('responsive-fix-styles')) {
-        const style = document.createElement('style');
-        style.id = 'responsive-fix-styles';
-        style.textContent = `
-            * { box-sizing: border-box !important; }
-            body { width: 100% !important; overflow-x: hidden !important; }
-            img, video, iframe { max-width: 100% !important; height: auto !important; }
-            .container, .wrapper, .content { max-width: 100% !important; padding-left: 15px !important; padding-right: 15px !important; }
-            @media (max-width: 768px) {
-                body { font-size: 14px !important; }
-                .container { padding-left: 10px !important; padding-right: 10px !important; }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    // اصلاح المان‌های خاص با عرض ثابت
-    document.querySelectorAll('[style*="width"]').forEach(el => {
-        const width = el.style.width;
-        if (width && !width.includes('%') && !width.includes('vw')) {
-            el.style.width = '100%';
-            el.style.maxWidth = width;
-        }
-    });
-}
-
-// اجرای تابع پس از لود صفحه
-document.addEventListener('DOMContentLoaded', fixResponsiveIssues);
-window.addEventListener('resize', fixResponsiveIssues); // برای تغییر سایز پنجره
-</script>
 </body>
 </html>
