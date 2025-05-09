@@ -1,4 +1,43 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -12,37 +51,55 @@
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #006D77;
-            --secondary-color: #83C5BE;
-            --accent-color: #FFD166;
-            --light-color: #EDF6F9;
-            --dark-color: #003844;
+            --primary-color: #2D9596;
+            --secondary-color: #1A5F7A;
+            --accent-color: #F7C04A;
+            --text-color: #1f2937;
+            --light-color: #f9fafb;
+            --dark-color: #111827;
+            --glass-effect: rgba(255, 255, 255, 0.95);
             --gradient-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             --gradient-accent: linear-gradient(135deg, var(--accent-color), #FFB347);
         }
-        
+
         body {
             font-family: 'Vazirmatn', sans-serif;
             background-color: #f8f9fa;
             color: #333;
             line-height: 1.8;
+            padding-top: 75px;
         }
-        
-        /* استایل نوار ناوبری پیشرفته */
+
         .navbar-custom {
-            background: rgba(0, 109, 119, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            padding: 0.8rem 0;
-            transition: all 0.3s ease;
+            background: var(--gradient-bg);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            padding: 1rem 0;
+            min-height: 75px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1030;
         }
-        
+
         .navbar-custom.scrolled {
-            background: var(--primary-color);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-            padding: 0.5rem 0;
+            background: var(--glass-effect) !important;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
         }
-        
+
+        .navbar-custom.scrolled .nav-link,
+        .navbar-custom.scrolled .navbar-brand {
+            color: var(--dark-color) !important;
+        }
+
+        .navbar-custom.scrolled .btn-outline-light,
+        .navbar-custom.scrolled .btn-login {
+            color: var(--dark-color) !important;
+            border-color: var(--dark-color) !important;
+        }
+
         .navbar-custom .navbar-brand {
             color: white;
             font-weight: 900;
@@ -51,59 +108,143 @@
             align-items: center;
             transition: all 0.3s;
         }
-        
+
         .navbar-custom .navbar-brand img {
-            height: 40px;
+            height: 50px;
             margin-left: 10px;
+            transition: all 0.3s ease;
         }
-        
-        .navbar-custom .navbar-brand:hover {
-            transform: translateY(-2px);
+
+        .navbar-custom.scrolled .navbar-brand img {
+            height: 45px;
         }
-        
+
         .navbar-custom .nav-link {
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            margin: 0 0.3rem;
-            border-radius: 6px;
-            transition: all 0.3s;
+            color: white;
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 0.5rem 1.3rem;
+            margin: 0 0.2rem;
             position: relative;
-            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
         }
-        
+
+        .navbar-custom .nav-link i {
+            margin-left: 0.5rem;
+            font-size: 1.1rem;
+        }
+
         .navbar-custom .nav-link::before {
             content: '';
             position: absolute;
-            bottom: 0;
+            top: 0;
             right: 0;
-            width: 0;
-            height: 3px;
-            background-color: var(--accent-color);
-            transition: width 0.3s ease;
-            border-radius: 3px;
-        }
-        
-        .navbar-custom .nav-link:hover::before,
-        .navbar-custom .nav-link.active::before {
             width: 100%;
-            left: 0;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        
-        .navbar-custom .nav-link:hover,
-        .navbar-custom .nav-link.active {
+
+        .navbar-custom .nav-link:hover::before {
+            opacity: 1;
+        }
+
+        .navbar-custom .nav-link:hover {
             color: white;
+            text-shadow: 0 0 8px rgba(255,255,255,0.7);
+            transform: translateY(-1px);
         }
-        
-        .navbar-custom .navbar-toggler {
-            border-color: rgba(255, 255, 255, 0.1);
+
+        .navbar-custom .nav-link.active {
+            color: var(--accent-color) !important;
+            font-weight: 900;
         }
-        
-        .navbar-custom .navbar-toggler-icon {
+
+        .btn-custom-primary,
+        .btn-register {
+            background: var(--gradient-accent);
+            color: #2D2727;
+            border: none;
+            border-radius: 50px;
+            padding: 0.7rem 2rem;
+            font-weight: 800;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(247, 192, 74, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-custom-primary:hover,
+        .btn-register:hover {
+            background: linear-gradient(135deg, #FFC850, #FFA347);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(247, 192, 74, 0.6);
+        }
+
+        .btn-custom-outline,
+        .btn-login {
+            border: 2px solid white;
+            border-radius: 50px;
+            padding: 0.7rem 2rem;
+            font-weight: 800;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-custom-outline:hover,
+        .btn-login:hover {
+            background-color: white;
+            color: var(--primary-color) !important;
+            border-color: white;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 0 10px;
+        }
+
+        .nav-item {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-buttons {
+            display: flex;
+            flex-shrink: 0;
+            margin-right: 10px;
+        }
+
+        .btn-nav {
+            padding: 0.5rem 1.2rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            white-space: nowrap;
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .navbar-toggler-icon {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
-        
-        /* استایل هیرو سکشن */
+
         .hero-section {
             background: var(--gradient-bg);
             color: white;
@@ -115,7 +256,7 @@
             background-blend-mode: overlay;
             background-size: cover;
         }
-        
+
         .hero-section::before {
             content: "";
             position: absolute;
@@ -127,12 +268,12 @@
             opacity: 0.15;
             pointer-events: none;
         }
-        
+
         .hero-content {
             position: relative;
             z-index: 2;
         }
-        
+
         .hero-title {
             font-size: 3rem;
             font-weight: 900;
@@ -140,7 +281,7 @@
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             line-height: 1.3;
         }
-        
+
         .hero-subtitle {
             font-size: 1.3rem;
             margin-bottom: 2.5rem;
@@ -149,18 +290,20 @@
             margin-right: auto;
             margin-left: auto;
         }
-        
+
         .hero-badge {
             display: inline-block;
-            background-color: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(5px);
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
+            background: linear-gradient(90deg, #6e48aa, #9d50bb);
+            color: white;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 15px #9d50bb;
+            border: 1px solid #ffffff30;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
             margin-bottom: 1.5rem;
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
+
         .hero-buttons .btn {
             margin: 0.5rem;
             padding: 0.8rem 2.2rem;
@@ -170,30 +313,30 @@
             font-size: 1rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .btn-primary {
             background: var(--gradient-accent);
             border: none;
             color: var(--dark-color);
         }
-        
+
         .btn-primary:hover {
             background: linear-gradient(135deg, #FFC850, #FFA347);
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(255, 180, 0, 0.3);
         }
-        
+
         .btn-outline-light {
             border-width: 2px;
             font-weight: 600;
         }
-        
+
         .btn-outline-light:hover {
             background-color: rgba(255, 255, 255, 0.15);
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
         }
-        
+
         .hero-image {
             max-height: 350px;
             margin-top: 3rem;
@@ -201,21 +344,75 @@
             animation: float 6s ease-in-out infinite;
             border-radius: 15px;
             border: 5px solid rgba(255, 255, 255, 0.1);
+            loading: lazy;
         }
-        
+
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
             100% { transform: translateY(0px); }
         }
-        
-        /* استایل بخش ویژگی‌ها */
+
+        @keyframes fadeInOut {
+            0%,100% { opacity:0.7; transform: translateX(-50%) translateY(2px); }
+            50% { opacity:1; transform: translateX(-50%) translateY(0); }
+        }
+
+        .golden-badge-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: 15px 0;
+        }
+
+        .golden-badge {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+            color: #FFD700;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5),
+                        inset 0 0 10px rgba(255, 215, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+        }
+
+        .golden-badge::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                transparent 45%,
+                rgba(255, 215, 0, 0.1) 50%,
+                transparent 55%
+            );
+            transform: rotate(30deg);
+            animation: gold-shine 4s infinite linear;
+            z-index: 0;
+        }
+
+        @keyframes gold-shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
+        }
+
         .features-section {
             padding: 5rem 0;
             background-color: white;
             position: relative;
         }
-        
+
         .features-section::before {
             content: "";
             position: absolute;
@@ -227,7 +424,7 @@
             opacity: 0.03;
             pointer-events: none;
         }
-        
+
         .section-title {
             color: var(--primary-color);
             text-align: center;
@@ -236,7 +433,7 @@
             font-weight: 900;
             font-size: 2.2rem;
         }
-        
+
         .section-title::after {
             content: "";
             display: block;
@@ -246,7 +443,7 @@
             margin: 1.5rem auto;
             border-radius: 3px;
         }
-        
+
         .section-subtitle {
             text-align: center;
             color: #555;
@@ -254,7 +451,7 @@
             margin: 0 auto 4rem auto;
             font-size: 1.1rem;
         }
-        
+
         .feature-card {
             background: white;
             border-radius: 15px;
@@ -269,7 +466,7 @@
             overflow: hidden;
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
-        
+
         .feature-card::before {
             content: "";
             position: absolute;
@@ -281,46 +478,45 @@
             opacity: 0.05;
             pointer-events: none;
         }
-        
+
         .feature-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 50px rgba(0, 180, 216, 0.15);
         }
-        
+
         .feature-icon {
             font-size: 3rem;
             color: var(--primary-color);
             margin-bottom: 1.5rem;
             transition: all 0.3s;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--gradient-bg);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
+
         .feature-card:hover .feature-icon {
             transform: scale(1.15);
         }
-        
+
         .feature-title {
             font-weight: 800;
             margin-bottom: 1.2rem;
             color: var(--dark-color);
             font-size: 1.3rem;
         }
-        
+
         .feature-text {
             color: #555;
             font-size: 0.95rem;
         }
-        
-        /* استایل بخش رشته‌های آموزشی */
+
         .programs-section {
             padding: 5rem 0;
             background-color: var(--light-color);
             position: relative;
             overflow: hidden;
         }
-        
+
         .programs-section::before {
             content: "";
             position: absolute;
@@ -332,7 +528,7 @@
             opacity: 0.05;
             pointer-events: none;
         }
-        
+
         .program-card {
             background: white;
             border-radius: 15px;
@@ -343,12 +539,12 @@
             margin-bottom: 2rem;
             position: relative;
         }
-        
+
         .program-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
-        
+
         .program-badge {
             position: absolute;
             top: 15px;
@@ -361,29 +557,30 @@
             font-size: 0.8rem;
             z-index: 2;
         }
-        
+
         .program-img {
             width: 100%;
             height: 200px;
             object-fit: cover;
             transition: transform 0.5s;
+            loading: lazy;
         }
-        
+
         .program-card:hover .program-img {
             transform: scale(1.05);
         }
-        
+
         .program-content {
             padding: 1.5rem;
         }
-        
+
         .program-title {
             font-weight: 800;
             margin-bottom: 0.8rem;
             color: var(--dark-color);
             font-size: 1.2rem;
         }
-        
+
         .program-meta {
             display: flex;
             justify-content: space-between;
@@ -391,26 +588,25 @@
             font-size: 0.85rem;
             color: #666;
         }
-        
+
         .program-meta i {
             color: var(--primary-color);
             margin-left: 5px;
         }
-        
+
         .program-desc {
             color: #555;
             font-size: 0.95rem;
             margin-bottom: 1.5rem;
         }
-        
-        /* استایل بخش نوآوری در آموزش */
+
         .innovation-section {
             padding: 5rem 0;
             background: var(--gradient-bg);
             color: white;
             position: relative;
         }
-        
+
         .innovation-section::before {
             content: "";
             position: absolute;
@@ -422,7 +618,7 @@
             opacity: 0.1;
             pointer-events: none;
         }
-        
+
         .innovation-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -434,37 +630,36 @@
             transition: all 0.4s;
             height: 100%;
         }
-        
+
         .innovation-card:hover {
             transform: translateY(-8px);
             background: rgba(255, 255, 255, 0.15);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
         }
-        
+
         .innovation-icon {
             font-size: 2.5rem;
             color: var(--accent-color);
             margin-bottom: 1.5rem;
         }
-        
+
         .innovation-title {
             font-weight: 800;
             margin-bottom: 1rem;
             font-size: 1.3rem;
         }
-        
-        /* استایل بخش دستاوردها */
+
         .achievements-section {
             padding: 5rem 0;
             background-color: white;
             position: relative;
         }
-        
+
         .achievement-item {
             text-align: center;
             padding: 1.5rem;
         }
-        
+
         .achievement-number {
             font-size: 3rem;
             font-weight: 900;
@@ -472,20 +667,19 @@
             margin-bottom: 0.5rem;
             line-height: 1;
         }
-        
+
         .achievement-title {
             font-weight: 700;
             color: var(--dark-color);
             font-size: 1.1rem;
         }
-        
-        /* استایل بخش اخبار و رویدادها */
+
         .news-section {
             padding: 5rem 0;
             background-color: var(--light-color);
             position: relative;
         }
-        
+
         .news-card {
             background: white;
             border-radius: 15px;
@@ -495,23 +689,24 @@
             height: 100%;
             margin-bottom: 2rem;
         }
-        
+
         .news-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
-        
+
         .news-img {
             width: 100%;
             height: 200px;
             object-fit: cover;
             transition: transform 0.5s;
+            loading: lazy;
         }
-        
+
         .news-card:hover .news-img {
             transform: scale(1.05);
         }
-        
+
         .news-date {
             background: var(--gradient-accent);
             color: var(--dark-color);
@@ -522,14 +717,14 @@
             margin-bottom: 1rem;
             font-weight: 700;
         }
-        
+
         .news-title {
             font-weight: 800;
             margin-bottom: 0.8rem;
             color: var(--dark-color);
             font-size: 1.2rem;
         }
-        
+
         .read-more {
             color: var(--primary-color);
             font-weight: 700;
@@ -538,28 +733,27 @@
             align-items: center;
             transition: all 0.3s;
         }
-        
+
         .read-more:hover {
             color: var(--secondary-color);
             text-decoration: underline;
         }
-        
+
         .read-more i {
             margin-right: 5px;
             transition: transform 0.3s;
         }
-        
+
         .read-more:hover i {
             transform: translateX(5px);
         }
-        
-        /* استایل بخش دسترسی سریع */
+
         .quick-access {
             padding: 4rem 0;
             background: white;
             position: relative;
         }
-        
+
         .quick-link {
             display: flex;
             flex-direction: column;
@@ -576,7 +770,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .quick-link::before {
             content: "";
             position: absolute;
@@ -588,34 +782,33 @@
             opacity: 0.05;
             pointer-events: none;
         }
-        
+
         .quick-link:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 40px rgba(0, 180, 216, 0.15);
             border-color: var(--secondary-color);
             background: linear-gradient(135deg, rgba(237, 246, 249, 1), rgba(209, 231, 255, 0.9));
         }
-        
+
         .quick-icon {
             font-size: 3rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--gradient-bg);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 1.5rem;
             transition: all 0.3s;
         }
-        
+
         .quick-link:hover .quick-icon {
             transform: scale(1.15);
         }
-        
+
         .quick-title {
             font-weight: 800;
             font-size: 1.2rem;
             color: var(--dark-color);
         }
-        
-        /* استایل‌های جدید برای بخش تماس */
+
         .contact-section {
             padding: 5rem 0;
             background: var(--gradient-bg);
@@ -623,7 +816,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .contact-section::before {
             content: "";
             position: absolute;
@@ -635,7 +828,7 @@
             opacity: 0.1;
             pointer-events: none;
         }
-        
+
         .contact-info-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -645,7 +838,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             height: 100%;
         }
-        
+
         .contact-form-card {
             background: white;
             border-radius: 20px;
@@ -653,29 +846,29 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
             height: 100%;
         }
-        
+
         .contact-form-card .form-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--gradient-bg);
             color: white;
             padding: 1.5rem 2rem;
         }
-        
+
         .contact-form-card .form-header h3 {
             font-weight: 800;
             margin-bottom: 0.5rem;
         }
-        
+
         .contact-form-card .form-header p {
             opacity: 0.9;
             font-size: 0.95rem;
             margin-bottom: 0;
         }
-        
+
         .contact-form-card .form-floating {
             position: relative;
             margin-bottom: 1.2rem;
         }
-        
+
         .contact-form-card .form-control {
             background-color: rgba(237, 246, 249, 0.5);
             border: 1px solid rgba(0, 109, 119, 0.2);
@@ -684,36 +877,36 @@
             border-radius: 12px;
             transition: all 0.3s;
         }
-        
+
         .contact-form-card .form-control:focus {
             background-color: white;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 0.25rem rgba(0, 109, 119, 0.25);
         }
-        
+
         .contact-form-card .form-control.is-invalid {
             border-color: #dc3545;
         }
-        
+
         .contact-form-card .form-control.is-invalid:focus {
             box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
         }
-        
+
         .contact-form-card .invalid-feedback {
             text-align: right;
             font-size: 0.85rem;
         }
-        
+
         .contact-form-card label {
             color: #666;
             font-weight: 500;
         }
-        
+
         .contact-icon-circle {
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--gradient-bg);
             color: white;
             display: flex;
             align-items: center;
@@ -722,7 +915,7 @@
             margin-left: 1rem;
             flex-shrink: 0;
         }
-        
+
         .btn-submit {
             background: var(--gradient-accent);
             border: none;
@@ -734,32 +927,32 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .btn-submit:hover {
             background: linear-gradient(135deg, #FFC850, #FFA347);
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(255, 180, 0, 0.3);
         }
-        
+
         .btn-submit:active {
             transform: translateY(0);
         }
-        
+
         .btn-submit .spinner-border {
             width: 1.2rem;
             height: 1.2rem;
+            display: none;
         }
-        
+
         .btn-submit.loading .submit-text {
             visibility: hidden;
             opacity: 0;
         }
-        
+
         .btn-submit.loading .spinner-border {
-            display: inline-block !important;
+            display: inline-block;
         }
-        
-        /* انیمیشن برای آیتم‌های تماس */
+
         .contact-info {
             display: flex;
             align-items: center;
@@ -768,33 +961,32 @@
             padding: 0.8rem;
             border-radius: 12px;
         }
-        
+
         .contact-info:hover {
             background: rgba(255, 255, 255, 0.1);
             transform: translateX(-5px);
         }
-        
+
         .contact-text h5 {
             font-weight: 800;
             margin-bottom: 0.3rem;
             font-size: 1.1rem;
             color: white;
         }
-        
+
         .contact-text p {
             color: rgba(255, 255, 255, 0.8);
             margin-bottom: 0;
             font-size: 0.95rem;
         }
-        
-        /* استایل فوتر */
+
         footer {
             background: linear-gradient(135deg, var(--dark-color), #002A32);
             color: white;
             padding: 4rem 0 2rem;
             position: relative;
         }
-        
+
         footer::before {
             content: "";
             position: absolute;
@@ -806,72 +998,73 @@
             opacity: 0.05;
             pointer-events: none;
         }
-        
+
         footer h5 {
             color: var(--accent-color);
             margin-bottom: 1.5rem;
             font-weight: 800;
             font-size: 1.3rem;
         }
-        
+
         footer a {
-            color: var(--secondary-color);
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             transition: all 0.3s;
         }
-        
+
         footer a:hover {
             color: var(--accent-color);
             text-decoration: underline;
         }
-        
+
         .footer-links {
             list-style: none;
             padding: 0;
         }
-        
+
         .footer-links li {
             margin-bottom: 0.8rem;
             display: flex;
             align-items: center;
         }
-        
+
         .footer-links i {
             margin-left: 0.8rem;
             color: var(--accent-color);
             font-size: 0.9rem;
         }
-        
+
         .footer-about {
             padding-right: 2rem;
         }
-        
+
         .footer-about p {
             color: rgba(255, 255, 255, 0.8);
             margin-bottom: 1.5rem;
+            font-size: 0.95rem;
         }
-        
+
         .footer-logo {
             display: flex;
             align-items: center;
             margin-bottom: 1.5rem;
         }
-        
+
         .footer-logo img {
             height: 50px;
             margin-left: 10px;
         }
-        
+
         .footer-logo-text {
             font-weight: 900;
             font-size: 1.5rem;
         }
-        
+
         .newsletter-form {
             display: flex;
             margin-top: 1.5rem;
         }
-        
+
         .newsletter-form input {
             flex: 1;
             background: rgba(255, 255, 255, 0.1);
@@ -881,11 +1074,11 @@
             border-radius: 50px 0 0 50px;
             border-right: none;
         }
-        
+
         .newsletter-form input::placeholder {
             color: rgba(255, 255, 255, 0.7);
         }
-        
+
         .newsletter-form button {
             background: var(--gradient-accent);
             border: none;
@@ -895,11 +1088,11 @@
             border-radius: 0 50px 50px 0;
             transition: all 0.3s;
         }
-        
+
         .newsletter-form button:hover {
             background: linear-gradient(135deg, #FFC850, #FFA347);
         }
-        
+
         .footer-bottom {
             margin-top: 3rem;
             padding-top: 2rem;
@@ -908,8 +1101,24 @@
             font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.7);
         }
-        
-        /* انیمیشن‌ها */
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -920,108 +1129,159 @@
                 transform: translateY(0);
             }
         }
-        
+
         .animate {
             opacity: 0;
             animation: fadeInUp 0.8s ease-out forwards;
         }
-        
-        .delay-1 {
-            animation-delay: 0.2s;
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+        @media (max-width: 1200px) {
+            .navbar-custom .nav-link {
+                padding: 0.5rem 1rem;
+                font-size: 0.95rem;
+            }
+
+            .btn-custom-outline,
+            .btn-custom-primary {
+                padding: 0.6rem 1.5rem;
+            }
         }
-        
-        .delay-2 {
-            animation-delay: 0.4s;
-        }
-        
-        .delay-3 {
-            animation-delay: 0.6s;
-        }
-        
-        .delay-4 {
-            animation-delay: 0.8s;
-        }
-        
-        /* ریسپانسیو */
+
         @media (max-width: 992px) {
+            .navbar-custom {
+                background: var(--primary-color) !important;
+                padding: 0.8rem 0;
+            }
+
+            .navbar-collapse {
+                padding: 1rem 0;
+                background-color: var(--secondary-color);
+                border-radius: 0 0 10px 10px;
+                margin-top: 0.5rem;
+            }
+
+            .navbar-nav {
+                flex-direction: column;
+                align-items: flex-start;
+                overflow-x: hidden;
+            }
+
+            .nav-item {
+                width: 100%;
+            }
+
+            .nav-link {
+                padding: 0.8rem 1.5rem !important;
+                justify-content: flex-start;
+                width: 100%;
+            }
+
+            .auth-buttons {
+                margin: 10px 0;
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .btn-nav {
+                width: 100%;
+                margin: 5px 0;
+                text-align: center;
+            }
+
             .hero-title {
                 font-size: 2.5rem;
             }
-            
+
             .hero-subtitle {
                 font-size: 1.1rem;
             }
-            
+
             .section-title {
                 font-size: 2rem;
             }
-            
+
             .contact-info-card {
                 padding: 1.8rem;
             }
-            
+
             .contact-icon-circle {
                 width: 45px;
                 height: 45px;
                 font-size: 1.1rem;
             }
         }
-        
+
         @media (max-width: 768px) {
             .hero-section {
                 padding: 7rem 0 4rem;
             }
-            
+
             .hero-title {
                 font-size: 2rem;
             }
-            
+
             .hero-subtitle {
                 font-size: 1rem;
             }
-            
+
             .hero-buttons .btn {
                 display: block;
                 width: 80%;
                 margin: 0.8rem auto;
             }
-            
+
+            .hero-buttons .d-flex {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
             .feature-card, .news-card, .quick-link, .program-card {
                 margin-bottom: 1.8rem;
             }
-            
+
             .navbar-custom .nav-link {
                 padding: 0.6rem;
                 margin: 0.2rem 0;
             }
-            
+
             .footer-about {
                 padding-right: 0;
                 margin-bottom: 2rem;
             }
-            
+
             .contact-info-card {
                 margin-bottom: 2rem;
             }
-            
+
             .contact-info {
                 padding: 0.6rem;
             }
+
+            .golden-badge {
+                font-size: 0.95rem;
+                padding: 10px 20px;
+                max-width: 90%;
+            }
         }
-        
+
         @media (max-width: 576px) {
             .hero-title {
                 font-size: 1.8rem;
             }
-            
+
             .hero-subtitle {
                 font-size: 0.95rem;
             }
-            
+
             .section-title {
                 font-size: 1.8rem;
             }
-            
+
             .section-title::after {
                 width: 80px;
                 height: 4px;
@@ -1030,748 +1290,15 @@
     </style>
 </head>
 <body>
- <!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>هنرستان فنی حرفه‌ای دانشمند قلم‌چی</title>
-    <!-- Bootstrap 5 RTL -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Vazirmatn Font -->
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts.css" rel="stylesheet" type="text/css" />
-    <style>
-        :root {
-            --primary-color: #2D9596; /* سبز یشمی */
-            --secondary-color: #1A5F7A; /* سبز یشمی تیره */
-            --accent-color: #F7C04A; /* رنگ طلایی برای تاکید */
-            --text-color: #1f2937;
-            --light-color: #f9fafb;
-            --dark-color: #111827;
-            --glass-effect: rgba(255, 255, 255, 0.9);
-        }
-        
-        body {
-            font-family: Vazirmatn, sans-serif;
-            padding-top: 70px; /* برای فیکس شدن نوار در بالای صفحه */
-        }
-        
-        /* نوار ناوبری سفارشی */
-        .navbar-custom {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s ease;
-            padding: 1rem 0;
-            min-height: 70px;
-        }
-        
-        .navbar-custom.scrolled {
-            background: var(--glass-effect) !important;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            padding: 0.8rem 0;
-        }
-        
-        .navbar-custom.scrolled .nav-link,
-        .navbar-custom.scrolled .navbar-brand {
-            color: var(--dark-color) !important;
-        }
-        
-        .navbar-custom.scrolled .btn-outline-light {
-            color: var(--dark-color) !important;
-            border-color: var(--dark-color) !important;
-        }
-        
-        .navbar-custom .navbar-brand img {
-            height: 50px;
-            transition: all 0.3s ease;
-        }
-        
-        .navbar-custom.scrolled .navbar-brand img {
-            height: 45px;
-        }
-        
-        .navbar-custom .nav-link {
-            color: white;
-            font-weight: 700; /* فونت پررنگ */
-            font-size: 1rem;
-            padding: 0.8rem 1.2rem;
-            margin: 0 0.1rem;
-            position: relative;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            height: 100%;
-        }
-        
-        .navbar-custom .nav-link i {
-            margin-left: 0.4rem;
-            font-size: 1rem;
-        }
-        
-        /* افکت زیرخط برای لینک‌ها */
-        .navbar-custom .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 0;
-            height: 4px;
-            background-color: var(--accent-color);
-            transition: width 0.3s ease;
-            border-radius: 2px;
-        }
-        
-        .navbar-custom .nav-link:hover::after,
-        .navbar-custom .nav-link.active::after {
-            width: 100%;
-            left: 0;
-        }
-        
-        .navbar-custom .nav-link:hover {
-            color: rgba(255, 255, 255, 0.95);
-            transform: translateY(-2px);
-        }
-        
-        /* دکمه‌های ویژه */
-        .btn-custom-primary {
-            background-color: var(--accent-color);
-            color: #2D2727;
-            border: none;
-            border-radius: 50px;
-            padding: 0.6rem 1.8rem;
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(247, 192, 74, 0.3);
-        }
-        
-        .btn-custom-primary:hover {
-            background-color: #f0b53a;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(247, 192, 74, 0.4);
-        }
-        
-        .btn-custom-outline {
-            border: 2px solid white;
-            border-radius: 50px;
-            padding: 0.6rem 1.8rem;
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-custom-outline:hover {
-            background-color: white;
-            color: var(--primary-color) !important;
-        }
-        
-        /* تنظیمات برای آیتم‌های منو */
-        .navbar-nav {
-            align-items: center;
-        }
-        
-        .nav-item {
-            display: flex;
-            align-items: center;
-            height: 100%;
-        }
-        
-        /* ریسپانسیو */
-        @media (max-width: 992px) {
-            .navbar-custom {
-                background: var(--primary-color) !important;
-                padding: 0.8rem 0;
-            }
-            
-            .navbar-collapse {
-                padding: 1rem 0;
-                background-color: var(--secondary-color);
-                border-radius: 0 0 10px 10px;
-                margin-top: 0.5rem;
-            }
-            
-            .nav-link {
-                padding: 0.8rem 1.5rem !important;
-            }
-            
-            .btn-custom-outline,
-            .btn-custom-primary {
-                margin: 0.5rem 1.5rem;
-                width: calc(100% - 3rem);
-                text-align: center;
-            }
-        }
-    </style>
-</head>
-<body>
-   <!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>هنرستان فنی حرفه‌ای دانشمند قلم‌چی</title>
-    <!-- Bootstrap 5 RTL -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Vazirmatn Font -->
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts.css" rel="stylesheet" type="text/css" />
-    <style>
-        :root {
-            --primary-color: #2D9596; /* سبز یشمی */
-            --secondary-color: #1A5F7A; /* سبز یشمی تیره */
-            --accent-color: #F7C04A; /* رنگ طلایی برای تاکید */
-            --text-color: #1f2937;
-            --light-color: #f9fafb;
-            --dark-color: #111827;
-            --glass-effect: rgba(255, 255, 255, 0.95);
-        }
-        
-        body {
-            font-family: Vazirmatn, sans-serif;
-            padding-top: 75px; /* برای فیکس شدن نوار در بالای صفحه */
-        }
-        
-        /* نوار ناوبری سفارشی */
-        .navbar-custom {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s ease;
-            padding: 1.2rem 0;
-            min-height: 75px;
-        }
-        
-        .navbar-custom.scrolled {
-            background: var(--glass-effect) !important;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 0.8rem 0;
-        }
-        
-        .navbar-custom.scrolled .nav-link,
-        .navbar-custom.scrolled .navbar-brand {
-            color: var(--dark-color) !important;
-        }
-        
-        .navbar-custom.scrolled .btn-outline-light {
-            color: var(--dark-color) !important;
-            border-color: var(--dark-color) !important;
-        }
-        
-        .navbar-custom .navbar-brand img {
-            height: 55px;
-            transition: all 0.3s ease;
-        }
-        
-        .navbar-custom.scrolled .navbar-brand img {
-            height: 45px;
-        }
-        
-        .navbar-custom .nav-link {
-            color: white;
-            font-weight: 800; /* فونت بسیار پررنگ */
-            font-size: 1.05rem;
-            padding: 0.5rem 1.3rem;
-            margin: 0 0.1rem;
-            position: relative;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-        }
-        
-        .navbar-custom .nav-link i {
-            margin-left: 0.5rem;
-            font-size: 1.1rem;
-        }
-        
-        /* افکت متالیک برای لینک‌ها */
-        .navbar-custom .nav-link:hover {
-            color: white !important;
-            text-shadow: 0 0 8px rgba(255,255,255,0.7);
-            transform: translateY(-1px);
-        }
-        
-        .navbar-custom .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
-            border-radius: 5px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .navbar-custom .nav-link:hover::before {
-            opacity: 1;
-        }
-        
-        .navbar-custom .nav-link.active {
-            color: var(--accent-color) !important;
-            font-weight: 900;
-        }
-        
-        /* دکمه‌های ویژه */
-        .btn-custom-primary {
-            background: linear-gradient(135deg, var(--accent-color), #f0b53a);
-            color: #2D2727;
-            border: none;
-            border-radius: 50px;
-            padding: 0.7rem 2rem;
-            font-weight: 800;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(247, 192, 74, 0.4);
-            text-shadow: none;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-custom-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(247, 192, 74, 0.6);
-        }
-        
-        .btn-custom-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.2));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .btn-custom-primary:hover::before {
-            opacity: 1;
-        }
-        
-        .btn-custom-outline {
-            border: 2px solid white;
-            border-radius: 50px;
-            padding: 0.7rem 2rem;
-            font-weight: 800;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-custom-outline:hover {
-            background-color: white;
-            color: var(--primary-color) !important;
-            border-color: white;
-        }
-        
-        /* تنظیمات برای آیتم‌های منو */
-        .navbar-nav {
-            display: flex;
-            align-items: center;
-            flex-wrap: nowrap;
-        }
-        
-        .nav-item {
-            display: flex;
-            align-items: center;
-            height: 100%;
-        }
-        
-        /* ریسپانسیو */
-        @media (max-width: 1200px) {
-            .navbar-custom .nav-link {
-                padding: 0.5rem 1rem;
-                font-size: 1rem;
-            }
-            
-            .btn-custom-outline,
-            .btn-custom-primary {
-                padding: 0.6rem 1.5rem;
-            }
-        }
-        
-        @media (max-width: 992px) {
-            .navbar-custom {
-                background: var(--primary-color) !important;
-                padding: 1rem 0;
-            }
-            
-            .navbar-collapse {
-                padding: 1rem 0;
-                background-color: var(--secondary-color);
-                border-radius: 0 0 10px 10px;
-                margin-top: 0.5rem;
-            }
-            
-            .nav-link {
-                padding: 0.8rem 1.5rem !important;
-                justify-content: flex-start;
-            }
-            
-            .btn-custom-outline,
-            .btn-custom-primary {
-                margin: 0.5rem 1.5rem;
-                width: calc(100% - 3rem);
-                text-align: center;
-                display: block;
-            }
-        }
-    </style>
-</head>
-<body>
-   <!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>هنرستان فنی حرفه‌ای دانشمند قلم‌چی</title>
-    <!-- Bootstrap 5 RTL -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Vazirmatn Font -->
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts.css" rel="stylesheet" type="text/css" />
-    <style>
-        :root {
-            --primary-color: #2D9596; /* سبز یشمی */
-            --secondary-color: #1A5F7A; /* سبز یشمی تیره */
-            --accent-color: #F7C04A; /* رنگ طلایی برای تاکید */
-            --text-color: #1f2937;
-            --light-color: #f9fafb;
-            --dark-color: #111827;
-            --glass-effect: rgba(255, 255, 255, 0.95);
-        }
-        
-        body {
-            font-family: Vazirmatn, sans-serif;
-            padding-top: 70px;
-        }
-        
-        /* نوار ناوبری سفارشی */
-        .navbar-custom {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
-            padding: 0.8rem 0;
-            min-height: 70px;
-        }
-        
-        .navbar-custom .container {
-            display: flex;
-            flex-wrap: nowrap;
-            align-items: center;
-        }
-        
-        /* لوگو */
-        .navbar-brand img {
-            height: 45px;
-            width: auto;
-        }
-        
-        /* آیتم‌های منو */
-        .navbar-nav {
-            display: flex;
-            flex-wrap: nowrap;
-            align-items: center;
-            white-space: nowrap;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            padding: 0 10px;
-        }
-        
-        .nav-item {
-            flex-shrink: 0;
-        }
-        
-        .nav-link {
-            color: white;
-            font-weight: 700;
-            font-size: 0.95rem;
-            padding: 0.5rem 1rem;
-            margin: 0 2px;
-            display: inline-flex;
-            align-items: center;
-            white-space: nowrap;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-        }
-        
-        .nav-link i {
-            margin-left: 5px;
-            font-size: 1rem;
-        }
-        
-        .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.15);
-			
-        }
-        
-        .nav-link.active {
-            color: var(--accent-color) !important;
-            font-weight: 800;
-        }
-        
-        /* دکمه‌ها */
-        .auth-buttons {
-            display: flex;
-            flex-shrink: 0;
-            margin-right: 10px;
-        }
-        
-        .btn-nav {
-            padding: 0.5rem 1.2rem;
-            font-weight: 700;
-            font-size: 0.9rem;
-            border-radius: 50px;
-            white-space: nowrap;
-        }
-        
-        .btn-login {
-            border: 2px solid white;
-            color: white;
-            margin-left: 0.5rem;
-        }
-        
-        .btn-login:hover {
-            background-color: white;
-            color: var(--primary-color);
-        }
-        
-        .btn-register {
-            background-color: var(--accent-color);
-            color: #2D2727;
-            border: none;
-        }
-        
-        .btn-register:hover {
-            background-color: #f0b53a;
-        }
-        
-        /* همبرگر منو */
-        .navbar-toggler {
-            border: none;
-            padding: 0.5rem;
-        }
-        
-        /* ریسپانسیو */
-        @media (max-width: 992px) {
-            .navbar-nav {
-                padding: 10px 0;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .nav-item {
-                width: 100%;
-            }
-            
-            .nav-link {
-                padding: 0.8rem 1.5rem !important;
-                width: 100%;
-            }
-            
-            .auth-buttons {
-                margin: 10px 0;
-                width: 100%;
-                flex-direction: column;
-            }
-            
-            .btn-nav {
-                width: 100%;
-                margin: 5px 0;
-                text-align: center;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- نوار ناوبری پیشرفته -->
-    <!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>هنرستان فنی حرفه‌ای دانشمند قلم‌چی</title>
-    <!-- Bootstrap 5 RTL -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Vazirmatn Font -->
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts.css" rel="stylesheet" type="text/css" />
-    <style>
-        :root {
-            --primary-color: #2D9596; /* سبز یشمی */
-            --secondary-color: #1A5F7A; /* سبز یشمی تیره */
-            --accent-color: #F7C04A; /* رنگ طلایی برای تاکید */
-            --text-color: #1f2937;
-            --light-color: #f9fafb;
-            --dark-color: #111827;
-            --glass-effect: rgba(255, 255, 255, 0.95);
-        }
-        
-        body {
-            font-family: Vazirmatn, sans-serif;
-            padding-top: 70px;
-        }
-        
-        /* نوار ناوبری سفارشی */
-        .navbar-custom {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
-            padding: 0.8rem 0;
-            min-height: 70px;
-        }
-        
-        .navbar-custom .container {
-            display: flex;
-            flex-wrap: nowrap;
-            align-items: center;
-        }
-        
-        /* لوگو */
-        .navbar-brand img {
-            height: 45px;
-            width: auto;
-        }
-        
-        /* آیتم‌های منو */
-        .navbar-nav {
-            display: flex;
-            flex-wrap: nowrap;
-            align-items: center;
-            white-space: nowrap;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            padding: 0 10px;
-        }
-        
-        .nav-item {
-            flex-shrink: 0;
-        }
-        
-        .nav-link {
-            color: white;
-            font-weight: 700;
-            font-size: 0.95rem;
-            padding: 0.5rem 1rem;
-            margin: 0 2px;
-            display: inline-flex;
-            align-items: center;
-            white-space: nowrap;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-        }
-        
-        .nav-link i {
-            margin-left: 5px;
-            font-size: 1rem;
-        }
-        
-        .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.15);
-			
-        }
-        
-        nav-link.active {
-    color: #7CFC00 !important; /* سبز فسفری روشن */
-    font-weight: 800;
-}
-        }
-        
-        /* دکمه‌ها */
-        .auth-buttons {
-            display: flex;
-            flex-shrink: 0;
-            margin-right: 10px;
-        }
-        
-        .btn-nav {
-            padding: 0.5rem 1.2rem;
-            font-weight: 700;
-            font-size: 0.9rem;
-            border-radius: 50px;
-            white-space: nowrap;
-        }
-        
-        .btn-login {
-            border: 2px solid black;
-            color: black;
-            margin-left: 0.5rem;
-        }
-        
-        .btn-login:hover {
-            background-color: white;
-            color: var(--primary-color);
-        }
-        
-        .btn-register {
-		 
-            background-color: var(--accent-color);
-            color: #2D2727;
-           border: 2px solid black;
-            color: black;
-            margin-left: 0.5rem;
-        }
-        
-        .btn-register:hover {
-            background-color: #f0b53a;
-        }
-        
-        /* همبرگر منو */
-        .navbar-toggler {
-            border: none;
-            padding: 0.5rem;
-        }
-        
-        /* ریسپانسیو */
-        @media (max-width: 992px) {
-            .navbar-nav {
-                padding: 10px 0;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .nav-item {
-                width: 100%;
-            }
-            
-            .nav-link {
-                padding: 0.8rem 1.5rem !important;
-                width: 100%;
-            }
-            
-            .auth-buttons {
-                margin: 10px 0;
-                width: 100%;
-                flex-direction: column;
-            }
-            
-            .btn-nav {
-                width: 100%;
-                margin: 5px 0;
-                text-align: center;
-            }
-        }
-    </style>
-</head>
-<body>
     <!-- نوار ناوبری پیشرفته -->
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
         <div class="container">
-           
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+            <a class="navbar-brand" href="index.html" aria-label="صفحه اصلی هنرستان دانشمند">
+                <img src="assets/images/logo.png" alt="هنرستان دانشمند">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="باز کردن منو">
                 <i class="fas fa-bars text-white"></i>
             </button>
-            
             <div class="collapse navbar-collapse" id="navbarMain">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
@@ -1802,240 +1329,110 @@
                         <a class="nav-link" href="contact.html"><i class="fas fa-phone-alt"></i> تماس با ما</a>
                     </li>
                 </ul>
-                 <a class="navbar-brand" href="index.html">
-                <img src="assets/images/logo.png" alt="هنرستان دانشمند">
-            </a>
                 <div class="auth-buttons">
                     <a href="login.html" class="btn btn-login btn-nav"><i class="fas fa-sign-in-alt"></i> ورود</a>
-                    <a href="register.html" class="btn btn-register btn-nav"><i class="fas fa-user-edit"></i> ثبت‌نام</a>
+                    <a href="admissions.html" class="btn btn-register btn-nav"><i class="fas fa-user-edit"></i> ثبت‌نام</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- اسکریپت‌ها -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // برای اطمینان از عدم شکست خطوط
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.style.whiteSpace = 'nowrap';
-        });
-    </script>
-</body>
-</html>
     <!-- بخش هیرو -->
     <section class="hero-section">
         <div class="container">
             <div class="hero-content">
-               <span class="hero-badge animate" style="background: linear-gradient(90deg, #6e48aa, #9d50bb); color: white; text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); box-shadow: 0 0 15px #9d50bb; border: 1px solid #ffffff30; padding: 8px 15px; border-radius: 20px; font-weight: bold; display: inline-block;">پذیرش از دانش‌آموزان شهرستان‌های اصفهان، خمینی‌شهر و شاهین‌شهر درسال تحصیلی جدید</span>
+                <span class="hero-badge animate">پذیرش از دانش‌آموزان شهرستان‌های اصفهان، خمینی‌شهر و شاهین‌شهر درسال تحصیلی جدید</span>
                 <h1 class="hero-title animate delay-1">هنرستان فنی حرفه‌ای دانشگاه صنعتی دانشمند قلم چی</h1>
                 <p class="hero-subtitle animate delay-2">تربیت نیروی متخصص و کارآمد برای صنعت کشور با بهره‌گیری از آخرین فناوری‌های آموزشی و برنامه‌های درسی تطبیق‌پذیر با هوش مصنوعی</p>
-           <div class="hero-buttons animate delay-3">
-  <div class="d-flex justify-content-center align-items-center position-relative" 
-       style="width: 100%; --offset: -100px;"> <!-- تغییر این مقدار برای تنظیم موقعیت -->
-       
-    <div style="transform: translateX(var(--offset)); display: flex; align-items: center; gap: 15px;">
-      <!-- دکمه مشاهده رشته‌ها -->
-      <a href="programs.html" class="btn btn-primary">
-        <i class="fas fa-list-ul me-2"></i>مشاهده رشته‌ها
-      </a>
-      
-      <!-- دکمه ثبت‌نام آنلاین -->
-      <a href="admissions.html" class="btn btn-outline-light">
-        <i class="fas fa-user-plus me-2"></i>ثبت‌نام آنلاین
-      </a>
-      
-      <!-- لوگو و ورود نمایندگی -->
-      <div class="position-relative" style="margin-left: 30px;">
-        <a class="navbar-brand" href="pass3.html">
-          <img src="assets/images/logo.png" alt="هنرستان دانشمند" 
-               style="height: auto; max-height: 150px; width: auto;">
-        </a>
-        <a href="pass3.html" class="btn btn-outline-light position-absolute start-50 translate-middle-x mt-1 px-3 py-1" 
-           style="font-size: 0.8rem; white-space: nowrap; min-width: 120px; text-decoration: none;
-                  animation: fadeInOut 3s infinite;">
-          <i class="fas fa-sign-in-alt me-1"></i>ورود نمایندگی
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<style>
-  @keyframes fadeInOut {
-    0%,100% { opacity:0.7; transform: translateX(-50%) translateY(2px); }
-    50% { opacity:1; transform: translateX(-50%) translateY(0); }
-  }
-</style>
-
+                <div class="hero-buttons animate delay-3">
+                    <div class="d-flex justify-content-center align-items-center position-relative" style="width: 100%; --offset: -100px;">
+                        <div style="transform: translateX(var(--offset)); display: flex; align-items: center; gap: 15px;">
+                            <a href="programs.html" class="btn btn-primary"><i class="fas fa-list-ul me-2"></i>مشاهده رشته‌ها</a>
+                            <a href="admissions.html" class="btn btn-outline-light"><i class="fas fa-user-plus me-2"></i>ثبت‌نام آنلاین</a>
+                            <div class="position-relative" style="margin-left: 30px;">
+                                <a class="navbar-brand" href="pass3.html">
+                                    <img src="assets/images/logo.png" alt="هنرستان دانشمند" style="height: auto; max-height: 150px; width: auto;">
+                                </a>
+                                <a href="pass3.html" class="btn btn-outline-light position-absolute start-50 translate-middle-x mt-1 px-3 py-1" style="font-size: 0.8rem; white-space: nowrap; min-width: 120px; text-decoration: none; animation: fadeInOut 3s infinite;">
+                                    <i class="fas fa-sign-in-alt me-1"></i>ورود نمایندگی
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
                 <img src="assets/images/hero-image.jpg" alt="هنرستان دانشمند" class="img-fluid hero-image animate delay-4">
             </div>
         </div>
     </section>
-<div class="golden-badge-container">
- <button class="golden-badge" onclick="window.location.href='roos.html'">آئین نامه ثبت نام و شرایط پذیرش </button>
-</div>
 
-<style>
-  .golden-badge-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 15px 0;
-    font-family: 'Yekan', 'IranYekan', sans-serif;
-  }
-  
-  .golden-badge {
-    display: inline-block;
-    padding: 12px 30px;
-    border-radius: 30px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    text-align: center;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
-    color: #FFD700;
-    text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5),
-                inset 0 0 10px rgba(255, 215, 0, 0.2);
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    position: relative;
-    overflow: hidden;
-    line-height: 1.6;
-    letter-spacing: 0.5px;
-  }
-  
-  .golden-badge::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-      to bottom right,
-      transparent 45%,
-      rgba(255, 215, 0, 0.1) 50%,
-      transparent 55%
-    );
-    transform: rotate(30deg);
-    animation: gold-shine 4s infinite linear;
-    z-index: 0;
-  }
-  
-  @keyframes gold-shine {
-    0% { transform: translateX(-100%) translateY(-100%) rotate(30deg); }
-    100% { transform: translateX(100%) translateY(100%) rotate(30deg); }
-  }
-  
-  @media (max-width: 768px) {
-    .golden-badge {
-      font-size: 0.95rem;
-      padding: 10px 20px;
-      max-width: 90%;
-    }
-  }
-</style>
+    <div class="golden-badge-container">
+        <button class="golden-badge" onclick="window.location.href='roos.html'">آئین نامه ثبت نام و شرایط پذیرش</button>
+    </div>
+
     <!-- بخش ویژگی‌ها -->
     <section class="features-section">
         <div class="container">
             <h2 class="section-title">چرا هنرستان دانشمند؟</h2>
-
-         
-         
             <div class="row">
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <div class="feature-icon">
-                           <i class="fas fa-bus"></i>
-                        </div>
-                        <h3 class="feature-title">ایاب و ذهاب </h3>
-                        <p class="feature-text">سرویس‌های دانش آموزی  مدرن و ایمن، با ناوگان به‌روز و رانندگان مجرب "سرویس‌های هوشمند با رهگیری لحظه‌ای و سیستم نظارت تصویری 📲🚐
-امنیت و آسایش دانش‌آموزان، اولویت همیشگی ماست </p>
+                        <div class="feature-icon"><i class="fas fa-bus"></i></div>
+                        <h3 class="feature-title">ایاب و ذهاب</h3>
+                        <p class="feature-text">سرویس‌های دانش آموزی مدرن و ایمن، با ناوگان به‌روز و رانندگان مجرب "سرویس‌های هوشمند با رهگیری لحظه‌ای و سیستم نظارت تصویری 📲🚐 امنیت و آسایش دانش‌آموزان، اولویت همیشگی ماست</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <div class="feature-icon">
-                           <i class="fas fa-hand-holding-heart"></i>
-                        </div>
-                        <h3 class="feature-title">تسهیلات ویژه مالی </h3>
-                        <p class="feature-text">
-            <i class="fas fa-percentage"></i> تخفیف‌های دوره‌ای ویژه<br>
-            <i class="fas fa-credit-card"></i> امکان پرداخت اقساطی<br>
-            <i class="fas fa-graduation-cap"></i> بورسیه تحصیلی استعدادی<br>
-            <i class="fas fa-university"></i> حمایت نهادهای مالی
-        </p>
+                        <div class="feature-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                        <h3 class="feature-title">تسهیلات ویژه مالی</h3>
+                        <p class="feature-text"><i class="fas fa-percentage"></i> تخفیف‌های دوره‌ای ویژه<br><i class="fas fa-credit-card"></i> امکان پرداخت اقساطی<br><i class="fas fa-graduation-cap"></i> بورسیه تحصیلی استعدادی<br><i class="fas fa-university"></i> حمایت نهادهای مالی</p>
                     </div>
-
                 </div>
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <div class="feature-icon">
-                         <i class="fas fa-user-graduate"></i>
-                        </div>
+                        <div class="feature-icon"><i class="fas fa-user-graduate"></i></div>
                         <h3 class="feature-title">مشاوره تحصیلی-شغلی</h3>
-                      <p class="feature-text">
-            <i class="fas fa-road"></i> برنامه‌ریزی مسیر تحصیلی<br>
-            <i class="fas fa-briefcase"></i> راهنمایی شغلی و بازار کار<br>
-            <i class="fas fa-chart-line"></i> توسعه مهارت‌های فردی<br>
-            <i class="fas fa-trophy"></i> همراهی تا رسیدن به موفقیت
-        </p>
+                        <p class="feature-text"><i class="fas fa-road"></i> برنامه‌ریزی مسیر تحصیلی<br><i class="fas fa-briefcase"></i> راهنمایی شغلی و بازار کار<br><i class="fas fa-chart-line"></i> توسعه مهارت‌های فردی<br><i class="fas fa-trophy"></i> همراهی تا رسیدن به موفقیت</p>
                     </div>
- </div>
-<div class="col-md-4">
+                </div>
+                <div class="col-md-4">
                     <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-chalkboard-teacher"></i>
-                        </div>
+                        <div class="feature-icon"><i class="fas fa-chalkboard-teacher"></i></div>
                         <h3 class="feature-title">اساتید مجرب و متخصص</h3>
                         <p class="feature-text">بهترین مدرسان با سابقه صنعتی و آموزشی برای تربیت نیروی کار ماهر و متخصص در رشته‌های مختلف فنی و حرفه‌ای</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-robot"></i>
-                        </div>
+                        <div class="feature-icon"><i class="fas fa-robot"></i></div>
                         <h3 class="feature-title">هوش مصنوعی در آموزش</h3>
                         <p class="feature-text">استفاده از سیستم‌های هوشمند برای شخصی‌سازی آموزش، ارزیابی دقیق و ارائه بازخورد فوری به دانش‌آموزان</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-flask"></i>
-                        </div>
+                        <div class="feature-icon"><i class="fas fa-flask"></i></div>
                         <h3 class="feature-title">کارگاه‌های مجهز</h3>
                         <p class="feature-text">امکانات آموزشی پیشرفته و محیطی کاملاً عملی برای یادگیری مؤثر با استانداردهای روز صنعت</p>
                     </div>
-
-
                 </div>
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-briefcase"></i>
-                        </div>
+                        <div class="feature-icon"><i class="fas fa-briefcase"></i></div>
                         <h3 class="feature-title">تضمین شغلی</h3>
                         <p class="feature-text">همکاری با شرکت‌های معتبر برای جذب فارغ‌التحصیلان مستعد و ارتباط مستقیم با بازار کار</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-book"></i>
-                        </div>
+                        <div class="feature-icon"><i class="fas fa-book"></i></div>
                         <h3 class="feature-title">سرفصل‌های به‌روز</h3>
                         <p class="feature-text">برنامه‌های درسی منطبق با استانداردهای وزارت آموزش و پرورش و نیازهای روز صنعت</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
+                        <div class="feature-icon"><i class="fas fa-trophy"></i></div>
                         <h3 class="feature-title">رتبه‌های برتر</h3>
                         <p class="feature-text">پرورش دهنده نفرات برتر کنکور و مسابقات مهارتی در رشته‌های فنی و حرفه‌ای</p>
                     </div>
@@ -2048,11 +1445,11 @@
     <section class="programs-section">
         <div class="container">
             <h2 class="section-title">رشته‌های آموزشی</h2>
-            <p class="section-subtitle">برنامه‌های آموزشی تخصصی ما برای پایه‌های دهم  با استفاده از هوش مصنوعی</p>
+            <p class="section-subtitle">برنامه‌های آموزشی تخصصی ما برای پایه‌های دهم با استفاده از هوش مصنوعی</p>
             <div class="row">
                 <div class="col-md-4">
                     <div class="program-card">
-                        <span class="program-badge">پایه دهم </span>
+                        <span class="program-badge">پایه دهم</span>
                         <img src="assets/images/program1.jpg" alt="فناوری اطلاعات" class="program-img">
                         <div class="program-content">
                             <h3 class="program-title">فناوری اطلاعات و ارتباطات</h3>
@@ -2067,7 +1464,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="program-card">
-                        <span class="program-badge">پایه دهم </span>
+                        <span class="program-badge">پایه دهم</span>
                         <img src="assets/images/program2.jpg" alt="حسابداری" class="program-img">
                         <div class="program-content">
                             <h3 class="program-title">حسابداری مالی</h3>
@@ -2082,7 +1479,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="program-card">
-                        <span class="program-badge">پایه دهم </span>
+                        <span class="program-badge">پایه دهم</span>
                         <img src="assets/images/program3.jpg" alt="الکتروتکنیک" class="program-img">
                         <div class="program-content">
                             <h3 class="program-title">الکتروتکنیک</h3>
@@ -2097,7 +1494,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="program-card">
-                        <span class="program-badge">پایه دهم </span>
+                        <span class="program-badge">پایه دهم</span>
                         <img src="assets/images/program4.jpg" alt="مکانیک خودرو" class="program-img">
                         <div class="program-content">
                             <h3 class="program-title">مکانیک خودرو</h3>
@@ -2112,7 +1509,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="program-card">
-                        <span class="program-badge">پایه دهم </span>
+                        <span class="program-badge">پایه دهم</span>
                         <img src="assets/images/program5.jpg" alt="معماری داخلی" class="program-img">
                         <div class="program-content">
                             <h3 class="program-title">معماری داخلی</h3>
@@ -2127,7 +1524,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="program-card">
-                        <span class="program-badge">پایه دهم </span>
+                        <span class="program-badge">پایه دهم</span>
                         <img src="assets/images/program6.jpg" alt="گرافیک" class="program-img">
                         <div class="program-content">
                             <h3 class="program-title">گرافیک و طراحی دیجیتال</h3>
@@ -2155,27 +1552,21 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="innovation-card">
-                        <div class="innovation-icon">
-                            <i class="fas fa-user-graduate"></i>
-                        </div>
+                        <div class="innovation-icon"><i class="fas fa-user-graduate"></i></div>
                         <h3 class="innovation-title">آموزش شخصی‌سازی شده</h3>
                         <p>سیستم هوشمند ما با تحلیل نقاط قوت و ضعف هر دانش‌آموز، برنامه‌های درسی اختصاصی طراحی می‌کند</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="innovation-card">
-                        <div class="innovation-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
+                        <div class="innovation-icon"><i class="fas fa-chart-line"></i></div>
                         <h3 class="innovation-title">ارزیابی هوشمند</h3>
                         <p>ارائه بازخورد فوری و تحلیل پیشرفت تحصیلی با استفاده از الگوریتم‌های پیشرفته یادگیری ماشین</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="innovation-card">
-                        <div class="innovation-icon">
-                            <i class="fas fa-laptop-code"></i>
-                        </div>
+                        <div class="innovation-icon"><i class="fas fa-laptop-code"></i></div>
                         <h3 class="innovation-title">محتوای تعاملی</h3>
                         <p>استفاده از محتوای آموزشی تعاملی و شبیه‌سازهای هوشمند برای درک بهتر مفاهیم پیچیده</p>
                     </div>
@@ -2271,83 +1662,58 @@
             <p class="section-subtitle">راه‌های ارتباطی و خدمات آنلاین هنرستان</p>
             <div class="row g-4">
                 <div class="col-md-3 col-sm-6">
-                    <a href="programs.html" class="quick-link">
-                        <div class="quick-icon">
-                            <i class="fas fa-list-ul"></i>
-                        </div>
+                    <a href="programs.html" class="quick-link" aria-label="رشته‌های آموزشی">
+                        <div class="quick-icon"><i class="fas fa-list-ul"></i></div>
                         <h3 class="quick-title">رشته‌های آموزشی</h3>
                     </a>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <a href="admissions.html" class="quick-link">
-                        <div class="quick-icon">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
+                    <a href="admissions.html" class="quick-link" aria-label="ثبت‌نام آنلاین">
+                        <div class="quick-icon"><i class="fas fa-user-plus"></i></div>
                         <h3 class="quick-title">ثبت‌نام آنلاین</h3>
                     </a>
-              
-
-     </div>
-
-
+                </div>
                 <div class="col-md-3 col-sm-6">
-                    <a href="roos.html" class="quick-link">
-                        <div class="quick-icon">
-                            <i class="fas fa-university"></i>
-                        </div>
+                    <a href="roos.html" class="quick-link" aria-label="آیین نامه ثبت‌نام و شرایط پذیرش">
+                        <div class="quick-icon"><i class="fas fa-university"></i></div>
                         <h3 class="quick-title">آیین نامه ثبت‌نام و شرایط پذیرش</h3>
                     </a>
                 </div>
-
                 <div class="col-md-3 col-sm-6">
-                    <a href="contact.html" class="quick-link">
-                        <div class="quick-icon">
-                            <i class="fas fa-phone-alt"></i>
-                        </div>
+                    <a href="contact.html" class="quick-link" aria-label="تماس با ما">
+                        <div class="quick-icon"><i class="fas fa-phone-alt"></i></div>
                         <h3 class="quick-title">تماس با ما</h3>
                     </a>
-  </div>
-   <div class="col-md-3 col-sm-6">
-                    <a href="dig.html" class="quick-link">
-                        <div class="quick-icon">
-                              <i class="fas fa-book-open"></i>
-
-   </div>
-                        <h3 class="quick-title">کتابخانه دیجیتال </h3>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="dig.html" class="quick-link" aria-label="کتابخانه دیجیتال">
+                        <div class="quick-icon"><i class="fas fa-book-open"></i></div>
+                        <h3 class="quick-title">کتابخانه دیجیتال</h3>
                     </a>
- </div>
-<div class="col-md-3 col-sm-6">
-                    <a href="admissions.html" class="quick-link">
-                        <div class="quick-icon">
-                            <i class="fas fa-poll"></i>
-
-   </div>
-                        <h3 class="quick-title">نتایج آزمون ها</h3>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="admissions.html" class="quick-link" aria-label="نتایج آزمون‌ها">
+                        <div class="quick-icon"><i class="fas fa-poll"></i></div>
+                        <h3 class="quick-title">نتایج آزمون‌ها</h3>
                     </a>
-</div>
-<div class="col-md-3 col-sm-6">
-                    <a href="admissions.html" class="quick-link">
-                        <div class="quick-icon">
-                          <i class="fas fa-calendar-alt"></i>
-
-   </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="admissions.html" class="quick-link" aria-label="تقویم آموزشی">
+                        <div class="quick-icon"><i class="fas fa-calendar-alt"></i></div>
                         <h3 class="quick-title">تقویم آموزشی</h3>
                     </a>
                 </div>
-
                 <div class="col-md-3 col-sm-6">
-                    <a href="contact.html" class="quick-link">
-                        <div class="quick-icon">
-                           <p> <i class="fas fa-school"></i></p>
-                        </div>
-                        <h3 class="quick-title">نمایندگی قلم چی </h3>
+                    <a href="contact.html" class="quick-link" aria-label="نمایندگی قلم چی">
+                        <div class="quick-icon"><i class="fas fa-school"></i></div>
+                        <h3 class="quick-title">نمایندگی قلم چی</h3>
                     </a>
-
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- بخش تماس - نسخه بهبود یافته -->
+    <!-- بخش تماس -->
     <section class="contact-section">
         <div class="container">
             <div class="row">
@@ -2355,46 +1721,38 @@
                     <div class="contact-info-card">
                         <h2 class="mb-4">ارتباط با هنرستان</h2>
                         <div class="contact-info">
-                            <div class="contact-icon-circle">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
+                            <div class="contact-icon-circle"><i class="fas fa-map-marker-alt"></i></div>
                             <div class="contact-text">
                                 <h5>آدرس</h5>
                                 <p>اصفهان، خیابان دانشگاه صنعتی، هنرستان فنی حرفه‌ای دانشمند</p>
                             </div>
                         </div>
                         <div class="contact-info">
-                            <div class="contact-icon-circle">
-                                <i class="fas fa-phone-alt"></i>
-                            </div>
+                            <div class="contact-icon-circle"><i class="fas fa-phone-alt"></i></div>
                             <div class="contact-text">
                                 <h5>تلفن</h5>
                                 <p>۰۳۱-۳۴۵۶۷۸۹۰</p>
                             </div>
                         </div>
                         <div class="contact-info">
-                            <div class="contact-icon-circle">
-                                <i class="fas fa-envelope"></i>
-                            </div>
+                            <div class="contact-icon-circle"><i class="fas fa-envelope"></i></div>
                             <div class="contact-text">
                                 <h5>ایمیل</h5>
                                 <p>info@daneshmand-school.ir</p>
                             </div>
                         </div>
                         <div class="contact-info">
-                            <div class="contact-icon-circle">
-                                <i class="fas fa-clock"></i>
-                            </div>
+                            <div class="contact-icon-circle"><i class="fas fa-clock"></i></div>
                             <div class="contact-text">
                                 <h5>ساعات کاری</h5>
                                 <p>شنبه تا چهارشنبه: ۷:۳۰ تا ۱۵:۳۰</p>
                             </div>
                         </div>
                         <div class="social-links">
-                            <a href="#" class="social-link" data-bs-toggle="tooltip" title="اینستاگرام"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link" data-bs-toggle="tooltip" title="تلگرام"><i class="fab fa-telegram"></i></a>
-                            <a href="#" class="social-link" data-bs-toggle="tooltip" title="واتساپ"><i class="fab fa-whatsapp"></i></a>
-                            <a href="#" class="social-link" data-bs-toggle="tooltip" title="یوتیوب"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="social-link" data-bs-toggle="tooltip" title="اینستاگرام" aria-label="اینستاگرام"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link" data-bs-toggle="tooltip" title="تلگرام" aria-label="تلگرام"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="social-link" data-bs-toggle="tooltip" title="واتساپ" aria-label="واتساپ"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="social-link" data-bs-toggle="tooltip" title="یوتیوب" aria-label="یوتیوب"><i class="fab fa-youtube"></i></a>
                         </div>
                     </div>
                 </div>
@@ -2404,22 +1762,22 @@
                             <h3>پیام به هنرستان</h3>
                             <p>سوالات، پیشنهادات و انتقادات خود را با ما در میان بگذارید</p>
                         </div>
-                        <form class="needs-validation" novalidate>
+                        <form class="needs-validation p-4" novalidate>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="fullname" placeholder="نام و نام خانوادگی" required>
+                                        <input type="text" class="form-control" id="fullname" placeholder="نام و نام خانوادگی" required aria-describedby="fullnameFeedback">
                                         <label for="fullname">نام و نام خانوادگی</label>
-                                        <div class="invalid-feedback">
+                                        <div id="fullnameFeedback" class="invalid-feedback">
                                             لطفاً نام و نام خانوادگی خود را وارد کنید
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" placeholder="آدرس ایمیل" required>
+                                        <input type="email" class="form-control" id="email" placeholder="آدرس ایمیل" required aria-describedby="emailFeedback">
                                         <label for="email">آدرس ایمیل</label>
-                                        <div class="invalid-feedback">
+                                        <div id="emailFeedback" class="invalid-feedback">
                                             لطفاً یک ایمیل معتبر وارد کنید
                                         </div>
                                     </div>
@@ -2427,26 +1785,26 @@
                             </div>
                             <div class="mb-3">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="subject" placeholder="موضوع پیام" required>
+                                    <input type="text" class="form-control" id="subject" placeholder="موضوع پیام" required aria-describedby="subjectFeedback">
                                     <label for="subject">موضوع پیام</label>
-                                    <div class="invalid-feedback">
+                                    <div id="subjectFeedback" class="invalid-feedback">
                                         لطفاً موضوع پیام را وارد کنید
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <div class="form-floating">
-                                    <textarea class="form-control" id="message" placeholder="متن پیام" style="height: 150px" required></textarea>
+                                    <textarea class="form-control" id="message" placeholder="متن پیام" style="height: 150px" required aria-describedby="messageFeedback"></textarea>
                                     <label for="message">متن پیام</label>
-                                    <div class="invalid-feedback">
+                                    <div id="messageFeedback" class="invalid-feedback">
                                         لطفاً متن پیام را وارد کنید
                                     </div>
                                 </div>
                             </div>
                             <div class="d-grid">
-                                <button class="btn btn-submit" type="submit">
+                                <button class="btn btn-submit" type="submit" aria-label="ارسال پیام">
                                     <span class="submit-text">ارسال پیام</span>
-                                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 </button>
                             </div>
                         </form>
@@ -2460,106 +1818,61 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-4 col-md-6 mb-4">
                     <div class="footer-about">
                         <div class="footer-logo">
                             <img src="assets/images/logo.png" alt="هنرستان دانشمند">
                             <span class="footer-logo-text">هنرستان دانشمند</span>
                         </div>
-                        <p>هنرستان فنی حرفه‌ای دانشمند قلم چی با بیش از ۲۰ سال سابقه درخشان در تربیت نیروی کار ماهر، یکی از مراکز پیشرو در آموزش‌های مهارتی با استفاده از فناوری‌های نوین آموزشی است.</p>
+                        <p>هنرستان فنی حرفه‌ای دانشمند قلم چی با بهره‌گیری از فناوری‌های نوین آموزشی و اساتید مجرب، در راستای تربیت نیروی متخصص و کارآمد برای صنعت کشور فعالیت می‌کند. ما به پرورش استعدادها و آماده‌سازی دانش‌آموزان برای آینده‌ای روشن متعهد هستیم.</p>
                         <div class="social-links">
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="social-link" data-bs-toggle="tooltip" title="اینستاگرام" aria-label="اینستاگرام"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link" data-bs-toggle="tooltip" title="تلگرام" aria-label="تلگرام"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="social-link" data-bs-toggle="tooltip" title="واتساپ" aria-label="واتساپ"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="social-link" data-bs-toggle="tooltip" title="یوتیوب" aria-label="یوتیوب"><i class="fab fa-youtube"></i></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-4">
+                <div class="col-lg-2 col-md-6 mb-4">
                     <h5>لینک‌های مفید</h5>
                     <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-angle-left"></i> سوالات متداول</a></li>
-                        <li><a href="#"><i class="fas fa-angle-left"></i> گالری تصاویر</a></li>
-                        <li><a href="#"><i class="fas fa-angle-left"></i> اخبار و رویدادها</a></li>
-                        <li><a href="#"><i class="fas fa-angle-left"></i> همکاران صنعتی</a></li>
-                        <li><a href="#"><i class="fas fa-angle-left"></i> اساتید و مربیان</a></li>
+                        <li><i class="fas fa-chevron-left"></i><a href="index.html">صفحه اصلی</a></li>
+                        <li><i class="fas fa-chevron-left"></i><a href="about.html">درباره ما</a></li>
+                        <li><i class="fas fa-chevron-left"></i><a href="programs.html">رشته‌های آموزشی</a></li>
+                        <li><i class="fas fa-chevron-left"></i><a href="admissions.html">ثبت‌نام آنلاین</a></li>
+                        <li><i class="fas fa-chevron-left"></i><a href="contact.html">تماس با ما</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-2 col-md-4">
-                    <h5>رشته‌های آموزشی</h5>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>خدمات و امکانات</h5>
                     <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-angle-left"></i> فناوری اطلاعات</a></li>
-                        <li><a href="#"><i class="fas fa-angle-left"></i> حسابداری مالی</a></li>
-                        <li><a href="#"><i class="fas fa-angle-left"></i> الکتروتکنیک</a></li>
-                        <li><a href="#"><i class="fas fa-angle-left"></i> مکانیک خودرو</a></li>
-                        <li><a href="#"><i class="fas fa-angle-left"></i> گرافیک دیجیتال</a></li>
+                        <li><i class="fas fa-chevron-left"></i><a href="consultation.html">مشاوره تحصیلی</a></li>
+                        <li><i class="fas fa-chevron-left"></i><a href="ai-education.html">هوش مصنوعی در آموزش</a></li>
+                        <li><i class="fas fa-chevron-left"></i><a href="facilities.html">امکانات آموزشی</a></li>
+                        <li><i class="fas fa-chevron-left"></i><a href="blog.html">وبلاگ</a></li>
+                        <li><i class="fas fa-chevron-left"></i><a href="roos.html">آئین‌نامه ثبت‌نام</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-4 col-md-4">
+                <div class="col-lg-3 col-md-6 mb-4">
                     <h5>خبرنامه</h5>
-                    <p>برای دریافت آخرین اخبار، اطلاعیه‌ها و رویدادهای هنرستان در خبرنامه عضو شوید.</p>
+                    <p>برای دریافت آخرین اخبار و اطلاعیه‌های هنرستان، در خبرنامه ما عضو شوید.</p>
                     <form class="newsletter-form">
-                        <input type="email" placeholder="آدرس ایمیل شما">
-                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        <input type="email" placeholder="ایمیل خود را وارد کنید" required aria-label="ایمیل برای خبرنامه">
+                        <button type="submit" aria-label="عضویت در خبرنامه">عضویت</button>
                     </form>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p class="mb-0"><i class="far fa-copyright me-2"></i>۱۴۰۲ هنرستان فنی حرفه‌ای دانشمند قلم چی. تمام حقوق محفوظ است.</p>
+                <p>© ۱۴۰۴ هنرستان فنی حرفه‌ای دانشمند قلم چی | تمامی حقوق محفوظ است</p>
             </div>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <!-- اسکریپت‌ها -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // تغییر استایل نوار ناوبری هنگام اسکرول
-            const navbar = document.querySelector('.navbar-custom');
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            });
-            
-            // فعال سازی انیمیشن‌ها هنگام اسکرول
-            const animateElements = document.querySelectorAll('.animate');
-            
-            function checkAnimation() {
-                animateElements.forEach(element => {
-                    const elementPosition = element.getBoundingClientRect().top;
-                    const screenPosition = window.innerHeight / 1.2;
-                    
-                    if (elementPosition < screenPosition) {
-                        element.style.opacity = '1';
-                    }
-                });
-            }
-            
-            window.addEventListener('scroll', checkAnimation);
-            checkAnimation(); // اجرای اولیه برای عناصری که در دید هستند
-            
-            // اسکرول نرم برای لینک‌های داخلی
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-
-            // اعتبارسنجی فرم تماس
-            const contactForm = document.querySelector('.contact-section .needs-validation');
+        // اعتبارسنجی فرم تماس
+        const contactForm = document.querySelector('.contact-section .needs-validation');
             if (contactForm) {
                 contactForm.addEventListener('submit', function(event) {
                     if (!contactForm.checkValidity()) {
@@ -2604,5 +1917,7 @@
             });
         });
     </script>
+    <!-- شمارنده کوانتومی - قرار دهید در انتهای فایل قبل از </body> -->
+
 </body>
 </html>
