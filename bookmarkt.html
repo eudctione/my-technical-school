@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کتابخانه دیجیتالی | هنرستان فنی حرفه‌ای دانشمند قلم چی</title>
+    <style>
+        :root {
+            --primary-color: #006D77;
+            --secondary-color: #83C5BE;
+            --accent-color: #FFD166;
+            --light-color: #EDF6F9;
+            --dark-color: #003844;
+            --gradient-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-accent: linear-gradient(135deg, var(--accent-color), #FFB347);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        @font-face {
+            font-family: 'Vazirmatn';
+            src: url('data:font/woff2;base64,d09GMgABAAAAA...') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.8;
+            padding-top: 0px;
+        }
+        
+        /* نوار ناوبری پیشرفته */
+        .navbar-custom {
+            background: rgba(0, 109, 119, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-custom.scrolled {
+            background: var(--primary-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            padding: 0.5rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-brand {
+            color: white;
+            font-weight: 900;
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+            margin-left: 10px;
+        }
+        
+        .navbar-brand:hover {
+            transform: translateY(-2px);
+        }
+        
+        .navbar-toggler {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .navbar-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .navbar-links li {
+            margin-right: 5px;
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            margin: 0 0.3rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+            position: relative;
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+        
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            width: 100%;
+            left: 0;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: white;
+        }
+        
+        .nav-link i {
+            margin-left: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-accent);
+            border: none;
+            color: var(--dark-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #FFC850, #FFA347);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 180, 0, 0.3);
+        }
+        
+        .btn-outline-light {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline-light:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+        }
+        
+        /* بخش هیرو پیشرفته */
+        .hero-section {
+            background: var(--gradient-bg);
+            color: white;
+            padding: 8rem 0 5rem;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></svg>') repeat;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #6e48aa, #9d50bb);
+            color: white;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 15px #9d50bb;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            line-height: 1.3;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+        
+        .search-container {
+            max-width: 700px;
+            margin: 0 auto 3rem auto;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding-right: 60px;
+            transition: all 0.3s;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .search-btn {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--gradient-accent);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            color: var(--dark-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .search-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        /* بخش محتوا */
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+        
+        .section-light {
+            background-color: var(--light-color);
+        }
+        
+        .section-white {
+            background-color: white;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            font-weight: 900;
+            font-size: 2.2rem;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: var(--gradient-accent);
+            margin: 1.5rem auto;
+            border-radius: 3px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 4rem auto;
+            font-size: 1.1rem;
+        }
+        
+        /* فیلترها */
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 2.5rem;
+            justify-content: center;
+        }
+        
+        .filter-btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            background: white;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 109, 119, 0.2);
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-btn i {
+            margin-left: 5px;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 109, 119, 0.2);
+        }
+        
+        /* کارت‌های محتوا */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 3rem;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 180, 216, 0.15);
+        }
+        
+        .content-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--gradient-accent);
+            color: var(--dark-color);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            z-index: 2;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content-cover {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: transform 0.5s;
+        }
+        
+        .content-card:hover .content-cover {
+            transform: scale(1.05);
+        }
+        
+        .content-body {
+            padding: 1.8rem;
+        }
+        
+        .content-title {
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            color: var(--dark-color);
+            font-size: 1.2rem;
+            line-height: 1.4;
+        }
+        
+        .content-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .content-meta i {
+            color: var(--primary-color);
+            margin-left: 5px;
+        }
+        
+        .content-desc {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .content-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .content-rating {
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+        
+        .content-rating i {
+            margin-left: 3px;
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1.2rem;
+            font-size: 0.9rem;
+        }
+        
+        /* بخش ویژه */
+        .featured-section {
+            background: var(--gradient-bg);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></svg>') repeat;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .featured-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .featured-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+        
+        .featured-title {
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .featured-text {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+        
+        /* پاورقی */
+        footer {
+            background: linear-gradient(135deg, var(--dark-color), #002A32);
+            color: white;
+            padding: 4rem 0 2rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.05"/></svg>') repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo img {
+            height: 50px;
+            margin-left: 10px;
+        }
+        
+        .footer-logo-text {
+            font-weight: 900;
+            font-size: 1.5rem;
+        }
+        
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent-color);
+            color: var(--dark-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h5 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links i {
+            margin-left: 0.8rem;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-top: 1.5rem;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.7rem 1rem;
+            border-radius: 50px 0 0 50px;
+            border-right: none;
+        }
+        
+        .newsletter-form input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .newsletter-form button {
+            background: var(--gradient-accent);
+            border: none;
+            color: var(--dark-color);
+            font-weight: 700;
+            padding: 0 1.5rem;
+            border-radius: 0 50px 50px 0;
+            transition: all 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background: linear-gradient(135deg, #FFC850, #FFA347);
+        }
+        
+        .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* انیمیشن‌ها */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        .delay-4 {
+            animation-delay: 0.8s;
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-toggler {
+                display: block;
+            }
+            
+            .navbar-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--primary-color);
+                padding: 1rem;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+            
+            .navbar-links.active {
+                display: flex;
+            }
+            
+            .navbar-links li {
+                margin: 0.5rem 0;
+            }
+            
+            .hero-section {
+                padding: 7rem 0 4rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title::after {
+                width: 80px;
+                height: 4px;
+            }
+            
+            .filters {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                flex-wrap: nowrap;
+            }
+            
+            .filter-btn {
+                flex-shrink: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- نوار ناوبری پیشرفته -->
+    <nav class="navbar-custom">
+        <div class="container">
+            <div class="navbar-container">
+                <a href="index.html" class="navbar-brand">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgNTAiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xODAgMTBjLTExIDAtMjAgOS0yMCAyMHM5IDIwIDIwIDIwIDIwLTkgMjAtMjAtOS0yMC0yMC0yMHptMC0xMGMxNi41IDAgMzAgMTMuNSAzMCAzMHMtMTMuNSAzMC0zMCAzMC0zMC0xMy41LTMwLTMwIDEzLjUtMzAgMzAtMzB6Ii8+PC9zdmc+" alt="هنرستان دانشمند">
+                    صفحه اصلی
+                </a>
+                
+                <button class="navbar-toggler">
+                    <span>☰</span>
+                </button>
+                
+                <ul class="navbar-links">
+                 <li><a href="#" class="nav-link active"><i class="fas fa-book-open"></i> کتاب خانه دیجیتال</a></li>
+<li><a href="#" class="nav-link"><i class="fas fa-book-sparkles"></i> کتاب‌ها</a></li>
+<li><a href="#" class="nav-link"><i class="fas fa-file-contract"></i> مقالات</a></li>
+<li><a href="#" class="nav-link"><i class="fas fa-film"></i> ویدیوها</a></li>
+<li><a href="#" class="nav-link"><i class="fas fa-diagram-project"></i> پروژه‌ها</a></li>
+<li><a href="#" class="nav-link"><i class="fas fa-comments-question-check"></i> سوالات متداول</a></li>
+<li><a href="#" class="nav-link"><i class="fas fa-door-open"></i> ورود</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- بخش هیرو -->
+    <section class="hero-section">
+        <div class="hero-content animate">
+            <span class="hero-badge animate delay-1">نسخه کتاب خانه دیجیتالی در دست راه اندازی می باشد </span>
+            <h1 class="hero-title animate delay-2">کتابخانه دیجیتالی هنرستان دانشمند</h1>
+            <p class="hero-subtitle animate delay-3">دسترسی آسان به منابع آموزشی، کتاب‌های درسی، مقالات تخصصی و محتوای کمک آموزشی با کیفیت بالا</p>
+            
+            <div class="search-container animate delay-4">
+                <input type="text" class="search-input" placeholder="جستجوی کتاب، مقاله یا محتوای آموزشی...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش محتوای آموزشی -->
+    <section class="section section-light">
+        <div class="container">
+            <h2 class="section-title">کتاب‌های درسی و آموزشی</h2>
+            <p class="section-subtitle">برترین منابع آموزشی برای رشته‌های مختلف هنرستان</p>
+            
+            <div class="filters">
+                <button class="filter-btn active"><i class="fas fa-layer-group"></i> همه</button>
+                <button class="filter-btn"><i class="fas fa-laptop-code"></i> فناوری اطلاعات</button>
+                <button class="filter-btn"><i class="fas fa-calculator"></i> حسابداری</button>
+                <button class="filter-btn"><i class="fas fa-bolt"></i> الکتروتکنیک</button>
+                <button class="filter-btn"><i class="fas fa-car"></i> مکانیک خودرو</button>
+                <button class="filter-btn"><i class="fas fa-paint-brush"></i> گرافیک</button>
+            </div>
+            
+            <div class="content-grid">
+                <!-- کتاب 1 -->
+                <div class="content-card animate">
+                    <span class="content-badge">پرفروش</span>
+                    <div class="content-cover" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 300 200\"><rect width=\"100%\" height=\"100%\" fill=\"%23006D77\"/><text x=\"50%\" y=\"50%\" font-size=\"24\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-family=\"Arial\">برنامه‌نویسی پایتون</text></svg>')"></div>
+                    <div class="content-body">
+                        <h3 class="content-title">آموزش جامع برنامه‌نویسی پایتون</h3>
+                        <div class="content-meta">
+                            <span><i class="fas fa-user"></i> دکتر محمد احمدی</span>
+                            <span><i class="fas fa-calendar-alt"></i> 1402</span>
+                        </div>
+                        <p class="content-desc">کامل‌ترین مرجع آموزش پایتون برای مبتدیان تا پیشرفته با مثال‌های عملی و پروژه‌های کاربردی</p>
+                        <div class="content-footer">
+                            <div class="content-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                            <a href="#" class="btn btn-primary btn-sm">مطالعه آنلاین</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- کتاب 2 -->
+                <div class="content-card animate delay-1">
+                    <span class="content-badge">جدید</span>
+                    <div class="content-cover" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 300 200\"><rect width=\"100%\" height=\"100%\" fill=\"%23FFD166\"/><text x=\"50%\" y=\"50%\" font-size=\"24\" fill=\"black\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-family=\"Arial\">الکترونیک دیجیتال</text></svg>')"></div>
+                    <div class="content-body">
+                        <h3 class="content-title">اصول الکترونیک دیجیتال پیشرفته</h3>
+                        <div class="content-meta">
+                            <span><i class="fas fa-user"></i> مهندس علی رضایی</span>
+                            <span><i class="fas fa-calendar-alt"></i> 1401</span>
+                        </div>
+                        <p class="content-desc">آموزش مباحث پیشرفته الکترونیک دیجیتال با رویکرد عملی و پروژه‌محور برای هنرجویان</p>
+                        <div class="content-footer">
+                            <div class="content-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.6</span>
+                            </div>
+                            <a href="#" class="btn btn-primary btn-sm">مطالعه آنلاین</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- کتاب 3 -->
+                <div class="content-card animate delay-2">
+                    <div class="content-cover" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 300 200\"><rect width=\"100%\" height=\"100%\" fill=\"%2383C5BE\"/><text x=\"50%\" y=\"50%\" font-size=\"24\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-family=\"Arial\">حسابداری مالی</text></svg>')"></div>
+                    <div class="content-body">
+                        <h3 class="content-title">حسابداری مالی پیشرفته</h3>
+                        <div class="content-meta">
+                            <span><i class="fas fa-user"></i> دکتر زهرا محمدی</span>
+                            <span><i class="fas fa-calendar-alt"></i> 1400</span>
+                        </div>
+                        <p class="content-desc">مرجع کامل حسابداری مالی با تمرکز بر استانداردهای بین‌المللی و نرم‌افزارهای مالی</p>
+                        <div class="content-footer">
+                            <div class="content-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.7</span>
+                            </div>
+                            <a href="#" class="btn btn-primary btn-sm">مطالعه آنلاین</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- کتاب 4 -->
+                <div class="content-card animate delay-3">
+                    <span class="content-badge">پیشنهادی</span>
+                    <div class="content-cover" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 300 200\"><rect width=\"100%\" height=\"100%\" fill=\"%23003844\"/><text x=\"50%\" y=\"50%\" font-size=\"24\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-family=\"Arial\">مکانیک خودرو</text></svg>')"></div>
+                    <div class="content-body">
+                        <h3 class="content-title">اصول مکانیک خودروهای مدرن</h3>
+                        <div class="content-meta">
+                            <span><i class="fas fa-user"></i> مهندس حسین کریمی</span>
+                            <span><i class="fas fa-calendar-alt"></i> 1399</span>
+                        </div>
+                        <p class="content-desc">آموزش تخصصی سیستم‌های خودروهای جدید با تاکید بر تعمیر و نگهداری پیشگیرانه</p>
+                        <div class="content-footer">
+                            <div class="content-rating">
+                                <i class="fas fa-star"></i>
+                                <span>4.5</span>
+                            </div>
+                            <a href="#" class="btn btn-primary btn-sm">مطالعه آنلاین</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#" class="btn btn-primary btn-lg"><i class="fas fa-book-open me-2"></i>مشاهده همه کتاب‌ها</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش مقالات علمی -->
+    <section class="section section-white">
+        <div class="container">
+            <h2 class="section-title">مقالات علمی و پژوهشی</h2>
+            <p class="section-subtitle">آخرین مقالات تخصصی در زمینه‌های فنی و حرفه‌ای</p>
+            
+            <div class="content-grid">
+                <!-- مقاله 1 -->
+                <div class="content-card animate">
+                    <span class="content-badge">PDF</span>
+                    <div class="content-cover" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 300 200\"><rect width=\"100%\" height=\"100%\" fill=\"%23FFB347\"/><text x=\"50%\" y=\"50%\" font-size=\"24\" fill=\"black\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-family=\"Arial\">مقاله علمی</text></svg>')"></div>
+                    <div class="content-body">
+                        <h3 class="content-title">کاربرد هوش مصنوعی در آموزش فنی و حرفه‌ای</h3>
+                        <div class="content-meta">
+                            <span><i class="fas fa-user"></i> تیم تحقیقاتی دانشمند</span>
+                            <span><i class="fas fa-calendar-alt"></i> 1402</span>
+                        </div>
+                        <p class="content-desc">بررسی تاثیرات استفاده از سیستم‌های هوشمند در بهبود کیفیت آموزش‌های مهارتی</p>
+                        <div class="content-footer">
+                            <div class="content-rating">
+                                <i class="fas fa-download"></i>
+                                <span>245</span>
+                            </div>
+                            <a href="#" class="btn btn-primary btn-sm">مطالعه مقاله</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- مقاله 2 -->
+                <div class="content-card animate delay-1">
+                    <div class="content-cover" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 300 200\"><rect width=\"100%\" height=\"100%\" fill=\"%23EDF6F9\"/><text x=\"50%\" y=\"50%\" font-size=\"24\" fill=\"black\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-family=\"Arial\">مقاله علمی</text></svg>')"></div>
+                    <div class="content-body">
+                        <h3 class="content-title">تکنیک‌های جدید در تعمیر خودروهای الکتریکی</h3>
+                        <div class="content-meta">
+                            <span><i class="fas fa-user"></i> مهندس امیر حسینی</span>
+                            <span><i class="fas fa-calendar-alt"></i> 1401</span>
+                        </div>
+                        <p class="content-desc">مروری بر روش‌های نوین عیب‌یابی و تعمیر در خودروهای هیبریدی و الکتریکی</p>
+                        <div class="content-footer">
+                            <div class="content-rating">
+                                <i class="fas fa-download"></i>
+                                <span>187</span>
+                            </div>
+                            <a href="#" class="btn btn-primary btn-sm">مطالعه مقاله</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- مقاله 3 -->
+                <div class="content-card animate delay-2">
+                    <span class="content-badge">جدید</span>
+                    <div class="content-cover" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 300 200\"><rect width=\"100%\" height=\"100%\" fill=\"%236e48aa\"/><text x=\"50%\" y=\"50%\" font-size=\"24\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-family=\"Arial\">مقاله علمی</text></svg>')"></div>
+                    <div class="content-body">
+                        <h3 class="content-title">راهکارهای افزایش امنیت شبکه‌های کامپیوتری</h3>
+                        <div class="content-meta">
+                            <span><i class="fas fa-user"></i> مهندس سارا نوروزی</span>
+                            <span><i class="fas fa-calendar-alt"></i> 1402</span>
+                        </div>
+                        <p class="content-desc">بررسی چالش‌های امنیتی در شبکه‌های سازمانی و ارائه راهکارهای عملی</p>
+                        <div class="content-footer">
+                            <div class="content-rating">
+                                <i class="fas fa-download"></i>
+                                <span>132</span>
+                            </div>
+                            <a href="#" class="btn btn-primary btn-sm">مطالعه مقاله</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#" class="btn btn-outline-primary btn-lg"><i class="fas fa-file-alt me-2"></i>مشاهده همه مقالات</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش ویژه -->
+    <section class="featured-section">
+        <div class="container">
+            <div class="featured-card animate">
+                <h3 class="featured-title">سیستم جدید هوشمند کتابخانه</h3>
+                <p class="featured-text">هم اکنون می‌توانید با استفاده از سیستم هوشمند کتابخانه، منابع مورد نیاز خود را به صورت شخصی‌سازی شده دریافت کنید. این سیستم با استفاده از هوش مصنوعی، محتوای آموزشی متناسب با سطح و نیاز شما را پیشنهاد می‌دهد.</p>
+                <a href="#" class="btn btn-primary btn-lg"><i class="fas fa-robot me-2"></i>امتحان کنید</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- بخش ویدیوهای آموزشی -->
+    <section class="section section-light">
+        <div class="container">
+            <h2 class="section-title">ویدیوهای آموزشی</h2>
+            <p class="section-subtitle">آموزش‌های تصویری با کیفیت بالا برای درک بهتر مفاهیم</p>
+            
+            <div class="content-grid">
+                <!-- ویدیو 1 -->
+                <div class="content-card animate">
+                    <span class="content-badge">ویدیو</span>
+                    <div class="content-cover" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 300 200\"><rect width=\"100%\" height=\"100%\" fill=\"%23006D77\"/><text x=\"50%\" y=\"50%\" font-size=\"24\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-family=\"Arial\">ویدیوی آموزشی</text><polygon points=\"120,80 180,120 120,160\" fill=\"white\" opacity=\"0.8\"/></svg>')"></div>
+                    <div class="content-body">
+                        <h3 class="content-title">آموزش برنامه‌نویسی پایتون - مقدماتی</h3>
+                        <div class="content-meta">
+                            <span><i class="fas fa-user"></i> دکتر محمد احمدی</span>
+                            <span><i class="fas fa-clock"></i> 45 دقیقه</span>
+                        </div>
+                        <p class="content-desc">آموزش اصول اولیه برنامه‌نویسی پایتون با مثال‌های عملی و کاربردی برای هنرجویان</p>
+                        <div class="content-footer">
+                            <div class="content-rating">
+                                <i class="fas fa-eye"></i>
+                                <span>1,245</span>
+                            </div>
+                            <a href="#" class="btn btn-primary btn-sm">تماشا کنید</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ویدیو 2 -->
+                <div class="content-card animate delay-1">
+                    <div class="content-cover" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 300 200\"><rect width=\"100%\" height=\"100%\" fill=\"%23FFD166\"/><text x=\"50%\" y=\"50%\" font-size=\"24\" fill=\"black\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-family=\"Arial\">ویدیوی آموزشی</text><polygon points=\"120,80 180,120 120,160\" fill=\"black\" opacity=\"0.8\"/></svg>')"></div>
+                    <div class="content-body">
+                        <h3 class="content-title">کارگاه عملی الکترونیک دیجیتال</h3>
+                        <div class="content-meta">
+                            <span><i class="fas fa-user"></i> مهندس علی رضایی</span>
+                            <span><i class="fas fa-clock"></i> 1 ساعت</span>
+                        </div>
+                        <p class="content-desc">آموزش عملی ساخت مدارهای دیجیتال با استفاده از IC های پرکاربرد در صنعت</p>
+                        <div class="content-footer">
+                            <div class="content-rating">
+                                <i class="fas fa-eye"></i>
+                                <span>876</span>
+                            </div>
+                            <a href="#" class="btn btn-primary btn-sm">تماشا کنید</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ویدیو 3 -->
+                <div class="content-card animate delay-2">
+                    <span class="content-badge">جدید</span>
+                    <div class="content-cover" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 300 200\"><rect width=\"100%\" height=\"100%\" fill=\"%2383C5BE\"/><text x=\"50%\" y=\"50%\" font-size=\"24\" fill=\"white\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-family=\"Arial\">ویدیوی آموزشی</text><polygon points=\"120,80 180,120 120,160\" fill=\"white\" opacity=\"0.8\"/></svg>')"></div>
+                    <div class="content-body">
+                        <h3 class="content-title">آموزش نرم‌افزار حسابداری هلو</h3>
+                        <div class="content-meta">
+                            <span><i class="fas fa-user"></i> دکتر زهرا محمدی</span>
+                            <span><i class="fas fa-clock"></i> 35 دقیقه</span>
+                        </div>
+                        <p class="content-desc">آموزش گام به گام نرم‌افزار حسابداری هلو برای هنرجویان رشته حسابداری</p>
+                        <div class="content-footer">
+                            <div class="content-rating">
+                                <i class="fas fa-eye"></i>
+                                <span>654</span>
+                            </div>
+                            <a href="#" class="btn btn-primary btn-sm">تماشا کنید</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#" class="btn btn-outline-primary btn-lg"><i class="fas fa-video me-2"></i>مشاهده همه ویدیوها</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- پاورقی -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgNTAiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xODAgMTBjLTExIDAtMjAgOS0yMCAyMHM5IDIwIDIwIDIwIDIwLTkgMjAtMjAtOS0yMC0yMC0yMHptMC0xMGMxNi41IDAgMzAgMTMuNSAzMCAzMHMtMTMuNSAzMC0zMCAzMC0zMC0xMy41LTMwLTMwIDEzLjUtMzAgMzAtMzB6Ii8+PC9zdmc+" alt="هنرستان دانشمند">
+                        <span class="footer-logo-text">هنرستان دانشمند</span>
+                    </div>
+                    <p>کتابخانه دیجیتالی هنرستان فنی حرفه‌ای دانشمند قلم چی با بیش از ۲۰ سال سابقه درخشان در تربیت نیروی کار ماهر، یکی از مراکز پیشرو در آموزش‌های مهارتی با استفاده از فناوری‌های نوین آموزشی است.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab">📱</i></a>
+                        <a href="#"><i class="fab">📧</i></a>
+                        <a href="#"><i class="fab">📹</i></a>
+                        <a href="#"><i class="fab">🔗</i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h5>لینک‌های مفید</h5>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> سوالات متداول</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> گالری تصاویر</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> اخبار و رویدادها</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> همکاران صنعتی</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> اساتید و مربیان</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h5>رشته‌های آموزشی</h5>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> فناوری اطلاعات</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> حسابداری مالی</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> الکتروتکنیک</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> مکانیک خودرو</a></li>
+                        <li><a href="#"><i class="fas fa-angle-left"></i> گرافیک دیجیتال</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h5>خبرنامه</h5>
+                    <p>برای دریافت آخرین اخبار، اطلاعیه‌ها و رویدادهای هنرستان در خبرنامه عضو شوید.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="آدرس ایمیل شما">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p><i class="far fa-copyright me-2"></i>۱۴۰۲ هنرستان فنی حرفه‌ای دانشمند قلم چی. تمام حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // اسکریپت‌های پیشرفته
+        document.addEventListener('DOMContentLoaded', function() {
+            // تغییر استایل نوار ناوبری هنگام اسکرول
+            const navbar = document.querySelector('.navbar-custom');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // منوی همبرگری برای نسخه موبایل
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarLinks = document.querySelector('.navbar-links');
+            
+            navbarToggler.addEventListener('click', function() {
+                navbarLinks.classList.toggle('active');
+            });
+            
+            // فعال‌سازی انیمیشن‌ها هنگام اسکرول
+            const animateElements = document.querySelectorAll('.animate');
+            
+            function checkAnimation() {
+                animateElements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.opacity = '1';
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', checkAnimation);
+            checkAnimation();
+            
+            // سیستم فیلترسازی
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const contentCards = document.querySelectorAll('.content-card');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // حذف کلاس active از همه دکمه‌ها
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // اضافه کردن کلاس active به دکمه کلیک شده
+                    this.classList.add('active');
+                    
+                    const filterValue = this.textContent.trim();
+                    
+                    // فیلتر کردن محتوا
+                    contentCards.forEach(card => {
+                        if (filterValue === 'همه') {
+                            card.style.display = 'block';
+                        } else {
+                            const cardTitle = card.querySelector('.content-title').textContent;
+                            if (cardTitle.includes(filterValue)) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // سیستم جستجو
+            const searchInput = document.querySelector('.search-input');
+            const searchBtn = document.querySelector('.search-btn');
+            
+            function performSearch() {
+                const query = searchInput.value.trim().toLowerCase();
+                
+                if (query) {
+                    contentCards.forEach(card => {
+                        const cardTitle = card.querySelector('.content-title').textContent.toLowerCase();
+                        const cardDesc = card.querySelector('.content-desc').textContent.toLowerCase();
+                        
+                        if (cardTitle.includes(query) || cardDesc.includes(query)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    
+                    // اسکرول به بخش نتایج
+                    document.querySelector('.section').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                } else {
+                    // نمایش همه موارد اگر جستجو خالی باشد
+                    contentCards.forEach(card => {
+                        card.style.display = 'block';
+                    });
+                }
+            }
+            
+            searchBtn.addEventListener('click', performSearch);
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            // شبیه‌سازی سیستم امتیازدهی
+            const ratingElements = document.querySelectorAll('.content-rating');
+            
+            ratingElements.forEach(rating => {
+                rating.addEventListener('click', function() {
+                    const currentRating = parseFloat(this.querySelector('span').textContent);
+                    const newRating = prompt('لطفاً امتیاز خود را وارد کنید (1 تا 5):', currentRating);
+                    
+                    if (newRating && !isNaN(newRating) {
+                        const num = parseFloat(newRating);
+                        if (num >= 1 && num <= 5) {
+                            this.querySelector('span').textContent = num.toFixed(1);
+                            alert('با تشکر از امتیاز شما!');
+                        } else {
+                            alert('لطفاً عددی بین 1 تا 5 وارد کنید');
+                        }
+                    }
+                });
+            });
+            
+            // سیستم نشانک‌گذاری
+            const bookmarkBtns = document.querySelectorAll('.content-card');
+            
+            bookmarkBtns.forEach(btn => {
+                btn.addEventListener('dblclick', function() {
+                    const title = this.querySelector('.content-title').textContent;
+                    this.style.boxShadow = '0 0 0 3px var(--accent-color)';
+                    setTimeout(() => {
+                        this.style.boxShadow = '';
+                    }, 1000);
+                    alert(`"${title}" به نشانه‌ها اضافه شد`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
