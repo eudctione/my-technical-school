@@ -2268,6 +2268,59 @@
         });
     </script>
     <!-- شمارنده کوانتومی - قرار دهید در انتهای فایل قبل از </body> -->
+<script>
+  (function() {
+    // شناسایی دستگاه موبایل
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    if (!isMobile) return; // فقط در موبایل اجرا شود
 
+    // پیدا کردن اولین `<nav>` یا `<ul>` یا `<div>` که احتمالاً منوی ناوبری است
+    const navbar = document.querySelector('nav, ul.navbar, div.navbar, header nav');
+    if (!navbar) return; // اگر منو پیدا نشد، کد اجرا نشود
+
+    // ایجاد دکمه همبرگری
+    const toggleBtn = document.createElement('button');
+    toggleBtn.innerHTML = '☰';
+    toggleBtn.style.cssText = `
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 10px;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      z-index: 1000;
+    `;
+
+    // مخفی کردن منوی اصلی در حالت موبایل
+    navbar.style.position = 'relative';
+    const menuItems = navbar.querySelectorAll('ul, div > ul, nav > ul');
+    if (menuItems.length) {
+      menuItems[0].style.cssText = `
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: inherit;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      `;
+    }
+
+    // اضافه کردن دکمه به نوار ناوبری
+    navbar.prepend(toggleBtn);
+
+    // کلیک روی دکمه همبرگری
+    toggleBtn.addEventListener('click', function() {
+      if (menuItems.length) {
+        const menu = menuItems[0];
+        menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+      }
+    });
+  })();
+</script>
 </body>
 </html>
