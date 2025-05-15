@@ -1332,7 +1332,7 @@
         }
         .nav-button {
             background: rgba(255, 255, 255, 0.2);
-            color: #1c2526; /* مشکی متالیک */
+            color: #1c2526;
             padding: 0.75rem 1.5rem;
             border-radius: 10px;
             border: 2px solid rgba(255, 255, 255, 0.5);
@@ -1349,8 +1349,7 @@
             border-color: rgba(255, 255, 255, 0.7);
             transform: translateY(-2px);
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.9), 0 0 15px rgba(192, 192, 192, 0.6);
-       
-	   }
+        }
         .nav-button.active {
             background: rgba(255, 255, 255, 0.5);
             border: 2px solid rgba(255, 255, 255, 0.8);
@@ -1389,7 +1388,7 @@
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
         }
         .arrow-icon::after {
-            content: '\f078'; /* آیکون فلش Font Awesome */
+            content: '\f078';
             font-family: 'Font Awesome 5 Free';
             font-weight: 900;
             margin-right: 0.5rem;
@@ -1399,28 +1398,24 @@
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
             backdrop-filter: blur(12px);
             border-radius: 15px;
-            padding: 6rem;
+            padding: 8rem;
             box-shadow: 0 4px 40px rgba(0, 0, 0, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.4);
             text-align: center;
             margin: 2rem auto;
             max-width: 1200px;
-         background-image: url('assets/images/hero-bg-pattern.png'), var(--gradient-bg);
+            background-image: url('assets/images/hero-bg-pattern.png'), var(--gradient-bg);
             background-blend-mode: overlay;
             background-size: cover;
-		
-		}
-		
+        }
         .hero-section .hero-badge {
             color: #ffffff;
             font-size: 1.2rem;
             font-weight: bold;
             text-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(192, 192, 192, 0.4);
             display: inline-block;
-       
-	   margin-bottom: 1rem;
-        
-		}
+            margin-bottom: 1rem;
+        }
         .hero-section h1 {
             color: #ffffff;
             font-size: 2rem;
@@ -1470,10 +1465,45 @@
                 transform: translateY(0);
             }
         }
+        /* استایل‌های مربوط به منوی همبرگری */
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
         @media (max-width: 768px) {
-            .navbar {
+            .hamburger {
+                display: block;
+                position: absolute;
+                right: 1rem;
+                top: 1rem;
+            }
+            .nav-menu {
+                display: none;
                 flex-direction: column;
-                padding: 0.5rem;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+                backdrop-filter: blur(12px);
+                border-radius: 0 0 15px 15px;
+                border: 1px solid rgba(255, 255, 255, 0.4);
+                box-shadow: 0 4px 40px rgba(0, 0, 0, 0.15);
+                padding: 1rem;
+            }
+            .nav-menu.active {
+                display: flex;
             }
             .nav-item {
                 margin: 0.5rem 0;
@@ -1487,6 +1517,10 @@
             .dropdown {
                 position: static;
                 width: 100%;
+                display: none;
+            }
+            .nav-item.active .dropdown {
+                display: block;
             }
             .hero-section {
                 padding: 1rem;
@@ -1498,114 +1532,118 @@
 <body>
     <!-- نوار ناوبری -->
     <nav class="navbar">
-        <div class="nav-item">
-            <a href="index.html" class="nav-button active"><i class="fas fa-home"></i> صفحه اصلی</a>
-        </div>
-        <div class="nav-item">
-            <button class="nav-button"><i class="fas fa-list-ul"></i> رشته‌های تحصیلی <span class="arrow-icon"></span></button>
-            <div class="dropdown">
-                <a href="programs.html" class="dropdown-item">فناوری اطلاعات و ارتباطات</a>
-                <a href="programs.html" class="dropdown-item">حسابداری مالی</a>
-                <a href="programs.html" class="dropdown-item">الکتروتکنیک</a>
-                <a href="programs.html" class="dropdown-item">مکانیک خودرو</a>
-                <a href="programs.html" class="dropdown-item">معماری داخلی</a>
-                <a href="programs.html" class="dropdown-item">گرافیک و طراحی دیجیتال</a>
+        <button class="hamburger"><i class="fas fa-bars"></i></button>
+        <div class="nav-menu">
+            <div class="nav-item">
+                <a href="index.html" class="nav-button active"><i class="fas fa-home"></i> صفحه اصلی</a>
             </div>
-        </div>
-        <div class="nav-item">
-            <button class="nav-button"><i class="fas fa-chalkboard-teacher"></i> اساتید <span class="arrow-icon"></span></button>
-            <div class="dropdown">
-                <a href="consultation.html" class="dropdown-item">مشاوره تحصیلی</a>
-                <a href="teachers.html" class="dropdown-item">اساتید مجرب و متخصص</a>
-                <a href="teachers.html" class="dropdown-item">همکاری با صنایع</a>
+            <div class="nav-item">
+                <button class="nav-button"><i class="fas fa-list-ul"></i> رشته‌های تحصیلی <span class="arrow-icon"></span></button>
+                <div class="dropdown">
+                    <a href="programs.html" class="dropdown-item">فناوری اطلاعات و ارتباطات</a>
+                    <a href="programs.html" class="dropdown-item">حسابداری مالی</a>
+                    <a href="programs.html" class="dropdown-item">الکتروتکنیک</a>
+                    <a href="programs.html" class="dropdown-item">مکانیک خودرو</a>
+                    <a href="programs.html" class="dropdown-item">معماری داخلی</a>
+                    <a href="programs.html" class="dropdown-item">گرافیک و طراحی دیجیتال</a>
+                </div>
             </div>
-        </div>
-       
-	   
-	   <div class="nav-item">
-            <button class="nav-button"><i class="fas fa-robot"></i>رباتیک<span class="arrow-icon"></span></button>
-            <div class="dropdown">
-                <a href="ai-education.html" class="dropdown-item">هوش مصنوعی</a>
-                <a href="bookmarkt.html" class="dropdown-item">کتابخانه دیجیتال </a>
-                <a href="facilities.html" class="dropdown-item">امکانات دیجیتال </a>
-				 <a href="logo.html" class="dropdown-item">وبلاک</a>
+            <div class="nav-item">
+                <button class="nav-button"><i class="fas fa-chalkboard-teacher"></i> اساتید <span class="arrow-icon"></span></button>
+                <div class="dropdown">
+                    <a href="consultation.html" class="dropdown-item">مشاوره تحصیلی</a>
+                    <a href="teachers.html" class="dropdown-item">اساتید مجرب و متخصص</a>
+                    <a href="teachers.html" class="dropdown-item">همکاری با صنایع</a>
+                </div>
             </div>
-        </div>
-	   
-	   
-	   <div class="nav-item">
-            <button class="nav-button"><i class="fas fa-phone-alt"></i> ارتباط با ما <span class="arrow-icon"></span></button>
-            <div class="dropdown">
-                <a href="about.html" class="dropdown-item">درباره ما</a>
-                <a href="contact.html" class="dropdown-item">تماس با ما</a>
-                <a href="contact.html" class="dropdown-item">خدمات</a>
+            <div class="nav-item">
+                <button class="nav-button"><i class="fas fa-robot"></i> رباتیک <span class="arrow-icon"></span></button>
+                <div class="dropdown">
+                    <a href="ai-education.html" class="dropdown-item">هوش مصنوعی</a>
+                    <a href="bookmarkt.html" class="dropdown-item">کتابخانه دیجیتال</a>
+                    <a href="facilities.html" class="dropdown-item">امکانات دیجیتال</a>
+                    <a href="logo.html" class="dropdown-item">وبلاگ</a>
+                </div>
             </div>
-        </div>
-	   
-        <div class="nav-item">
- <a href="roos.html" class="nav-button"><i class="fas fa-gavel"></i> آئین نامه ومقررات  </a>
-        </div>
-        <div class="nav-item">
-           
-        </div>
-        <div class="nav-item">
-            
-        </div>
-        <div class="nav-item">
-            
-        </div>
-        <div class="nav-item">
-            <a href="login.html" class="nav-button"><i class="fas fa-sign-in-alt"></i> ورود</a>
-            <div class="dropdown">
-                <a href="pass3.html" class="dropdown-item">ورود نمایندگی</a>
+            <div class="nav-item">
+                <button class="nav-button"><i class="fas fa-phone-alt"></i> ارتباط با ما <span class="arrow-icon"></span></button>
+                <div class="dropdown">
+                    <a href="about.html" class="dropdown-item">درباره ما</a>
+                    <a href="contact.html" class="dropdown-item">تماس با ما</a>
+                    <a href="contact.html" class="dropdown-item">خدمات</a>
+                </div>
             </div>
-        </div>
-        <div class="nav-item">
-            <a href="admissions.html" class="nav-button"><i class="fas fa-user-edit"></i> ثبت‌نام</a>
+            <div class="nav-item">
+                <a href="roos.html" class="nav-button"><i class="fas fa-gavel"></i> آئین‌نامه و مقررات</a>
+            </div>
+            <div class="nav-item">
+                <a href="login.html" class="nav-button"><i class="fas fa-sign-in-alt"></i> ورود</a>
+                <div class="dropdown">
+                    <a href="pass3.html" class="dropdown-item">ورود نمایندگی</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="admissions.html" class="nav-button"><i class="fas fa-user-edit"></i> ثبت‌نام</a>
+            </div>
         </div>
     </nav>
 
     <!-- هدر هیرو -->
-	
     <section class="hero-section">
-	<div class="hero" style="width: 100%; text-align: center;">
-        <div class="container">
-            <div class="hero-content">
-                <span class="hero-badge animate">پذیرش از دانش‌آموزان شهرستان‌های اصفهان، خمینی‌شهر و شاهین‌شهر درسال تحصیلی جدید</span>
-                <h1 class="hero-title animate delay-1">هنرستان فنی حرفه‌ای دانشگاه صنعتی دانشمند قلم چی</h1>
-                <p class="hero-subtitle animate delay-2">تربیت نیروی متخصص و کارآمد برای صنعت کشور با بهره‌گیری از آخرین فناوری‌های آموزشی و برنامه‌های درسی تطبیق‌پذیر با هوش مصنوعی</p>
-                <div class="hero-buttons animate delay-3">
-                    <div class="d-flex justify-content-center align-items-center position-relative" style="width: 100%; --offset: -100px;">
-                        <div style="transform: translateX(var(--offset)); display: flex; align-items: center; gap: 15px;">
-                            <a href="programs.html" class="btn btn-primary"><i class="fas fa-list-ul me-2"></i>مشاهده رشته‌ها</a>
-                            <a href="admissions.html" class="btn btn-outline-light"><i class="fas fa-user-plus me-2"></i>ثبت‌نام آنلاین</a>
-                            <div class="position-relative" style="margin-left: 30px;">
-                                <a class="navbar-brand" href="pass3.html">
-                                    <img src="assets/images/logo.png" alt="هنرستان دانشمند" style="height: auto; max-height: 150px; width: auto;">
-                                </a>
-                                <a href="pass3.html" class="btn btn-outline-light position-absolute start-50 translate-middle-x mt-1 px-3 py-1" style="font-size: 0.8rem; white-space: nowrap; min-width: 120px; text-decoration: none; animation: fadeInOut 3s infinite;">
-                                    <i class="fas fa-sign-in-alt me-1"></i>ورود نمایندگی
-                                </a>
+        <div class="hero" style="width: 100%; text-align: center;">
+            <div class="container">
+                <div class="hero-content">
+                    <span class="hero-badge animate">پذیرش از دانش‌آموزان شهرستان‌های اصفهان، خمینی‌شهر و شاهین‌شهر درسال تحصیلی جدید</span>
+                    <h1 class="hero-title animate delay-1">هنرستان فنی حرفه‌ای دانشگاه صنعتی دانشمند قلم چی</h1>
+                    <p class="hero-subtitle animate delay-2">تربیت نیروی متخصص و کارآمد برای صنعت کشور با بهره‌گیری از آخرین فناوری‌های آموزشی و برنامه‌های درسی تطبیق‌پذیر با هوش مصنوعی</p>
+                    <div class="hero-buttons animate delay-3">
+                        <div class="d-flex justify-content-center align-items-center position-relative" style="width: 100%; --offset: -100px;">
+                            <div style="transform: translateX(var(--offset)); display: flex; align-items: center; gap: 15px;">
+                                <a href="programs.html" class="btn btn-primary"><i class="fas fa-list-ul me-2"></i>مشاهده رشته‌ها</a>
+                                <a href="admissions.html" class="btn btn-outline-light"><i class="fas fa-user-plus me-2"></i>ثبت‌نام آنلاین</a>
+                                <div class="position-relative" style="margin-left: 30px;">
+                                    <a class="navbar-brand" href="pass3.html">
+                                        <img src="assets/images/logo.png" alt="هنرستان دانشمند" style="height: auto; max-height: 150px; width: auto;">
+                                    </a>
+                                    <a href="pass3.html" class="btn btn-outline-light position-absolute start-50 translate-middle-x mt-1 px-3 py-1" style="font-size: 0.8rem; white-space: nowrap; min-width: 120px; text-decoration: none; animation: fadeInOut 3s infinite;">
+                                        <i class="fas fa-sign-in-alt me-1"></i>ورود نمایندگی
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-   <!-- <img src="assets/images/hero-image.jpg" alt="هنرستان دانشمند" class="img-fluid hero-image animate delay-4" style="display: block; margin-left: auto; margin-right: auto; position: relative; top: 2px;"> -->
             </div>
         </div>
-		</div>
     </section>
 
     <script>
+        // JavaScript برای کنترل منوی همبرگری
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
         // JavaScript برای کنترل باز و بسته شدن منوی کشویی
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('mouseenter', () => {
-                const dropdown = item.querySelector('.dropdown');
-                if (dropdown) dropdown.style.display = 'block';
+                if (window.innerWidth > 768) {
+                    const dropdown = item.querySelector('.dropdown');
+                    if (dropdown) dropdown.style.display = 'block';
+                }
             });
             item.addEventListener('mouseleave', () => {
-                const dropdown = item.querySelector('.dropdown');
-                if (dropdown) dropdown.style.display = 'none';
+                if (window.innerWidth > 768) {
+                    const dropdown = item.querySelector('.dropdown');
+                    if (dropdown) dropdown.style.display = 'none';
+                }
+            });
+            item.querySelector('.nav-button').addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    item.classList.toggle('active');
+                }
             });
         });
     </script>
@@ -1782,7 +1820,7 @@
                     <span style="color: #fff;"><i class="fas fa-clock" style="color: #ffd700;"></i> 5 روز در هفته</span>
                 </div>
                 <p class="program-desc" style="color: #ccc; min-height: 80px;">آموزش برنامه‌نویسی، شبکه‌های کامپیوتری و امنیت اطلاعات با استفاده از پلتفرم‌های هوشمند آموزشی</p>
-                <a href="https://www.kanoon.ir/Public/Entrance?mc=6&gc=83" class="btn w-100" style="background: transparent; color: #ffd700; border: 2px solid #ffd700; font-weight: bold; transition: all 0.3s;">جزئیات بیشتر <i class="fas fa-arrow-left"></i></a>
+                <a href="program-it.html" class="btn w-100" style="background: transparent; color: #ffd700; border: 2px solid #ffd700; font-weight: bold; transition: all 0.3s;">جزئیات بیشتر <i class="fas fa-arrow-left"></i></a>
             </div>
         </div>
     </div>
@@ -1799,7 +1837,7 @@
                     <span style="color: #fff;"><i class="fas fa-clock" style="color: #ffd700;"></i> 5 روز در هفته</span>
                 </div>
                 <p class="program-desc" style="color: #ccc; min-height: 80px;">آموزش اصول حسابداری، نرم‌افزارهای مالی و سیستم‌های هوشمند تحلیل مالی با رویکرد عملی</p>
-                <a href="https://www.kanoon.ir/Public/Entrance?mc=6&gc=89" class="btn w-100" style="background: transparent; color: #ffd700; border: 2px solid #ffd700; font-weight: bold; transition: all 0.3s;">جزئیات بیشتر <i class="fas fa-arrow-left"></i></a>
+                <a href="program-accounting.html" class="btn w-100" style="background: transparent; color: #ffd700; border: 2px solid #ffd700; font-weight: bold; transition: all 0.3s;">جزئیات بیشتر <i class="fas fa-arrow-left"></i></a>
             </div>
         </div>
     </div>
@@ -1816,7 +1854,7 @@
                     <span style="color: #fff;"><i class="fas fa-clock" style="color: #ffd700;"></i> 5 روز در هفته</span>
                 </div>
                 <p class="program-desc" style="color: #ccc; min-height: 80px;">آموزش تخصصی برق صنعتی، کنترل سیستم‌های الکترونیکی و اتوماسیون با تجهیزات پیشرفته</p>
-                <a href="https://www.kanoon.ir/Public/Entrance?mc=5&gc=53" class="btn w-100" style="background: transparent; color: #ffd700; border: 2px solid #ffd700; font-weight: bold; transition: all 0.3s;">جزئیات بیشتر <i class="fas fa-arrow-left"></i></a>
+                <a href="program-electro.html" class="btn w-100" style="background: transparent; color: #ffd700; border: 2px solid #ffd700; font-weight: bold; transition: all 0.3s;">جزئیات بیشتر <i class="fas fa-arrow-left"></i></a>
             </div>
         </div>
     </div>
@@ -1833,7 +1871,7 @@
                     <span style="color: #fff;"><i class="fas fa-clock" style="color: #ffd700;"></i> 5 روز در هفته</span>
                 </div>
                 <p class="program-desc" style="color: #ccc; min-height: 80px;">آموزش تعمیر و نگهداری خودروهای مدرن با استفاده از شبیه‌سازهای هوشمند و کارگاه‌های مجهز</p>
-                <a href="https://www.kanoon.ir/Public/Entrance?mc=7&gc=18" class="btn w-100" style="background: transparent; color: #ffd700; border: 2px solid #ffd700; font-weight: bold; transition: all 0.3s;">جزئیات بیشتر <i class="fas fa-arrow-left"></i></a>
+                <a href="program-mechanics.html" class="btn w-100" style="background: transparent; color: #ffd700; border: 2px solid #ffd700; font-weight: bold; transition: all 0.3s;">جزئیات بیشتر <i class="fas fa-arrow-left"></i></a>
             </div>
         </div>
     </div>
@@ -2398,3 +2436,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
+ <!---برای حرفه ای شدن این وب سایت کلیه این موارد را انجام  می دهی افزودن CSS و JavaScript برای بهبود ظاهر و تعاملات.
+بهینه‌سازی برای دستگاه‌های مختلف (Responsive Design).
+بهبود دسترسی‌پذیری و SEO.
+وبرای استفاده از تصاویر و آیکون‌های باکیفیت.می توانید از محتوا دارکتوری ایمیج در https://eudctione.github.io/my-technical-school/ استفاده نمائید و یا https://www.vecteezy.com/ hsjthni klhmdn 
+ساده‌سازی محتوا و رفع لینک‌های ناقص.می توانید باتوجه به  https://eudctione.github.io/my-technical-school تکمیل و یا هدایت به صفحه اصلی کنید تا بصورت دستی تغییرات لازم داده شود .سایت حرفه ای شده را از ابتدا تا انتها کدهای آن را بازنویسی می کنید که بصورت مستقل و حرفه ای تر عمل کند--> 
