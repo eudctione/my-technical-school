@@ -1470,7 +1470,53 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
+       	   
+	   }
+	   .hero-section .btn {
+    /* استایل‌های پایه */
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 0.5rem;
+    display: inline-block;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7),
+                 0 0 15px rgba(192, 192, 192, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hero-section .btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.95);
+    transform: translateY(-3px) scale(1.03);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 1),
+                 0 0 25px rgba(255, 255, 255, 0.9),
+                 0 0 35px rgba(192, 192, 192, 0.6);
+    box-shadow: 0 6px 30px rgba(255, 255, 255, 0.6),
+                0 0 20px rgba(255, 255, 255, 0.5) inset;
+    animation: pulse-glow 1.5s infinite alternate;
+}
+
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 6px 30px rgba(255, 255, 255, 0.6),
+                    0 0 20px rgba(255, 255, 255, 0.5) inset;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 1),
+                     0 0 25px rgba(255, 255, 255, 0.9),
+                     0 0 35px rgba(192, 192, 192, 0.6);
+    }
+    100% {
+        box-shadow: 0 6px 40px rgba(255, 255, 255, 0.8),
+                    0 0 25px rgba(255, 255, 255, 0.7) inset;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 1),
+                     0 0 35px rgba(255, 255, 255, 1),
+                     0 0 45px rgba(192, 192, 192, 0.8);
+    }
+}
         /* استایل‌های منوی همبرگری */
         .hamburger {
             display: none;
