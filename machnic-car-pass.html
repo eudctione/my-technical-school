@@ -949,312 +949,324 @@
         </div>
     </div>
 
-    <script>
-        // ==============================================
-        // داده‌های سیستم - دانش‌آموزان واقعی هنرستان
-        // ==============================================
-        const systemData = {
-            students: {
-                "99239151481": { 
-                    password: "student001", 
-                    fullName: "پارسا پوربختگان",
-                    class: "پایه دهم - مکانیک خودرو"
-                },
-                "99235774216": { 
-                    password: "student002", 
-                    fullName: "محمدمهدی کاظمی",
-                    class: "پایه دهم - مکانیک خودرو"
-                },
-                "9930946877": { 
-                    password: "student003", 
-                    fullName: "علی رضا کمالی",
-                    class: "پایه دهم - مکانیک خودرو"
-                },
-                "994488178": { 
-                    password: "student004", 
-                    fullName: "پوریا آریباهی",
-                    class: "پایه دهم - مکانیک خودرو"
-                },
-                "9923504966": { 
-                    password: "student005", 
-                    fullName: "حسین کمالی",
-                    class: "پایه دهم - مکانیک خودرو"
-                },
-                "9131661576": { 
-                    password: "student006", 
-                    fullName: "سهیل مجیری",
-                    class: "پایه دهم - مکانیک خودرو"
-                },
-                "9132178365": { 
-                    password: "student007", 
-                    fullName: "طاها امیربان",
-                    class: "پایه دهم - مکانیک خودرو"
-                },
-                "9133247266": { 
-                    password: "student008", 
-                    fullName: "جواد کمالی",
-                    class: "پایه دهم - مکانیک خودرو"
-                },
-                "9964851411": { 
-                    password: "student009", 
-                    fullName: "محمد امین حاجی حیدری",
-                    class: "پایه دهم - مکانیک خودرو"
-                },
-                "9131687076": { 
-                    password: "student010", 
-                    fullName: "دانش‌آموز دهم",
-                    class: "پایه دهم - مکانیک خودرو"
-                }
-            }
-        };
-
-        // ==============================================
-        // عناصر DOM
-        // ==============================================
-        const errorMessage = document.getElementById('errorMessage');
-        const errorText = document.getElementById('errorText');
-        const successMessage = document.getElementById('successMessage');
-        const successText = document.getElementById('successText');
-        const loginForm = document.getElementById('loginForm');
-        const studentCodeInput = document.getElementById('studentCode');
-        const passwordInput = document.getElementById('password');
-        const passwordToggle = document.getElementById('passwordToggle');
-        const rememberMeCheckbox = document.getElementById('rememberMe');
-        const forgotPasswordLink = document.getElementById('forgotPassword');
-        const loginLoader = document.getElementById('loginLoader');
-        const supportModal = document.getElementById('supportModal');
-        const closeModal = document.getElementById('closeModal');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const helpLink = document.getElementById('helpLink');
-        const quantumParticles = document.getElementById('quantumParticles');
-
-        // ==============================================
-        // توابع عمومی
-        // ==============================================
-        
-        /**
-         * ایجاد ذرات کوانتومی در پس‌زمینه
-         */
-        function createQuantumParticles() {
-            const particleCount = 30;
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('quantum-particle');
-                
-                const size = Math.random() * 15 + 5;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.animationDelay = `${Math.random() * 25}s`;
-                particle.style.opacity = Math.random() * 0.5 + 0.1;
-                particle.style.background = `radial-gradient(circle, 
-                    rgba(0, 212, 255, ${Math.random() * 0.4 + 0.2}) 0%, 
-                    rgba(110, 0, 255, ${Math.random() * 0.3 + 0.1}) 50%, 
-                    transparent 70%)`;
-                
-                quantumParticles.appendChild(particle);
+  <script>
+    // ==============================================
+    // داده‌های سیستم - دانش‌آموزان واقعی هنرستان
+    // ==============================================
+    const systemData = {
+        students: {
+            "99239151481": { 
+                password: "student001", 
+                fullName: "پارسا پوربختگان",
+                class: "پایه دهم - مکانیک خودرو",
+                panelPage: "G10T1/student001-panel.html"
+            },
+            "99235774216": { 
+                password: "student002", 
+                fullName: "محمدمهدی کاظمی",
+                class: "پایه دهم - مکانیک خودرو",
+                panelPage: "G10T1/student002-panel.html"
+            },
+            "9930946877": { 
+                password: "student003", 
+                fullName: "علی رضا کمالی",
+                class: "پایه دهم - مکانیک خودرو",
+                panelPage: "G10T1/student003-panel.html"
+            },
+            "994488178": { 
+                password: "student004", 
+                fullName: "پوریا آریباهی",
+                class: "پایه دهم - مکانیک خودرو",
+                panelPage: "G10T1/student004-panel.html"
+            },
+            "9923504966": { 
+                password: "student005", 
+                fullName: "حسین کمالی",
+                class: "پایه دهم - مکانیک خودرو",
+                panelPage: "G10T1/student005-panel.html"
+            },
+            "9131661576": { 
+                password: "student006", 
+                fullName: "سهیل مجیری",
+                class: "پایه دهم - مکانیک خودرو",
+                panelPage: "G10T1/student006-panel.html"
+            },
+            "9132178365": { 
+                password: "student007", 
+                fullName: "طاها امیربان",
+                class: "پایه دهم - مکانیک خودرو",
+                panelPage: "G10T1/student007-panel.html"
+            },
+            "9133247266": { 
+                password: "student008", 
+                fullName: "جواد کمالی",
+                class: "پایه دهم - مکانیک خودرو",
+                panelPage: "G10T1/student008-panel.html"
+            },
+            "9964851411": { 
+                password: "student009", 
+                fullName: "محمد امین حاجی حیدری",
+                class: "پایه دهم - مکانیک خودرو",
+                panelPage: "car9.html"
+            },
+            "9131687076": { 
+                password: "student010", 
+                fullName: "دانش‌آموز دهم",
+                class: "پایه دهم - مکانیک خودرو",
+                panelPage: "car10.html"
             }
         }
-        
-        /**
-         * نمایش/مخفی کردن رمز عبور
-         */
-        function togglePasswordVisibility() {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            passwordToggle.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
-        }
-        
-        /**
-         * نمایش پیام خطا
-         */
-        function showError(message) {
-            errorText.textContent = message;
-            errorMessage.style.display = 'block';
-            successMessage.style.display = 'none';
+    };
+
+    // ==============================================
+    // عناصر DOM
+    // ==============================================
+    const errorMessage = document.getElementById('errorMessage');
+    const errorText = document.getElementById('errorText');
+    const successMessage = document.getElementById('successMessage');
+    const successText = document.getElementById('successText');
+    const loginForm = document.getElementById('loginForm');
+    const studentCodeInput = document.getElementById('studentCode');
+    const passwordInput = document.getElementById('password');
+    const passwordToggle = document.getElementById('passwordToggle');
+    const rememberMeCheckbox = document.getElementById('rememberMe');
+    const forgotPasswordLink = document.getElementById('forgotPassword');
+    const loginLoader = document.getElementById('loginLoader');
+    const supportModal = document.getElementById('supportModal');
+    const closeModal = document.getElementById('closeModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const helpLink = document.getElementById('helpLink');
+    const quantumParticles = document.getElementById('quantumParticles');
+
+    // ==============================================
+    // توابع عمومی
+    // ==============================================
+    
+    /**
+     * ایجاد ذرات کوانتومی در پس‌زمینه
+     */
+    function createQuantumParticles() {
+        const particleCount = 30;
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('quantum-particle');
             
-            setTimeout(() => {
-                errorMessage.style.display = 'none';
-            }, 6000);
+            const size = Math.random() * 15 + 5;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 25}s`;
+            particle.style.opacity = Math.random() * 0.5 + 0.1;
+            particle.style.background = `radial-gradient(circle, 
+                rgba(0, 212, 255, ${Math.random() * 0.4 + 0.2}) 0%, 
+                rgba(110, 0, 255, ${Math.random() * 0.3 + 0.1}) 50%, 
+                transparent 70%)`;
+            
+            quantumParticles.appendChild(particle);
         }
+    }
+    
+    /**
+     * نمایش/مخفی کردن رمز عبور
+     */
+    function togglePasswordVisibility() {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        passwordToggle.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+    }
+    
+    /**
+     * نمایش پیام خطا
+     */
+    function showError(message) {
+        errorText.textContent = message;
+        errorMessage.style.display = 'block';
+        successMessage.style.display = 'none';
         
-        /**
-         * نمایش پیام موفقیت
-         */
-        function showSuccess(message) {
-            successText.textContent = message;
-            successMessage.style.display = 'block';
+        setTimeout(() => {
             errorMessage.style.display = 'none';
-            
-            setTimeout(() => {
-                successMessage.style.display = 'none';
-            }, 6000);
+        }, 6000);
+    }
+    
+    /**
+     * نمایش پیام موفقیت
+     */
+    function showSuccess(message) {
+        successText.textContent = message;
+        successMessage.style.display = 'block';
+        errorMessage.style.display = 'none';
+        
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 6000);
+    }
+    
+    /**
+     * نمایش مودال پشتیبانی
+     */
+    function showSupportModal() {
+        supportModal.style.display = 'flex';
+    }
+    
+    /**
+     * مخفی کردن مودال پشتیبانی
+     */
+    function hideSupportModal() {
+        supportModal.style.display = 'none';
+    }
+    
+    /**
+     * هدایت به پنل دانش‌آموزی اختصاصی
+     */
+    function redirectToDashboard(studentCode) {
+        showSuccess(`ورود موفق! در حال هدایت به پنل دانش‌آموزی...`);
+        
+        // ذخیره اطلاعات دانش‌آموز در localStorage
+        const studentData = systemData.students[studentCode];
+        const sessionData = {
+            code: studentCode,
+            fullName: studentData.fullName,
+            class: studentData.class,
+            panelPage: studentData.panelPage,
+            loginTime: new Date().getTime(),
+            sessionId: 'session_' + Math.random().toString(36).substr(2, 9)
+        };
+        
+        localStorage.setItem('currentStudent', JSON.stringify(sessionData));
+        
+        // ذخیره اطلاعات برای "مرا به خاطر بسپار"
+        const rememberMe = rememberMeCheckbox.checked;
+        if (rememberMe) {
+            localStorage.setItem('rememberMe', 'true');
+            localStorage.setItem('savedStudentCode', studentCode);
+        } else {
+            localStorage.removeItem('rememberMe');
+            localStorage.removeItem('savedStudentCode');
         }
         
-        /**
-         * نمایش مودال پشتیبانی
-         */
-        function showSupportModal() {
-            supportModal.style.display = 'flex';
-        }
-        
-        /**
-         * مخفی کردن مودال پشتیبانی
-         */
-        function hideSupportModal() {
-            supportModal.style.display = 'none';
-        }
-        
-        /**
-         * هدایت به پنل دانش‌آموزی
-         */
-        function redirectToDashboard(studentCode) {
-            showSuccess(`ورود موفق! در حال هدایت به پنل دانش‌آموزی...`);
-            
-            // ذخیره اطلاعات دانش‌آموز در localStorage
-            const studentData = systemData.students[studentCode];
-            const sessionData = {
-                code: studentCode,
-                fullName: studentData.fullName,
-                class: studentData.class,
-                loginTime: new Date().getTime(),
-                sessionId: 'session_' + Math.random().toString(36).substr(2, 9)
-            };
-            
-            localStorage.setItem('currentStudent', JSON.stringify(sessionData));
-            
-            // ذخیره اطلاعات برای "مرا به خاطر بسپار"
-            const rememberMe = rememberMeCheckbox.checked;
-            if (rememberMe) {
-                localStorage.setItem('rememberMe', 'true');
-                localStorage.setItem('savedStudentCode', studentCode);
-            } else {
-                localStorage.removeItem('rememberMe');
-                localStorage.removeItem('savedStudentCode');
-            }
-            
-            // هدایت به پنل دانش‌آموزی
-            setTimeout(() => {
-                window.location.href = 'student-panel-mich-car.html';
-            }, 2000);
-        }
+        // هدایت به پنل دانش‌آموزی اختصاصی
+        setTimeout(() => {
+            window.location.href = studentData.panelPage;
+        }, 2000);
+    }
 
-        // ==============================================
-        // رویدادهای سیستم
-        // ==============================================
+    // ==============================================
+    // رویدادهای سیستم
+    // ==============================================
+    
+    // بارگذاری صفحه
+    window.addEventListener('DOMContentLoaded', function() {
+        createQuantumParticles();
         
-        // بارگذاری صفحه
-        window.addEventListener('DOMContentLoaded', function() {
-            createQuantumParticles();
-            
-            // بررسی وضعیت "مرا به خاطر بسپار"
-            const rememberMe = localStorage.getItem('rememberMe') === 'true';
-            const savedStudentCode = localStorage.getItem('savedStudentCode');
+        // بررسی وضعیت "مرا به خاطر بسپار"
+        const rememberMe = localStorage.getItem('rememberMe') === 'true';
+        const savedStudentCode = localStorage.getItem('savedStudentCode');
 
-            if (rememberMe && savedStudentCode && systemData.students[savedStudentCode]) {
-                studentCodeInput.value = savedStudentCode;
-                rememberMeCheckbox.checked = true;
-                showSuccess(`خوش آمدید! لطفاً رمز عبور خود را وارد کنید.`);
-                passwordInput.focus();
-            }
-        });
+        if (rememberMe && savedStudentCode && systemData.students[savedStudentCode]) {
+            studentCodeInput.value = savedStudentCode;
+            rememberMeCheckbox.checked = true;
+            showSuccess(`خوش آمدید! لطفاً رمز عبور خود را وارد کنید.`);
+            passwordInput.focus();
+        }
+    });
+    
+    // تغییر وضعیت نمایش رمز عبور
+    passwordToggle.addEventListener('click', togglePasswordVisibility);
+    
+    // فرم ورود دانش‌آموزان
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
         
-        // تغییر وضعیت نمایش رمز عبور
-        passwordToggle.addEventListener('click', togglePasswordVisibility);
+        const studentCode = studentCodeInput.value.trim();
+        const password = passwordInput.value.trim();
+        const rememberMe = rememberMeCheckbox.checked;
         
-        // فرم ورود دانش‌آموزان
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const studentCode = studentCodeInput.value.trim();
-            const password = passwordInput.value.trim();
-            const rememberMe = rememberMeCheckbox.checked;
-            
-            // اعتبارسنجی اولیه
-            if (!studentCode) {
-                showError("لطفاً کد دانش‌آموزی خود را وارد کنید.");
-                studentCodeInput.focus();
-                return;
-            }
-            
-            if (!password) {
-                showError("لطفاً رمز عبور خود را وارد کنید.");
-                passwordInput.focus();
-                return;
-            }
-            
-            // نمایش لودر
-            loginLoader.style.display = 'block';
-            loginForm.querySelector('button[type="submit"]').disabled = true;
-            
-            // شبیه‌سازی تاخیر برای لاگین
-            setTimeout(() => {
-                if (systemData.students[studentCode]) {
-                    if (password === systemData.students[studentCode].password) {
-                        // ورود موفق
-                        redirectToDashboard(studentCode);
-                    } else {
-                        showError("رمز عبور اشتباه است!");
-                        passwordInput.focus();
-                    }
+        // اعتبارسنجی اولیه
+        if (!studentCode) {
+            showError("لطفاً کد دانش‌آموزی خود را وارد کنید.");
+            studentCodeInput.focus();
+            return;
+        }
+        
+        if (!password) {
+            showError("لطفاً رمز عبور خود را وارد کنید.");
+            passwordInput.focus();
+            return;
+        }
+        
+        // نمایش لودر
+        loginLoader.style.display = 'block';
+        loginForm.querySelector('button[type="submit"]').disabled = true;
+        
+        // شبیه‌سازی تاخیر برای لاگین
+        setTimeout(() => {
+            if (systemData.students[studentCode]) {
+                if (password === systemData.students[studentCode].password) {
+                    // ورود موفق
+                    redirectToDashboard(studentCode);
                 } else {
-                    showError("کد دانش‌آموزی یافت نشد!");
-                    studentCodeInput.focus();
+                    showError("رمز عبور اشتباه است!");
+                    passwordInput.focus();
                 }
-                
-                // مخفی کردن لودر
-                loginLoader.style.display = 'none';
-                loginForm.querySelector('button[type="submit"]').disabled = false;
-            }, 2000);
-        });
-        
-        // بازیابی رمز عبور
-        forgotPasswordLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            showSupportModal();
-        });
-        
-        // بستن مودال
-        closeModal.addEventListener('click', hideSupportModal);
-        closeModalBtn.addEventListener('click', hideSupportModal);
-        
-        // کلیک خارج از مودال برای بستن
-        supportModal.addEventListener('click', function(e) {
-            if (e.target === supportModal) {
-                hideSupportModal();
+            } else {
+                showError("کد دانش‌آموزی یافت نشد!");
+                studentCodeInput.focus();
             }
-        });
-        
-        // راهنمای ورود
-        helpLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            showSupportModal();
-        });
-        
-        // انیمیشن focus روی inputها
-        const inputs = document.querySelectorAll('input');
-        inputs.forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.parentElement.classList.add('focused');
-            });
             
-            input.addEventListener('blur', function() {
-                this.parentElement.parentElement.classList.remove('focused');
-            });
+            // مخفی کردن لودر
+            loginLoader.style.display = 'none';
+            loginForm.querySelector('button[type="submit"]').disabled = false;
+        }, 2000);
+    });
+    
+    // بازیابی رمز عبور
+    forgotPasswordLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        showSupportModal();
+    });
+    
+    // بستن مودال
+    closeModal.addEventListener('click', hideSupportModal);
+    closeModalBtn.addEventListener('click', hideSupportModal);
+    
+    // کلیک خارج از مودال برای بستن
+    supportModal.addEventListener('click', function(e) {
+        if (e.target === supportModal) {
+            hideSupportModal();
+        }
+    });
+    
+    // راهنمای ورود
+    helpLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        showSupportModal();
+    });
+    
+    // انیمیشن focus روی inputها
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.parentElement.classList.add('focused');
         });
+        
+        input.addEventListener('blur', function() {
+            this.parentElement.parentElement.classList.remove('focused');
+        });
+    });
 
-        // جلوه‌های تعاملی برای کارت‌ها
-        const featureCards = document.querySelectorAll('.feature-card');
-        featureCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-12px) scale(1.03)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
+    // جلوه‌های تعاملی برای کارت‌ها
+    const featureCards = document.querySelectorAll('.feature-card');
+    featureCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-12px) scale(1.03)';
         });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+
     </script>
 </body>
 </html>
