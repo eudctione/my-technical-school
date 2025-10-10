@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سیستم آموزشی - ورود دانش‌آموزان</title>
+    <title>سیستم آموزشی هوشمند - ورود دانش‌آموزان</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #4f46e5;
-            --primary-dark: #4338ca;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
             --secondary: #10b981;
             --secondary-dark: #059669;
             --accent: #f59e0b;
@@ -17,16 +18,22 @@
             --dark: #1e293b;
             --darker: #0f172a;
             --light: #f8fafc;
-            --danger: #dc2626;
-            --danger-dark: #b91c1c;
-            --success: #16a34a;
-            --warning: #d97706;
-            --info: #0ea5e9;
-            --gray-200: #e2e8f0;
-            --gray-300: #cbd5e1;
-            --gray-400: #94a3b8;
+            --danger: #ef4444;
+            --danger-dark: #dc2626;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --info: #3b82f6;
             --quantum-blue: #00d4ff;
             --quantum-purple: #6e00ff;
+            --quantum-pink: #ec4899;
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-dark: rgba(0, 0, 0, 0.2);
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --shadow-hover: 0 30px 80px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            --gradient-quantum: linear-gradient(135deg, var(--quantum-purple) 0%, var(--quantum-blue) 100%);
+            --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--quantum-pink) 100%);
         }
         
         * {
@@ -37,7 +44,7 @@
         }
         
         body {
-            background: linear-gradient(135deg, var(--quantum-purple) 0%, var(--quantum-blue) 100%);
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
             min-height: 100vh;
             margin: 0;
             padding: 20px;
@@ -46,57 +53,148 @@
             align-items: center;
             position: relative;
             overflow-x: hidden;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        /* جلوه‌های پیشرفته پس‌زمینه */
+        .background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--quantum-blue), var(--quantum-purple));
+            opacity: 0.1;
+            animation: float 25s infinite linear;
+            filter: blur(40px);
+        }
+        
+        .shape-1 { 
+            width: 400px; 
+            height: 400px; 
+            top: 10%; 
+            right: 5%; 
+            animation-delay: 0s;
+            background: linear-gradient(45deg, var(--quantum-blue), var(--primary-light));
+        }
+        .shape-2 { 
+            width: 300px; 
+            height: 300px; 
+            bottom: 15%; 
+            left: 8%; 
+            animation-delay: -8s;
+            background: linear-gradient(45deg, var(--quantum-purple), var(--quantum-pink));
+        }
+        .shape-3 { 
+            width: 250px; 
+            height: 250px; 
+            top: 60%; 
+            right: 20%; 
+            animation-delay: -15s;
+            background: linear-gradient(45deg, var(--accent), var(--quantum-blue));
+        }
+        
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            33% { 
+                transform: translateY(-40px) rotate(120deg) scale(1.1);
+            }
+            66% { 
+                transform: translateY(40px) rotate(240deg) scale(0.9);
+            }
         }
         
         .quantum-particle {
             position: absolute;
-            background: rgba(255, 255, 255, 0.5);
+            background: radial-gradient(circle, var(--quantum-blue) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
-            animation: float 15s infinite linear;
-            z-index: 1;
+            animation: particleFloat 20s infinite linear;
+            z-index: 2;
+            opacity: 0.6;
         }
         
-        @keyframes float {
-            0% { transform: translateY(0) translateX(0); opacity: 0; }
-            50% { opacity: 0.7; }
-            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        @keyframes particleFloat {
+            0%, 100% { 
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.3;
+            }
+            25% { 
+                transform: translate(100px, -50px) rotate(90deg);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: translate(50px, 100px) rotate(180deg);
+                opacity: 0.4;
+            }
+            75% { 
+                transform: translate(-100px, 50px) rotate(270deg);
+                opacity: 0.8;
+            }
         }
         
         .main-container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 20px auto;
             position: relative;
             z-index: 10;
+            display: grid;
+            grid-template-columns: 1fr 480px;
+            gap: 60px;
+            align-items: center;
         }
         
         .login-container {
-            background: rgba(255, 255, 255, 0.97);
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: var(--glass);
+            backdrop-filter: blur(40px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            box-shadow: var(--shadow);
             width: 100%;
-            max-width: 500px;
+            max-width: 480px;
             overflow: hidden;
             position: relative;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.5s ease;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             margin: 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border-radius: 32px;
+            z-index: -1;
         }
         
         .login-container:hover {
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            transform: translateY(-5px);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(255, 255, 255, 0.2);
         }
         
         .login-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            background: var(--gradient-primary);
             color: white;
-            padding: 25px;
+            padding: 45px 35px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--primary-light) 100%);
         }
         
         .login-header::before {
@@ -106,560 +204,306 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: pulse 8s infinite linear;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            animation: pulse 12s infinite linear;
             z-index: 1;
         }
         
         @keyframes pulse {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
         }
         
         .login-header h1 {
-            font-size: 1.5rem;
-            margin: 0 0 5px 0;
+            font-size: 2.2rem;
+            margin: 0 0 15px 0;
             position: relative;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
             z-index: 2;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .login-header p {
             position: relative;
             z-index: 2;
-            opacity: 0.9;
+            opacity: 0.95;
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         
         .login-body {
-            padding: 25px;
+            padding: 45px 35px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            position: relative;
+        }
+        
+        .login-body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
         }
         
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             position: relative;
         }
         
         .input-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark);
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: #e2e8f0;
+            font-size: 1.1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .input-wrapper i {
+            position: absolute;
+            right: 20px;
+            color: #94a3b8;
+            font-size: 1.3rem;
+            z-index: 2;
+            transition: all 0.3s ease;
         }
         
         .input-group input {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--gray-200);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s;
-            background: rgba(255,255,255,0.8);
+            padding: 18px 60px 18px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            color: #f1f5f9;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .input-group input::placeholder {
+            color: #94a3b8;
         }
         
         .input-group input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15), 0 8px 30px rgba(99, 102, 241, 0.2);
             outline: none;
-            background: white;
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.08);
         }
         
-        .btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 5px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                rgba(255,255,255,0) 45%,
-                rgba(255,255,255,0.3) 50%,
-                rgba(255,255,255,0) 55%
-            );
-            transform: rotate(30deg);
-            transition: all 0.3s;
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
-        }
-        
-        .btn:hover::after {
-            left: 100%;
-        }
-        
-        .btn-secondary {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
-        }
-        
-        .btn-secondary:hover {
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
-        }
-        
-        .btn-accent {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-        }
-        
-        .btn-accent:hover {
-            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
-        }
-        
-        .btn-dark {
-            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
-        }
-        
-        .btn-dark:hover {
-            box-shadow: 0 5px 15px rgba(30, 41, 59, 0.4);
-        }
-        
-        .btn-danger {
-            background: linear-gradient(135deg, var(--danger) 0%, var(--danger-dark) 100%);
-        }
-        
-        .btn-danger:hover {
-            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.4);
-        }
-        
-        .btn-sm {
-            padding: 8px 12px;
-            font-size: 0.9rem;
-        }
-        
-        .message {
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-            display: none;
-            position: relative;
-        }
-        
-        .error-message {
-            color: var(--danger);
-            background: rgba(220, 38, 38, 0.1);
-            animation: shake 0.5s;
-        }
-        
-        .success-message {
-            color: var(--success);
-            background: rgba(22, 163, 74, 0.1);
-        }
-        
-        .warning-message {
-            color: var(--warning);
-            background: rgba(217, 119, 6, 0.1);
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-5px); }
-            40%, 80% { transform: translateX(5px); }
-        }
-        
-        .login-loader {
-            display: none;
-            text-align: center;
-            margin: 15px 0;
-        }
-        
-        .loader {
-            width: 24px;
-            height: 24px;
-            border: 3px solid rgba(79, 70, 229, 0.2);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            display: inline-block;
-            animation: spin 1s linear infinite;
-            margin-left: 10px;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .input-group input:focus + .input-wrapper i {
+            color: var(--primary);
+            transform: scale(1.2);
         }
         
         .password-toggle {
             position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
+            left: 20px;
             background: none;
             border: none;
-            color: var(--gray-500);
+            color: #94a3b8;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            padding: 8px;
+            border-radius: 8px;
+            z-index: 3;
         }
         
         .password-toggle:hover {
-            color: var(--dark);
-        }
-        
-        .login-footer {
-            text-align: center;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid var(--gray-200);
-        }
-        
-        .login-footer a {
             color: var(--primary);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .login-footer a:hover {
-            color: var(--primary-dark);
-            text-decoration: underline;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
-        .feature-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .feature-card i {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: var(--quantum-blue);
-        }
-        
-        .feature-card h3 {
-            font-size: 1rem;
-            margin-bottom: 8px;
-        }
-        
-        .feature-card p {
-            font-size: 0.85rem;
-            opacity: 0.9;
-        }
-        
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .login-container {
-                margin: 0 10px;
-            }
-            
-            .login-header h1 {
-                font-size: 1.3rem;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .login-body {
-                padding: 20px 15px;
-            }
-            
-            body {
-                padding: 10px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-   <!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سیستم آموزشی - ورود دانش‌آموزان</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #4f46e5;
-            --primary-dark: #4338ca;
-            --secondary: #10b981;
-            --secondary-dark: #059669;
-            --accent: #f59e0b;
-            --accent-dark: #d97706;
-            --dark: #1e293b;
-            --darker: #0f172a;
-            --light: #f8fafc;
-            --danger: #dc2626;
-            --danger-dark: #b91c1c;
-            --success: #16a34a;
-            --warning: #d97706;
-            --info: #0ea5e9;
-            --gray-200: #e2e8f0;
-            --gray-300: #cbd5e1;
-            --gray-400: #94a3b8;
-            --quantum-blue: #00d4ff;
-            --quantum-purple: #6e00ff;
-        }
-        
-        * {
-            font-family: 'Vazirmatn', sans-serif;
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-            background: linear-gradient(135deg, var(--quantum-purple) 0%, var(--quantum-blue) 100%);
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        .quantum-particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: float 15s infinite linear;
-            z-index: 1;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0) translateX(0); opacity: 0; }
-            50% { opacity: 0.7; }
-            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
-        }
-        
-        .main-container {
-            width: 100%;
-            max-width: 500px;
-            margin: 20px auto;
-            position: relative;
-            z-index: 10;
-        }
-        
-        .login-container {
-            background: rgba(255, 255, 255, 0.97);
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.5s ease;
-        }
-        
-        .login-container:hover {
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            transform: translateY(-5px);
-        }
-        
-        .login-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 25px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .login-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: pulse 8s infinite linear;
-            z-index: 1;
-        }
-        
-        @keyframes pulse {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .login-header h1 {
-            font-size: 1.5rem;
-            margin: 0 0 5px 0;
-            position: relative;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            z-index: 2;
-        }
-        
-        .login-header p {
-            position: relative;
-            z-index: 2;
-            opacity: 0.9;
-        }
-        
-        .login-body {
-            padding: 25px;
-        }
-        
-        .input-group {
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark);
-        }
-        
-        .input-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--gray-200);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s;
-            background: rgba(255,255,255,0.8);
-        }
-        
-        .input-group input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
-            outline: none;
-            background: white;
+            background: rgba(99, 102, 241, 0.1);
+            transform: scale(1.1);
         }
         
         .btn {
             width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 20px;
+            background: var(--gradient-primary);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
+            border-radius: 16px;
+            font-size: 1.2rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 5px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 15px;
             position: relative;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 12px;
+            box-shadow: 0 8px 30px rgba(79, 70, 229, 0.4);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
-        .btn::after {
+        .btn::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                rgba(255,255,255,0) 45%,
-                rgba(255,255,255,0.3) 50%,
-                rgba(255,255,255,0) 55%
-            );
-            transform: rotate(30deg);
-            transition: all 0.3s;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
         }
         
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(79, 70, 229, 0.6);
         }
         
-        .btn:hover::after {
+        .btn:hover::before {
             left: 100%;
         }
         
+        .btn:active {
+            transform: translateY(-1px);
+        }
+        
         .btn-secondary {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+            background: var(--gradient-accent);
+            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.4);
         }
         
         .btn-secondary:hover {
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 15px 40px rgba(245, 158, 11, 0.6);
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 25px 0 35px 0;
+        }
+        
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+        
+        .checkbox-container input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary);
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+        
+        .forgot-password {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+        
+        .forgot-password:hover {
+            color: var(--primary);
+            text-decoration: none;
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateY(-2px);
         }
         
         .message {
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 30px;
             text-align: center;
             display: none;
             position: relative;
+            animation: slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+            border: 1px solid;
+            font-weight: 600;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
         
         .error-message {
             color: var(--danger);
-            background: rgba(220, 38, 38, 0.1);
-            animation: shake 0.5s;
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.2);
+            animation: shake 0.6s ease;
         }
         
         .success-message {
             color: var(--success);
-            background: rgba(22, 163, 74, 0.1);
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.2);
         }
         
         .warning-message {
             color: var(--warning);
-            background: rgba(217, 119, 6, 0.1);
+            background: rgba(245, 158, 11, 0.1);
+            border-color: rgba(245, 158, 11, 0.2);
         }
         
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-5px); }
-            40%, 80% { transform: translateX(5px); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
         }
         
         .login-loader {
             display: none;
             text-align: center;
-            margin: 15px 0;
+            margin: 25px 0;
+            animation: fadeIn 0.5s ease;
         }
         
         .loader {
-            width: 24px;
-            height: 24px;
-            border: 3px solid rgba(79, 70, 229, 0.2);
+            width: 32px;
+            height: 32px;
+            border: 3px solid rgba(99, 102, 241, 0.2);
             border-top-color: var(--primary);
             border-radius: 50%;
             display: inline-block;
             animation: spin 1s linear infinite;
-            margin-left: 10px;
+            margin-left: 15px;
         }
         
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         .support-modal {
@@ -669,133 +513,312 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            animation: fadeIn 0.3s;
+            animation: fadeIn 0.4s;
         }
         
         .modal-content {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            max-width: 450px;
+            background: var(--glass);
+            backdrop-filter: blur(40px);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 40px;
+            max-width: 500px;
             width: 90%;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            box-shadow: var(--shadow-hover);
             position: relative;
-            animation: slideUp 0.4s;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #e2e8f0;
         }
         
         @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from { transform: translateY(40px) scale(0.95); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
         }
         
         .modal-icon {
-            font-size: 4rem;
-            color: var(--primary);
-            margin-bottom: 20px;
+            font-size: 5rem;
+            margin-bottom: 30px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
         }
         
         .modal-title {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--dark);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #f1f5f9;
+            font-weight: 800;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         
         .modal-text {
-            margin-bottom: 25px;
-            color: var(--gray-500);
-            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #cbd5e1;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            font-weight: 500;
         }
         
         .support-info {
-            background: rgba(79, 70, 229, 0.1);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 20px 0;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            backdrop-filter: blur(10px);
         }
         
         .support-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin: 10px 0;
-            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+            justify-content: flex-start;
+            padding: 10px 0;
+            font-size: 1.1rem;
+        }
+        
+        .support-item i {
+            font-size: 1.4rem;
+            width: 30px;
+            text-align: center;
         }
         
         .close-modal {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            color: var(--gray-400);
+            top: 25px;
+            left: 25px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            font-size: 1.4rem;
+            color: #ef4444;
             cursor: pointer;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .close-modal:hover {
-            color: var(--danger);
+            color: var(--danger-dark);
+            background: rgba(239, 68, 68, 0.2);
+            transform: scale(1.1);
         }
         
         .footer-links {
             text-align: center;
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: var(--gray-500);
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1rem;
+            color: #94a3b8;
         }
         
         .footer-links a {
-            color: var(--primary);
+            color: var(--primary-light);
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 8px;
         }
         
         .footer-links a:hover {
-            color: var(--primary-dark);
-            text-decoration: underline;
+            color: var(--primary);
+            text-decoration: none;
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .welcome-section {
+            color: white;
+            text-align: right;
+            padding: 40px;
+        }
+        
+        .welcome-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+        
+        .welcome-subtitle {
+            font-size: 1.4rem;
+            color: #cbd5e1;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background: var(--glass);
+            backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            color: white;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature-card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+        
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        
+        .feature-card p {
+            font-size: 1rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+            font-weight: 500;
         }
         
         /* Responsive design */
-        @media (max-width: 768px) {
-            .login-container {
-                margin: 0 10px;
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
             }
             
-            .login-header h1 {
-                font-size: 1.3rem;
-            }
-            
-            .modal-content {
+            .welcome-section {
+                text-align: center;
                 padding: 20px;
             }
             
+            .welcome-title {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .login-container {
+                margin: 0 15px;
+                max-width: 100%;
+            }
+            
+            .login-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .login-header p {
+                font-size: 1.1rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .modal-content {
+                padding: 30px 20px;
+            }
+            
             .modal-icon {
-                font-size: 3rem;
+                font-size: 4rem;
+            }
+            
+            .welcome-title {
+                font-size: 2.2rem;
+            }
+            
+            .welcome-subtitle {
+                font-size: 1.2rem;
             }
         }
         
         @media (max-width: 480px) {
             .login-body {
-                padding: 20px 15px;
+                padding: 30px 20px;
             }
             
             body {
-                padding: 10px;
+                padding: 15px;
+            }
+            
+            .remember-forgot {
+                flex-direction: column;
+                gap: 20px;
+                align-items: flex-start;
+            }
+            
+            .login-header {
+                padding: 30px 20px;
+            }
+            
+            .welcome-title {
+                font-size: 1.8rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- جلوه‌های پیشرفته پس‌زمینه -->
+    <div class="background-effects">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+    </div>
+    
     <!-- ذرات کوانتومی در پس‌زمینه -->
     <div id="quantumParticles"></div>
     
@@ -808,9 +831,9 @@
             <div class="modal-icon">
                 <i class="fas fa-headset"></i>
             </div>
-            <h2 class="modal-title">بازیابی رمز عبور</h2>
+            <h2 class="modal-title">پشتیبانی فنی</h2>
             <p class="modal-text">
-                برای بازیابی رمز عبور فراموش شده، لطفاً با پشتیبانی فنی سیستم تماس بگیرید.
+                برای بازیابی رمز عبور یا دریافت راهنمایی، لطفاً با پشتیبانی فنی سیستم تماس بگیرید.
             </p>
             <div class="support-info">
                 <div class="support-item">
@@ -833,10 +856,41 @@
     </div>
     
     <div class="main-container">
+        <div class="welcome-section">
+            <h1 class="welcome-title">سیستم آموزشی هوشمند<br>مکانیک خودرو</h1>
+            <p class="welcome-subtitle">
+                به پیشرفته‌ترین پلتفرم آموزشی رشته مکانیک خودرو خوش آمدید.<br>
+                دسترسی به دروس تخصصی، مدیریت تکالیف و پیگیری پیشرفت تحصیلی.
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-book-open"></i>
+                    <h3>دسترسی به دروس</h3>
+                    <p>مشاهده تمام دروس و محتوای آموزشی پیشرفته با رابط کاربری مدرن</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tasks"></i>
+                    <h3>مدیریت تکالیف</h3>
+                    <p>پیگیری و ارسال تکالیف درسی با سیستم هوشمند و خودکار</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>مشاهده نمرات</h3>
+                    <p>بررسی کارنامه و تحلیل پیشرفت تحصیلی به صورت لحظه‌ای</p>
+                </div>
+<div class="feature-card">
+    <i class="fas fa-calendar-alt"></i>
+    <h3>تقویم آموزشی</h3>
+    <p>برنامه‌ریزی و مدیریت زمان به صورت هوشمند و شخصی‌سازی شده</p>
+</div>
+            </div>
+        </div>
+
         <div class="login-container">
             <div class="login-header">
-                <h1><i class="fas fa-graduation-cap"></i> سیستم آموزشی دانش‌آموزان</h1>
-                <p>ورود به پنل دانش‌آموزی پایه دهم رشته مکانیک خودرو </p>
+                <h1><i class="fas fa-graduation-cap"></i> ورود به سیستم</h1>
+                <p>پنل دانش‌آموزی پایه دهم رشته مکانیک خودرو</p>
             </div>
             
             <div class="login-body">
@@ -853,91 +907,103 @@
                 <form id="loginForm">
                     <div class="input-group">
                         <label for="studentCode"><i class="fas fa-user-graduate"></i> کد دانش‌آموزی</label>
-                        <input type="text" id="studentCode" placeholder=" کدملی دانش‌آموزی خود را وارد کنید" required>
+                        <div class="input-wrapper">
+                            <i class="fas fa-id-card"></i>
+                            <input type="text" id="studentCode" placeholder="کدملی دانش‌آموزی خود را وارد کنید" required>
+                        </div>
                     </div>
                     
                     <div class="input-group">
                         <label for="password"><i class="fas fa-key"></i> رمز عبور</label>
-                        <input type="password" id="password" placeholder="رمز عبور خود را وارد کنید" required>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" placeholder="رمز عبور خود را وارد کنید" required>
+                            <button type="button" class="password-toggle" id="passwordToggle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
                     </div>
                     
-                <!-- بخش "مرا به خاطر بسپار" در یک خط -->
-                    <div class="input-group-remember">
+                    <div class="remember-forgot">
                         <label class="checkbox-container">
                             <input type="checkbox" id="rememberMe">
-                            <span class="checkmark"></span>
-                           <a> مرا به خاطر بسپار </a>
+                            <span>مرا به خاطر بسپار</span>
                         </label>
-
-                         <a href="#" id="forgotPassword" style="font-size: 0.9rem; color: var(--primary);">رمز عبور را فراموش کرده‌ام</a>
+                        <a href="#" class="forgot-password" id="forgotPassword">رمز عبور را فراموش کرده‌ام</a>
                     </div>
                     
                     <div class="login-loader" id="loginLoader">
                         <div class="loader"></div>
-                        <span>در حال بررسی اطلاعات...</span>
+                        <span>در حال بررسی اطلاعات و ورود به سیستم...</span>
                     </div>
                     
-                    <button type="submit" class="btn"><i class="fas fa-sign-in-alt"></i> ورود به پنل</button>
+                    <button type="submit" class="btn">
+                        <i class="fas fa-sign-in-alt"></i> ورود به پنل دانش‌آموزی
+                    </button>
                 </form>
                 
                 <div class="footer-links">
-                    <p>برای اولین بار از سیستم استفاده می‌کنید؟ <a href="#" id="helpLink">راهنمای ورود</a></p>
+                    <p>برای اولین بار از سیستم استفاده می‌کنید؟ <a href="#" id="helpLink">راهنمای ورود به سیستم</a></p>
                 </div>
             </div>
         </div>
     </div>
 
-
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <i class="fas fa-book-open"></i>
-                <h3>دسترسی به دروس</h3>
-                <p>مشاهده تمام دروس و محتوای آموزشی</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-tasks"></i>
-                <h3>مدیریت تکالیف</h3>
-                <p>پیگیری و ارسال تکالیف درسی</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-chart-line"></i>
-                <h3>مشاهده نمرات</h3>
-                <p>بررسی کارنامه و پیشرفت تحصیلی</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-calendar-alt"></i>
-                <h3>تقویم آموزشی</h3>
-                <p>برنامه‌ریزی و مدیریت زمان</p>
-            </div>
-        </div>
-    </div>
-
-   <script>
+    <script>
         // ==============================================
-        // داده‌های سیستم
+        // داده‌های سیستم - دانش‌آموزان واقعی هنرستان
         // ==============================================
         const systemData = {
             students: {
-                "98012345": { 
-                    password: "student123", 
-                    fullName: "محمد احمدی",
-                    class: "پایه دهم - ریاضی فیزیک"
+                "99239151481": { 
+                    password: "student001", 
+                    fullName: "پارسا پوربختگان",
+                    class: "پایه دهم - مکانیک خودرو"
                 },
-                "98012346": { 
-                    password: "student456", 
-                    fullName: "فاطمه محمدی",
-                    class: "پایه نهم - تجربی"
+                "99235774216": { 
+                    password: "student002", 
+                    fullName: "محمدمهدی کاظمی",
+                    class: "پایه دهم - مکانیک خودرو"
                 },
-                "98012347": { 
-                    password: "student789", 
-                    fullName: "علی رضایی",
-                    class: "پایه یازدهم - انسانی"
+                "9930946877": { 
+                    password: "student003", 
+                    fullName: "علی رضا کمالی",
+                    class: "پایه دهم - مکانیک خودرو"
                 },
-                "98012348": { 
-                    password: "student000", 
-                    fullName: "زهرا کریمی",
-                    class: "پایه دوازدهم - تجربی"
+                "994488178": { 
+                    password: "student004", 
+                    fullName: "پوریا آریباهی",
+                    class: "پایه دهم - مکانیک خودرو"
+                },
+                "9923504966": { 
+                    password: "student005", 
+                    fullName: "حسین کمالی",
+                    class: "پایه دهم - مکانیک خودرو"
+                },
+                "9131661576": { 
+                    password: "student006", 
+                    fullName: "سهیل مجیری",
+                    class: "پایه دهم - مکانیک خودرو"
+                },
+                "9132178365": { 
+                    password: "student007", 
+                    fullName: "طاها امیربان",
+                    class: "پایه دهم - مکانیک خودرو"
+                },
+                "9133247266": { 
+                    password: "student008", 
+                    fullName: "جواد کمالی",
+                    class: "پایه دهم - مکانیک خودرو"
+                },
+                "9964851411": { 
+                    password: "student009", 
+                    fullName: "محمد امین حاجی حیدری",
+                    class: "پایه دهم - مکانیک خودرو"
+                },
+                "9131687076": { 
+                    password: "student010", 
+                    fullName: "دانش‌آموز دهم",
+                    class: "پایه دهم - مکانیک خودرو"
                 }
             }
         };
@@ -952,6 +1018,7 @@
         const loginForm = document.getElementById('loginForm');
         const studentCodeInput = document.getElementById('studentCode');
         const passwordInput = document.getElementById('password');
+        const passwordToggle = document.getElementById('passwordToggle');
         const rememberMeCheckbox = document.getElementById('rememberMe');
         const forgotPasswordLink = document.getElementById('forgotPassword');
         const loginLoader = document.getElementById('loginLoader');
@@ -969,26 +1036,38 @@
          * ایجاد ذرات کوانتومی در پس‌زمینه
          */
         function createQuantumParticles() {
-            const particleCount = 20;
+            const particleCount = 30;
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('quantum-particle');
                 
-                const size = Math.random() * 10 + 5;
+                const size = Math.random() * 15 + 5;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 particle.style.left = `${Math.random() * 100}%`;
                 particle.style.top = `${Math.random() * 100}%`;
-                particle.style.animationDelay = `${Math.random() * 15}s`;
-                particle.style.opacity = Math.random() * 0.5;
+                particle.style.animationDelay = `${Math.random() * 25}s`;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                particle.style.background = `radial-gradient(circle, 
+                    rgba(0, 212, 255, ${Math.random() * 0.4 + 0.2}) 0%, 
+                    rgba(110, 0, 255, ${Math.random() * 0.3 + 0.1}) 50%, 
+                    transparent 70%)`;
                 
                 quantumParticles.appendChild(particle);
             }
         }
         
         /**
+         * نمایش/مخفی کردن رمز عبور
+         */
+        function togglePasswordVisibility() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            passwordToggle.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        }
+        
+        /**
          * نمایش پیام خطا
-         * @param {string} message - متن پیام خطا
          */
         function showError(message) {
             errorText.textContent = message;
@@ -997,12 +1076,11 @@
             
             setTimeout(() => {
                 errorMessage.style.display = 'none';
-            }, 5000);
+            }, 6000);
         }
         
         /**
          * نمایش پیام موفقیت
-         * @param {string} message - متن پیام موفقیت
          */
         function showSuccess(message) {
             successText.textContent = message;
@@ -1011,7 +1089,7 @@
             
             setTimeout(() => {
                 successMessage.style.display = 'none';
-            }, 5000);
+            }, 6000);
         }
         
         /**
@@ -1030,17 +1108,35 @@
         
         /**
          * هدایت به پنل دانش‌آموزی
-         * @param {string} studentCode - کد دانش‌آموزی
          */
         function redirectToDashboard(studentCode) {
-            // در اینجا می‌توانید به صفحه پروفایل دانش‌آموز هدایت کنید
-            // برای نمونه یک پیام موفقیت نمایش داده می‌شود
             showSuccess(`ورود موفق! در حال هدایت به پنل دانش‌آموزی...`);
             
-            // شبیه‌سازی هدایت به صفحه پروفایل
+            // ذخیره اطلاعات دانش‌آموز در localStorage
+            const studentData = systemData.students[studentCode];
+            const sessionData = {
+                code: studentCode,
+                fullName: studentData.fullName,
+                class: studentData.class,
+                loginTime: new Date().getTime(),
+                sessionId: 'session_' + Math.random().toString(36).substr(2, 9)
+            };
+            
+            localStorage.setItem('currentStudent', JSON.stringify(sessionData));
+            
+            // ذخیره اطلاعات برای "مرا به خاطر بسپار"
+            const rememberMe = rememberMeCheckbox.checked;
+            if (rememberMe) {
+                localStorage.setItem('rememberMe', 'true');
+                localStorage.setItem('savedStudentCode', studentCode);
+            } else {
+                localStorage.removeItem('rememberMe');
+                localStorage.removeItem('savedStudentCode');
+            }
+            
+            // هدایت به پنل دانش‌آموزی
             setTimeout(() => {
-                alert(`به پنل دانش‌آموزی ${systemData.students[studentCode].fullName} خوش آمدید!\n\nاین بخش دوم سیستم خواهد بود.`);
-                // در حالت واقعی: window.location.href = 'student-profile.html';
+                window.location.href = 'student-panel-mich-car.html';
             }, 2000);
         }
 
@@ -1052,17 +1148,20 @@
         window.addEventListener('DOMContentLoaded', function() {
             createQuantumParticles();
             
-            // بررسی وضعیت لاگین کاربر
-            const loggedInStudentCode = localStorage.getItem('loggedInStudentCode');
+            // بررسی وضعیت "مرا به خاطر بسپار"
             const rememberMe = localStorage.getItem('rememberMe') === 'true';
-            
-            if (loggedInStudentCode && systemData.students[loggedInStudentCode] && rememberMe) {
-                studentCodeInput.value = loggedInStudentCode;
+            const savedStudentCode = localStorage.getItem('savedStudentCode');
+
+            if (rememberMe && savedStudentCode && systemData.students[savedStudentCode]) {
+                studentCodeInput.value = savedStudentCode;
                 rememberMeCheckbox.checked = true;
-                showSuccess(`خوش آمدید ${systemData.students[loggedInStudentCode].fullName}! لطفاً رمز عبور خود را وارد کنید.`);
+                showSuccess(`خوش آمدید! لطفاً رمز عبور خود را وارد کنید.`);
                 passwordInput.focus();
             }
         });
+        
+        // تغییر وضعیت نمایش رمز عبور
+        passwordToggle.addEventListener('click', togglePasswordVisibility);
         
         // فرم ورود دانش‌آموزان
         loginForm.addEventListener('submit', function(e) {
@@ -1074,13 +1173,13 @@
             
             // اعتبارسنجی اولیه
             if (!studentCode) {
-                showError("لطفا کد دانش‌آموزی خود را وارد کنید.");
+                showError("لطفاً کد دانش‌آموزی خود را وارد کنید.");
                 studentCodeInput.focus();
                 return;
             }
             
             if (!password) {
-                showError("لطفا رمز عبور خود را وارد کنید.");
+                showError("لطفاً رمز عبور خود را وارد کنید.");
                 passwordInput.focus();
                 return;
             }
@@ -1094,14 +1193,6 @@
                 if (systemData.students[studentCode]) {
                     if (password === systemData.students[studentCode].password) {
                         // ورود موفق
-                        if (rememberMe) {
-                            localStorage.setItem('loggedInStudentCode', studentCode);
-                            localStorage.setItem('rememberMe', true);
-                        } else {
-                            localStorage.removeItem('loggedInStudentCode');
-                            localStorage.removeItem('rememberMe');
-                        }
-                        
                         redirectToDashboard(studentCode);
                     } else {
                         showError("رمز عبور اشتباه است!");
@@ -1115,7 +1206,7 @@
                 // مخفی کردن لودر
                 loginLoader.style.display = 'none';
                 loginForm.querySelector('button[type="submit"]').disabled = false;
-            }, 1500);
+            }, 2000);
         });
         
         // بازیابی رمز عبور
@@ -1139,6 +1230,30 @@
         helpLink.addEventListener('click', function(e) {
             e.preventDefault();
             showSupportModal();
+        });
+        
+        // انیمیشن focus روی inputها
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.parentElement.classList.remove('focused');
+            });
+        });
+
+        // جلوه‌های تعاملی برای کارت‌ها
+        const featureCards = document.querySelectorAll('.feature-card');
+        featureCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-12px) scale(1.03)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
         });
     </script>
 </body>
