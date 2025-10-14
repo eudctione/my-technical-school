@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پودمان دوم: نقشه خوانی | هنرستان هوش مصنوعی دانشمند</title>
+    
+    <!-- لینک فونت‌های پیشرفته -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    
+    <!-- آیکون‌های فونت آوسام -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Library for Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* سیستم طراحی پیشرفته */
+        :root {
+            --primary: #7c3aed;
+            --primary-dark: #6d28d9;
+            --primary-light: #8b5cf6;
+            --secondary: #06d6a0;
+            --accent: #f59e0b;
+            --accent-dark: #d97706;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --bg: #ffffff;
+            --card-bg: #f8fafc;
+            --card-hover: #f1f5f9;
+            --border: #e2e8f0;
+            --shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 30px 60px -12px rgba(0, 0, 0, 0.25);
+            --radius: 20px;
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+            --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --gradient-success: linear-gradient(135deg, #06d6a0 0%, #0d9488 100%);
+            --gradient-dark: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            --header-height: 80px;
+            --toolbar-height: 70px;
+        }
+
+        [data-theme="dark"] {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --secondary: #06d6a0;
+            --accent: #f59e0b;
+            --text: #f8fafc;
+            --text-light: #cbd5e1;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --card-hover: #334155;
+            --border: #374151;
+            --shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
+            --shadow-hover: 0 30px 60px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'Poppins', system-ui, sans-serif;
+            line-height: 1.8;
+            color: var(--text);
+            background: var(--bg);
+            direction: rtl;
+            transition: var(--transition);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-top: var(--header-height);
+        }
+
+        /* هدر هوشمند */
+        .header {
+            background: var(--gradient-dark);
+            color: white;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            height: var(--header-height);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            box-shadow: var(--shadow);
+        }
+
+        .header--scrolled {
+            height: 70px;
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header__content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            gap: 2rem;
+        }
+
+        .header__brand {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .header__title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+            background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header__subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: 300;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header__actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary);
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn--outline {
+            background: transparent;
+            color: white;
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn--outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+        }
+
+  /* ناوبری */
+   
+
+        /* هیرو سکشن حرفه‌ای */
+        .hero {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 8rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(124, 58, 237, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(6, 214, 160, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.2) 0%, transparent 50%);
+            background-size: cover;
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero__title {
+            font-size: 3.8rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero__subtitle {
+            font-size: 1.8rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .hero__description {
+            font-size: 1.2rem;
+            opacity: 0.85;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero__actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* محتوای اصلی */
+        .main {
+            padding: 5rem 0;
+            background: var(--bg);
+        }
+
+        .section {
+            margin-bottom: 6rem;
+        }
+
+        .section__header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section__title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section__title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 6px;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+        }
+
+        .section__subtitle {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* کارت‌های محتوای آموزشی */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .learning-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .learning-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .learning-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .learning-card__icon {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(124, 58, 237, 0.1);
+            color: var(--primary);
+        }
+
+        .learning-card__title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .learning-card__description {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+            font-size: 1.1rem;
+        }
+
+        .learning-card__features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .learning-card__features li {
+            margin-bottom: 1rem;
+            padding-right: 2rem;
+            position: relative;
+            font-size: 1.05rem;
+        }
+
+        .learning-card__features li:before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* بخش تمرینات تعاملی */
+        .interactive-section {
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: var(--radius);
+            padding: 4rem;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+        }
+
+        .interactive-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .interactive-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .interactive-description {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .exercise-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .exercise-card__icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 auto 1.5rem;
+        }
+
+        .exercise-card__title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .exercise-card__description {
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* بخش احجام هندسی */
+        .geometry-section {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 4rem;
+            margin: 4rem 0;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .geometry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .geometry-card {
+            background: var(--bg);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .geometry-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .geometry-card__shape {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .geometry-card__title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .geometry-card__description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* بخش روش‌های نقشه خوانی */
+        .methods-section {
+            background: var(--gradient-success);
+            color: white;
+            border-radius: var(--radius);
+            padding: 4rem;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .methods-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+        }
+
+        .methods-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .method-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .method-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .method-card__number {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .method-card__title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .method-card__description {
+            opacity: 0.9;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        /* بخش نمونه‌های عملی */
+        .examples-section {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 4rem;
+            margin: 4rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .example-card {
+            background: var(--bg);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .example-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-accent);
+        }
+
+        .example-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .example-card__title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .example-card__description {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .example-card__steps {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .example-card__steps li {
+            margin-bottom: 1rem;
+            padding-right: 2rem;
+            position: relative;
+        }
+
+        .example-card__steps li:before {
+            content: "→";
+            position: absolute;
+            right: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* منوهای پایانی */
+        .menu-section {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 6rem 0;
+            margin-top: 4rem;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .menu-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+            padding: 3rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-15px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-card__icon {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 auto 2rem;
+        }
+
+        .menu-card__title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-card__description {
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        /* هندسی‌های تزئینی */
+        .geometric-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            right: 5%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            bottom: 20%;
+            left: 10%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 15%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+        }
+
+        /* رسپانسیو */
+        @media (max-width: 968px) {
+            .hero__title {
+                font-size: 3rem;
+            }
+            
+            .hero__subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .section__title {
+                font-size: 2.5rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header__title {
+                font-size: 1.3rem;
+            }
+            
+            .header__subtitle {
+                display: none;
+            }
+            
+            .hero {
+                padding: 6rem 0 4rem;
+            }
+            
+            .hero__title {
+                font-size: 2.5rem;
+            }
+            
+            .hero__subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .hero__actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .interactive-section,
+            .methods-section,
+            .geometry-section,
+            .examples-section {
+                padding: 3rem 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero__title {
+                font-size: 2rem;
+            }
+            
+            .section__title {
+                font-size: 2rem;
+            }
+            
+            .learning-card {
+                padding: 2rem;
+            }
+            
+            .menu-card {
+                padding: 2.5rem 2rem;
+            }
+            
+            .geometry-card__shape {
+                font-size: 3rem;
+                height: 100px;
+            }
+        }
+
+ .nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #2980b9;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 2400px; /* عرض استاندارد و رایج */
+    margin: 0 auto; /*居中 شدن در صفحه*/
+    border-radius: 8px; /* گوشه‌های گرد اختیاری */
+}
+
+.nav-links li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    background-color: #3498db;
+}
+   </style>
+
+</head>
+<body>
+    <!-- هدر هوشمند -->
+    <header class="header" id="main-header">
+        <div class="container">
+            <div class="header__content">
+                <div class="header__brand">
+                   </div>
+                
+               <div class="header__actions">
+                   
+                </div>
+             
+    </div>
+<nav>
+    <ul class="nav-links">
+        <li><a href="#basics">مبانی نقشه‌خوانی</a></li>
+        <li><a href="#methods">روش‌ها و تکنیک‌ها</a></li>
+        <li><a href="#exercises">تمرینات عملی</a></li>
+        <li><a href="#examples">نمونه‌های صنعتی</a></li>
+        <!-- تگ بسته اضافی </li> اینجا حذف شود -->
+        <li style="margin-right:420px;">
+    <a href="https://ai-daneshmand.ir/dashboard" class="btn btn--outline">
+        <i class="fas fa-arrow-right"></i>
+        بازگشت به پنل کاربری
+    </a>
+</li>
+    </ul>
+</nav> 
+
+
+        </div>
+
+    </header>
+
+    <!-- هیرو سکشن حرفه‌ای -->
+    <section class="hero">
+        <div class="geometric-shape shape-1"></div>
+        <div class="geometric-shape shape-2"></div>
+        <div class="geometric-shape shape-3"></div>
+        
+        <div class="container">
+            <div class="hero__content">
+                <h1 class="hero__title" data-aos="fade-up">هنر نقشه خوانی حرفه‌ای</h1>
+                <p class="hero__subtitle" data-aos="fade-up" data-aos-delay="200">تبدیل نقشه‌های دو بعدی به تصاویر سه بعدی ذهنی</p>
+                <p class="hero__description" data-aos="fade-up" data-aos-delay="400">
+                    تسلط بر مهارت نقشه خوانی، کلید درک و اجرای دقیق طرح‌های مهندسی در صنعت خودروسازی و مکانیک است. 
+                    در این پودمان با تکنیک‌های پیشرفته تجسم سه بعدی آشنا خواهید شد.
+                </p>
+                <div class="hero__actions" data-aos="fade-up" data-aos-delay="600">
+                    <a href="#content" class="btn">
+                        <i class="fas fa-play-circle"></i>
+                        شروع یادگیری
+                    </a>
+                    <a href="#exercises" class="btn btn--outline">
+                        <i class="fas fa-pencil-alt"></i>
+                        تمرینات عملی
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- محتوای اصلی -->
+    <main class="main" id="content">
+        <div class="container">
+            <!-- بخش اصول نقشه خوانی -->
+            <section class="section">
+                <div class="section__header" data-aos="fade-up">
+                    <h2 class="section__title">اصول و مبانی نقشه خوانی</h2>
+                    <p class="section__subtitle">درک شکل سه بعدی از روی نمای‌های دو بعدی، مهارتی ضروری برای هر مهندس و تکنسین</p>
+                </div>
+
+                <div class="content-grid">
+                    <div class="learning-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="learning-card__icon">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <h3 class="learning-card__title">تجسم سه بعدی</h3>
+                        <p class="learning-card__description">
+                            توانایی تبدیل نقشه‌های دو بعدی به تصاویر سه بعدی در ذهن، مهم‌ترین مهارت در نقشه خوانی است که نیاز به تمرین و درک فضایی دارد.
+                        </p>
+                        <ul class="learning-card__features">
+                            <li>درک ارتباط بین نماهای مختلف</li>
+                            <li>تجسم احجام پیچیده</li>
+                            <li>شناسایی خطوط دید و ندید</li>
+                            <li>درک برش‌ها و مقاطع</li>
+                            <li>تشخیص جزئیات پنهان</li>
+                        </ul>
+                    </div>
+
+                    <div class="learning-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="learning-card__icon">
+                            <i class="fas fa-shapes"></i>
+                        </div>
+                        <h3 class="learning-card__title">احجام هندسی پایه</h3>
+                        <p class="learning-card__description">
+                            آشنایی با احجام هندسی اساسی و ویژگی‌های آنها، نقش مهمی در تسریع فرآیند نقشه خوانی و درک بهتر طرح‌ها دارد.
+                        </p>
+                        <ul class="learning-card__features">
+                            <li>منشورها و ویژگی‌های آنها</li>
+                            <li>هرم‌ها و کاربردهای صنعتی</li>
+                            <li>استوانه و مخروط‌ها</li>
+                            <li>کره و سطوح کروی</li>
+                            <li>احجام ترکیبی و پیچیده</li>
+                        </ul>
+                    </div>
+
+                    <div class="learning-card" data-aos="fade-up" data-aos-delay="600">
+                        <div class="learning-card__icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3 class="learning-card__title">خطوط و نمادها</h3>
+                        <p class="learning-card__description">
+                            درک صحیح از انواع خطوط، نمادها و علائم اختصاری در نقشه‌کشی، برای تفسیر دقیق اطلاعات ضروری است.
+                        </p>
+                        <ul class="learning-card__features">
+                            <li>خطوط پیوسته و نقطه‌چین</li>
+                            <li>نمادهای اندازه‌گذاری</li>
+                            <li>علائم سطح و پرداخت</li>
+                            <li>نمادهای جوشکاری</li>
+                            <li>علائم تلرانس و انطباق</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- بخش احجام هندسی -->
+            <section class="section">
+                <div class="section__header" data-aos="fade-up">
+                    <h2 class="section__title">احجام هندسی در نقشه‌کشی</h2>
+                    <p class="section__subtitle">شناسایی و درک احجام اساسی که پایه‌ای ترین اجزای طرح‌های صنعتی هستند</p>
+                </div>
+
+                <div class="geometry-section" data-aos="fade-up">
+                    <div class="geometry-grid">
+                        <div class="geometry-card">
+                            <div class="geometry-card__shape">
+                                <i class="fas fa-cube"></i>
+                            </div>
+                            <h3 class="geometry-card__title">منشورها</h3>
+                            <p class="geometry-card__description">
+                                احجامی با سطح مقطع ثابت در طول، که در صنعت برای قطعات با سطح مقطع یکنواخت استفاده می‌شوند.
+                            </p>
+                        </div>
+                        
+                        <div class="geometry-card">
+                            <div class="geometry-card__shape">
+                                <i class="fas fa-square"></i>
+                            </div>
+                            <h3 class="geometry-card__title">هرم‌ها</h3>
+                            <p class="geometry-card__description">
+                                احجامی با قاعده چندضلعی و سطوح جانبی مثلثی که در نقاط اتصال و پایه‌ها کاربرد دارند.
+                            </p>
+                        </div>
+                        
+                        <div class="geometry-card">
+                            <div class="geometry-card__shape">
+                                <i class="fas fa-circle"></i>
+                            </div>
+                            <h3 class="geometry-card__title">استوانه‌ها</h3>
+                            <p class="geometry-card__description">
+                                حجم‌های دوار با سطح مقطع دایره‌ای که در شفت‌ها، پین‌ها و محورها استفاده گسترده‌ای دارند.
+                            </p>
+                        </div>
+                        
+                        <div class="geometry-card">
+                            <div class="geometry-card__shape">
+                                <i class="fas fa-cone"></i>
+                            </div>
+                            <h3 class="geometry-card__title">مخروط‌ها</h3>
+                            <p class="geometry-card__description">
+                                احجام دوار با سطح مقطع متغیر که در قطعات مخروطی و نوک تیز کاربرد دارند.
+                            </p>
+                        </div>
+                        
+                        <div class="geometry-card">
+                            <div class="geometry-card__shape">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h3 class="geometry-card__title">کره‌ها</h3>
+                            <p class="geometry-card__description">
+                                احجام کاملاً متقارن که در یاتاقان‌ها، شیرآلات و قطعات تحت فشار استفاده می‌شوند.
+                            </p>
+                        </div>
+                        
+                        <div class="geometry-card">
+                            <div class="geometry-card__shape">
+                                <i class="fas fa-cubes"></i>
+                            </div>
+                            <h3 class="geometry-card__title">احجام ترکیبی</h3>
+                            <p class="geometry-card__description">
+                                ترکیبی از احجام ساده که در قطعات پیچیده صنعتی و مکانیزم‌های پیشرفته دیده می‌شوند.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- بخش روش‌های نقشه خوانی -->
+            <section class="section">
+                <div class="section__header" data-aos="fade-up">
+                    <h2 class="section__title">روش‌های پیشرفته نقشه خوانی</h2>
+                    <p class="section__subtitle">تکنیک‌های سیستماتیک برای درک سریع و دقیق نقشه‌های مهندسی</p>
+                </div>
+
+                <div class="methods-section" data-aos="fade-up">
+                    <div class="methods-content">
+                        <div class="methods-grid">
+                            <div class="method-card">
+                                <div class="method-card__number">01</div>
+                                <h3 class="method-card__title">بهره‌گیری از توانایی ذهنی</h3>
+                                <p class="method-card__description">
+                                    استفاده از قدرت تجسم سه بعدی ذهن برای درک مستقیم شکل قطعه از روی نماهای دو بعدی. این روش نیاز به تمرین مداوم دارد.
+                                </p>
+                            </div>
+                            
+                            <div class="method-card">
+                                <div class="method-card__number">02</div>
+                                <h3 class="method-card__title">تجزیه به اجسام ساده</h3>
+                                <p class="method-card__description">
+                                    شکستن قطعه پیچیده به اجزای ساده‌تر هندسی و درک هر جزء به صورت جداگانه، سپس ترکیب آنها برای درک کل قطعه.
+                                </p>
+                            </div>
+                            
+                            <div class="method-card">
+                                <div class="method-card__number">03</div>
+                                <h3 class="method-card__title">استفاده از خط ۴۵ درجه</h3>
+                                <p class="method-card__description">
+                                    به کارگیری خط ۴۵ درجه برای انتقال ابعاد و جزئیات بین نماهای مختلف و تکمیل نمای مجهول با دقت بالا.
+                                </p>
+                            </div>
+                            
+                            <div class="method-card">
+                                <div class="method-card__number">04</div>
+                                <h3 class="method-card__title">تشخیص اختلاف سطوح</h3>
+                                <p class="method-card__description">
+                                    هر خط در نقشه نماینده یک اختلاف سطح است. تشخیص این اختلاف‌ها کلید درک عمق و شکل سه بعدی قطعه است.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- بخش تمرینات تعاملی -->
+            <section class="section" id="exercises">
+                <div class="section__header" data-aos="fade-up">
+                    <h2 class="section__title">تمرینات عملی و تعاملی</h2>
+                    <p class="section__subtitle">تقویت مهارت نقشه خوانی با تمرینات گام به گام و پروژه‌های کاربردی</p>
+                </div>
+
+                <div class="interactive-section" data-aos="fade-up">
+                    <div class="interactive-content">
+                        <h3 class="interactive-title">تمرینات نقشه خوانی پیشرفته</h3>
+                        <p class="interactive-description">
+                            با انجام این تمرینات، مهارت تجسم سه بعدی خود را تقویت کرده و توانایی خواندن پیچیده‌ترین نقشه‌های صنعتی را کسب خواهید کرد.
+                        </p>
+                        
+                        <div class="exercise-grid">
+                            <div class="exercise-card">
+                                <div class="exercise-card__icon">
+                                    <i class="fas fa-puzzle-piece"></i>
+                                </div>
+                                <h4 class="exercise-card__title">تکمیل نمای سوم</h4>
+                                <p class="exercise-card__description">
+                                    با داشتن دو نما، نمای سوم را ترسیم کنید و مهارت انتقال اطلاعات بین نماها را تقویت نمایید.
+                                </p>
+                                <a href="#" class="btn btn--outline">
+                                    <i class="fas fa-play"></i>
+                                    شروع تمرین
+                                </a>
+                            </div>
+                            
+                            <div class="exercise-card">
+                                <div class="exercise-card__icon">
+                                    <i class="fas fa-cut"></i>
+                                </div>
+                                <h4 class="exercise-card__title">شناسایی مقاطع</h4>
+                                <p class="exercise-card__description">
+                                    نقشه‌های مقطعی را تحلیل کرده و شکل کامل قطعه را تجسم کنید.
+                                </p>
+                                <a href="#" class="btn btn--outline">
+                                    <i class="fas fa-play"></i>
+                                    شروع تمرین
+                                </a>
+                            </div>
+                            
+                            <div class="exercise-card">
+                                <div class="exercise-card__icon">
+                                    <i class="fas fa-expand-alt"></i>
+                                </div>
+                                <h4 class="exercise-card__title">نمای انفجاری</h4>
+                                <p class="exercise-card__description">
+                                    قطعات مونتاژ شده را به اجزای تشکیل‌دهنده تجزیه کرده و روابط بین آنها را درک کنید.
+                                </p>
+                                <a href="#" class="btn btn--outline">
+                                    <i class="fas fa-play"></i>
+                                    شروع تمرین
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- بخش نمونه‌های عملی -->
+            <section class="section">
+                <div class="section__header" data-aos="fade-up">
+                    <h2 class="section__title">نمونه‌های عملی از صنعت</h2>
+                    <p class="section__subtitle">کاربرد مهارت نقشه خوانی در پروژه‌های واقعی صنعتی و خودروسازی</p>
+                </div>
+
+                <div class="examples-section" data-aos="fade-up">
+                    <div class="examples-grid">
+                        <div class="example-card">
+                            <h3 class="example-card__title">
+                                <i class="fas fa-cog"></i>
+                                تحلیل قطعات موتور
+                            </h3>
+                            <p class="example-card__description">
+                                نقشه خوانی پیستون، شاتون، میل لنگ و سایر قطعات موتورهای احتراق داخلی با تمرکز بر جزئیات حیاتی.
+                            </p>
+                            <ul class="example-card__steps">
+                                <li>شناسایی سطوح اصطکاکی</li>
+                                <li>درک روابط حرکتی بین قطعات</li>
+                                <li>تحلیل سیستم روغن‌کاری</li>
+                                <li>بررسی تلرانس‌های حیاتی</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="example-card">
+                            <h3 class="example-card__title">
+                                <i class="fas fa-car"></i>
+                                سیستم تعلیق خودرو
+                            </h3>
+                            <p class="example-card__description">
+                                درک نقشه‌های سیستم تعلیق شامل کمک‌فنرها، springs، سیستم فرمان و اتصالات مربوطه.
+                            </p>
+                            <ul class="example-card__steps">
+                                <li>تحلیل هندسه سیستم تعلیق</li>
+                                <li>شناسایی نقاط اتصال</li>
+                                <li>درک مکانیزم حرکتی</li>
+                                <li>بررسی استحکام و دوام</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="example-card">
+                            <h3 class="example-card__title">
+                                <i class="fas fa-tools"></i>
+                                ابزارهای مونتاژ
+                            </h3>
+                            <p class="example-card__description">
+                                نقشه خوانی fixtureها، jigها و ابزارهای مونتاژ تخصصی مورد استفاده در خط تولید خودرو.
+                            </p>
+                            <ul class="example-card__steps">
+                                <li>درک عملکرد ابزارها</li>
+                                <li>شناسایی نقاط گیره‌گذاری</li>
+                                <li>تحلیل سیستم‌های موقعیت‌دهی</li>
+                                <li>بررسی ایمنی و ارگونومی</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- منوهای پایانی -->
+    <section class="menu-section" id="menus">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title" style="color: white;">منابع تکمیلی و ارزیابی</h2>
+                <p class="section__subtitle" style="color: rgba(255,255,255,0.9);">دسترسی به محتوای پیشرفته و سنجش مهارت‌های کسب شده</p>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-card__icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="menu-card__title">فیلم‌های آموزشی پیشرفته</h3>
+                    <p class="menu-card__description">
+                        دسترسی به مجموعه کامل فیلم‌های آموزشی با کیفیت 4K که تکنیک‌های پیشرفته نقشه خوانی را به صورت عملی آموزش می‌دهند.
+                    </p>
+                    <a href="#" class="btn btn--outline" style="border-color: white; color: white;">
+                        <i class="fas fa-play"></i>
+                        مشاهده فیلم‌ها
+                    </a>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-card__icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 class="menu-card__title">جزوات تخصصی</h3>
+                    <p class="menu-card__description">
+                        دانلود جزوات پیشرفته، نمونه نقشه‌های صنعتی، استانداردهای بین‌المللی و منابع تخصصی برای تسلط کامل.
+                    </p>
+                    <a href="#" class="btn btn--outline" style="border-color: white; color: white;">
+                        <i class="fas fa-download"></i>
+                        دریافت منابع
+                    </a>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-card__icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="menu-card__title">ارزیابی مهارت</h3>
+                    <p class="menu-card__description">
+                        شرکت در آزمون‌های آنلاین و تمرینات ارزیابی برای سنجش سطح مهارت نقشه خوانی و دریافت گواهینامه.
+                    </p>
+                    <a href="#" class="btn btn--outline" style="border-color: white; color: white;">
+                        <i class="fas fa-clipboard-check"></i>
+                        شروع ارزیابی
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- اسکریپت‌های ضروری -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // مدیریت اسکرول هدر
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('main-header');
+            let lastScrollY = window.scrollY;
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('header--scrolled');
+                } else {
+                    header.classList.remove('header--scrolled');
+                }
+                
+                lastScrollY = window.scrollY;
+            });
+            
+            // اسکرول نرم برای لینک‌ها
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const target = document.querySelector(targetId);
+                    
+                    if (target) {
+                        const headerHeight = document.getElementById('main-header').offsetHeight;
+                        const targetPosition = target.offsetTop - headerHeight - 20;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

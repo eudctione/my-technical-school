@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پودمان پنجم: ترسیم نقشه با رایانه | هنرستان هوش مصنوعی دانشمند</title>
+    
+    <!-- لینک فونت‌های پیشرفته -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    
+    <!-- آیکون‌های فونت آوسام -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Library for Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* سیستم طراحی پیشرفته */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --accent-dark: #d97706;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --bg: #ffffff;
+            --card-bg: #f8fafc;
+            --card-hover: #f1f5f9;
+            --border: #e2e8f0;
+            --shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 30px 60px -12px rgba(0, 0, 0, 0.25);
+            --radius: 20px;
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --gradient-primary: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --gradient-dark: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            --header-height: 80px;
+        }
+
+        [data-theme="dark"] {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --text: #f8fafc;
+            --text-light: #cbd5e1;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --card-hover: #334155;
+            --border: #374151;
+            --shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
+            --shadow-hover: 0 30px 60px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'Poppins', system-ui, sans-serif;
+            line-height: 1.8;
+            color: var(--text);
+            background: var(--bg);
+            direction: rtl;
+            transition: var(--transition);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-top: var(--header-height);
+        }
+
+        /* هدر هوشمند */
+        .header {
+            background: var(--gradient-dark);
+            color: white;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            height: var(--header-height);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            box-shadow: var(--shadow);
+        }
+
+        .header--scrolled {
+            height: 70px;
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header__content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            gap: 2rem;
+        }
+
+        .header__brand {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .header__title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+            background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header__subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: 300;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header__actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary);
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn--outline {
+            background: transparent;
+            color: white;
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn--outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+        }
+
+        /* ناوبری */
+        .nav-links {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            max-width: 2400px;
+            margin: 10px auto 0;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-links li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 12px 18px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-links li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-links li:last-child {
+            margin-right: auto;
+        }
+
+        /* هیرو سکشن حرفه‌ای */
+        .hero {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 8rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(37, 99, 235, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.2) 0%, transparent 50%);
+            background-size: cover;
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero__title {
+            font-size: 3.8rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero__subtitle {
+            font-size: 1.8rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .hero__description {
+            font-size: 1.2rem;
+            opacity: 0.85;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero__actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* محتوای اصلی */
+        .main {
+            padding: 5rem 0;
+            background: var(--bg);
+        }
+
+        .section {
+            margin-bottom: 6rem;
+        }
+
+        .section__header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section__title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section__title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 6px;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+        }
+
+        .section__subtitle {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* کارت‌های محتوای آموزشی */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .learning-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .learning-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .learning-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .learning-card__icon {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+        }
+
+        .learning-card__title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .learning-card__description {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+            font-size: 1.1rem;
+        }
+
+        .learning-card__features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .learning-card__features li {
+            margin-bottom: 1rem;
+            padding-right: 2rem;
+            position: relative;
+            font-size: 1.05rem;
+        }
+
+        .learning-card__features li:before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* بخش تمرینات تعاملی */
+        .interactive-section {
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: var(--radius);
+            padding: 4rem;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+        }
+
+        .interactive-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .interactive-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .interactive-description {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .exercise-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .exercise-card__icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 auto 1.5rem;
+        }
+
+        .exercise-card__title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .exercise-card__description {
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* بخش‌های جدید برای محتوای ترسیم با رایانه */
+        .software-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .software-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .software-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .software-card__visual {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            background: var(--bg);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .software-card__title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .software-card__description {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .software-card__features {
+            list-style: none;
+            text-align: right;
+        }
+
+        .software-card__features li {
+            margin-bottom: 0.8rem;
+            padding-right: 1.5rem;
+            position: relative;
+        }
+
+        .software-card__features li:before {
+            content: "→";
+            position: absolute;
+            right: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* بخش ابزارها و دستورات */
+        .commands-section {
+            background: var(--gradient-success);
+            color: white;
+            border-radius: var(--radius);
+            padding: 4rem;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .commands-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+        }
+
+        .commands-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .command-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .command-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .command-card__icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 auto 1.5rem;
+        }
+
+        .command-card__title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .command-card__description {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* بخش نمونه‌های عملی */
+        .examples-section {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 4rem;
+            margin: 4rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .example-card {
+            background: var(--bg);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .example-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-accent);
+        }
+
+        .example-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .example-card__title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .example-card__description {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .example-card__steps {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .example-card__steps li {
+            margin-bottom: 1rem;
+            padding-right: 2rem;
+            position: relative;
+        }
+
+        .example-card__steps li:before {
+            content: "→";
+            position: absolute;
+            right: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* منوهای پایانی */
+        .menu-section {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 6rem 0;
+            margin-top: 4rem;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .menu-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+            padding: 3rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-15px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-card__icon {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 auto 2rem;
+        }
+
+        .menu-card__title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-card__description {
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        /* هندسی‌های تزئینی */
+        .geometric-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            right: 5%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            bottom: 20%;
+            left: 10%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 15%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+        }
+
+        /* کانواس برای تمرینات تعاملی */
+        .cad-canvas-container {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px dashed var(--border);
+            text-align: center;
+        }
+
+        .cad-canvas {
+            width: 100%;
+            height: 400px;
+            background: var(--bg);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            cursor: crosshair;
+            margin-bottom: 1rem;
+        }
+
+        .canvas-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* جدول‌های آموزشی */
+        .educational-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .educational-table th {
+            background: var(--primary);
+            color: white;
+            padding: 1.2rem;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .educational-table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .educational-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .educational-table tr:hover {
+            background: var(--card-hover);
+        }
+
+        /* رسپانسیو */
+        @media (max-width: 968px) {
+            .hero__title {
+                font-size: 3rem;
+            }
+            
+            .hero__subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .section__title {
+                font-size: 2.5rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header__title {
+                font-size: 1.3rem;
+            }
+            
+            .header__subtitle {
+                display: none;
+            }
+            
+            .hero {
+                padding: 6rem 0 4rem;
+            }
+            
+            .hero__title {
+                font-size: 2.5rem;
+            }
+            
+            .hero__subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .hero__actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .interactive-section,
+            .commands-section,
+            .examples-section {
+                padding: 3rem 2rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+            }
+            
+            .nav-links li a {
+                padding: 12px 16px;
+            }
+            
+            .nav-links li:last-child {
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero__title {
+                font-size: 2rem;
+            }
+            
+            .section__title {
+                font-size: 2rem;
+            }
+            
+            .learning-card {
+                padding: 2rem;
+            }
+            
+            .menu-card {
+                padding: 2.5rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر هوشمند -->
+    <header class="header" id="main-header">
+        <div class="container">
+            <div class="header__content">
+                <div class="header__brand">
+                  
+                <nav>
+                <ul class="nav-links">
+                    <li><a href="#introduction">مقدمه و مفاهیم</a></li>
+                    <li><a href="#autocad-basics">آشنایی با اتوکد</a></li>
+                    <li><a href="#commands">دستورات پایه</a></li>
+                    <li><a href="#2d-drawing">ترسیم دو بعدی</a></li>
+                    <li><a href="#3d-modeling">مدل‌سازی سه بعدی</a></li>
+                    <li><a href="#exercises">تمرینات عملی</a></li>
+<li><a href="https://ai-daneshmand.ir/dashboard" class="btn btn--outline">
+                        <i class="fas fa-arrow-right"></i>
+                        بازگشت به پنل کاربری
+                    </a></li>
+
+
+                </ul>
+
+
+            </na
+ </div>
+                
+            </div>
+           
+        </div>
+    </header>
+
+    <!-- هیرو سکشن حرفه‌ای -->
+    <section class="hero">
+        <div class="geometric-shape shape-1"></div>
+        <div class="geometric-shape shape-2"></div>
+        <div class="geometric-shape shape-3"></div>
+        
+        <div class="container">
+            <div class="hero__content">
+                <h1 class="hero__title" data-aos="fade-up">هنر ترسیم نقشه با رایانه</h1>
+                <p class="hero__subtitle" data-aos="fade-up" data-aos-delay="200">تبدیل ایده‌های طراحی به نقشه‌های دقیق دیجیتال</p>
+                <p class="hero__description" data-aos="fade-up" data-aos-delay="400">
+                    تسلط بر نرم‌افزارهای CAD مهارتی ضروری برای هر مهندس و طراح مدرن است. 
+                    در این پودمان با محیط اتوکد، دستورات ترسیم دو بعدی و سه بعدی، و تکنیک‌های پیشرفته نقشه‌کشی رایانه‌ای آشنا خواهید شد.
+                </p>
+                <div class="hero__actions" data-aos="fade-up" data-aos-delay="600">
+                    <a href="#content" class="btn">
+                        <i class="fas fa-play-circle"></i>
+                        شروع یادگیری
+                    </a>
+                    <a href="#exercises" class="btn btn--outline">
+                        <i class="fas fa-desktop"></i>
+                        تمرینات تعاملی
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- محتوای اصلی -->
+    <main class="main" id="content">
+        <div class="container">
+            <!-- بخش مقدمه و مفاهیم -->
+            <section class="section" id="introduction">
+                <div class="section__header" data-aos="fade-up">
+                    <h2 class="section__title">مقدمه و مفاهیم پایه</h2>
+                    <p class="section__subtitle">آشنایی با تاریخچه و اهمیت ترسیم به کمک رایانه در صنعت</p>
+                </div>
+
+                <div class="content-grid">
+                    <div class="learning-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="learning-card__icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3 class="learning-card__title">تاریخچه CAD</h3>
+                        <p class="learning-card__description">
+                            ترسیم به کمک رایانه (CAD) با نرم‌افزار اتوکد در سال ۱۹۸۲ توسط شرکت اتودسک آغاز شد. این نرم‌افزار انقلابی در صنعت نقشه‌کشی ایجاد کرد و امروزه پرکاربردترین نرم‌افزار در ترسیم دقیق نقشه‌های دو بعدی و سه بعدی است.
+                        </p>
+                        <ul class="learning-card__features">
+                            <li>شروع در سال ۱۹۸۲ توسط اتودسک</li>
+                            <li>پرکاربردترین نرم‌افزار CAD</li>
+                            <li>پشتیبانی از ترسیم دو بعدی و سه بعدی</li>
+                            <li>جامعیت و سازگاری با تمام رشته‌های صنعتی</li>
+                            <li>امکان تکثیر، تصحیح و تبادل اطلاعات</li>
+                        </ul>
+                    </div>
+
+                    <div class="learning-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="learning-card__icon">
+                            <i class="fas fa-mouse-pointer"></i>
+                        </div>
+                        <h3 class="learning-card__title">مزایای ترسیم رایانه‌ای</h3>
+                        <p class="learning-card__description">
+                            استفاده از رایانه در نقشه‌کشی امکانات متنوع و جالب‌توجهی فراهم کرده است. علاوه بر ترسیم تصاویر دو بعدی، امکان ایجاد تصاویر سه بعدی و مدل‌سازی مجازی طرح‌ها نیز فراهم شده است.
+                        </p>
+                        <ul class="learning-card__features">
+                            <li>دقت و سرعت بالاتر در ترسیم</li>
+                            <li>امکان ویرایش و اصلاح آسان</li>
+                            <li>مدل‌سازی سه بعدی پارامتریک</li>
+                            <li>تهیه نقشه‌های دو بعدی از مدل‌های سه بعدی</li>
+                            <li>تحلیل تنش‌ها و محاسبات طراحی</li>
+                        </ul>
+                    </div>
+
+                    <div class="learning-card" data-aos="fade-up" data-aos-delay="600">
+                        <div class="learning-card__icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="learning-card__title">نرم‌افزارهای جایگزین</h3>
+                        <p class="learning-card__description">
+                            علاوه بر اتوکد، نرم‌افزارهای متعددی برای ترسیم به کمک رایانه وجود دارند که برخی رایگان یا با قیمت کمتر هستند و امکانات مشابهی ارائه می‌دهند.
+                        </p>
+                        <ul class="learning-card__features">
+                            <li>DraftSight - تقریباً رایگان با محیط ساده</li>
+                            <li>BricsCAD - قیمت کمتر از یک دهم اتوکد</li>
+                            <li>IntelliCAD - سبک با ابزارهای اصلی</li>
+                            <li>نرم‌افزارهای مدل‌سازی: اینونتور، سالیدورکز، کتیا</li>
+                            <li>انتخاب نرم‌افزار بر اساس نیاز و بودجه</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- بخش آشنایی با اتوکد -->
+            <section class="section" id="autocad-basics">
+                <div class="section__header" data-aos="fade-up">
+                    <h2 class="section__title">آشنایی با محیط اتوکد</h2>
+                    <p class="section__subtitle">معرفی بخش‌های مختلف محیط کاربری اتوکد و ابزارهای اصلی</p>
+                </div>
+
+                <div class="software-grid" data-aos="fade-up">
+                    <div class="software-card">
+                        <div class="software-card__visual">
+                            <i class="fas fa-window-maximize" style="font-size: 4rem; color: var(--primary);"></i>
+                        </div>
+                        <h3 class="software-card__title">نوار عنوان (Title Bar)</h3>
+                        <p class="software-card__description">
+                            نوار رنگی در بالاترین قسمت که شامل آیکون‌های کنترل نرم‌افزار، نام نرم‌افزار و نام فایل باز شده است.
+                        </p>
+                        <ul class="software-card__features">
+                            <li>آیکون‌های کنترل نرم‌افزار</li>
+                            <li>نام نرم‌افزار و فایل جاری</li>
+                            <li>دکمه‌های Minimize, Maximize, Close</li>
+                        </ul>
+                    </div>
+
+                    <div class="software-card">
+                        <div class="software-card__visual">
+                            <i class="fas fa-bars" style="font-size: 4rem; color: var(--primary);"></i>
+                        </div>
+                        <h3 class="software-card__title">نوار منو (Menu Bar)</h3>
+                        <p class="software-card__description">
+                            دستورهای مختلف اتوکد به صورت دسته‌بندی شده در منوهای کرکره‌ای واقع در این نوار قرار دارند.
+                        </p>
+                        <ul class="software-card__features">
+                            <li>دستورهای دسته‌بندی شده</li>
+                            <li>منوهای کرکره‌ای</li>
+                            <li>دسترسی به تمام قابلیت‌های نرم‌افزار</li>
+                        </ul>
+                    </div>
+
+                    <div class="software-card">
+                        <div class="software-card__visual">
+                            <i class="fas fa-tools" style="font-size: 4rem; color: var(--primary);"></i>
+                        </div>
+                        <h3 class="software-card__title">ریبون (Ribbon)</h3>
+                        <p class="software-card__description">
+                            مجموعه‌ای از پانل‌ها که گروه‌هایی از ابزارها را ارائه می‌دهند. ریبون حاوی دستورهای پرکاربرد به صورت دسته‌بندی شده است.
+                        </p>
+                        <ul class="software-card__features">
+                            <li>پانل‌های ابزار دسته‌بندی شده</li>
+                            <li>دستورهای پرکاربرد</li>
+                            <li>سازماندهی با سربرگ‌ها و تب‌ها</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- جدول معرفی بخش‌های اتوکد -->
+                <div class="cad-canvas-container" data-aos="fade-up">
+                    <h3>اجزای اصلی محیط اتوکد</h3>
+                    <table class="educational-table">
+                        <thead>
+                            <tr>
+                                <th>نام بخش</th>
+                                <th>کاربرد</th>
+                                <th>توضیحات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>نوار عنوان</td>
+                                <td>کنترل پنجره نرم‌افزار</td>
+                                <td>شامل دکمه‌های Minimize, Maximize, Close و نام فایل</td>
+                            </tr>
+                            <tr>
+                                <td>نوار منو</td>
+                                <td>دسترسی به دستورات</td>
+                                <td>دستورهای دسته‌بندی شده در منوهای کرکره‌ای</td>
+                            </tr>
+                            <tr>
+                                <td>ریبون</td>
+                                <td>دستورات پرکاربرد</td>
+                                <td>پانل‌های ابزار دسته‌بندی شده</td>
+                            </tr>
+                            <tr>
+                                <td>خط دستور</td>
+                                <td>تعامل با اتوکد</td>
+                                <td>محل تایپ دستورات و مشاهده پیغام‌ها</td>
+                            </tr>
+                            <tr>
+                                <td>نوار وضعیت</td>
+                                <td>کنترل ترسیم دقیق</td>
+                                <td>شامل ابزارهای Ortho, Snap, Grid و نمایش مختصات</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- بخش دستورات پایه -->
+            <section class="section" id="commands">
+                <div class="section__header" data-aos="fade-up">
+                    <h2 class="section__title">دستورات پایه ترسیم</h2>
+                    <p class="section__subtitle">آموزش دستورات اصلی برای ترسیم اشکال هندسی در اتوکد</p>
+                </div>
+
+                <div class="commands-section" data-aos="fade-up">
+                    <div class="commands-content">
+                        <div class="commands-grid">
+                            <div class="command-card">
+                                <div class="command-card__icon">
+                                    <i class="fas fa-grip-lines"></i>
+                                </div>
+                                <h3 class="command-card__title">LINE</h3>
+                                <p class="command-card__description">
+                                    ترسیم پاره خط مستقیم بین دو نقطه
+                                </p>
+                            </div>
+                            
+                            <div class="command-card">
+                                <div class="command-card__icon">
+                                    <i class="fas fa-circle"></i>
+                                </div>
+                                <h3 class="command-card__title">CIRCLE</h3>
+                                <p class="command-card__description">
+                                    ترسیم دایره با تعیین مرکز و شعاع
+                                </p>
+                            </div>
+                            
+                            <div class="command-card">
+                                <div class="command-card__icon">
+                                    <i class="fas fa-draw-polygon"></i>
+                                </div>
+                                <h3 class="command-card__title">POLYGON</h3>
+                                <p class="command-card__description">
+                                    ترسیم چندضلعی‌های منتظم
+                                </p>
+                            </div>
+                            
+                            <div class="command-card">
+                                <div class="command-card__icon">
+                                    <i class="fas fa-vector-square"></i>
+                                </div>
+                                <h3 class="command-card__title">RECTANGLE</h3>
+                                <p class="command-card__description">
+                                    ترسیم مستطیل یکپارچه
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تمرین تعاملی ترسیم خط -->
+                <div class="cad-canvas-container" data-aos="fade-up">
+                    <h3>تمرین تعاملی: آشنایی با دستور LINE</h3>
+                    <p>با استفاده از دستور LINE سعی کنید شکل زیر را ترسیم کنید</p>
+                    <canvas class="cad-canvas" id="line-cad-canvas" width="800" height="400"></canvas>
+                    <div class="canvas-controls">
+                        <button class="btn" onclick="clearCadCanvas()">
+                            <i class="fas fa-eraser"></i>
+                            پاک کردن
+                        </button>
+                        <button class="btn btn--outline" onclick="showCadGuidelines()">
+                            <i class="fas fa-eye"></i>
+                            نمایش راهنما
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- بخش ترسیم دو بعدی -->
+            <section class="section" id="2d-drawing">
+                <div class="section__header" data-aos="fade-up">
+                    <h2 class="section__title">ترسیم نقشه‌های دو بعدی</h2>
+                    <p class="section__subtitle">آموزش تکنیک‌های پیشرفته برای ترسیم نقشه‌های صنعتی</p>
+                </div>
+
+                <div class="examples-section" data-aos="fade-up">
+                    <div class="examples-grid">
+                        <div class="example-card">
+                            <h3 class="example-card__title">
+                                <i class="fas fa-ruler-combined"></i>
+                                سیستم‌های مختصات
+                            </h3>
+                            <p class="example-card__description">
+                                آشنایی با سیستم‌های مختصات کارتزین و قطبی برای ترسیم دقیق
+                            </p>
+                            <ul class="example-card__steps">
+                                <li>سیستم مختصات کارتزین (X,Y)</li>
+                                <li>سیستم مختصات قطبی (فاصله<زاویه)</li>
+                                <li>مختصات مطلق و نسبی</li>
+                                <li>استفاده از علامت @ برای مختصات نسبی</li>
+                                <li>استفاده از علامت # برای مختصات مطلق</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="example-card">
+                            <h3 class="example-card__title">
+                                <i class="fas fa-object-group"></i>
+                                ابزارهای کمک‌رسان
+                            </h3>
+                            <p class="example-card__description">
+                                استفاده از Object Snap برای ترسیم دقیق
+                            </p>
+                            <ul class="example-card__steps">
+                                <li>Endpoint - ابتدا و انتهای خط</li>
+                                <li>Midpoint - نقطه میانی</li>
+                                <li>Center - مرکز دایره و کمان</li>
+                                <li>Intersection - محل تلاقی</li>
+                                <li>Perpendicular - نقطه عمود</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="example-card">
+                            <h3 class="example-card__title">
+                                <i class="fas fa-edit"></i>
+                                دستورات ویرایش
+                            </h3>
+                            <p class="example-card__description">
+                                ویرایش و اصلاح موضوعات ترسیمی
+                            </p>
+                            <ul class="example-card__steps">
+                                <li>TRIM - بریدن موضوعات</li>
+                                <li>EXTEND - امتداد دادن موضوعات</li>
+                                <li>FILLET - گرد کردن گوشه‌ها</li>
+                                <li>CHAMFER - پخ زدن گوشه‌ها</li>
+                                <li>OFFSET - کپی موازی</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- جدول دستورات ویرایش -->
+                <div class="cad-canvas-container" data-aos="fade-up">
+                    <h3>دستورات ویرایش پرکاربرد</h3>
+                    <table class="educational-table">
+                        <thead>
+                            <tr>
+                                <th>دستور</th>
+                                <th>کاربرد</th>
+                                <th>میانبر</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>TRIM</td>
+                                <td>بریدن بخشی از موضوعات</td>
+                                <td>TR</td>
+                            </tr>
+                            <tr>
+                                <td>EXTEND</td>
+                                <td>امتداد دادن موضوعات</td>
+                                <td>EX</td>
+                            </tr>
+                            <tr>
+                                <td>FILLET</td>
+                                <td>گرد کردن گوشه‌ها</td>
+                                <td>F</td>
+                            </tr>
+                            <tr>
+                                <td>CHAMFER</td>
+                                <td>پخ زدن گوشه‌ها</td>
+                                <td>CHA</td>
+                            </tr>
+                            <tr>
+                                <td>OFFSET</td>
+                                <td>ایجاد کپی موازی</td>
+                                <td>O</td>
+                            </tr>
+                            <tr>
+                                <td>MIRROR</td>
+                                <td>ایجاد تصویر متقارن</td>
+                                <td>MI</td>
+                            </tr>
+                            <tr>
+                                <td>ARRAY</td>
+                                <td>ایجاد آرایه‌های سطری و قطبی</td>
+                                <td>AR</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- بخش مدل‌سازی سه بعدی -->
+            <section class="section" id="3d-modeling">
+                <div class="section__header" data-aos="fade-up">
+                    <h2 class="section__title">مدل‌سازی سه بعدی</h2>
+                    <p class="section__subtitle">آموزش تکنیک‌های ایجاد مدل‌های سه بعدی در اتوکد</p>
+                </div>
+
+                <div class="content-grid">
+                    <div class="learning-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="learning-card__icon">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <h3 class="learning-card__title">احجام پایه</h3>
+                        <p class="learning-card__description">
+                            ایجاد احجام سه بعدی پایه مانند مکعب مستطیل، استوانه، مخروط، کره و هرم
+                        </p>
+                        <ul class="learning-card__features">
+                            <li>BOX - مکعب مستطیل</li>
+                            <li>CYLINDER - استوانه</li>
+                            <li>CONE - مخروط</li>
+                            <li>SPHERE - کره</li>
+                            <li>PYRAMID - هرم</li>
+                            <li>WEDGE - گوه</li>
+                        </ul>
+                    </div>
+
+                    <div class="learning-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="learning-card__icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3 class="learning-card__title">دستورات تبدیل</h3>
+                        <p class="learning-card__description">
+                            تبدیل پروفیل‌های دو بعدی به احجام سه بعدی با استفاده از دستورات EXTRUDE و REVOLVE
+                        </p>
+                        <ul class="learning-card__features">
+                            <li>EXTRUDE - کشیدن پروفیل دو بعدی</li>
+                            <li>REVOLVE - چرخش پروفیل حول محور</li>
+                            <li>SWEEP - حرکت پروفیل در مسیر</li>
+                            <li>LOFT - ایجاد حجم از پروفیل‌های متوالی</li>
+                        </ul>
+                    </div>
+
+                    <div class="learning-card" data-aos="fade-up" data-aos-delay="600">
+                        <div class="learning-card__icon">
+                            <i class="fas fa-object-ungroup"></i>
+                        </div>
+                        <h3 class="learning-card__title">عملیات بولین</h3>
+                        <p class="learning-card__description">
+                            ترکیب احجام سه بعدی با استفاده از عملیات UNION, SUBTRACT و INTERSECT
+                        </p>
+                        <ul class="learning-card__features">
+                            <li>UNION - ادغام احجام</li>
+                            <li>SUBTRACT - تفریق احجام</li>
+                            <li>INTERSECT - اشتراک احجام</li>
+                            <li>ایجاد احجام پیچیده از احجام ساده</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- تمرین تعاملی مدل‌سازی سه بعدی -->
+                <div class="cad-canvas-container" data-aos="fade-up">
+                    <h3>تمرین تعاملی: آشنایی با مدل‌سازی سه بعدی</h3>
+                    <p>مراحل ایجاد یک مدل سه بعدی ساده را مشاهده کنید</p>
+                    <canvas class="cad-canvas" id="3d-cad-canvas" width="800" height="400"></canvas>
+                    <div class="canvas-controls">
+                        <button class="btn" onclick="show3DStep(1)">
+                            <i class="fas fa-cube"></i>
+                            مرحله ۱: حجم پایه
+                        </button>
+                        <button class="btn" onclick="show3DStep(2)">
+                            <i class="fas fa-edit"></i>
+                            مرحله ۲: ویرایش
+                        </button>
+                        <button class="btn" onclick="show3DStep(3)">
+                            <i class="fas fa-palette"></i>
+                            مرحله ۳: رنگ‌آمیزی
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- بخش تمرینات عملی -->
+            <section class="section" id="exercises">
+                <div class="section__header" data-aos="fade-up">
+                    <h2 class="section__title">تمرینات عملی و پروژه‌ها</h2>
+                    <p class="section__subtitle">تقویت مهارت‌های ترسیم با رایانه با تمرینات گام به گام</p>
+                </div>
+
+                <div class="interactive-section" data-aos="fade-up">
+                    <div class="interactive-content">
+                        <h3 class="interactive-title">تمرینات پیشرفته ترسیم با رایانه</h3>
+                        <p class="interactive-description">
+                            با انجام این تمرینات، مهارت کار با اتوکد را تقویت کرده و توانایی ترسیم نقشه‌های صنعتی پیچیده را کسب خواهید کرد.
+                        </p>
+                        
+                        <div class="exercise-grid">
+                            <div class="exercise-card">
+                                <div class="exercise-card__icon">
+                                    <i class="fas fa-drafting-compass"></i>
+                                </div>
+                                <h4 class="exercise-card__title">ترسیم نقشه‌های صنعتی</h4>
+                                <p class="exercise-card__description">
+                                    رسم نقشه‌های اجرایی قطعات مکانیکی با اندازه‌گذاری کامل
+                                </p>
+                                <a href="#" class="btn btn--outline">
+                                    <i class="fas fa-play"></i>
+                                    شروع تمرین
+                                </a>
+                            </div>
+                            
+                            <div class="exercise-card">
+                                <div class="exercise-card__icon">
+                                    <i class="fas fa-cube"></i>
+                                </div>
+                                <h4 class="exercise-card__title">مدل‌سازی سه بعدی</h4>
+                                <p class="exercise-card__description">
+                                    ایجاد مدل‌های سه بعدی از قطعات و مجموعه‌های مونتاژی
+                                </p>
+                                <a href="#" class="btn btn--outline">
+                                    <i class="fas fa-play"></i>
+                                    شروع تمرین
+                                </a>
+                            </div>
+                            
+                            <div class="exercise-card">
+                                <div class="exercise-card__icon">
+                                    <i class="fas fa-print"></i>
+                                </div>
+                                <h4 class="exercise-card__title">خروجی و چاپ</h4>
+                                <p class="exercise-card__description">
+                                    تنظیم layout و تهیه خروجی چاپی از نقشه‌ها
+                                </p>
+                                <a href="#" class="btn btn--outline">
+                                    <i class="fas fa-play"></i>
+                                    شروع تمرین
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- پروژه‌های نمونه -->
+                <div class="examples-section" data-aos="fade-up">
+                    <div class="examples-grid">
+                        <div class="example-card">
+                            <h3 class="example-card__title">
+                                <i class="fas fa-cog"></i>
+                                پروژه ۱: قطعه مکانیکی
+                            </h3>
+                            <p class="example-card__description">
+                                ترسیم نقشه‌های دو بعدی و مدل سه بعدی یک قطعه مکانیکی با جزئیات کامل
+                            </p>
+                            <ul class="example-card__steps">
+                                <li>ترسیم نماهای مختلف (Front, Top, Side)</li>
+                                <li>ایجاد برش‌های لازم</li>
+                                <li>اندازه‌گذاری دقیق</li>
+                                <li>مدل‌سازی سه بعدی</li>
+                                <li>تهیه خروجی چاپی</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="example-card">
+                            <h3 class="example-card__title">
+                                <i class="fas fa-tools"></i>
+                                پروژه ۲: مجموعه مونتاژی
+                            </h3>
+                            <p class="example-card__description">
+                                طراحی و مدل‌سازی یک مجموعه مونتاژی شامل چندین قطعه
+                            </p>
+                            <ul class="example-card__steps">
+                                <li>طراحی قطعات مجزا</li>
+                                <li>مدل‌سازی سه بعدی هر قطعه</li>
+                                <li>مونتاژ قطعات</li>
+                                <li>تهیه نقشه انفجاری</li>
+                                <li>ایجاد لیست قطعات</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="example-card">
+                            <h3 class="example-card__title">
+                                <i class="fas fa-home"></i>
+                                پروژه ۳: نقشه معماری
+                            </h3>
+                            <p class="example-card__description">
+                                ترسیم پلان، نما و برش یک ساختمان مسکونی
+                            </p>
+                            <ul class="example-card__steps">
+                                <li>ترسیم پلان معماری</li>
+                                <li>ایجاد نماهای مختلف</li>
+                                <li>تهیه برش‌های لازم</li>
+                                <li>اندازه‌گذاری و نوشتن مشخصات</li>
+                                <li>ایجاد layout و خروجی چاپی</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- منوهای پایانی -->
+    <section class="menu-section" id="resources">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title" style="color: white;">منابع تکمیلی و ارزیابی</h2>
+                <p class="section__subtitle" style="color: rgba(255,255,255,0.9);">دسترسی به محتوای پیشرفته و سنجش مهارت‌های کسب شده</p>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-card__icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="menu-card__title">فیلم‌های آموزشی پیشرفته</h3>
+                    <p class="menu-card__description">
+                        دسترسی به مجموعه کامل فیلم‌های آموزشی که تکنیک‌های پیشرفته اتوکد، مدل‌سازی سه بعدی و ترسیم نقشه‌های صنعتی را به صورت عملی آموزش می‌دهند.
+                    </p>
+                    <a href="#" class="btn btn--outline" style="border-color: white; color: white;">
+                        <i class="fas fa-play"></i>
+                        مشاهده فیلم‌ها
+                    </a>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-card__icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 class="menu-card__title">فایل‌های تمرینی</h3>
+                    <p class="menu-card__description">
+                        دانلود فایل‌های تمرینی، نمونه نقشه‌های صنعتی، بلوک‌های آماده و منابع تخصصی برای تسلط کامل بر اتوکد.
+                    </p>
+                    <a href="#" class="btn btn--outline" style="border-color: white; color: white;">
+                        <i class="fas fa-download"></i>
+                        دریافت منابع
+                    </a>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-card__icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="menu-card__title">ارزیابی مهارت</h3>
+                    <p class="menu-card__description">
+                        شرکت در آزمون‌های آنلاین و تمرینات ارزیابی برای سنجش سطح مهارت کار با اتوکد و دریافت گواهینامه.
+                    </p>
+                    <a href="#" class="btn btn--outline" style="border-color: white; color: white;">
+                        <i class="fas fa-clipboard-check"></i>
+                        شروع ارزیابی
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- اسکریپت‌های ضروری -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // مدیریت اسکرول هدر
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('main-header');
+            let lastScrollY = window.scrollY;
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('header--scrolled');
+                } else {
+                    header.classList.remove('header--scrolled');
+                }
+                
+                lastScrollY = window.scrollY;
+            });
+            
+            // اسکرول نرم برای لینک‌ها
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const target = document.querySelector(targetId);
+                    
+                    if (target) {
+                        const headerHeight = document.getElementById('main-header').offsetHeight;
+                        const targetPosition = target.offsetTop - headerHeight - 20;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // راه‌اندازی کانواس تمرینات
+            drawCadGuidelines();
+            initialize3DCanvas();
+        });
+
+        // توابع مربوط به کانواس تمرینات
+        function drawCadGuidelines() {
+            const canvas = document.getElementById('line-cad-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([5, 5]);
+            
+            // شکل نمونه برای تمرین
+            ctx.beginPath();
+            ctx.moveTo(100, 100);
+            ctx.lineTo(300, 100);
+            ctx.lineTo(300, 200);
+            ctx.lineTo(100, 200);
+            ctx.closePath();
+            ctx.stroke();
+            
+            ctx.setLineDash([]);
+        }
+
+        function clearCadCanvas() {
+            const canvas = document.getElementById('line-cad-canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawCadGuidelines();
+        }
+
+        function showCadGuidelines() {
+            drawCadGuidelines();
+        }
+
+        // توابع مربوط به کانواس سه بعدی
+        function initialize3DCanvas() {
+            const canvas = document.getElementById('3d-cad-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#f8fafc';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#1e293b';
+            ctx.font = '24px Vazirmatn';
+            ctx.textAlign = 'center';
+            ctx.fillText('برای مشاهده مراحل مدل‌سازی روی دکمه‌های زیر کلیک کنید', canvas.width/2, canvas.height/2);
+        }
+
+        function show3DStep(step) {
+            const canvas = document.getElementById('3d-cad-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#f8fafc';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#1e293b';
+            ctx.font = '20px Vazirmatn';
+            ctx.textAlign = 'center';
+            
+            if (step === 1) {
+                // رسم حجم پایه
+                ctx.fillStyle = '#3b82f6';
+                ctx.fillRect(150, 150, 200, 100);
+                ctx.fillStyle = '#1e293b';
+                ctx.fillText('مرحله ۱: ایجاد حجم پایه (BOX)', canvas.width/2, 100);
+            } else if (step === 2) {
+                // رسم حجم ویرایش شده
+                ctx.fillStyle = '#3b82f6';
+                ctx.fillRect(150, 150, 200, 100);
+                ctx.fillStyle = '#10b981';
+                ctx.fillRect(200, 100, 100, 50);
+                ctx.fillStyle = '#1e293b';
+                ctx.fillText('مرحله ۲: افزودن جزئیات و ویرایش', canvas.width/2, 100);
+            } else if (step === 3) {
+                // رسم حجم نهایی با رنگ
+                ctx.fillStyle = '#3b82f6';
+                ctx.fillRect(150, 150, 200, 100);
+                ctx.fillStyle = '#10b981';
+                ctx.fillRect(200, 100, 100, 50);
+                ctx.fillStyle = '#f59e0b';
+                ctx.beginPath();
+                ctx.arc(250, 200, 30, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#1e293b';
+                ctx.fillText('مرحله ۳: رنگ‌آمیزی و تکمیل مدل', canvas.width/2, 100);
+            }
+        }
+    </script>
+</body>
+</html>

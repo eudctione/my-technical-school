@@ -1,0 +1,2605 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سامانه آموزش نقشه‌کشی فنی | هنرستان هوش مصنوعی دانشمند</title>
+    
+    <!-- لینک فونت‌های پیشرفته -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    
+    <!-- آیکون‌های فونت آوسام -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* سیستم طراحی پیشرفته */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --accent-dark: #d97706;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --bg: #ffffff;
+            --card-bg: #f8fafc;
+            --card-hover: #f1f5f9;
+            --border: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-dark: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            --header-height: 80px;
+            --toolbar-height: 70px;
+        }
+
+        [data-theme="dark"] {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --text: #f8fafc;
+            --text-light: #cbd5e1;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --card-hover: #334155;
+            --border: #374151;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            --shadow-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'Poppins', system-ui, sans-serif;
+            line-height: 1.8;
+            color: var(--text);
+            background: var(--bg);
+            direction: rtl;
+            transition: var(--transition);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-top: var(--header-height);
+        }
+
+        /* هدر هوشمند */
+        .header {
+            background: var(--gradient-primary);
+            color: white;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            height: var(--header-height);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            box-shadow: var(--shadow);
+        }
+
+        .header--scrolled {
+            height: 70px;
+            background: rgba(37, 99, 235, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header__content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            gap: 2rem;
+        }
+
+        .header__brand {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .header__title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+            background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header__subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: 300;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header__actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary);
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn--outline {
+            background: transparent;
+            color: white;
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn--outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+        }
+
+        /* ناوبری پیشرفته */
+        .nav-container {
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .nav-links {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-links li {
+            position: relative;
+        }
+
+        .nav-links li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 12px 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-links li a.active {
+            background-color: rgba(255, 255, 255, 0.25);
+            font-weight: 600;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            width: 0;
+            height: 3px;
+            background: white;
+            transition: all 0.3s ease;
+            transform: translateX(50%);
+        }
+
+        .nav-links li a:hover::after,
+        .nav-links li a.active::after {
+            width: 80%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            min-width: 220px;
+            box-shadow: var(--shadow-hover);
+            border-radius: 12px;
+            z-index: 1000;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .dropdown-content a {
+            color: var(--text);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: right;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* هیرو سکشن حرفه‌ای */
+        .hero {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 6rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            background-size: cover;
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero__title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero__subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .hero__description {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            margin-bottom: 3rem;
+            line-height: 1.7;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero__actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* محتوای اصلی */
+        .main {
+            padding: 4rem 0;
+            background: var(--bg);
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section__header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section__title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section__title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .section__subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* کارت‌های محتوای آموزشی */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .learning-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .learning-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .learning-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .learning-card__icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .learning-card__title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .learning-card__description {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .learning-card__features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .learning-card__features li {
+            margin-bottom: 0.75rem;
+            padding-right: 1.5rem;
+            position: relative;
+        }
+
+        .learning-card__features li:before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* بخش فرمول‌ها و نمادها */
+        .formula-section {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            margin: 3rem 0;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .formula-section__title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .formula-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .formula-card {
+            background: var(--bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .formula-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-accent);
+        }
+
+        .formula-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .formula-card__title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .formula-box {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            direction: ltr;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .math-formula {
+            font-size: 1.3rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            direction: ltr;
+        }
+
+        .formula-explanation {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-right: 4px solid var(--primary);
+        }
+
+        .symbol-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .symbol-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .symbol-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .symbol {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* بخش اشکال هندسی تعاملی */
+        .geometry-section {
+            background: var(--gradient-success);
+            color: white;
+            border-radius: var(--radius);
+            padding: 3rem;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .geometry-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 0%, transparent 50%);
+        }
+
+        .geometry-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .geometry-canvas-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .geometry-canvas {
+            width: 100%;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .geometry-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .geometry-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* جدول مثلثاتی */
+        .trigonometry-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .trigonometry-table th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .trigonometry-table td {
+            padding: 0.75rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .trigonometry-table tr:nth-child(even) {
+            background: var(--card-bg);
+        }
+
+        .trigonometry-table tr:hover {
+            background: var(--card-hover);
+        }
+
+        /* منوهای پایانی */
+        .menu-section {
+            background: var(--gradient-dark);
+            color: white;
+            padding: 4rem 0;
+            margin-top: 4rem;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-card__icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 auto 1.5rem;
+        }
+
+        .menu-card__title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .menu-card__description {
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* هندسی‌های تزئینی */
+        .geometric-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            right: 5%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+        }
+
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 10%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+        }
+
+        /* پیشرفت یادگیری */
+        .progress-section {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .progress-item {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .progress-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: var(--border);
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 5px;
+            transition: width 1s ease-in-out;
+        }
+
+        /* رسپانسیو */
+        @media (max-width: 968px) {
+            .hero__title {
+                font-size: 2.8rem;
+            }
+            
+            .hero__subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .section__title {
+                font-size: 2rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+            }
+
+            .geometry-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header__title {
+                font-size: 1.3rem;
+            }
+            
+            .header__subtitle {
+                display: none;
+            }
+            
+            .hero {
+                padding: 5rem 0 3rem;
+            }
+            
+            .hero__title {
+                font-size: 2.2rem;
+            }
+            
+            .hero__subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .hero__actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .nav-links {
+                flex-direction: column;
+            }
+
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                background: rgba(255, 255, 255, 0.8);
+            }
+
+            .formula-section, .geometry-section {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero__title {
+                font-size: 1.8rem;
+            }
+            
+            .section__title {
+                font-size: 1.7rem;
+            }
+            
+            .learning-card {
+                padding: 1.5rem;
+            }
+            
+            .menu-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .geometry-controls .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر هوشمند -->
+    <header class="header" id="main-header">
+        <div class="container">
+            <div class="header__content">
+                <div class="header__brand">
+                                <!-- ناوبری پیشرفته -->
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="#content" >مفاهیم پایه ای </a></li>
+                    <li class="dropdown">
+                        <a href="#basics">مبانی نقشه‌کشی <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="#principles">اصول و استانداردها</a>
+                            <a href="#tools">ابزارهای نقشه‌کشی</a>
+                            <a href="#symbols">نمادها و علائم</a>
+                            <a href="#lines">انواع خطوط</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#geometry">ترسیمات هندسی <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="#polygons">چندضلعی‌ها</a>
+                            <a href="#circles">دایره و کمان</a>
+                            <a href="#projections">تصاویر سه‌بعدی</a>
+                            <a href="#sections">مقطع و نما</a>
+                        </div>
+                    </li>
+                    <li><a href="#formulas">فرمول‌ها و محاسبات</a></li>
+                    <li><a href="#exercises">تمرینات عملی</a></li>
+                    <li><a href="#resources">منابع آموزشی</a></li>
+ <div class="header__actions">
+                   <li><a href="https://ai-daneshmand.ir/dashboard" class="btn btn--outline">
+                        <i class="fas fa-arrow-right"></i>
+                        بازگشت به پنل کاربری
+                    </a></li>
+
+                </ul>
+
+            
+                </div>
+                
+            </div>
+            
+</div>
+        </div>
+    </header>
+
+    <!-- هیرو سکشن حرفه‌ای -->
+    <section class="hero">
+        <div class="geometric-shape shape-1"></div>
+        <div class="geometric-shape shape-2"></div>
+        
+        <div class="container">
+            <div class="hero__content">
+                <h1 class="hero__title">آموزش تخصصی نقشه‌کشی فنی و مهندسی</h1>
+                <p class="hero__subtitle">دوره جامع پایه دهم رشته مکانیک خودرو</p>
+                <p class="hero__description">
+                    یادگیری اصول استانداردهای بین‌المللی نقشه‌کشی، ابزارهای تخصصی، 
+                    ترسیمات هندسی و کاربردهای صنعتی در خودروسازی با متدهای مدرن آموزشی
+                </p>
+                <div class="hero__actions">
+                    <a href="#content" class="btn">
+                        <i class="fas fa-play-circle"></i>
+                        شروع یادگیری
+                    </a>
+                    <a href="#exercises" class="btn btn--outline">
+                        <i class="fas fa-pencil-alt"></i>
+                        تمرینات تعاملی
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- محتوای اصلی -->
+    <main class="main" id="content">
+        <div class="container">
+       
+
+            <!-- بخش معرفی -->
+            <section class="section">
+                <div class="section__header">
+                    <h2 class="section__title">مفاهیم پایه نقشه‌کشی فنی</h2>
+                    <p class="section__subtitle">آشنایی با اصول، استانداردها و اهمیت نقشه‌کشی در صنعت</p>
+                </div>
+
+                <div class="content-grid">
+                    <div class="learning-card">
+                        <div class="learning-card__icon">
+                            <i class="fas fa-drafting-compass"></i>
+                        </div>
+                        <h3 class="learning-card__title">اصول نقشه‌کشی</h3>
+                        <p class="learning-card__description">
+                            نقشه‌کشی فنی زبان مشترک مهندسان در سراسر جهان است که امکان انتقال دقیق ایده‌ها و طرح‌ها را فراهم می‌کند.
+                        </p>
+                        <ul class="learning-card__features">
+                            <li>استانداردهای بین‌المللی ISO</li>
+                            <li>انواع نقشه‌های فنی</li>
+                            <li>کاربرد در صنایع مختلف</li>
+                            <li>اهمیت در طراحی و ساخت</li>
+                        </ul>
+                    </div>
+
+                    <div class="learning-card">
+                        <div class="learning-card__icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="learning-card__title">ابزارهای نقشه‌کشی</h3>
+                        <p class="learning-card__description">
+                            آشنایی با ابزارهای تخصصی نقشه‌کشی و نحوه استفاده صحیح از هر یک برای ترسیم دقیق.
+                        </p>
+                        <ul class="learning-card__features">
+                            <li>میز نقشه‌کشی و تخته رسم</li>
+                            <li>خط‌کش T و انواع گونیا</li>
+                            <li>پرگار و قطره‌گیر</li>
+                            <li>مدادهای مخصوص و پاک‌کن</li>
+                        </ul>
+                    </div>
+
+                    <div class="learning-card">
+                        <div class="learning-card__icon">
+                            <i class="fas fa-ruler-combined"></i>
+                        </div>
+                        <h3 class="learning-card__title">استانداردها و مفاهیم</h3>
+                        <p class="learning-card__description">
+                            یادگیری استانداردهای جهانی و مفاهیم پایه‌ای که هر نقشه‌کش حرفه‌ای باید بداند.
+                        </p>
+                        <ul class="learning-card__features">
+                            <li>استانداردهای ISO 128 و 3098</li>
+                            <li>اندازه‌های کاغذ (A0 تا A4)</li>
+                            <li>مقیاس‌های استاندارد</li>
+                            <li>خطوط و علائم اختصاری</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- بخش فرمول‌ها و نمادها -->
+            <section class="section" id="formulas">
+                <div class="section__header">
+                    <h2 class="section__title">فرمول‌ها و نمادهای تخصصی</h2>
+                    <p class="section__subtitle">آشنایی با نمادها، فرمول‌ها و علائم اختصاری در نقشه‌کشی</p>
+                </div>
+
+                <div class="formula-section">
+                    <h3 class="formula-section__title">
+                        <i class="fas fa-square-root-alt"></i>
+                        نمادهای اندازه‌گذاری
+                    </h3>
+                    
+                    <div class="formula-grid">
+                        <div class="formula-card">
+                            <h4 class="formula-card__title">نماد قطر</h4>
+                            <div class="formula-box">Ø</div>
+                            <div class="formula-explanation">
+                                <strong>توضیح:</strong> برای نشان دادن اندازه قطر دایره‌ها و استوانه‌ها استفاده می‌شود.
+                            </div>
+                        </div>
+                        
+                        <div class="formula-card">
+                            <h4 class="formula-card__title">نماد شعاع</h4>
+                            <div class="formula-box">R</div>
+                            <div class="formula-explanation">
+                                <strong>توضیح:</strong> برای نشان دادن اندازه شعاع کمان‌ها و گوشه‌های گرد استفاده می‌شود.
+                            </div>
+                        </div>
+                        
+                        <div class="formula-card">
+                            <h4 class="formula-card__title">نماد مربع</h4>
+                            <div class="formula-box">□</div>
+                            <div class="formula-explanation">
+                                <strong>توضیح:</strong> برای نشان دادن سطح مقطع مربع در نقشه‌ها استفاده می‌شود.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="formula-section__title" style="margin-top: 3rem;">
+                        <i class="fas fa-calculator"></i>
+                        فرمول‌های محاسباتی
+                    </h3>
+                    
+                    <div class="formula-grid">
+                        <div class="formula-card">
+                            <h4 class="formula-card__title">محاسبه مقیاس</h4>
+                            <div class="math-formula">
+                                مقیاس = اندازه نقشه ÷ اندازه واقعی
+                            </div>
+                            <div class="formula-explanation">
+                                <strong>توضیح:</strong> برای محاسبه نسبت اندازه نقشه به اندازه واقعی قطعه استفاده می‌شود.
+                            </div>
+                        </div>
+                        
+                        <div class="formula-card">
+                            <h4 class="formula-card__title">محاسبه محیط دایره</h4>
+                            <div class="math-formula">
+                                C = 2πR = πD
+                            </div>
+                            <div class="formula-explanation">
+                                <strong>توضیح:</strong> برای محاسبه محیط دایره با استفاده از شعاع (R) یا قطر (D).
+                            </div>
+                        </div>
+                        
+                        <div class="formula-card">
+                            <h4 class="formula-card__title">تبدیل اندازه‌ها</h4>
+                            <div class="math-formula">
+                                1 اینچ = 25.4 میلی‌متر
+                            </div>
+                            <div class="formula-explanation">
+                                <strong>توضیح:</strong> برای تبدیل اندازه‌ها بین سیستم متریک و سیستم اینچی.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="formula-section__title" style="margin-top: 3rem;">
+                        <i class="fas fa-shapes"></i>
+                        نمادهای هندسی
+                    </h3>
+                    
+                    <div class="symbol-grid">
+                        <div class="symbol-item">
+                            <div class="symbol">⟂</div>
+                            <div>عمود بر هم</div>
+                        </div>
+                        <div class="symbol-item">
+                            <div class="symbol">∥</div>
+                            <div>موازی</div>
+                        </div>
+                        <div class="symbol-item">
+                            <div class="symbol">∠</div>
+                            <div>زاویه</div>
+                        </div>
+                        <div class="symbol-item">
+                            <div class="symbol">△</div>
+                            <div>مثلث</div>
+                        </div>
+                        <div class="symbol-item">
+                            <div class="symbol">□</div>
+                            <div>مربع/مستطیل</div>
+                        </div>
+                        <div class="symbol-item">
+                            <div class="symbol">○</div>
+                            <div>دایره</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- بخش اشکال هندسی تعاملی -->
+           <section class="section" id="geometry">
+    <div class="section__header">
+        <h2 class="section__title">آزمایشگاه هندسه تعاملی</h2>
+        <p class="section__subtitle">کشف و تجسم مفاهیم هندسی با ابزارهای پیشرفته و محیطی پویا</p>
+    </div>
+
+    <div class="geometry-section">
+        <div class="geometry-content">
+            <!-- نوار ابزار اصلی -->
+            <div class="geometry-toolbar">
+                <div class="toolbar-group">
+                    <h4 class="toolbar-title">اشکال پایه</h4>
+                    <div class="toolbar-buttons">
+                        <button class="tool-btn active" data-shape="triangle">
+                            <i class="fas fa-draw-polygon"></i>
+                            <span>مثلث</span>
+                        </button>
+                        <button class="tool-btn" data-shape="square">
+                            <i class="fas fa-square"></i>
+                            <span>مربع</span>
+                        </button>
+                        <button class="tool-btn" data-shape="circle">
+                            <i class="fas fa-circle"></i>
+                            <span>دایره</span>
+                        </button>
+                        <button class="tool-btn" data-shape="rectangle">
+                            <i class="fas fa-rectangle-landscape"></i>
+                            <span>مستطیل</span>
+                        </button>
+                        <button class="tool-btn" data-shape="rhombus">
+                            <i class="fas fa-diamond"></i>
+                            <span>لوزی</span>
+                        </button>
+                        <button class="tool-btn" data-shape="pentagon">
+                            <i class="fas fa-draw-polygon"></i>
+                            <span>پنج ضلعی</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="toolbar-group">
+                    <h4 class="toolbar-title">ابزارهای ترسیم</h4>
+                    <div class="toolbar-buttons">
+                        <button class="tool-btn" data-tool="select">
+                            <i class="fas fa-mouse-pointer"></i>
+                            <span>انتخاب</span>
+                        </button>
+                        <button class="tool-btn" data-tool="move">
+                            <i class="fas fa-arrows-alt"></i>
+                            <span>جابجایی</span>
+                        </button>
+                        <button class="tool-btn" data-tool="rotate">
+                            <i class="fas fa-redo"></i>
+                            <span>چرخش</span>
+                        </button>
+                        <button class="tool-btn" data-tool="scale">
+                            <i class="fas fa-expand-alt"></i>
+                            <span>تغییر اندازه</span>
+                        </button>
+                        <button class="tool-btn" id="clear-all">
+                            <i class="fas fa-trash-alt"></i>
+                            <span>پاک کردن همه</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- محیط ترسیم -->
+            <div class="geometry-workspace">
+                <div class="canvas-container">
+                    <canvas class="geometry-canvas" id="geometry-canvas" width="800" height="500"></canvas>
+                    <div class="canvas-grid-overlay"></div>
+                    <div class="coordinate-display">
+                        مختصات: <span id="coords">(0, 0)</span>
+                    </div>
+                </div>
+                
+                <div class="properties-panel">
+                    <div class="panel-header">
+                        <h4>ویژگی‌های شکل</h4>
+                        <button class="panel-toggle" id="properties-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="panel-content" id="properties-content">
+                        <div class="property-group">
+                            <label for="shape-name">نام شکل:</label>
+                            <input type="text" id="shape-name" placeholder="نام شکل">
+                        </div>
+                        <div class="property-group">
+                            <label for="shape-color">رنگ:</label>
+                            <input type="color" id="shape-color" value="#3498db">
+                        </div>
+                        <div class="property-group">
+                            <label for="shape-opacity">شفافیت:</label>
+                            <input type="range" id="shape-opacity" min="0.1" max="1" step="0.1" value="0.8">
+                        </div>
+                        <div class="property-group">
+                            <label for="shape-stroke">ضخامت خط:</label>
+                            <input type="range" id="shape-stroke" min="1" max="10" value="2">
+                        </div>
+                        <div class="calculated-properties" id="calculated-properties">
+                            <p>هیچ شکلی انتخاب نشده است</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- پنل اطلاعات و محاسبات -->
+            <div class="info-panels">
+                <div class="info-panel">
+                    <div class="panel-header">
+                        <h4>اطلاعات شکل</h4>
+                    </div>
+                    <div class="panel-content" id="shape-info">
+                        <div class="info-placeholder">
+                            <i class="fas fa-shapes"></i>
+                            <p>برای شروع، یک شکل را انتخاب یا رسم کنید</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-panel">
+                    <div class="panel-header">
+                        <h4>فرمول‌های هندسی</h4>
+                    </div>
+                    <div class="panel-content">
+                        <div class="formula-tabs">
+                            <button class="formula-tab active" data-formula="area">مساحت</button>
+                            <button class="formula-tab" data-formula="perimeter">محیط</button>
+                            <button class="formula-tab" data-formula="volume">حجم</button>
+                        </div>
+                        <div class="formula-content" id="formula-content">
+                            <div class="formula-card">
+                                <h5>مثلث</h5>
+                                <div class="math-formula">A = ½ × b × h</div>
+                                <p>مساحت = نصف × قاعده × ارتفاع</p>
+                            </div>
+                            <div class="formula-card">
+                                <h5>مربع</h5>
+                                <div class="math-formula">A = a²</div>
+                                <p>مساحت = ضلع × ضلع</p>
+                            </div>
+                            <div class="formula-card">
+                                <h5>دایره</h5>
+                                <div class="math-formula">A = πr²</div>
+                                <p>مساحت = عدد پی × شعاع × شعاع</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- گالری اشکال -->
+            <div class="shapes-gallery">
+                <h3 class="gallery-title">گالری اشکال هندسی</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-shape="triangle">
+                        <div class="shape-preview triangle"></div>
+                        <span>مثلث</span>
+                    </div>
+                    <div class="gallery-item" data-shape="square">
+                        <div class="shape-preview square"></div>
+                        <span>مربع</span>
+                    </div>
+                    <div class="gallery-item" data-shape="circle">
+                        <div class="shape-preview circle"></div>
+                        <span>دایره</span>
+                    </div>
+                    <div class="gallery-item" data-shape="rectangle">
+                        <div class="shape-preview rectangle"></div>
+                        <span>مستطیل</span>
+                    </div>
+                    <div class="gallery-item" data-shape="rhombus">
+                        <div class="shape-preview rhombus"></div>
+                        <span>لوزی</span>
+                    </div>
+                    <div class="gallery-item" data-shape="pentagon">
+                        <div class="shape-preview pentagon"></div>
+                        <span>پنج ضلعی</span>
+                    </div>
+                    <div class="gallery-item" data-shape="hexagon">
+                        <div class="shape-preview hexagon"></div>
+                        <span>شش ضلعی</span>
+                    </div>
+                    <div class="gallery-item" data-shape="trapezoid">
+                        <div class="shape-preview trapezoid"></div>
+                        <span>ذوزنقه</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* استایل‌های بخش هندسی */
+.geometry-section {
+    background: linear-gradient(135deg, #1a2a6c, #2a3a7c, #3a4a8c);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.geometry-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.toolbar-group {
+    flex: 1;
+    min-width: 300px;
+}
+
+.toolbar-title {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    color: #e0e0ff;
+}
+
+.toolbar-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tool-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 80px;
+}
+
+.tool-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.tool-btn.active {
+    background: rgba(52, 152, 219, 0.7);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tool-btn i {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+}
+
+.tool-btn span {
+    font-size: 0.85rem;
+}
+
+.geometry-workspace {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.canvas-container {
+    flex: 3;
+    position: relative;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    min-height: 500px;
+}
+
+.geometry-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: crosshair;
+}
+
+.canvas-grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+}
+
+.coordinate-display {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.properties-panel {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    min-width: 250px;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panel-header h4 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.panel-toggle {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.panel-content {
+    padding: 1.5rem;
+}
+
+.property-group {
+    margin-bottom: 1.2rem;
+}
+
+.property-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #e0e0ff;
+}
+
+.property-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.calculated-properties {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-panels {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.info-panel {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.info-placeholder {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.info-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.formula-tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.formula-tab {
+    flex: 1;
+    padding: 0.8rem;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.formula-tab.active {
+    color: white;
+    border-bottom: 2px solid #3498db;
+}
+
+.formula-content {
+    padding: 1.5rem;
+}
+
+.formula-card {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.formula-card h5 {
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+    color: #e0e0ff;
+}
+
+.math-formula {
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.shapes-gallery {
+    margin-top: 2rem;
+}
+
+.gallery-title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #e0e0ff;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1.5rem;
+}
+
+.gallery-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.shape-preview {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 0.8rem;
+    background: rgba(52, 152, 219, 0.7);
+}
+
+.triangle {
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.square {
+    /* مربع ساده */
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+.rectangle {
+    width: 80px;
+}
+
+.rhombus {
+    transform: rotate(45deg);
+    margin-top: 10px;
+}
+
+.pentagon {
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+}
+
+.hexagon {
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+.trapezoid {
+    clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+
+/* رسپانسیو */
+@media (max-width: 992px) {
+    .geometry-workspace {
+        flex-direction: column;
+    }
+    
+    .info-panels {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .geometry-toolbar {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .toolbar-group {
+        min-width: 100%;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+}
+</style>
+
+<script>
+// کد جاوااسکریپت برای عملکرد تعاملی
+document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('geometry-canvas');
+    const ctx = canvas.getContext('2d');
+    const coordsDisplay = document.getElementById('coords');
+    const shapeInfo = document.getElementById('shape-info');
+    const calculatedProperties = document.getElementById('calculated-properties');
+    const formulaTabs = document.querySelectorAll('.formula-tab');
+    const formulaContent = document.getElementById('formula-content');
+    const toolButtons = document.querySelectorAll('.tool-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const clearButton = document.getElementById('clear-all');
+    
+    let currentTool = 'select';
+    let currentShape = 'triangle';
+    let shapes = [];
+    let selectedShape = null;
+    let isDrawing = false;
+    let startX, startY;
+    
+    // تنظیم اندازه کانواس
+    function resizeCanvas() {
+        const container = canvas.parentElement;
+        canvas.width = container.clientWidth;
+        canvas.height = container.clientHeight;
+        drawScene();
+    }
+    
+    // رسم صحنه
+    function drawScene() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // رسم اشکال
+        shapes.forEach(shape => {
+            drawShape(shape);
+        });
+        
+        // رسم شکل انتخابی
+        if (selectedShape) {
+            drawSelection(selectedShape);
+        }
+    }
+    
+    // رسم یک شکل
+    function drawShape(shape) {
+        ctx.save();
+        ctx.fillStyle = shape.color;
+        ctx.strokeStyle = shape.strokeColor || '#ffffff';
+        ctx.lineWidth = shape.strokeWidth || 2;
+        ctx.globalAlpha = shape.opacity || 0.8;
+        
+        switch(shape.type) {
+            case 'triangle':
+                drawTriangle(shape);
+                break;
+            case 'square':
+                drawSquare(shape);
+                break;
+            case 'circle':
+                drawCircle(shape);
+                break;
+            case 'rectangle':
+                drawRectangle(shape);
+                break;
+            case 'rhombus':
+                drawRhombus(shape);
+                break;
+            case 'pentagon':
+                drawPentagon(shape);
+                break;
+        }
+        
+        ctx.restore();
+    }
+    
+    // رسم مثلث
+    function drawTriangle(shape) {
+        const { x, y, width, height } = shape;
+        ctx.beginPath();
+        ctx.moveTo(x + width/2, y);
+        ctx.lineTo(x + width, y + height);
+        ctx.lineTo(x, y + height);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+    }
+    
+    // رسم مربع
+    function drawSquare(shape) {
+        const { x, y, width, height } = shape;
+        ctx.fillRect(x, y, width, height);
+        ctx.strokeRect(x, y, width, height);
+    }
+    
+    // رسم دایره
+    function drawCircle(shape) {
+        const { x, y, width, height } = shape;
+        const radius = Math.min(width, height) / 2;
+        const centerX = x + width/2;
+        const centerY = y + height/2;
+        
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+    }
+    
+    // رسم مستطیل
+    function drawRectangle(shape) {
+        const { x, y, width, height } = shape;
+        ctx.fillRect(x, y, width, height);
+        ctx.strokeRect(x, y, width, height);
+    }
+    
+    // رسم لوزی
+    function drawRhombus(shape) {
+        const { x, y, width, height } = shape;
+        ctx.beginPath();
+        ctx.moveTo(x + width/2, y);
+        ctx.lineTo(x + width, y + height/2);
+        ctx.lineTo(x + width/2, y + height);
+        ctx.lineTo(x, y + height/2);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+    }
+    
+    // رسم پنج ضلعی
+    function drawPentagon(shape) {
+        const { x, y, width, height } = shape;
+        const centerX = x + width/2;
+        const centerY = y + height/2;
+        const radius = Math.min(width, height) / 2;
+        
+        ctx.beginPath();
+        for (let i = 0; i < 5; i++) {
+            const angle = (i * 2 * Math.PI / 5) - Math.PI/2;
+            const px = centerX + radius * Math.cos(angle);
+            const py = centerY + radius * Math.sin(angle);
+            
+            if (i === 0) {
+                ctx.moveTo(px, py);
+            } else {
+                ctx.lineTo(px, py);
+            }
+        }
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+    }
+    
+    // رسم نشانگر انتخاب
+    function drawSelection(shape) {
+        const { x, y, width, height } = shape;
+        
+        ctx.save();
+        ctx.strokeStyle = '#00ff00';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([5, 5]);
+        ctx.strokeRect(x, y, width, height);
+        
+        // رسم دستگیره‌های تغییر اندازه
+        const handleSize = 8;
+        ctx.fillStyle = '#00ff00';
+        ctx.setLineDash([]);
+        
+        // گوشه‌ها
+        ctx.fillRect(x - handleSize/2, y - handleSize/2, handleSize, handleSize);
+        ctx.fillRect(x + width - handleSize/2, y - handleSize/2, handleSize, handleSize);
+        ctx.fillRect(x - handleSize/2, y + height - handleSize/2, handleSize, handleSize);
+        ctx.fillRect(x + width - handleSize/2, y + height - handleSize/2, handleSize, handleSize);
+        
+        // وسط اضلاع
+        ctx.fillRect(x + width/2 - handleSize/2, y - handleSize/2, handleSize, handleSize);
+        ctx.fillRect(x + width/2 - handleSize/2, y + height - handleSize/2, handleSize, handleSize);
+        ctx.fillRect(x - handleSize/2, y + height/2 - handleSize/2, handleSize, handleSize);
+        ctx.fillRect(x + width - handleSize/2, y + height/2 - handleSize/2, handleSize, handleSize);
+        
+        ctx.restore();
+    }
+    
+    // رویدادهای ماوس
+    canvas.addEventListener('mousedown', handleMouseDown);
+    canvas.addEventListener('mousemove', handleMouseMove);
+    canvas.addEventListener('mouseup', handleMouseUp);
+    
+    function handleMouseDown(e) {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        startX = x;
+        startY = y;
+        
+        if (currentTool === 'select') {
+            // بررسی آیا روی شکلی کلیک شده
+            selectedShape = null;
+            for (let i = shapes.length - 1; i >= 0; i--) {
+                if (isPointInShape(x, y, shapes[i])) {
+                    selectedShape = shapes[i];
+                    updatePropertiesPanel(selectedShape);
+                    break;
+                }
+            }
+            
+            if (!selectedShape) {
+                // اگر روی شکل کلیک نشده، شکل جدید ایجاد کن
+                isDrawing = true;
+                const newShape = {
+                    type: currentShape,
+                    x: x,
+                    y: y,
+                    width: 0,
+                    height: 0,
+                    color: document.getElementById('shape-color').value,
+                    opacity: parseFloat(document.getElementById('shape-opacity').value),
+                    strokeWidth: parseInt(document.getElementById('shape-stroke').value)
+                };
+                shapes.push(newShape);
+                selectedShape = newShape;
+                updatePropertiesPanel(selectedShape);
+            }
+        } else {
+            isDrawing = true;
+        }
+        
+        drawScene();
+    }
+    
+    function handleMouseMove(e) {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // به‌روزرسانی مختصات
+        coordsDisplay.textContent = `(${Math.round(x)}, ${Math.round(y)})`;
+        
+        if (isDrawing && selectedShape) {
+            const width = x - startX;
+            const height = y - startY;
+            
+            selectedShape.width = width;
+            selectedShape.height = height;
+            
+            drawScene();
+        }
+    }
+    
+    function handleMouseUp() {
+        isDrawing = false;
+        
+        if (selectedShape) {
+            updateShapeInfo(selectedShape);
+        }
+    }
+    
+    // بررسی آیا نقطه داخل شکل است
+    function isPointInShape(x, y, shape) {
+        return x >= shape.x && x <= shape.x + shape.width &&
+               y >= shape.y && y <= shape.y + shape.height;
+    }
+    
+    // به‌روزرسانی پنل اطلاعات شکل
+    function updateShapeInfo(shape) {
+        let infoHTML = '';
+        
+        switch(shape.type) {
+            case 'triangle':
+                infoHTML = `
+                    <div class="shape-details">
+                        <h5>مثلث</h5>
+                        <p>موقعیت: (${Math.round(shape.x)}, ${Math.round(shape.y)})</p>
+                        <p>ابعاد: ${Math.round(shape.width)} × ${Math.round(shape.height)}</p>
+                        <p>مساحت: ${calculateTriangleArea(shape)}</p>
+                        <p>محیط: ${calculateTrianglePerimeter(shape)}</p>
+                    </div>
+                `;
+                break;
+            case 'square':
+                infoHTML = `
+                    <div class="shape-details">
+                        <h5>مربع</h5>
+                        <p>موقعیت: (${Math.round(shape.x)}, ${Math.round(shape.y)})</p>
+                        <p>ضلع: ${Math.round(shape.width)}</p>
+                        <p>مساحت: ${calculateSquareArea(shape)}</p>
+                        <p>محیط: ${calculateSquarePerimeter(shape)}</p>
+                    </div>
+                `;
+                break;
+            case 'circle':
+                infoHTML = `
+                    <div class="shape-details">
+                        <h5>دایره</h5>
+                        <p>موقعیت: (${Math.round(shape.x)}, ${Math.round(shape.y)})</p>
+                        <p>شعاع: ${Math.round(Math.min(shape.width, shape.height) / 2)}</p>
+                        <p>مساحت: ${calculateCircleArea(shape)}</p>
+                        <p>محیط: ${calculateCirclePerimeter(shape)}</p>
+                    </div>
+                `;
+                break;
+        }
+        
+        shapeInfo.innerHTML = infoHTML;
+    }
+    
+    // به‌روزرسانی پنل ویژگی‌ها
+    function updatePropertiesPanel(shape) {
+        document.getElementById('shape-name').value = shape.name || '';
+        document.getElementById('shape-color').value = shape.color;
+        document.getElementById('shape-opacity').value = shape.opacity || 0.8;
+        document.getElementById('shape-stroke').value = shape.strokeWidth || 2;
+        
+        // محاسبه ویژگی‌های هندسی
+        let propertiesHTML = '';
+        
+        switch(shape.type) {
+            case 'triangle':
+                propertiesHTML = `
+                    <p>مساحت: ${calculateTriangleArea(shape)}</p>
+                    <p>محیط: ${calculateTrianglePerimeter(shape)}</p>
+                `;
+                break;
+            case 'square':
+                propertiesHTML = `
+                    <p>مساحت: ${calculateSquareArea(shape)}</p>
+                    <p>محیط: ${calculateSquarePerimeter(shape)}</p>
+                `;
+                break;
+            case 'circle':
+                propertiesHTML = `
+                    <p>مساحت: ${calculateCircleArea(shape)}</p>
+                    <p>محیط: ${calculateCirclePerimeter(shape)}</p>
+                `;
+                break;
+        }
+        
+        calculatedProperties.innerHTML = propertiesHTML;
+    }
+    
+    // توابع محاسباتی
+    function calculateTriangleArea(shape) {
+        return Math.round(0.5 * shape.width * shape.height);
+    }
+    
+    function calculateTrianglePerimeter(shape) {
+        const side1 = shape.width;
+        const side2 = shape.height;
+        const side3 = Math.sqrt(side1*side1 + side2*side2);
+        return Math.round(side1 + side2 + side3);
+    }
+    
+    function calculateSquareArea(shape) {
+        return Math.round(shape.width * shape.width);
+    }
+    
+    function calculateSquarePerimeter(shape) {
+        return Math.round(4 * shape.width);
+    }
+    
+    function calculateCircleArea(shape) {
+        const radius = Math.min(shape.width, shape.height) / 2;
+        return Math.round(Math.PI * radius * radius);
+    }
+    
+    function calculateCirclePerimeter(shape) {
+        const radius = Math.min(shape.width, shape.height) / 2;
+        return Math.round(2 * Math.PI * radius);
+    }
+    
+    // رویدادهای دکمه‌ها
+    toolButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // حذف کلاس active از همه دکمه‌ها
+            toolButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // اضافه کردن کلاس active به دکمه کلیک شده
+            this.classList.add('active');
+            
+            const shape = this.getAttribute('data-shape');
+            const tool = this.getAttribute('data-tool');
+            
+            if (shape) {
+                currentShape = shape;
+            }
+            
+            if (tool) {
+                currentTool = tool;
+            }
+        });
+    });
+    
+    // رویدادهای تب‌های فرمول
+    formulaTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            formulaTabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            const formulaType = this.getAttribute('data-formula');
+            updateFormulaContent(formulaType);
+        });
+    });
+    
+    // به‌روزرسانی محتوای فرمول
+    function updateFormulaContent(type) {
+        let contentHTML = '';
+        
+        if (type === 'area') {
+            contentHTML = `
+                <div class="formula-card">
+                    <h5>مثلث</h5>
+                    <div class="math-formula">A = ½ × b × h</div>
+                    <p>مساحت = نصف × قاعده × ارتفاع</p>
+                </div>
+                <div class="formula-card">
+                    <h5>مربع</h5>
+                    <div class="math-formula">A = a²</div>
+                    <p>مساحت = ضلع × ضلع</p>
+                </div>
+                <div class="formula-card">
+                    <h5>دایره</h5>
+                    <div class="math-formula">A = πr²</div>
+                    <p>مساحت = عدد پی × شعاع × شعاع</p>
+                </div>
+            `;
+        } else if (type === 'perimeter') {
+            contentHTML = `
+                <div class="formula-card">
+                    <h5>مثلث</h5>
+                    <div class="math-formula">P = a + b + c</div>
+                    <p>محیط = مجموع سه ضلع</p>
+                </div>
+                <div class="formula-card">
+                    <h5>مربع</h5>
+                    <div class="math-formula">P = 4a</div>
+                    <p>محیط = چهار برابر ضلع</p>
+                </div>
+                <div class="formula-card">
+                    <h5>دایره</h5>
+                    <div class="math-formula">P = 2πr</div>
+                    <p>محیط = دو × عدد پی × شعاع</p>
+                </div>
+            `;
+        } else if (type === 'volume') {
+            contentHTML = `
+                <div class="formula-card">
+                    <h5>مکعب</h5>
+                    <div class="math-formula">V = a³</div>
+                    <p>حجم = ضلع × ضلع × ضلع</p>
+                </div>
+                <div class="formula-card">
+                    <h5>استوانه</h5>
+                    <div class="math-formula">V = πr²h</div>
+                    <p>حجم = مساحت قاعده × ارتفاع</p>
+                </div>
+                <div class="formula-card">
+                    <h5>کره</h5>
+                    <div class="math-formula">V = 4/3πr³</div>
+                    <p>حجم = چهار سوم × عدد پی × شعاع به توان سه</p>
+                </div>
+            `;
+        }
+        
+        formulaContent.innerHTML = contentHTML;
+    }
+    
+    // رویدادهای گالری
+    galleryItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const shapeType = this.getAttribute('data-shape');
+            currentShape = shapeType;
+            
+            // برجسته کردن شکل انتخاب شده در نوار ابزار
+            toolButtons.forEach(btn => {
+                if (btn.getAttribute('data-shape') === shapeType) {
+                    btn.click();
+                }
+            });
+        });
+    });
+    
+    // پاک کردن همه
+    clearButton.addEventListener('click', function() {
+        shapes = [];
+        selectedShape = null;
+        shapeInfo.innerHTML = `
+            <div class="info-placeholder">
+                <i class="fas fa-shapes"></i>
+                <p>برای شروع، یک شکل را انتخاب یا رسم کنید</p>
+            </div>
+        `;
+        calculatedProperties.innerHTML = '<p>هیچ شکلی انتخاب نشده است</p>';
+        drawScene();
+    });
+    
+    // رویدادهای کنترل‌های ویژگی
+    document.getElementById('shape-color').addEventListener('change', function() {
+        if (selectedShape) {
+            selectedShape.color = this.value;
+            drawScene();
+        }
+    });
+    
+    document.getElementById('shape-opacity').addEventListener('input', function() {
+        if (selectedShape) {
+            selectedShape.opacity = parseFloat(this.value);
+            drawScene();
+        }
+    });
+    
+    document.getElementById('shape-stroke').addEventListener('input', function() {
+        if (selectedShape) {
+            selectedShape.strokeWidth = parseInt(this.value);
+            drawScene();
+        }
+    });
+    
+    // مقداردهی اولیه
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+});
+</script>
+
+            <!-- بخش جدول مثلثاتی -->
+            <section class="section">
+                <div class="section__header">
+                    <h2 class="section__title">جدول مثلثاتی زوایا</h2>
+                    <p class="section__subtitle">مقادیر سینوس، کسینوس و تانژانت برای زوایای مهم</p>
+                </div>
+
+                <div class="formula-section">
+                    <table class="trigonometry-table">
+                        <thead>
+                            <tr>
+                                <th>زاویه (درجه)</th>
+                                <th>سینوس (Sin)</th>
+                                <th>کسینوس (Cos)</th>
+                                <th>تانژانت (Tan)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0°</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>30°</td>
+                                <td>½</td>
+                                <td>√3/2</td>
+                                <td>√3/3</td>
+                            </tr>
+                            <tr>
+                                <td>45°</td>
+                                <td>√2/2</td>
+                                <td>√2/2</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>60°</td>
+                                <td>√3/2</td>
+                                <td>½</td>
+                                <td>√3</td>
+                            </tr>
+                            <tr>
+                                <td>90°</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>∞</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- بخش ترسیمات هندسی -->
+            <section class="section">
+                <div class="section__header">
+                    <h2 class="section__title">ترسیمات هندسی پیشرفته</h2>
+                    <p class="section__subtitle">آموزش تکنیک‌های پیشرفته ترسیم اشکال و احجام هندسی</p>
+                </div>
+
+                <div class="content-grid">
+                    <div class="learning-card">
+                        <div class="learning-card__icon">
+                            <i class="fas fa-draw-polygon"></i>
+                        </div>
+                        <h3 class="learning-card__title">ترسیم چندضلعی‌ها</h3>
+                        <p class="learning-card__description">
+                            آموزش روش‌های دقیق ترسیم چندضلعی‌های منتظم با استفاده از پرگار و خط‌کش.
+                        </p>
+                        <ul class="learning-card__features">
+                            <li>ترسیم مثلث‌های مختلف</li>
+                            <li>چندضلعی‌های منتظم</li>
+                            <li>روش‌های تقسیم دایره</li>
+                            <li>ترسیم اشکال ستاره‌ای</li>
+                        </ul>
+                    </div>
+
+                    <div class="learning-card">
+                        <div class="learning-card__icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h3 class="learning-card__title">تصاویر سه‌بعدی</h3>
+                        <p class="learning-card__description">
+                            یادگیری اصول ترسیم تصاویر سه‌بعدی و پرسپکتیو برای نمایش بهتر احجام.
+                        </p>
+                        <ul class="learning-card__features">
+                            <li>اصول پرسپکتیو</li>
+                            <li>نمای ایزومتریک</li>
+                            <li>نمای دایمتریک</li>
+                            <li>نمای تریمتریک</li>
+                        </ul>
+                    </div>
+
+                    <div class="learning-card">
+                        <div class="learning-card__icon">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <h3 class="learning-card__title">نماهای استاندارد</h3>
+                        <p class="learning-card__description">
+                            آشنایی با نماهای استاندارد نقشه‌کشی و نحوه نمایش قطعات از زوایای مختلف.
+                        </p>
+                        <ul class="learning-card__features">
+                            <li>نمای جلو، بالا و جانبی</li>
+                            <li>نمای مقطع و جزئیات</li>
+                            <li>نمای کمکی و موضعی</li>
+                            <li>نمای انفجاری</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- منوهای پایانی -->
+    <section class="menu-section" id="resources">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title" style="color: white;">دسترسی به منابع آموزشی</h2>
+                <p class="section__subtitle" style="color: rgba(255,255,255,0.9);">استفاده از محتوای چندرسانه‌ای برای یادگیری بهتر</p>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-card__icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3 class="menu-card__title">فیلم‌های آموزشی</h3>
+                    <p class="menu-card__description">
+                        دسترسی به مجموعه کامل فیلم‌های آموزشی با کیفیت HD که تمامی مباحث نقشه‌کشی را به صورت عملی آموزش می‌دهند.
+                    </p>
+                    <a href="#" class="btn btn--outline" style="border-color: white; color: white;">
+                        <i class="fas fa-play"></i>
+                        مشاهده فیلم‌ها
+                    </a>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-card__icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 class="menu-card__title">جزوات و منابع</h3>
+                    <p class="menu-card__description">
+                        دانلود جزوات تخصصی، نمونه سوالات، تمرینات عملی و منابع کمکی برای تسلط کامل بر مباحث نقشه‌کشی.
+                    </p>
+                    <a href="#" class="btn btn--outline" style="border-color: white; color: white;">
+                        <i class="fas fa-download"></i>
+                        دریافت جزوات
+                    </a>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-card__icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3 class="menu-card__title">تکالیف و پروژه‌ها</h3>
+                    <p class="menu-card__description">
+                        دسترسی به تکالیف هفتگی، پروژه‌های عملی و تمرینات طراحی برای تقویت مهارت‌های نقشه‌کشی.
+                    </p>
+                    <a href="#" class="btn btn--outline" style="border-color: white; color: white;">
+                        <i class="fas fa-clipboard-list"></i>
+                        مشاهده تکالیف
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // مدیریت اسکرول هدر
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('main-header');
+            let lastScrollY = window.scrollY;
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('header--scrolled');
+                } else {
+                    header.classList.remove('header--scrolled');
+                }
+                
+                lastScrollY = window.scrollY;
+            });
+            
+            // اسکرول نرم برای لینک‌ها
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const target = document.querySelector(targetId);
+                    
+                    if (target) {
+                        const headerHeight = document.getElementById('main-header').offsetHeight;
+                        const targetPosition = target.offsetTop - headerHeight - 20;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // فعال کردن منوهای کشویی در موبایل
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        this.classList.toggle('active');
+                    }
+                });
+            });
+
+            // راه‌اندازی کانواس هندسی
+            initializeGeometryCanvas();
+        });
+
+        // توابع مربوط به کانواس هندسی
+        function initializeGeometryCanvas() {
+            const canvas = document.getElementById('geometry-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // تنظیم اندازه کانواس
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            
+            // رسم شبکه زمینه
+            drawGrid(ctx, canvas.width, canvas.height);
+        }
+
+        function drawGrid(ctx, width, height) {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = '#f8fafc';
+            ctx.fillRect(0, 0, width, height);
+            
+            // رسم خطوط شبکه
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.lineWidth = 0.5;
+            
+            const gridSize = 20;
+            for (let x = 0; x <= width; x += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, height);
+                ctx.stroke();
+            }
+            
+            for (let y = 0; y <= height; y += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(width, y);
+                ctx.stroke();
+            }
+            
+            // رسم محورهای مختصات
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 2;
+            
+            // محور X
+            ctx.beginPath();
+            ctx.moveTo(0, height/2);
+            ctx.lineTo(width, height/2);
+            ctx.stroke();
+            
+            // محور Y
+            ctx.beginPath();
+            ctx.moveTo(width/2, 0);
+            ctx.lineTo(width/2, height);
+            ctx.stroke();
+        }
+
+        function drawShape(shapeType) {
+            const canvas = document.getElementById('geometry-canvas');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            drawGrid(ctx, width, height);
+            
+            ctx.strokeStyle = '#2563eb';
+            ctx.fillStyle = 'rgba(37, 99, 235, 0.2)';
+            ctx.lineWidth = 3;
+            
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const size = 80;
+            
+            let shapeInfo = "";
+            
+            switch(shapeType) {
+                case 'triangle':
+                    // رسم مثلث
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY - size);
+                    ctx.lineTo(centerX - size, centerY + size);
+                    ctx.lineTo(centerX + size, centerY + size);
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.fill();
+                    shapeInfo = "مثلث متساوی‌الساقین - مساحت: ½ × قاعده × ارتفاع";
+                    break;
+                    
+                case 'square':
+                    // رسم مربع
+                    ctx.beginPath();
+                    ctx.rect(centerX - size, centerY - size, size * 2, size * 2);
+                    ctx.stroke();
+                    ctx.fill();
+                    shapeInfo = "مربع - مساحت: ضلع × ضلع - محیط: 4 × ضلع";
+                    break;
+                    
+                case 'circle':
+                    // رسم دایره
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, size, 0, Math.PI * 2);
+                    ctx.stroke();
+                    ctx.fill();
+                    shapeInfo = "دایره - مساحت: π × شعاع² - محیط: 2 × π × شعاع";
+                    break;
+                    
+                case 'rectangle':
+                    // رسم مستطیل
+                    ctx.beginPath();
+                    ctx.rect(centerX - size, centerY - size/2, size * 2, size);
+                    ctx.stroke();
+                    ctx.fill();
+                    shapeInfo = "مستطیل - مساحت: طول × عرض - محیط: 2 × (طول + عرض)";
+                    break;
+                    
+                case 'rhombus':
+                    // رسم لوزی
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY - size);
+                    ctx.lineTo(centerX + size, centerY);
+                    ctx.lineTo(centerX, centerY + size);
+                    ctx.lineTo(centerX - size, centerY);
+                    ctx.closePath();
+                    ctx.stroke();
+                    ctx.fill();
+                    shapeInfo = "لوزی - مساحت: (قطر بزرگ × قطر کوچک) ÷ 2";
+                    break;
+            }
+            
+            // نمایش اطلاعات شکل
+            document.getElementById('shape-info').textContent = shapeInfo;
+        }
+
+        function clearCanvas() {
+            const canvas = document.getElementById('geometry-canvas');
+            const ctx = canvas.getContext('2d');
+            drawGrid(ctx, canvas.width, canvas.height);
+            document.getElementById('shape-info').textContent = "برای شروع، یکی از اشکال هندسی را انتخاب کنید";
+        }
+
+        // تنظیم مجدد کانواس هنگام تغییر سایز پنجره
+        window.addEventListener('resize', function() {
+            initializeGeometryCanvas();
+        });
+    </script>
+</body>
+</html>
