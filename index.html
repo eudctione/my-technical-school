@@ -2399,23 +2399,74 @@
     </div>
 </div>
 
-    <div class="col-md-4">
+   <div class="col-md-4">
     <div class="news-card">
-        <img src="assets/images/consultation.jpg" alt="جلسات مشاوره و بازدید از هنرستان" class="news-img">
+        <img src="assets/images/consultation.jpg" alt="نخستین هنرستان هوش مصنوعی ایران - بازدید ویژه مدیران" class="news-img">
         <div class="p-4">
             <span class="news-date">۱۴۰۴/۰۵/۲۵</span>
-            <h3 class="news-title">جلسات مشاوره رایگان و بازدید از هنرستان</h3>
-            <p style="font-family: 'IranSans', sans-serif; font-size: 1.2rem; line-height: 1.8; color: #34495e;">
+            <h3 class="news-title">بازدید از نخستین هنرستان هوش مصنوعی ایران</h3>
+            <p style="font-family: 'IranSans', sans-serif; font-size: 1.1rem; line-height: 1.8; color: #34495e;">
+                🚀 <strong>پیشرو در آموزش‌های صنعت‌محور</strong><br>
                 
- در روز چهارشنبه ۲۹ مرداد ۱۴۰۴  در شهرک علمی و تحقیقاتی برگذار می گردد.
-امکان بازدید از شنبه تا چهارشنبه با هماهنگی قبلی از طریق پشتیبان آموزشی و تأیید حراست شهرک از هنرستان  وجود دارد.
+                • اولین هنرستان تخصصی AI در ایران<br>
+                • آموزش‌های مستقیم نیاز بازار کار<br>
+                • کارگاه‌های مجهز و پیشرفته<br><br>
 
-برای اطلاعات بیشتر با  پشتیبان آموزشی هنرستان تماس بگیرید
+                📍 شهرک علمی و تحقیقاتی اصفهان<br>
+                📅 روزهای شنبه تا چهارشنبه
             </p>
-            <a href="ai-daneshmand.ir/visit" class="read-more">ادامه مطلب <i class="fas fa-arrow-left"></i></a>
+            <button class="btn-request-manager" onclick="openManagerRegistration()">
+                <i class="fas fa-user-tie"></i>
+                 ثبت درخواست بازدید ویژه مدیران 
+            </button>
         </div>
     </div>
 </div>
+
+<style>
+.btn-request-manager {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-family: 'IranSans', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-request-manager:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-request-manager i {
+    margin-left: 8px;
+}
+
+.news-title {
+    color: #2c3e50;
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+</style>
+
+<script>
+function openManagerRegistration() {
+    const hasCode = confirm("مدیر محترم، برای ثبت درخواست بازدید نیاز به کد رهگیری دارید.\n\nآیا کد رهگیری خود را دریافت کرده‌اید؟");
+    
+    if (hasCode) {
+        window.location.href = "manager-registration.html";
+    } else {
+        alert("📞 لطفاً با پشتیبان آموزشی تماس بگیرید:\n۰۹۳۳۶۹۳۲۴۰۹\n\nپس از دریافت کد رهگیری، می‌توانید درخواست بازدید خود را ثبت نمایید.");
+    }
+}
+</script>
 
   <div class="col-md-4">
     <div class="news-card">
