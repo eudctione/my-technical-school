@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سامانه بازدید از نخستین هنرستان هوش مصنوعی ایران</title>
+    <title>سامانه بازدید - هنرستان هوش مصنوعی دانشمند</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #6c63ff;
-            --primary-dark: #564fd8;
-            --secondary: #ff6b8b;
-            --accent: #00cec9;
-            --dark: #1a1a2e;
-            --darker: #16213e;
-            --light: #f7f7f7;
-            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
-            --glow: 0 0 15px rgba(108, 99, 255, 0.5);
+            --primary: #1e40af;
+            --primary-dark: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #0f766e;
+            --accent: #dc2626;
+            --accent-light: #ef4444;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --gray: #64748b;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
         
         * {
@@ -27,158 +34,273 @@
         }
         
         body {
-            background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #533483);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            color: var(--light);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: var(--dark);
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-        
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
-            text-align: center;
-            padding: 40px 0;
-            position: relative;
-        }
-        
-        .logo {
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(108, 99, 255, 0.3);
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
             line-height: 1.6;
         }
         
-        .quantum-grid {
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* نوار ناوبری */
+        .navbar {
+            background: var(--light);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+        
+        .nav-link:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .admin-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .admin-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+        
+        /* هدر اصلی */
+        .main-header {
+            padding: 160px 0 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .tech-grid {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(108, 99, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(108, 99, 255, 0.1) 1px, transparent 1px);
-            background-size: 30px 30px;
-            z-index: -1;
-            opacity: 0.5;
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
         }
         
-        .main-content {
+        .main-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+        }
+        
+        .stats {
             display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
             justify-content: center;
-            margin: 40px 0;
+            gap: 3rem;
+            margin-top: 3rem;
         }
         
-        .card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-light);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* محتوای اصلی */
+        .main-content {
+            padding: 4rem 0;
+            background: white;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .content-card {
+            background: white;
             border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid #e2e8f0;
             transition: all 0.3s ease;
-            flex: 1;
-            min-width: 300px;
-            max-width: 500px;
             position: relative;
             overflow: hidden;
         }
         
-        .card::before {
+        .content-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
+            right: 0;
             width: 100%;
             height: 5px;
-            background: var(--gradient);
+            background: linear-gradient(90deg, var(--accent), var(--primary));
         }
         
-        .card:hover {
+        .content-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
         }
         
         .card-title {
             font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--accent);
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .feature-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-        
-        .card-title i {
-            font-size: 1.8rem;
-        }
-        
-        .info-section {
-            margin-bottom: 25px;
-        }
-        
-        .info-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.05);
+            gap: 1rem;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: #f8fafc;
             border-radius: 10px;
             transition: all 0.3s ease;
+            border-right: 4px solid var(--primary);
         }
         
-        .info-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
+        .feature-item:hover {
+            background: #e2e8f0;
+            transform: translateX(10px);
         }
         
-        .info-item i {
-            margin-left: 10px;
-            color: var(--accent);
+        .feature-icon {
+            color: var(--primary);
             font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
         }
         
+        /* فرم‌ها */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
         }
         
         .form-label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
         }
         
         .form-input {
             width: 100%;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            color: var(--light);
+            padding: 1rem 1.5rem;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            color: var(--dark);
             font-size: 1rem;
             transition: all 0.3s ease;
         }
@@ -186,254 +308,799 @@
         .form-input:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: var(--glow);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
         
         .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            background: var(--gradient);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-align: center;
+            text-decoration: none;
             width: 100%;
-            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
         }
         
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(30, 64, 175, 0.3);
         }
         
-        .btn:active {
-            transform: translateY(0);
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
         }
         
         .contact-info {
             text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
             border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            border: 2px solid var(--primary);
         }
         
         .contact-title {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: var(--accent);
-        }
-        
-        .contact-detail {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
             font-weight: 700;
-            margin: 10px 0;
+        }
+        
+        .contact-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
             direction: ltr;
+            display: block;
         }
         
-        .pulse {
-            animation: pulse 2s infinite;
+        /* بخش صنعتی */
+        .industrial-section {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: white;
+            padding: 4rem 0;
         }
         
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: white;
         }
         
-        .floating {
-            animation: floating 3s ease-in-out infinite;
+        .industrial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
         
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        .industrial-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
         }
         
-        .quantum-dots {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+        .industrial-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .industrial-icon {
+            font-size: 3rem;
+            color: var(--accent-light);
+            margin-bottom: 1rem;
+        }
+        
+        /* پنل ادمین */
+        .admin-panel {
+            display: none;
+            padding: 120px 0 60px;
+            background: #f1f5f9;
+            min-height: 100vh;
+        }
+        
+        .admin-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .admin-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .admin-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+        
+        .code-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .code-item:hover {
+            border-color: var(--primary);
+        }
+        
+        .code-info h4 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .code-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .code-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .edit-btn {
+            background: rgba(30, 64, 175, 0.1);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        
+        .delete-btn {
+            background: rgba(220, 38, 38, 0.1);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* مودال */
+        .modal {
+            display: none;
+            position: fixed;
             top: 0;
             left: 0;
-            z-index: -1;
-            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
         }
         
-        .dot {
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .close-btn {
             position: absolute;
-            width: 5px;
-            height: 5px;
-            background: var(--accent);
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: float-dots 10s linear infinite;
+            top: 1rem;
+            left: 1rem;
+            background: none;
+            border: none;
+            color: var(--gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
         }
         
-        @keyframes float-dots {
-            0% { transform: translateY(100vh) rotate(0deg); }
-            100% { transform: translateY(-100px) rotate(360deg); }
+        .close-btn:hover {
+            color: var(--dark);
         }
         
+        /* پیام‌ها */
+        .message {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            z-index: 10000;
+            box-shadow: var(--shadow);
+            border: 2px solid;
+            animation: slideDown 0.3s ease;
+        }
+        
+        .message.success {
+            background: var(--success);
+            border-color: #059669;
+        }
+        
+        .message.error {
+            background: var(--danger);
+            border-color: #dc2626;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateX(-50%) translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        /* فوتر */
         footer {
+            background: var(--darker);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-description {
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+        
+        .footer-links h4 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            display: block;
+            color: #94a3b8;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
             text-align: center;
-            padding: 30px 0;
-            margin-top: 50px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            opacity: 0.7;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+        }
+        
+        /* ریسپانسیو */
+        @media (max-width: 1024px) {
+            .content-grid, .admin-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .stats {
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
         }
         
         @media (max-width: 768px) {
-            .card {
-                min-width: 100%;
+            .main-title {
+                font-size: 2.2rem;
             }
             
-            .logo {
-                font-size: 2rem;
+            .nav-links {
+                display: none;
             }
             
-            .subtitle {
-                font-size: 1rem;
+            .content-card {
+                padding: 2rem;
+            }
+            
+            .industrial-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="quantum-dots" id="quantumDots"></div>
-    
-    <div class="container">
-        <header>
-            <div class="quantum-grid"></div>
-            <h1 class="logo floating">فرم ویژه  درخواست مدیران و مسئولین مدارس  </h1>
-            <p class="subtitle">نخستین هنرستان تخصصی هوش مصنوعی در ایران با رویکرد صنعت‌محور</p>
-        </header>
-        
-        <div class="main-content">
-            <div class="card">
-                <h2 class="card-title"><i class="fas fa-info-circle"></i> اطلاعیه مهم</h2>
-                <div class="info-section">
-                    <div class="info-item">
-                        <i class="fas fa-rocket"></i>
-                        <span>بازدید از نخستین هنرستان هوش مصنوعی ایران</span>
-                    </div>
-                    
-                    <div class="info-item">
+    <!-- نوار ناوبری -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <div class="logo-icon">
                         <i class="fas fa-graduation-cap"></i>
-                        <span>بازدید از صنایع برگزیده دانش بنیان مسقر در شهرک  </span>
-                  
-  </div>
-<div class="info-item">
-                        <i class="fas fa-industry"></i>
-                        <span>برگذاری کارگاهای مشاوره تحصیلی و شغلی رایگان </span>
                     </div>
-                    <div class="info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>برگذاری همایش و سمینارهای هوش مصنوی ویژه مدیران </span>
-                    </div>
+                    هنرستان دانشمند
                 </div>
-                
-                <div class="contact-info">
-                    <h3 class="contact-title">برای دریافت کد رهگیری با پشتیبان آموزشی تماس بگیرید</h3>
-                    <div class="contact-detail pulse">
-                        <i class="fas fa-phone"></i> ۰۹۳۳۶۹۳۲۴۰۹
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <h2 class="card-title"><i class="fas fa-sign-in-alt"></i> ورود به سامانه</h2>
-                <p style="margin-bottom: 20px; line-height: 1.6;">مدیران محترم، لطفاً کد رهگیری دریافتی از پشتیبان آموزشی را در قسمت زیر وارد نمایید:</p>
-                
-                <form id="accessForm">
-                    <div class="form-group">
-                        <label for="trackingCode" class="form-label">کد رهگیری</label>
-                        <input type="text" id="trackingCode" class="form-input" placeholder="مثال: DH-1404-12345" required>
-                    </div>
-                    
-                    <button type="submit" class="btn">
-                        <i class="fas fa-arrow-left"></i> ورود به سامانه
+                <div class="nav-links">
+                    <a href="#" class="nav-link">صفحه اصلی</a>
+                    <a href="#" class="nav-link">آموزش‌ها</a>
+                    <a href="#" class="nav-link">کارگاه‌ها</a>
+                    <a href="#" class="nav-link">همکاری صنعتی</a>
+                    <a href="#" class="nav-link">تماس با ما</a>
+                    <button class="admin-btn" onclick="showAdminLogin()">
+                        <i class="fas fa-cog"></i>
+                        پنل مدیریت
                     </button>
-                </form>
-                
-                <div style="margin-top: 20px; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 10px; font-size: 0.9rem;">
-                    <i class="fas fa-shield-alt" style="color: var(--accent); margin-left: 5px;"></i>
-                    اطلاعات شما با استفاده از رمزنگاری پیشرفته محافظت می‌شود
                 </div>
             </div>
         </div>
-        
-        <footer>
-            <p>کلیه حقوق این سامانه برای هنرستان دانشمند محفوظ می‌باشد © ۱۴۰۳</p>
-            <p>نخستین هنرستان تخصصی هوش مصنوعی ایران</p>
-        </footer>
+    </nav>
+
+    <!-- پنل اصلی -->
+    <div class="container" id="mainPanel">
+        <header class="main-header">
+            <div class="tech-grid"></div>
+            <div class="container">
+                <div class="header-content">
+                    <h1 class="main-title">سامانه بازدید تخصصی مدیران و صنعت‌گران</h1>
+                    <p class="subtitle">
+                        نخستین هنرستان تخصصی هوش مصنوعی ایران با استانداردهای بین‌المللی و همکاری مستقیم با صنعت
+                    </p>
+                    
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-number">۱۴۰۲</span>
+                            <span class="stat-label">تأسیس هنرستان</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">۲۱۰+</span>
+                            <span class="stat-label">هنرجوی فعال</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">۱۵</span>
+                            <span class="stat-label">همکاری صنعتی</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">۸۵%</span>
+                            <span class="stat-label">اشتغال‌پذیری</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- محتوای اصلی -->
+        <section class="main-content">
+            <div class="container">
+                <div class="content-grid">
+                    <!-- کارت اطلاع‌رسانی -->
+                    <div class="content-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <h2 class="card-title">برنامه بازدید تخصصی</h2>
+                        </div>
+                        
+                        <ul class="feature-list">
+                            <li class="feature-item">
+                                <i class="fas fa-microchip feature-icon"></i>
+                                <span>بازدید از آزمایشگاه‌های پیشرفته هوش مصنوعی و رباتیک</span>
+                            </li>
+                            <li class="feature-item">
+                                <i class="fas fa-industry feature-icon"></i>
+                                <span>آشنایی با خطوط تولید صنعتی و فناوری‌های نوین</span>
+                            </li>
+                            <li class="feature-item">
+                                <i class="fas fa-graduation-cap feature-icon"></i>
+                                <span>کارگاه‌های آموزشی و مشاوره شغلی رایگان</span>
+                            </li>
+                            <li class="feature-item">
+                                <i class="fas fa-chalkboard-teacher feature-icon"></i>
+                                <span>همایش‌های تخصصی فناوری و آموزش‌های مهارتی</span>
+                            </li>
+                            <li class="feature-item">
+                                <i class="fas fa-handshake feature-icon"></i>
+                                <span>فرصت‌های همکاری با صنایع و شرکت‌های دانش‌بنیان</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="contact-info">
+                            <h3 class="contact-title">برای دریافت کد رهگیری با واحد روابط صنعتی تماس بگیرید</h3>
+                            <span class="contact-number">
+                                <i class="fas fa-phone"></i>
+                                ۰۹۳۳۶۹۳۲۴۰۹
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- کارت ورود به سامانه -->
+                    <div class="content-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-sign-in-alt"></i>
+                            </div>
+                            <h2 class="card-title">ورود به سامانه بازدید</h2>
+                        </div>
+                        
+                        <p style="margin-bottom: 2rem; color: var(--gray); line-height: 1.8;">
+                            مدیران محترم مدارس، مسئولین صنعتی و علاقه‌مندان به همکاری، 
+                            لطفاً کد رهگیری دریافتی از واحد روابط صنعتی را وارد نمایید:
+                        </p>
+                        
+                        <form id="accessForm">
+                            <div class="form-group">
+                                <label for="trackingCode" class="form-label">کد رهگیری</label>
+                                <input type="text" id="trackingCode" class="form-input" placeholder="مثال: DM-1403-001" required>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-accent">
+                                <i class="fas fa-arrow-left"></i>
+                                ورود به سامانه ثبت‌نام
+                            </button>
+                        </form>
+                        
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: #fef2f2; border-radius: 12px; border: 2px solid #fecaca;">
+                            <i class="fas fa-info-circle" style="color: var(--accent); margin-left: 0.5rem;"></i>
+                            <span style="color: var(--dark); font-weight: 500;">کد رهگیری شما تنها برای یک بار استفاده معتبر می‌باشد</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش صنعتی -->
+        <section class="industrial-section">
+            <div class="container">
+                <h2 class="section-title">همکاری‌های صنعتی و آموزشی</h2>
+                <div class="industrial-grid">
+                    <div class="industrial-card">
+                        <i class="fas fa-robot industrial-icon"></i>
+                        <h3>رباتیک صنعتی</h3>
+                        <p>آموزش و پژوهش در حوزه رباتیک پیشرفته و اتوماسیون صنعتی</p>
+                    </div>
+                    <div class="industrial-card">
+                        <i class="fas fa-brain industrial-icon"></i>
+                        <h3>هوش مصنوعی</h3>
+                        <p>توسعه راهکارهای هوش مصنوعی برای صنعت و کسب‌وکار</p>
+                    </div>
+                    <div class="industrial-card">
+                        <i class="fas fa-industry industrial-icon"></i>
+                        <h3>اتوماسیون</h3>
+                        <p>طراحی و پیاده‌سازی سیستم‌های اتوماسیون صنعتی</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
+    <!-- پنل ادمین -->
+    <section class="admin-panel" id="adminPanel">
+        <div class="container">
+            <div class="admin-header">
+                <h1 class="admin-title">پنل مدیریت کدهای رهگیری</h1>
+                <p class="subtitle" style="color: var(--gray);">مدیریت دسترسی مدیران و صنعت‌گران به سامانه بازدید</p>
+            </div>
+
+            <div class="admin-grid">
+                <div class="content-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <h2 class="card-title">افزودن کد جدید</h2>
+                    </div>
+                    
+                    <form id="addCodeForm">
+                        <div class="form-group">
+                            <label for="newCode" class="form-label">کد رهگیری</label>
+                            <input type="text" id="newCode" class="form-input" placeholder="DM-1403-XXX" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="codeDescription" class="form-label">توضیحات</label>
+                            <input type="text" id="codeDescription" class="form-input" placeholder="مثلاً: مدیر فنی شرکت صنعتی">
+                        </div>
+                        <button type="submit" class="btn">
+                            <i class="fas fa-plus"></i>
+                            افزودن کد جدید
+                        </button>
+                    </form>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <h2 class="card-title">کدهای فعال</h2>
+                    </div>
+                    
+                    <div id="codesList">
+                        <!-- کدها توسط جاوااسکریپت نمایش داده می‌شوند -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- مودال ورود ادمین -->
+    <div class="modal" id="adminLoginModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('adminLoginModal')">&times;</button>
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--dark);">ورود به پنل مدیریت</h2>
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label for="adminCode" class="form-label">کد مدیریتی</label>
+                    <input type="password" id="adminCode" class="form-input" placeholder="کد اختصاصی ادمین" required>
+                </div>
+                <button type="submit" class="btn">
+                    <i class="fas fa-lock"></i>
+                    ورود به پنل مدیریت
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">هنرستان دانشمند</div>
+                    <p class="footer-description">
+                        نخستین هنرستان تخصصی هوش مصنوعی ایران با هدف تربیت نیروی متخصص و کارآفرین 
+                        در حوزه‌های نوین فناوری و هوش مصنوعی. همکاری مستقیم با صنعت و بازار کار.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <h4>دسترسی سریع</h4>
+                    <a href="#">صفحه اصلی</a>
+                    <a href="#">برنامه آموزشی</a>
+                    <a href="#">کارگاه‌ها</a>
+                    <a href="#">همکاری صنعتی</a>
+                </div>
+                <div class="footer-links">
+                    <h4>اطلاعات تماس</h4>
+                    <a href="#">اصفهان، شهرک علمی و تحقیقاتی</a>
+                    <a href="#">تلفن: ۰۳۱-۳۳۵۸۲۱۴۷</a>
+                    <a href="#">ایمیل: info@daneshmand.ir</a>
+                    <a href="#">ساعات کاری: ۸-۱۶</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>کلیه حقوق این سامانه برای هنرستان دانشمند محفوظ می‌باشد © ۱۴۰۳ | نخستین هنرستان تخصصی هوش مصنوعی ایران</p>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // ایجاد نقاط کوانتومی متحرک
-        function createQuantumDots() {
-            const container = document.getElementById('quantumDots');
-            const dotCount = 50;
-            
-            for (let i = 0; i < dotCount; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('dot');
-                
-                // موقعیت تصادفی
-                dot.style.left = `${Math.random() * 100}%`;
-                dot.style.animationDelay = `${Math.random() * 10}s`;
-                
-                // اندازه تصادفی
-                const size = Math.random() * 5 + 2;
-                dot.style.width = `${size}px`;
-                dot.style.height = `${size}px`;
-                
-                // شفافیت تصادفی
-                dot.style.opacity = Math.random() * 0.5 + 0.2;
-                
-                container.appendChild(dot);
-            }
-        }
-        
-        // مدیریت فرم
+        // داده‌های نمونه
+        let validTrackingCodes = [
+            { code: "DM-1403-001", description: "مدیریت منطقه ۱ آموزش و پرورش", active: true },
+            { code: "DM-1403-002", description: "شرکت صنعتی ایران خودرو", active: true },
+            { code: "DM-1403-003", description: "هنرستان فنی و حرفه‌ای شهید بابایی", active: true },
+            { code: "DM-1403-004", description: "شهرک صنعتی سگزی", active: false }
+        ];
+
+        const ADMIN_CODE = "ADMIN-1403";
+
+        // مدیریت فرم ورود مدیران
         document.getElementById('accessForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const trackingCode = document.getElementById('trackingCode').value.trim();
             
             if (!trackingCode) {
-                alert('لطفاً کد رهگیری را وارد نمایید.');
+                showMessage('لطفاً کد رهگیری را وارد نمایید.', 'error');
                 return;
             }
             
-            // نمایش پیام در حال بارگذاری
+            const isValidCode = validTrackingCodes.some(item => 
+                item.code === trackingCode && item.active === true
+            );
+            
             const btn = this.querySelector('button');
             const originalText = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال بررسی...';
             btn.disabled = true;
             
-            // شبیه‌سازی بررسی کد
             setTimeout(() => {
-                // در اینجا می‌توانید آدرس گوگل فرم را جایگزین کنید
-                window.location.href = 'https://forms.google.com'; // این آدرس را تغییر دهید
-                
-                // بازنشانی دکمه (در صورت عدم هدایت)
-                setTimeout(() => {
+                if (isValidCode) {
+                    showMessage('کد رهگیری معتبر است. در حال هدایت به گوگل فرم...', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'https://docs.google.com/forms/d/e/your-form-id/viewform';
+                    }, 2000);
+                } else {
+                    showMessage('کد رهگیری نامعتبر یا غیرفعال است.', 'error');
                     btn.innerHTML = originalText;
                     btn.disabled = false;
-                }, 2000);
+                }
             }, 1500);
         });
-        
+
+        // مدیریت فرم ورود ادمین
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const adminCode = document.getElementById('adminCode').value.trim();
+            
+            if (adminCode === ADMIN_CODE) {
+                closeModal('adminLoginModal');
+                showAdminPanel();
+                loadAdminCodes();
+                showMessage('با موفقیت وارد پنل مدیریت شدید.', 'success');
+            } else {
+                showMessage('کد مدیریتی نامعتبر است.', 'error');
+            }
+        });
+
+        // مدیریت فرم افزودن کد جدید
+        document.getElementById('addCodeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newCode = document.getElementById('newCode').value.trim();
+            const description = document.getElementById('codeDescription').value.trim();
+            
+            if (!newCode) {
+                showMessage('لطفاً کد رهگیری را وارد نمایید.', 'error');
+                return;
+            }
+            
+            // بررسی فرمت کد
+            if (!newCode.match(/^DM-\d{4}-\d{3}$/)) {
+                showMessage('فرمت کد رهگیری صحیح نیست. فرمت صحیح: DM-1403-001', 'error');
+                return;
+            }
+            
+            const isDuplicate = validTrackingCodes.some(item => item.code === newCode);
+            if (isDuplicate) {
+                showMessage('این کد قبلاً ثبت شده است.', 'error');
+                return;
+            }
+            
+            validTrackingCodes.push({
+                code: newCode,
+                description: description || 'بدون توضیح',
+                active: true
+            });
+            
+            showMessage('کد جدید با موفقیت افزوده شد.', 'success');
+            this.reset();
+            loadAdminCodes();
+        });
+
+        // نمایش پیام
+        function showMessage(message, type) {
+            // حذف پیام قبلی اگر وجود دارد
+            const existingMessage = document.querySelector('.message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            const messageEl = document.createElement('div');
+            messageEl.className = `message ${type}`;
+            messageEl.textContent = message;
+            
+            document.body.appendChild(messageEl);
+            
+            setTimeout(() => {
+                if (messageEl.parentNode) {
+                    messageEl.remove();
+                }
+            }, 4000);
+        }
+
+        // نمایش مودال ورود ادمین
+        function showAdminLogin() {
+            document.getElementById('adminLoginModal').style.display = 'flex';
+        }
+
+        // بستن مودال
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // نمایش پنل ادمین
+        function showAdminPanel() {
+            document.getElementById('mainPanel').style.display = 'none';
+            document.querySelector('.industrial-section').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+        }
+
+        // بارگذاری کدها در پنل ادمین
+        function loadAdminCodes() {
+            const codesList = document.getElementById('codesList');
+            codesList.innerHTML = '';
+            
+            if (validTrackingCodes.length === 0) {
+                codesList.innerHTML = '<p style="text-align: center; color: var(--gray); padding: 2rem;">هیچ کد رهگیری‌ای ثبت نشده است</p>';
+                return;
+            }
+            
+            validTrackingCodes.forEach((item, index) => {
+                const codeItem = document.createElement('div');
+                codeItem.className = 'code-item';
+                codeItem.innerHTML = `
+                    <div class="code-info">
+                        <h4>${item.code}</h4>
+                        <p>${item.description}</p>
+                        <span style="color: ${item.active ? 'var(--success)' : 'var(--danger)'}; font-size: 0.9rem; font-weight: 600;">
+                            ${item.active ? '✅ فعال' : '❌ غیرفعال'}
+                        </span>
+                    </div>
+                    <div class="code-actions">
+                        <button class="action-btn edit-btn" onclick="toggleCode(${index})">
+                            ${item.active ? 'غیرفعال' : 'فعال'}
+                        </button>
+                        <button class="action-btn delete-btn" onclick="deleteCode(${index})">
+                            حذف
+                        </button>
+                    </div>
+                `;
+                codesList.appendChild(codeItem);
+            });
+        }
+
+        // تغییر وضعیت کد
+        function toggleCode(index) {
+            validTrackingCodes[index].active = !validTrackingCodes[index].active;
+            loadAdminCodes();
+            showMessage('وضعیت کد تغییر کرد.', 'success');
+        }
+
+        // حذف کد
+        function deleteCode(index) {
+            if (confirm('آیا از حذف این کد اطمینان دارید؟')) {
+                validTrackingCodes.splice(index, 1);
+                loadAdminCodes();
+                showMessage('کد با موفقیت حذف شد.', 'success');
+            }
+        }
+
         // راه‌اندازی اولیه
         document.addEventListener('DOMContentLoaded', function() {
-            createQuantumDots();
+            // بارگذاری اولیه کدها
+            loadAdminCodes();
         });
     </script>
 </body>
