@@ -846,6 +846,91 @@
         .advanced-menu::-webkit-scrollbar-thumb:hover {
             background: rgba(255,255,255,0.5);
         }
+
+        /* استایل‌های جدید برای رفع مشکلات */
+        .learning-link {
+            display: block;
+            padding: 12px 16px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-right: 50px;
+        }
+
+        .learning-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateX(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .learning-link:hover .link-description {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .link-description {
+            display: block;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .learning-link::after {
+            content: "→";
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .learning-link:hover::after {
+            transform: translateY(-50%) translateX(-5px);
+        }
+
+        .section-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .section-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-section {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            color: white;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .empty-section i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .empty-section p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -1387,7 +1472,17 @@
                         بازگشت به داشبورد
                     </button>
                 </div>
-                <p style="color: white; opacity: 0.8;">این بخش برای پیگیری و ارسال تکالیف درسی طراحی خواهد شد.</p>
+                <div class="empty-section">
+                    <i class="fas fa-tasks"></i>
+                    <h3>سیستم مدیریت تکالیف</h3>
+                    <p>این بخش برای پیگیری و ارسال تکالیف درسی طراحی خواهد شد. در این قسمت می‌توانید:</p>
+                    <ul style="text-align: right; margin: 20px 0;">
+                        <li>تکالیف جدید را مشاهده کنید</li>
+                        <li>تکالیف انجام شده را ارسال کنید</li>
+                        <li>نمرات تکالیف را بررسی کنید</li>
+                        <li>تاریخ‌های تحویل را مدیریت کنید</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="content-section" id="grades">
@@ -1401,7 +1496,17 @@
                         بازگشت به داشبورد
                     </button>
                 </div>
-                <p style="color: white; opacity: 0.8;">این بخش برای بررسی کارنامه و تحلیل پیشرفت تحصیلی طراحی خواهد شد.</p>
+                <div class="empty-section">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>کارنامه هوشمند</h3>
+                    <p>این بخش برای بررسی کارنامه و تحلیل پیشرفت تحصیلی طراحی خواهد شد. در این قسمت می‌توانید:</p>
+                    <ul style="text-align: right; margin: 20px 0;">
+                        <li>نمرات خود را در دروس مختلف مشاهده کنید</li>
+                        <li>تحلیل پیشرفت تحصیلی را بررسی کنید</li>
+                        <li>مقایسه با میانگین کلاس را مشاهده کنید</li>
+                        <li>نمودارهای پیشرفت را تحلیل کنید</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="content-section" id="calendar">
@@ -1415,7 +1520,66 @@
                         بازگشت به داشبورد
                     </button>
                 </div>
-                <p style="color: white; opacity: 0.8;">این بخش برای برنامه‌ریزی و مدیریت زمان طراحی خواهد شد.</p>
+                <div class="empty-section">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>تقویم آموزشی هوشمند</h3>
+                    <p>این بخش برای برنامه‌ریزی و مدیریت زمان طراحی خواهد شد. در این قسمت می‌توانید:</p>
+                    <ul style="text-align: right; margin: 20px 0;">
+                        <li>برنامه هفتگی خود را مشاهده کنید</li>
+                        <li>تاریخ امتحانات را پیگیری کنید</li>
+                        <li>رویدادهای آموزشی را مدیریت کنید</li>
+                        <li>یادآوری برای تکالیف و پروژه‌ها تنظیم کنید</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- بخش‌های جدید -->
+            <div class="content-section" id="progress">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-trending-up"></i>
+                        تحلیل پیشرفت تحصیلی
+                    </h2>
+                    <button class="back-btn" data-target="dashboard">
+                        <i class="fas fa-arrow-right"></i>
+                        بازگشت به داشبورد
+                    </button>
+                </div>
+                <div class="empty-section">
+                    <i class="fas fa-trending-up"></i>
+                    <h3>تحلیل پیشرفت تحصیلی</h3>
+                    <p>این بخش برای تحلیل و بررسی پیشرفت تحصیلی طراحی خواهد شد. در این قسمت می‌توانید:</p>
+                    <ul style="text-align: right; margin: 20px 0;">
+                        <li>پیشرفت خود را در دروس مختلف پیگیری کنید</li>
+                        <li>نمودارهای تحلیلی را مشاهده کنید</li>
+                        <li>نقاط قوت و ضعف خود را شناسایی کنید</li>
+                        <li>برنامه‌ریزی برای بهبود عملکرد داشته باشید</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-section" id="schedule">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-clock"></i>
+                        برنامه هفتگی
+                    </h2>
+                    <button class="back-btn" data-target="dashboard">
+                        <i class="fas fa-arrow-right"></i>
+                        بازگشت به داشبورد
+                    </button>
+                </div>
+                <div class="empty-section">
+                    <i class="fas fa-clock"></i>
+                    <h3>برنامه هفتگی</h3>
+                    <p>این بخش برای مشاهده و مدیریت برنامه هفتگی طراحی خواهد شد. در این قسمت می‌توانید:</p>
+                    <ul style="text-align: right; margin: 20px 0;">
+                        <li>برنامه درسی هفتگی را مشاهده کنید</li>
+                        <li>ساعت‌های کلاس‌ها را مدیریت کنید</li>
+                        <li>برنامه مطالعه شخصی تنظیم کنید</li>
+                        <li>یادآوری برای جلسات مهم تنظیم کنید</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -1457,11 +1621,36 @@
                                 <div class="section-title-sm">سرفصل‌های اصلی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>اصول و مفاهیم نقشه‌کشی فنی</li>
-                                        <li>آشنایی با نرم‌افزارهای CAD</li>
-                                        <li>ترسیم نقشه‌های دو بعدی</li>
-                                        <li>مدل‌سازی سه بعدی قطعات</li>
-                                        <li>استانداردهای نقشه‌کشی صنعتی</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                آشنایی با اصول و مبانی نقشه‌کشی فنی و استانداردهای اولیه
+                                                <span class="link-description">(پودمان اول - مفاهیم پایه)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تسلط بر مهارت نقشه‌خوانی و تجسم سه‌بعدی از نقشه‌های دو بعدی
+                                                <span class="link-description">(پودمان دوم - نقشه‌خوانی)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                آموزش مفاهیم تقارن و تکنیک‌های مختلف برش در نقشه‌کشی
+                                                <span class="link-description">(پودمان سوم - برش و تقارن)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تسلط بر ترسیم دست آزاد (اسکیس) و مهندسی معکوس
+                                                <span class="link-description">(پودمان چهارم - ترسیم دست آزاد)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تسلط بر نرم‌افزارهای CAD تخصصی
+                                                <span class="link-description">(پودمان پنجم - تمرینات نرم‌افزاری)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1470,10 +1659,30 @@
                                 <div class="section-title-sm">اهداف آموزشی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>توانایی ترسیم نقشه‌های فنی دقیق</li>
-                                        <li>تسلط بر نرم‌افزارهای CAD تخصصی</li>
-                                        <li>درک استانداردهای صنعتی</li>
-                                        <li>طراحی قطعات خودرو به صورت حرفه‌ای</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                توانایی ترسیم نقشه‌های فنی دقیق
+                                                <span class="link-description">(مفاهیم پایه و استانداردها)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تسلط بر نرم‌افزارهای CAD تخصصی
+                                                <span class="link-description">(نقشه‌خوانی و تجسم سه‌بعدی)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                درک استانداردهای صنعتی
+                                                <span class="link-description">(برش، تقارن و هاشورزنی)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                طراحی قطعات خودرو به صورت حرفه‌ای
+                                                <span class="link-description">(ترسیم دست آزاد و مهندسی معکوس)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1482,21 +1691,41 @@
                                 <div class="section-title-sm">محتوای عملی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>پروژه طراحی سیستم تعلیق</li>
-                                        <li>مدل‌سازی موتور چهارسیلندر</li>
-                                        <li>طراحی قطعات بدنه خودرو</li>
-                                        <li>آنالیز استاتیکی قطعات</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                پروژه طراحی سیستم تعلیق
+                                                <span class="link-description">(تحلیل هندسه و نقاط اتصال)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                مدل‌سازی موتور چهارسیلندر
+                                                <span class="link-description">(اصول اولیه و استانداردها)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                طراحی قطعات بدنه خودرو
+                                                <span class="link-description">(ترسیم دست آزاد و مهندسی معکوس)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                آنالیز استاتیکی قطعات
+                                                <span class="link-description">(برش و تحلیل مقاطع)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div class="detail-actions">
-                            <button class="detail-btn">
+                            <button class="detail-btn" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-download"></i>
                                 دریافت محتوا
                             </button>
-                            <button class="detail-btn primary">
+                            <button class="detail-btn primary" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-play"></i>
                                 شروع یادگیری
                             </button>
@@ -1530,11 +1759,36 @@
                                 <div class="section-title-sm">سرفصل‌های اصلی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>اصول سرویس‌های دوره‌ای موتور</li>
-                                        <li>سیستم‌های روان‌کاری و خنک‌کنندگی</li>
-                                        <li>تعویض فیلترها و روغن‌ها</li>
-                                        <li>تنظیم سیستم‌های جرقه و سوخت</li>
-                                        <li>نگهداری پیشگیرانه</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                اصول سرویس‌های دوره‌ای موتور
+                                                <span class="link-description">(پودمان اول - سرویس‌های پایه)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                سیستم‌های روان‌کاری و خنک‌کنندگی
+                                                <span class="link-description">(پودمان دوم - سیستم‌های کمکی)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تعویض فیلترها و روغن‌ها
+                                                <span class="link-description">(پودمان سوم - تعمیرات دوره‌ای)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تنظیم سیستم‌های جرقه و سوخت
+                                                <span class="link-description">(پودمان چهارم - سیستم‌های احتراق)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                نگهداری پیشگیرانه
+                                                <span class="link-description">(پودمان پنجم - پیشگیری و نگهداری)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1543,11 +1797,30 @@
                                 <div class="section-title-sm">ابزارهای مورد نیاز</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>ست آچارهای متریک</li>
-                                        <li>دستگاه دیاگ موتور</li>
-                                        <li>کیت اندازه‌گیری فاصله سوپاپ</li>
-                                        <li>تست‌ر فشار سیلندر</li>
-                                        <li>کیت تعویض تسمه تایم</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                ست آچارهای متریک
+                                                <span class="link-description">(ابزارهای پایه)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                دستگاه دیاگ موتور
+                                                <span class="link-description">(ابزارهای تشخیصی)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                کیت اندازه‌گیری فاصله سوپاپ
+                                                <span class="link-description">(ابزارهای تخصصی)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تست‌ر فشار سیلندر
+                                                <span class="link-description">(ابزارهای اندازه‌گیری)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1556,21 +1829,41 @@
                                 <div class="section-title-sm">پروژه‌های عملی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>سرویس کامل موتور چهارزمانه</li>
-                                        <li>تعویض تسمه تایم</li>
-                                        <li>تنظیم سوپاپ‌ها</li>
-                                        <li>عیب‌یابی سیستم جرقه</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                سرویس کامل موتور چهارزمانه
+                                                <span class="link-description">(پروژه عملی اول)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تعویض تسمه تایم
+                                                <span class="link-description">(پروژه عملی دوم)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تنظیم سوپاپ‌ها
+                                                <span class="link-description">(پروژه عملی سوم)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                عیب‌یابی سیستم جرقه
+                                                <span class="link-description">(پروژه عملی چهارم)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div class="detail-actions">
-                            <button class="detail-btn">
+                            <button class="detail-btn" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-download"></i>
                                 دریافت محتوا
                             </button>
-                            <button class="detail-btn primary">
+                            <button class="detail-btn primary" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-play"></i>
                                 شروع یادگیری
                             </button>
@@ -1604,11 +1897,36 @@
                                 <div class="section-title-sm">سرفصل‌های اصلی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>اصول عیب‌یابی سیستم‌های موتور</li>
-                                        <li>تعمیرات پیشرفته موتور</li>
-                                        <li>سیستم‌های انتقال قدرت</li>
-                                        <li>تعمیرات سیستم‌های برقی</li>
-                                        <li>بازسازی کامل خودرو</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                اصول عیب‌یابی سیستم‌های موتور
+                                                <span class="link-description">(پودمان اول - عیب‌یابی)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تعمیرات پیشرفته موتور
+                                                <span class="link-description">(پودمان دوم - تعمیرات موتور)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                سیستم‌های انتقال قدرت
+                                                <span class="link-description">(پودمان سوم - انتقال قدرت)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تعمیرات سیستم‌های برقی
+                                                <span class="link-description">(پودمان چهارم - سیستم برق)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                بازسازی کامل خودرو
+                                                <span class="link-description">(پودمان پنجم - بازسازی)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1617,10 +1935,30 @@
                                 <div class="section-title-sm">تجهیزات تخصصی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>دستگاه عیب‌یابی کامپیوتری</li>
-                                        <li>کیت بازسازی موتور</li>
-                                        <li>تجهیزات اندازه‌گیری دقیق</li>
-                                        <li>ابزارهای تعمیرات تخصصی</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                دستگاه عیب‌یابی کامپیوتری
+                                                <span class="link-description">(تجهیزات مدرن)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                کیت بازسازی موتور
+                                                <span class="link-description">(ابزارهای تخصصی)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تجهیزات اندازه‌گیری دقیق
+                                                <span class="link-description">(ابزارهای اندازه‌گیری)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                ابزارهای تعمیرات تخصصی
+                                                <span class="link-description">(ابزارهای پیشرفته)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1629,21 +1967,41 @@
                                 <div class="section-title-sm">پروژه‌های عملی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>بازسازی کامل موتور</li>
-                                        <li>تعمیر سیستم تعلیق</li>
-                                        <li>عیب‌یابی سیستم برق خودرو</li>
-                                        <li>تعمیر گیربکس</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                بازسازی کامل موتور
+                                                <span class="link-description">(پروژه عملی اول)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تعمیر سیستم تعلیق
+                                                <span class="link-description">(پروژه عملی دوم)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                عیب‌یابی سیستم برق خودرو
+                                                <span class="link-description">(پروژه عملی سوم)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تعمیر گیربکس
+                                                <span class="link-description">(پروژه عملی چهارم)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div class="detail-actions">
-                            <button class="detail-btn">
+                            <button class="detail-btn" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-download"></i>
                                 دریافت محتوا
                             </button>
-                            <button class="detail-btn primary">
+                            <button class="detail-btn primary" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-play"></i>
                                 شروع یادگیری
                             </button>
@@ -1679,11 +2037,36 @@
                                 <div class="section-title-sm">سرفصل‌های اصلی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>مکانیک کلاسیک و دینامیک</li>
-                                        <li>ترمودینامیک موتور</li>
-                                        <li>اصول انتقال حرارت</li>
-                                        <li>مقاومت مصالح</li>
-                                        <li>اصول سیالات</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                مکانیک کلاسیک و دینامیک
+                                                <span class="link-description">(پودمان اول - مکانیک)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                ترمودینامیک موتور
+                                                <span class="link-description">(پودمان دوم - ترمودینامیک)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                اصول انتقال حرارت
+                                                <span class="link-description">(پودمان سوم - انتقال حرارت)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                مقاومت مصالح
+                                                <span class="link-description">(پودمان چهارم - مقاومت مصالح)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                اصول سیالات
+                                                <span class="link-description">(پودمان پنجم - سیالات)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1692,10 +2075,30 @@
                                 <div class="section-title-sm">مفاهیم کلیدی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>قوانین نیوتن در خودرو</li>
-                                        <li>اصول کار موتورهای احتراقی</li>
-                                        <li>سیستم‌های انتقال قدرت</li>
-                                        <li>اصول ترمز و فرمان</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                قوانین نیوتن در خودرو
+                                                <span class="link-description">(مکانیک کاربردی)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                اصول کار موتورهای احتراقی
+                                                <span class="link-description">(اصول موتور)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                سیستم‌های انتقال قدرت
+                                                <span class="link-description">(انتقال قدرت)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                اصول ترمز و فرمان
+                                                <span class="link-description">(سیستم‌های کنترلی)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1704,21 +2107,41 @@
                                 <div class="section-title-sm">کاربردهای عملی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>محاسبات توان و گشتاور</li>
-                                        <li>آنالیز سیستم تعلیق</li>
-                                        <li>بررسی عملکرد ترمزها</li>
-                                        <li>محاسبات راندمان موتور</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                محاسبات توان و گشتاور
+                                                <span class="link-description">(محاسبات پایه)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                آنالیز سیستم تعلیق
+                                                <span class="link-description">(تحلیل سیستم‌ها)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                بررسی عملکرد ترمزها
+                                                <span class="link-description">(سیستم ترمز)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                محاسبات راندمان موتور
+                                                <span class="link-description">(راندمان و بهره‌وری)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div class="detail-actions">
-                            <button class="detail-btn">
+                            <button class="detail-btn" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-download"></i>
                                 دریافت محتوا
                             </button>
-                            <button class="detail-btn primary">
+                            <button class="detail-btn primary" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-play"></i>
                                 شروع یادگیری
                             </button>
@@ -1752,11 +2175,36 @@
                                 <div class="section-title-sm">سرفصل‌های اصلی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>اصول برق و الکترونیک</li>
-                                        <li>سیستم‌های شارژ و استارت</li>
-                                        <li>مدارهای روشنایی</li>
-                                        <li>سیستم‌های کنترل الکترونیکی</li>
-                                        <li>عیب‌یابی مدارهای برقی</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                اصول برق و الکترونیک
+                                                <span class="link-description">(پودمان اول - اصول پایه)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                سیستم‌های شارژ و استارت
+                                                <span class="link-description">(پودمان دوم - سیستم شارژ)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                مدارهای روشنایی
+                                                <span class="link-description">(پودمان سوم - سیستم روشنایی)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                سیستم‌های کنترل الکترونیکی
+                                                <span class="link-description">(پودمان چهارم - کنترل الکترونیکی)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                عیب‌یابی مدارهای برقی
+                                                <span class="link-description">(پودمان پنجم - عیب‌یابی)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1765,10 +2213,30 @@
                                 <div class="section-title-sm">تجهیزات برقی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>باتری و دینام</li>
-                                        <li>سیستم جرقه‌زنی</li>
-                                        <li>کامپیوتر خودرو (ECU)</li>
-                                        <li>سنسورها و عملگرها</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                باتری و دینام
+                                                <span class="link-description">(منابع انرژی)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                سیستم جرقه‌زنی
+                                                <span class="link-description">(سیستم احتراق)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                کامپیوتر خودرو (ECU)
+                                                <span class="link-description">(سیستم کنترل)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                سنسورها و عملگرها
+                                                <span class="link-description">(قطعات الکترونیکی)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1777,21 +2245,41 @@
                                 <div class="section-title-sm">پروژه‌های عملی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>نصب و راه‌اندازی سیستم صوتی</li>
-                                        <li>عیب‌یابی مدار شارژ</li>
-                                        <li>تعمیر سیستم روشنایی</li>
-                                        <li>بررسی سنسورهای موتور</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                نصب و راه‌اندازی سیستم صوتی
+                                                <span class="link-description">(پروژه عملی اول)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                عیب‌یابی مدار شارژ
+                                                <span class="link-description">(پروژه عملی دوم)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تعمیر سیستم روشنایی
+                                                <span class="link-description">(پروژه عملی سوم)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                بررسی سنسورهای موتور
+                                                <span class="link-description">(پروژه عملی چهارم)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div class="detail-actions">
-                            <button class="detail-btn">
+                            <button class="detail-btn" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-download"></i>
                                 دریافت محتوا
                             </button>
-                            <button class="detail-btn primary">
+                            <button class="detail-btn primary" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-play"></i>
                                 شروع یادگیری
                             </button>
@@ -1825,11 +2313,36 @@
                                 <div class="section-title-sm">سرفصل‌های اصلی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>اصول هیدرولیک صنعتی</li>
-                                        <li>سیستم‌های پنوماتیکی</li>
-                                        <li>پمپ‌ها و کمپرسورها</li>
-                                        <li>سیلندرها و عملگرها</li>
-                                        <li>کنترل‌های هیدرولیکی</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                اصول هیدرولیک صنعتی
+                                                <span class="link-description">(پودمان اول - هیدرولیک)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                سیستم‌های پنوماتیکی
+                                                <span class="link-description">(پودمان دوم - پنوماتیک)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                پمپ‌ها و کمپرسورها
+                                                <span class="link-description">(پودمان سوم - تجهیزات)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                سیلندرها و عملگرها
+                                                <span class="link-description">(پودمان چهارم - عملگرها)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                کنترل‌های هیدرولیکی
+                                                <span class="link-description">(پودمان پنجم - کنترل)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1838,10 +2351,30 @@
                                 <div class="section-title-sm">کاربردها در خودرو</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>سیستم ترمز هیدرولیکی</li>
-                                        <li>فرمان هیدرولیک</li>
-                                        <li>سیستم تعلیق هوایی</li>
-                                        <li>جک‌های هیدرولیکی</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                سیستم ترمز هیدرولیکی
+                                                <span class="link-description">(سیستم ترمز)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                فرمان هیدرولیک
+                                                <span class="link-description">(سیستم فرمان)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                سیستم تعلیق هوایی
+                                                <span class="link-description">(سیستم تعلیق)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                جک‌های هیدرولیکی
+                                                <span class="link-description">(سیستم‌های کمکی)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1850,21 +2383,41 @@
                                 <div class="section-title-sm">پروژه‌های عملی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>تعمیر سیستم ترمز</li>
-                                        <li>بازسازی پمپ هیدرولیک</li>
-                                        <li>نصب سیستم پنوماتیک</li>
-                                        <li>عیب‌یابی مدارهای هیدرولیکی</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تعمیر سیستم ترمز
+                                                <span class="link-description">(پروژه عملی اول)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                بازسازی پمپ هیدرولیک
+                                                <span class="link-description">(پروژه عملی دوم)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                نصب سیستم پنوماتیک
+                                                <span class="link-description">(پروژه عملی سوم)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                عیب‌یابی مدارهای هیدرولیکی
+                                                <span class="link-description">(پروژه عملی چهارم)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div class="detail-actions">
-                            <button class="detail-btn">
+                            <button class="detail-btn" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-download"></i>
                                 دریافت محتوا
                             </button>
-                            <button class="detail-btn primary">
+                            <button class="detail-btn primary" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-play"></i>
                                 شروع یادگیری
                             </button>
@@ -1900,11 +2453,36 @@
                                 <div class="section-title-sm">سرفصل‌های اصلی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>جبر و معادلات</li>
-                                        <li>هندسه تحلیلی</li>
-                                        <li>مثلثات کاربردی</li>
-                                        <li>آمار و احتمال</li>
-                                        <li>حسابان مقدماتی</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                جبر و معادلات
+                                                <span class="link-description">(پودمان اول - جبر)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                هندسه تحلیلی
+                                                <span class="link-description">(پودمان دوم - هندسه)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                مثلثات کاربردی
+                                                <span class="link-description">(پودمان سوم - مثلثات)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                آمار و احتمال
+                                                <span class="link-description">(پودمان چهارم - آمار)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                حسابان مقدماتی
+                                                <span class="link-description">(پودمان پنجم - حسابان)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1913,10 +2491,30 @@
                                 <div class="section-title-sm">کاربرد در مکانیک</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>محاسبات گشتاور و توان</li>
-                                        <li>آنالیز ابعادی قطعات</li>
-                                        <li>محاسبات دنده‌ها</li>
-                                        <li>بررسی نسبت‌های انتقال</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                محاسبات گشتاور و توان
+                                                <span class="link-description">(محاسبات موتور)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                آنالیز ابعادی قطعات
+                                                <span class="link-description">(آنالیز ابعاد)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                محاسبات دنده‌ها
+                                                <span class="link-description">(سیستم انتقال)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                بررسی نسبت‌های انتقال
+                                                <span class="link-description">(نسبت‌های دنده)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1925,21 +2523,41 @@
                                 <div class="section-title-sm">تمرین‌های عملی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>محاسبه حجم سیلندر</li>
-                                        <li>تعیین نسبت تراکم</li>
-                                        <li>محاسبات سیستم تعلیق</li>
-                                        <li>بررسی هندسی چرخ‌دنده‌ها</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                محاسبه حجم سیلندر
+                                                <span class="link-description">(تمرین عملی اول)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تعیین نسبت تراکم
+                                                <span class="link-description">(تمرین عملی دوم)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                محاسبات سیستم تعلیق
+                                                <span class="link-description">(تمرین عملی سوم)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                بررسی هندسی چرخ‌دنده‌ها
+                                                <span class="link-description">(تمرین عملی چهارم)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div class="detail-actions">
-                            <button class="detail-btn">
+                            <button class="detail-btn" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-download"></i>
                                 دریافت محتوا
                             </button>
-                            <button class="detail-btn primary">
+                            <button class="detail-btn primary" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-play"></i>
                                 شروع یادگیری
                             </button>
@@ -1973,11 +2591,36 @@
                                 <div class="section-title-sm">سرفصل‌های اصلی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>مکانیک نیوتنی</li>
-                                        <li>ترمودینامیک</li>
-                                        <li>الکتریسیته و مغناطیس</li>
-                                        <li>امواج و ارتعاشات</li>
-                                        <li>فیزیک مدرن مقدماتی</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                مکانیک نیوتنی
+                                                <span class="link-description">(پودمان اول - مکانیک)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                ترمودینامیک
+                                                <span class="link-description">(پودمان دوم - ترمودینامیک)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                الکتریسیته و مغناطیس
+                                                <span class="link-description">(پودمان سوم - الکتریسیته)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                امواج و ارتعاشات
+                                                <span class="link-description">(پودمان چهارم - امواج)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                فیزیک مدرن مقدماتی
+                                                <span class="link-description">(پودمان پنجم - فیزیک مدرن)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1986,10 +2629,30 @@
                                 <div class="section-title-sm">کاربرد در خودرو</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>اصول حرکت و شتاب</li>
-                                        <li>تبدیل انرژی در موتور</li>
-                                        <li>سیستم‌های الکتریکی خودرو</li>
-                                        <li>ارتعاشات و تعادل</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                اصول حرکت و شتاب
+                                                <span class="link-description">(دینامیک خودرو)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تبدیل انرژی در موتور
+                                                <span class="link-description">(ترمودینامیک موتور)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                سیستم‌های الکتریکی خودرو
+                                                <span class="link-description">(الکتریسیته کاربردی)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                ارتعاشات و تعادل
+                                                <span class="link-description">(مکانیک ارتعاشات)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -1998,21 +2661,41 @@
                                 <div class="section-title-sm">آزمایش‌های عملی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>اندازه‌گیری شتاب</li>
-                                        <li>بررسی تبدیل انرژی</li>
-                                        <li>آزمایش مدارهای الکتریکی</li>
-                                        <li>بررسی ارتعاشات</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                اندازه‌گیری شتاب
+                                                <span class="link-description">(آزمایش اول)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                بررسی تبدیل انرژی
+                                                <span class="link-description">(آزمایش دوم)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                آزمایش مدارهای الکتریکی
+                                                <span class="link-description">(آزمایش سوم)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                بررسی ارتعاشات
+                                                <span class="link-description">(آزمایش چهارم)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div class="detail-actions">
-                            <button class="detail-btn">
+                            <button class="detail-btn" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-download"></i>
                                 دریافت محتوا
                             </button>
-                            <button class="detail-btn primary">
+                            <button class="detail-btn primary" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-play"></i>
                                 شروع یادگیری
                             </button>
@@ -2046,11 +2729,36 @@
                                 <div class="section-title-sm">سرفصل‌های اصلی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>شیمی آلی و معدنی</li>
-                                        <li>سوخت‌ها و احتراق</li>
-                                        <li>روان‌کننده‌ها و مواد شیمیایی</li>
-                                        <li>خوردگی و حفاظت مواد</li>
-                                        <li>شیمی پلیمرها</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                شیمی آلی و معدنی
+                                                <span class="link-description">(پودمان اول - شیمی پایه)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                سوخت‌ها و احتراق
+                                                <span class="link-description">(پودمان دوم - سوخت‌ها)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                روان‌کننده‌ها و مواد شیمیایی
+                                                <span class="link-description">(پودمان سوم - روان‌کننده‌ها)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                خوردگی و حفاظت مواد
+                                                <span class="link-description">(پودمان چهارم - خوردگی)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                شیمی پلیمرها
+                                                <span class="link-description">(پودمان پنجم - پلیمرها)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -2059,10 +2767,30 @@
                                 <div class="section-title-sm">مواد خودرو</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>آلیاژهای فلزی</li>
-                                        <li>پلاستیک‌ها و کامپوزیت‌ها</li>
-                                        <li>روغن‌ها و گریس‌ها</li>
-                                        <li>مواد ضد یخ و ضد جوش</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                آلیاژهای فلزی
+                                                <span class="link-description">(مواد فلزی)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                پلاستیک‌ها و کامپوزیت‌ها
+                                                <span class="link-description">(مواد غیرفلزی)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                روغن‌ها و گریس‌ها
+                                                <span class="link-description">(روان‌کننده‌ها)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                مواد ضد یخ و ضد جوش
+                                                <span class="link-description">(مواد شیمیایی)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -2071,21 +2799,41 @@
                                 <div class="section-title-sm">آزمایش‌های عملی</div>
                                 <div class="section-content">
                                     <ul>
-                                        <li>تست کیفیت سوخت</li>
-                                        <li>بررسی خوردگی فلزات</li>
-                                        <li>آزمایش روان‌کننده‌ها</li>
-                                        <li>شناسایی مواد پلیمری</li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                تست کیفیت سوخت
+                                                <span class="link-description">(آزمایش اول)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                بررسی خوردگی فلزات
+                                                <span class="link-description">(آزمایش دوم)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                آزمایش روان‌کننده‌ها
+                                                <span class="link-description">(آزمایش سوم)</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="learning-link" onclick="alert('این بخش در حال توسعه است')">
+                                                شناسایی مواد پلیمری
+                                                <span class="link-description">(آزمایش چهارم)</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div class="detail-actions">
-                            <button class="detail-btn">
+                            <button class="detail-btn" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-download"></i>
                                 دریافت محتوا
                             </button>
-                            <button class="detail-btn primary">
+                            <button class="detail-btn primary" onclick="alert('این قابلیت به زودی اضافه خواهد شد')">
                                 <i class="fas fa-play"></i>
                                 شروع یادگیری
                             </button>
@@ -2196,9 +2944,8 @@
 
         function logout() {
             if (confirm('آیا از خروج از سیستم اطمینان دارید؟')) {
-                localStorage.removeItem('loggedInStudentCode');
-                localStorage.removeItem('rememberMe');
-                window.location.href = 'index.html';
+                // در اینجا می‌توانید کد خروج واقعی را اضافه کنید
+                alert('شما از سیستم خارج شدید.');
             }
         }
 
