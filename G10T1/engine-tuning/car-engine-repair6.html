@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بخش ششم: تعمیرات نیم‌موتور - پایه دهم فنی و حرفه‌ای</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2d74da;
+            --accent: #e53e3e;
+            --success: #38a169;
+            --warning: #dd6b20;
+            --light: #f7fafc;
+            --dark: #2d3748;
+            --gradient: linear-gradient(135deg, #2d74da 0%, #1a365d 100%);
+            --gradient-accent: linear-gradient(135deg, #e53e3e 0%, #dd6b20 100%);
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --border-radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a365d 0%, #2d74da 100%);
+            color: var(--dark);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(45, 116, 218, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(229, 62, 62, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(56, 161, 105, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px),
+                radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 30px 30px, 60px 60px;
+            animation: float 20s linear infinite;
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Enhanced Navigation */
+        .nav-container {
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            margin-bottom: 2.5rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            box-shadow: var(--shadow-lg);
+            flex-wrap: wrap;
+            justify-content: center;
+            transition: var(--transition);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-tab {
+            padding: 14px 28px;
+            margin: 5px;
+            background: rgba(247, 250, 252, 0.7);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            font-size: 1rem;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .nav-tab:hover {
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(45, 116, 218, 0.3);
+        }
+
+        .nav-tab:hover::before {
+            opacity: 1;
+        }
+
+        .nav-tab.active {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 8px 20px rgba(45, 116, 218, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* Enhanced Content Sections */
+        .content-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 0.6s ease;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--gradient);
+            transform: translateY(-6px);
+            transition: var(--transition);
+        }
+
+        .content-section:hover::before {
+            transform: translateY(0);
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(40px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.8rem;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--secondary);
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: var(--secondary);
+            margin: 2rem 0 1.2rem 0;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        h4 {
+            color: var(--primary);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        /* Enhanced Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 2.5rem 0;
+        }
+
+        .card {
+            background: var(--light);
+            padding: 2.2rem;
+            border-radius: var(--border-radius);
+            border-left: 6px solid var(--secondary);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--gradient);
+            transform: translateY(-6px);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card:hover::before {
+            transform: translateY(0);
+        }
+
+        .card h4 {
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        /* Enhanced Table Styles */
+        .table-container {
+            overflow-x: auto;
+            margin: 2.5rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            background: white;
+        }
+
+        .table-container:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 18px 22px;
+            text-align: right;
+            border-bottom: 1px solid #e2e8f0;
+            transition: var(--transition);
+        }
+
+        th {
+            background: var(--gradient);
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            font-size: 1.1rem;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        /* Enhanced Progress and Status */
+        .status-indicator {
+            display: inline-block;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 5px;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .status-indicator:hover {
+            transform: scale(1.05);
+        }
+
+        .status-basic { 
+            background: var(--accent); 
+            color: white; 
+        }
+        .status-intermediate { 
+            background: var(--warning); 
+            color: white; 
+        }
+        .status-advanced { 
+            background: var(--success); 
+            color: white; 
+        }
+
+        /* Enhanced Features List */
+        .features-list {
+            list-style: none;
+            margin: 1.2rem 0;
+        }
+
+        .features-list li {
+            padding: 14px 0;
+            border-bottom: 1px solid #e2e8f0;
+            position: relative;
+            padding-right: 40px;
+            transition: var(--transition);
+        }
+
+        .features-list li:hover {
+            background-color: #f8fafc;
+            padding-right: 45px;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+
+        .features-list li:hover::before {
+            transform: scale(1.2);
+        }
+
+        /* Enhanced Interactive Elements */
+        .interactive-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 2.5rem 0;
+        }
+
+        .video-placeholder, .download-card, .quiz-card {
+            flex: 1;
+            min-width: 320px;
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .video-placeholder:hover, .download-card:hover, .quiz-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-icon, .download-icon, .quiz-icon {
+            font-size: 4rem;
+            color: var(--secondary);
+            margin-bottom: 1.8rem;
+            transition: var(--transition);
+        }
+
+        .video-placeholder:hover .video-icon,
+        .download-card:hover .download-icon,
+        .quiz-card:hover .quiz-icon {
+            transform: scale(1.1);
+        }
+
+        .video-placeholder h4, .download-card h4, .quiz-card h4 {
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            font-size: 1.4rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 18px;
+            box-shadow: 0 6px 18px rgba(45, 116, 218, 0.3);
+            position: relative;
+            overflow: hidden;
+            font-size: 1rem;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            transform: translateX(-100%);
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(45, 116, 218, 0.4);
+        }
+
+        .btn:hover::before {
+            transform: translateX(0);
+        }
+
+        .btn-accent {
+            background: var(--gradient-accent);
+            box-shadow: 0 6px 18px rgba(229, 62, 62, 0.3);
+        }
+
+        .btn-accent:hover {
+            box-shadow: 0 12px 25px rgba(229, 62, 62, 0.4);
+        }
+
+        /* Enhanced Progress Bar */
+        .progress-container {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .progress-container:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .progress-bar {
+            height: 24px;
+            background: #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 12px;
+            transition: width 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 100%;
+            background: rgba(255,255,255,0.3);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(150px); }
+        }
+
+        /* Enhanced Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: white;
+            margin-top: 3rem;
+            background: rgba(0,0,0,0.1);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        footer:hover {
+            background: rgba(0,0,0,0.15);
+        }
+
+        /* Step Container */
+        .step-container {
+            counter-reset: step;
+            margin: 2.5rem 0;
+        }
+
+        .step {
+            position: relative;
+            padding: 2rem 2rem 2rem 5rem;
+            margin: 1.5rem 0;
+            background: var(--light);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            border-left: 4px solid var(--secondary);
+        }
+
+        .step:hover {
+            transform: translateX(-8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-size: 1.2rem;
+        }
+
+        /* Warning and Info Boxes */
+        .warning-box {
+            background: #fffaf0;
+            border: 1px solid #feebc8;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-right: 6px solid var(--warning);
+            transition: var(--transition);
+        }
+
+        .warning-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(221, 107, 32, 0.2);
+        }
+
+        .info-box {
+            background: #ebf8ff;
+            border: 1px solid #bee3f8;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-right: 6px solid var(--secondary);
+            transition: var(--transition);
+        }
+
+        .info-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(45, 116, 218, 0.2);
+        }
+
+        /* Diagram Styles */
+        .diagram-container {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            border: 2px dashed #cbd5e0;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .diagram-container:hover {
+            border-color: var(--secondary);
+        }
+
+        .diagram-placeholder {
+            width: 100%;
+            height: 350px;
+            background: #edf2f7;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #718096;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .diagram-container:hover .diagram-placeholder {
+            background: #e2e8f0;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .quiz-container:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .quiz-question {
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quiz-option {
+            padding: 16px 20px;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            font-size: 1rem;
+        }
+
+        .quiz-option:hover {
+            background: #ebf8ff;
+            border-color: #90cdf4;
+        }
+
+        .quiz-option.correct {
+            background: #c6f6d5;
+            border: 2px solid #9ae6b4;
+        }
+
+        .quiz-option.incorrect {
+            background: #fed7d7;
+            border: 2px solid #feb2b2;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            font-size: 1.2rem;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            animation: floatElement 20s infinite linear;
+        }
+
+        @keyframes floatElement {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 18px;
+            }
+            
+            h1 {
+                font-size: 2.4rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-tab {
+                margin: 4px 0;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 25px;
+            }
+            
+            .content-section {
+                padding: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .card-grid, .interactive-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-section {
+                padding: 2rem;
+            }
+            
+            .interactive-container {
+                flex-direction: column;
+            }
+            
+            .video-placeholder, .download-card, .quiz-card {
+                min-width: 100%;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                left: 20px;
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 12px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+                border-radius: 12px;
+            }
+            
+            .card {
+                padding: 1.8rem;
+            }
+            
+            .btn {
+                padding: 12px 24px;
+            }
+            
+            header {
+                padding: 2rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Elements -->
+    <div class="floating-elements" id="floatingElements"></div>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1><i class="fas fa-car-crash"></i> بخش ششم: تعمیرات نیم‌موتور</h1>
+                <p class="subtitle">آموزش پیشرفته و تعاملی برای دانش‌آموزان پایه دهم هنرستان‌های فنی و حرفه‌ای - رشته مکانیک خودرو</p>
+            </div>
+        </header>
+
+        <div class="nav-container">
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-target="intro"><i class="fas fa-home"></i> معرفی بخش</button>
+                <button class="nav-tab" data-target="balance-system"><i class="fas fa-cogs"></i> سیستم بالانس‌ر</button>
+                <button class="nav-tab" data-target="bearings"><i class="fas fa-compress-arrows-alt"></i> یاتاقان‌ها</button>
+                <button class="nav-tab" data-target="crankshaft"><i class="fas fa-cog"></i> میل‌لنگ و کنترل‌ها</button>
+                <button class="nav-tab" data-target="engine-sounds"><i class="fas fa-volume-up"></i> عیب‌یابی صداها</button>
+                <button class="nav-tab" data-target="cylinder-piston"><i class="fas fa-tachometer-alt"></i> سیلندر و پیستون</button>
+                <button class="nav-tab" data-target="assembly"><i class="fas fa-tools"></i> مونتاژ موتور</button>
+                <button class="nav-tab" data-target="evaluation"><i class="fas fa-clipboard-check"></i> ارزشیابی</button>
+            </nav>
+        </div>
+
+        <section id="intro" class="content-section active">
+            <h2><i class="fas fa-info-circle"></i> معرفی بخش ششم: تعمیرات نیم‌موتور</h2>
+            <p>در این بخش با مباحث پیشرفته‌ای در زمینه تعمیرات نیم‌موتور آشنا خواهید شد. این آموزش شامل کنترل‌های دقیق، عیب‌یابی سیستماتیک و روش‌های استاندارد تعمیر موتور است.</p>
+            
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>پیشرفت دوره</span>
+                    <span>85% تکمیل شده</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%"></div>
+                </div>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-bullseye"></i> اهداف یادگیری</h4>
+                    <ul class="features-list">
+                        <li>شناخت سیستم بالانس‌ر و عملکرد آن</li>
+                        <li>آشنایی با انواع یاتاقان‌ها و روش‌های کنترل آن‌ها</li>
+                        <li>عیب‌یابی صداهای موتور و تشخیص منشاء آن‌ها</li>
+                        <li>کنترل و تعمیر میل‌لنگ و متعلقات آن</li>
+                        <li>بازسازی سیلندرها و سیستم پیستون</li>
+                        <li>مونتاژ صحیح موتور پس از تعمیرات</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tools"></i> مهارت‌های عملی</h4>
+                    <ul class="features-list">
+                        <li>استفاده از ابزارهای اندازه‌گیری دقیق</li>
+                        <li>انجام کنترل‌های ابعادی قطعات موتور</li>
+                        <li>تعویض و تنظیم یاتاقان‌ها</li>
+                        <li>تراشکاری و بازسازی سیلندرها</li>
+                        <li>مونتاژ و تنطیم موتور</li>
+                        <li>تست و راه‌اندازی موتور پس از تعمیر</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-exclamation-triangle"></i> نکات ایمنی</h4>
+                    <ul class="features-list">
+                        <li>استفاده از لوازم حفاظت فردی</li>
+                        <li>رعایت اصول ایمنی در کار با ابزارآلات</li>
+                        <li>دقت در جابجایی قطعات سنگین</li>
+                        <li>آشنایی با روش‌های اطفاء حریق</li>
+                        <li>رعایت بهداشت محیط کار</li>
+                        <li>آشنایی با کمک‌های اولیه</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h4><i class="fas fa-lightbulb"></i> راهنمای مطالعه</h4>
+                <p>برای درک بهتر مطالب این بخش، توصیه می‌شود ابتدا ویدئوهای آموزشی هر قسمت را مشاهده کرده و سپس به مطالعه متن و انجام تمرینات بپردازید. انجام پروژه‌های عملی درک شما را از مفاهیم بسیار افزایش خواهد داد.</p>
+            </div>
+            
+            <div class="interactive-container">
+                <div class="video-placeholder">
+                    <div class="video-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>آموزش تصویری بخش ششم</h4>
+                    <p>مرور کامل مباحث بخش ششم به صورت ویدئویی</p>
+                    <button class="btn"><i class="fas fa-play"></i> پخش ویدئو (42 دقیقه)</button>
+                </div>
+                
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-file-download"></i>
+                    </div>
+                    <h4>منابع آموزشی</h4>
+                    <p>دانلود مجموعه کامل منابع و جزوات بخش ششم</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود (24 MB)</button>
+                </div>
+                
+                <div class="quiz-card">
+                    <div class="quiz-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h4>آزمون تعیین سطح</h4>
+                    <p>سنجش دانش پیشین برای شروع بهینه‌تر</p>
+                    <button class="btn btn-accent"><i class="fas fa-pencil-alt"></i> شروع آزمون</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="balance-system" class="content-section">
+            <h2><i class="fas fa-cogs"></i> سیستم بالانس‌ر و شفت‌های بالانس</h2>
+            <p>سیستم بالانس‌ر برای کاهش ارتعاشات موتور طراحی شده است. در این بخش با عملکرد و روش‌های کنترل این سیستم آشنا می‌شوید.</p>
+            
+            <h3><i class="fas fa-project-diagram"></i> انواع سیستم‌های بالانس‌ر</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-cog"></i> شفت بالانس هم‌جهت</h4>
+                    <p>شفت‌های بالانس که در جهت میل‌لنگ می‌چرخند و برای خنثی کردن ارتعاشات اولیه طراحی شده‌اند.</p>
+                    <span class="status-indicator status-basic">سیستم پایه</span>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-cogs"></i> شفت بالانس مخالف‌جهت</h4>
+                    <p>شفت‌های بالانس که در جهت مخالف میل‌لنگ می‌چرخند و برای خنثی کردن ارتعاشات ثانویه استفاده می‌شوند.</p>
+                    <span class="status-indicator status-intermediate">سیستم پیشرفته</span>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tachometer-alt"></i> سیستم‌های مدرن</h4>
+                    <p>استفاده از بالانس‌رهای فعال با کنترل الکترونیکی برای کاهش ارتعاشات در دورهای مختلف موتور.</p>
+                    <span class="status-indicator status-advanced">فناوری نوین</span>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-tools"></i> روش نصب و تنظیم بالانس‌ر</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>تنظیم موقعیت شفت‌ها</h4>
+                    <p>شفت‌های بالانس باید در موقعیت صحیح نسبت به میل‌لنگ نصب شوند. نصب نادرست باعث افزایش ارتعاشات موتور می‌شود.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>تنظیم تایمینگ</h4>
+                    <p>تنظیم تایمینگ شفت‌های بالانس با استفاده از نشانه‌های روی چرخ‌دنده‌ها انجام می‌شود.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>کنترل نهایی</h4>
+                    <p>پس از نصب، موتور را راه‌اندازی کرده و ارتعاشات آن را در دورهای مختلف کنترل کنید.</p>
+                </div>
+            </div>
+            
+            <div class="diagram-container">
+                <h4><i class="fas fa-project-diagram"></i> نمودار سیستم بالانس‌ر</h4>
+                <div class="diagram-placeholder">
+                    <p>در اینجا نمودار کامل سیستم بالانس‌ر نمایش داده می‌شود</p>
+                </div>
+                <p class="text-center mt-3">شکل 1: اجزای سیستم بالانس‌ر و نحوه عملکرد آن</p>
+            </div>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">
+                    <p>در صورت نصب نادرست شفت‌های بالانس، کدام مشکل به وجود می‌آید؟</p>
+                </div>
+                <div class="quiz-options">
+                    <div class="quiz-option">کاهش مصرف سوخت</div>
+                    <div class="quiz-option">افزایش توان موتور</div>
+                    <div class="quiz-option correct">افزایش ارتعاشات موتور</div>
+                    <div class="quiz-option">کاهش دمای موتور</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="bearings" class="content-section">
+            <h2><i class="fas fa-compress-arrows-alt"></i> یاتاقان‌ها و نقش آن‌ها در موتور</h2>
+            <p>یاتاقان‌ها یکی از مهمترین قطعات موتور هستند که نقش حیاتی در کاهش اصطکاک و انتقال نیرو دارند.</p>
+            
+            <h3><i class="fas fa-cog"></i> انواع یاتاقان‌ها</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-layer-group"></i> یاتاقان‌های لغزشی</h4>
+                    <p>یاتاقان‌های ساده که بر اساس فیلم روغن کار می‌کنند و در میل‌لنگ و میل‌سوپاپ استفاده می‌شوند.</p>
+                    <span class="status-indicator status-basic">پایه‌ای</span>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-bolt"></i> یاتاقان‌های غلتشی</h4>
+                    <p>یاتاقان‌های ساچمه‌ای و رولری که در پمپ‌ها و برخی سیستم‌های فرعی استفاده می‌شوند.</p>
+                    <span class="status-indicator status-intermediate">متوسط</span>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-gem"></i> یاتاقان‌های مدرن</h4>
+                    <p>یاتاقان‌های با پوشش‌های نانویی و مواد کامپوزیتی برای کاربردهای خاص و دورهای بالا.</p>
+                    <span class="status-indicator status-advanced">پیشرفته</span>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-tools"></i> کنترل و تعویض یاتاقان‌ها</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>کنترل لقی یاتاقان</h4>
+                    <p>با استفاده از پلاستیک گیج لقی بین یاتاقان و محور را اندازه‌گیری کنید. لقی استاندارد معمولاً بین ۰.۰۲ تا ۰.۰۵ میلی‌متر است.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>بررسی سایش یاتاقان</h4>
+                    <p>سطح یاتاقان را از نظر خراشیدگی، سایش غیریکنواخت و تغییر رنگ بررسی کنید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>تعویض یاتاقان</h4>
+                    <p>یاتاقان‌های معیوب را با سایز صحیح تعویض کرده و از روغن‌کاری مناسب اطمینان حاصل کنید.</p>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h4><i class="fas fa-lightbulb"></i> نکته فنی مهم</h4>
+                <p>یاتاقان‌ها باید همیشه با روغن مناسب و با فشار کافی روان‌کاری شوند. خشک کار کردن یاتاقان حتی برای مدت کوتاه می‌تواند باعث آسیب جدی به موتور شود.</p>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>نوع یاتاقان</th>
+                            <th>مواد تشکیل‌دهنده</th>
+                            <th>کاربرد</th>
+                            <th>طول عمر تقریبی</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>بابیتی</td>
+                            <td>آلیاژ سرب و قلع</td>
+                            <td>موتورهای قدیمی</td>
+                            <td>۵۰,۰۰۰ کیلومتر</td>
+                        </tr>
+                        <tr>
+                            <td>مس-سرب</td>
+                            <td>آلیاژ مس و سرب</td>
+                            <td>موتورهای مدرن</td>
+                            <td>۱۰۰,۰۰۰ کیلومتر</td>
+                        </tr>
+                        <tr>
+                            <td>آلومینیوم</td>
+                            <td>آلیاژ آلومینیوم-قلع</td>
+                            <td>موتورهای پرسرعت</td>
+                            <td>۱۵۰,۰۰۰ کیلومتر</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="crankshaft" class="content-section">
+            <h2><i class="fas fa-cog"></i> میل‌لنگ و کنترل‌های مربوطه</h2>
+            <p>میل‌لنگ قلب تپنده موتور است که حرکت خطی پیستون‌ها را به حرکت دورانی تبدیل می‌کند.</p>
+            
+            <h3><i class="fas fa-ruler"></i> کنترل‌های ابعادی میل‌لنگ</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-ruler-combined"></i> کنترل تاب میل‌لنگ</h4>
+                    <p>با استفاده از ساعت اندازه‌گیری و پایه V شکل، میزان تاب میل‌لنگ را کنترل کنید.</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-compress-alt"></i> کنترل قطر محورها</h4>
+                    <p>قطر محورهای اصلی و لنگ‌ها را با میکرومتر در چند نقطه اندازه‌گیری کنید.</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-search"></i> کنترل ترک‌ها</h4>
+                    <p>با استفاده از روش‌های غیرمخرب مانند مایع نافذ، ترک‌های سطحی را بررسی کنید.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-tools"></i> روش‌های تعمیر میل‌لنگ</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>پولیش کاری</h4>
+                    <p>برای رفع خراشیدگی‌های سطحی از کاغذ سنباده نرم استفاده کنید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>گرندینگ</h4>
+                    <p>در صورت سایش بیش از حد، میل‌لنگ را گرند کرده و از یاتاقان اورسایز استفاده کنید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>جوشکاری ترمیمی</h4>
+                    <p>برای تعمیر ترک‌ها و خوردگی‌ها از جوشکاری تخصصی استفاده کنید.</p>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h4><i class="fas fa-exclamation-triangle"></i> هشدار ایمنی</h4>
+                <p>میل‌لنگ‌های دارای ترک‌های عمیق باید تعویض شوند. استفاده از میل‌لنگ ترک‌دار می‌تواند منجر به شکست catastrophic موتور شود.</p>
+            </div>
+        </section>
+
+        <section id="engine-sounds" class="content-section">
+            <h2><i class="fas fa-volume-up"></i> عیب‌یابی صداهای موتور</h2>
+            <p>شناخت و تشخیص صداهای غیرعادی موتور اولین قدم در عیب‌یابی صحیح است.</p>
+            
+            <h3><i class="fas fa-diagnoses"></i> انواع صداهای غیرعادی</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-hammer"></i> صدای ضربه پیستون</h4>
+                    <p>صدای تق تق در هنگام شتاب‌گیری، ناشی از لقی بیش از حد پیستون در سیلندر</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-bell"></i> صدای یاتاقان</h4>
+                    <p>صدای کوبش عمقی که با افزایش دور موتور تشدید می‌شود</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-cog"></i> صدای زنجیر تایم</h4>
+                    <p>صدای خش خش یا تق تق از جلوی موتور، ناشی از شل شدن زنجیر تایم</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-stethoscope"></i> روش‌های تشخیص صدا</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>شنود با استتوسکوپ</h4>
+                    <p>با استفاده از استتوسکوپ مکانیکی، محل دقیق تولید صدا را پیدا کنید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>تست حذف سیلندر</h4>
+                    <p>با قطع کردن انژکتورها یا شمع‌ها یکی یکی، صداهای مربوط به هر سیلندر را تشخیص دهید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>تست بارگذاری</h4>
+                    <p>با اعمال بارهای مختلف روی موتور، رفتار صدا را در شرایط مختلف بررسی کنید.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="cylinder-piston" class="content-section">
+            <h2><i class="fas fa-tachometer-alt"></i> سیلندر و پیستون</h2>
+            <p>سیلندر و پیستون از مهمترین اجزای موتور هستند که مستقیماً در فرآیند احتراق نقش دارند.</p>
+            
+            <h3><i class="fas fa-ruler"></i> کنترل‌های ابعادی سیلندر</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-ruler-combined"></i> کنترل بیضی‌شدن</h4>
+                    <p>سیلندرها در راستای عمود بر محور گژن‌پین بیشترین سایش را دارند.</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-arrows-alt-v"></i> کنترل مخروطی‌شدن</h4>
+                    <p>سیلندرها در قسمت بالایی که رینگ‌ها حرکت می‌کنند بیشتر ساییده می‌شوند.</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-search"></i> کنترل سطح سیلندر</h4>
+                    <p>سطوح سیلندر باید عاری از خراشیدگی‌های عمیق و خطوط طولی باشند.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-tools"></i> روش‌های بازسازی سیلندر</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>هونینگ</h4>
+                    <p>برای ایجاد سطح مناسب برای آب‌بندی رینگ‌ها، سیلندرها را هون کنید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>بورینگ</h4>
+                    <p>در صورت سایش شدید، سیلندرها را بور کرده و از پیستون اورسایز استفاده کنید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>نصب بوش</h4>
+                    <p>برای سیلندرهای آسیب‌دیده شدید، بوش جدید نصب کنید.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="assembly" class="content-section">
+            <h2><i class="fas fa-tools"></i> مونتاژ موتور</h2>
+            <p>مونتاژ صحیح موتور پس از تعمیرات برای اطمینان از عملکرد بهینه و عمر طولانی ضروری است.</p>
+            
+            <h3><i class="fas fa-cogs"></i> مراحل مونتاژ</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>آماده‌سازی قطعات</h4>
+                    <p>تمامی قطعات را کاملاً تمیز کرده و با روغن مناسب روان‌کاری کنید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>مونتاژ میل‌لنگ و یاتاقان‌ها</h4>
+                    <p>میل‌لنگ را در بلوک سیلندر قرار داده و یاتاقان‌ها را با گشتاور مشخص ببندید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>نصب پیستون و شاتون</h4>
+                    <p>پیستون‌ها را با رینگ‌های جدید و با جهت صحیح در سیلندرها نصب کنید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>مونتاژ سرسیلندر</h4>
+                    <p>سرسیلندر را با واشر جدید نصب کرده و پیچ‌ها را با ترتیب و گشتاور صحیح ببندید.</p>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h4><i class="fas fa-lightbulb"></i> نکته مهم مونتاژ</h4>
+                <p>همیشه از گشتاورسنج کالیبره شده استفاده کنید و ترتیب بستن پیچ‌ها را دقیقاً رعایت کنید. استفاده از لوازم اندازه‌گیری دقیق برای کنترل لقی‌ها ضروری است.</p>
+            </div>
+        </section>
+
+        <section id="evaluation" class="content-section">
+            <h2><i class="fas fa-clipboard-check"></i> ارزشیابی و تست نهایی</h2>
+            <p>پس از مونتاژ موتور، انجام تست‌های مختلف برای اطمینان از صحت عملکرد ضروری است.</p>
+            
+            <h3><i class="fas fa-vial"></i> تست‌های عملکردی</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-compress-arrows-alt"></i> تست فشار سیلندر</h4>
+                    <p>فشار تراکم تمام سیلندرها را اندازه‌گیری و با هم مقایسه کنید.</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tachometer-alt"></i> تست فشار روغن</h4>
+                    <p>فشار روغن را در دورهای مختلف موتور کنترل کنید.</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-temperature-high"></i> تست دمای کاری</h4>
+                    <p>دمای موتور را در شرایط مختلف کاری مانیتور کنید.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-check-circle"></i> چک‌لیست نهایی</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>کنترل نشتی‌ها</h4>
+                    <p>از عدم نشتی روغن، آب و سایر مایعات اطمینان حاصل کنید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>کنترل صداها</h4>
+                    <p>موتور را در دورهای مختلف گوش داده و از عدم وجود صداهای غیرعادی مطمئن شوید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>تست جاده‌ای</h4>
+                    <p>در صورت امکان، موتور را در شرایط واقعی رانندگی تست کنید.</p>
+                </div>
+            </div>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">
+                    <p>کدام یک از موارد زیر نشان‌دهنده مونتاژ صحیح موتور است؟</p>
+                </div>
+                <div class="quiz-options">
+                    <div class="quiz-option">فشار روغن پایین در دور آرام</div>
+                    <div class="quiz-option">اختلاف فشار بین سیلندرها بیش از ۱۰٪</div>
+                    <div class="quiz-option correct">فشار روغن ثابت در تمام دورها</div>
+                    <div class="quiz-option">وجود صداهای متالیک از موتور</div>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>پایه دهم - شاخه فنی و حرفه‌ای | رشته مکانیک خودرو | بخش ششم: تعمیرات نیم‌موتور</p>
+            <p>تمامی حقوق محفوظ است © 2023 - طراحی شده با <i class="fas fa-heart" style="color: #e53e3e;"></i> برای دانش‌آموزان ایران</p>
+        </footer>
+    </div>
+
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // ایجاد المان‌های شناور در پس‌زمینه
+        const floatingElements = document.getElementById('floatingElements');
+        for (let i = 0; i < 15; i++) {
+            const element = document.createElement('div');
+            element.className = 'floating-element';
+            element.style.width = `${Math.random() * 60 + 20}px`;
+            element.style.height = element.style.width;
+            element.style.left = `${Math.random() * 100}%`;
+            element.style.animationDelay = `${Math.random() * 20}s`;
+            element.style.animationDuration = `${Math.random() * 20 + 20}s`;
+            floatingElements.appendChild(element);
+        }
+
+        // سیستم تب‌های پیشرفته
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // حذف کلاس active از همه تب‌ها و بخش‌ها
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                
+                // افزودن کلاس active به تب و بخش مربوطه
+                tab.classList.add('active');
+                const targetId = tab.getAttribute('data-target');
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                    
+                    // به‌روزرسانی هش URL برای بوکمارک
+                    window.location.hash = targetId;
+                    
+                    // اسکرول به بالای بخش با انیمیشن
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // مدیریت هش در لود اولیه
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const targetTab = document.querySelector(`.nav-tab[data-target="${hash}"]`);
+                if (targetTab) {
+                    targetTab.click();
+                }
+            }
+            
+            // انیمیشن نوار پیشرفت
+            const progressFill = document.querySelector('.progress-fill');
+            setTimeout(() => {
+                if (progressFill) {
+                    progressFill.style.width = '85%';
+                }
+            }, 500);
+        });
+
+        // دکمه بازگشت به بالا
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // تعامل پیشرفته دکمه‌ها
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.textContent.includes('دانلود') || this.textContent.includes('پخش')) {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<span class="loading"></span> در حال بارگذاری...';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        if (this.textContent.includes('دانلود')) {
+                            alert('فایل با موفقیت دانلود شد!');
+                        } else {
+                            alert('ویدئو در حال پخش است...');
+                        }
+                    }, 2000);
+                    
+                    e.preventDefault();
+                }
+            });
+        });
+
+        // سیستم کویز تعاملی
+        document.querySelectorAll('.quiz-option').forEach(option => {
+            option.addEventListener('click', () => {
+                // حذف کلاس‌های موجود
+                option.parentElement.querySelectorAll('.quiz-option').forEach(o => {
+                    o.classList.remove('correct', 'incorrect');
+                });
+                
+                // افزودن کلاس صحیح/غلط بر اساس داده‌ها
+                if (option.classList.contains('correct')) {
+                    option.classList.add('correct');
+                    // نمایش پیام موفقیت
+                    setTimeout(() => {
+                        alert('پاسخ شما صحیح است! ✓');
+                    }, 300);
+                } else {
+                    option.classList.add('incorrect');
+                    // نمایش پیام خطا
+                    setTimeout(() => {
+                        alert('پاسخ شما نادرست است. مجدداً تلاش کنید.');
+                    }, 300);
+                }
+            });
+        });
+
+        // افکت‌های هوور پیشرفته برای کارت‌ها
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-12px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // هایلایت سطرهای جدول
+        document.querySelectorAll('table tr').forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#f0f9ff';
+            });
+            
+            row.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = '';
+            });
+        });
+
+        // ناوبری با صفحه‌کلید
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                const tabs = Array.from(document.querySelectorAll('.nav-tab'));
+                const currentTab = document.querySelector('.nav-tab.active');
+                const currentIndex = tabs.indexOf(currentTab);
+                
+                let nextIndex;
+                if (e.key === 'ArrowRight') {
+                    nextIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
+                } else {
+                    nextIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
+                }
+                
+                tabs[nextIndex].click();
+            }
+        });
+
+        // منوی موبایل واکنش‌گرا
+        function createMobileMenu() {
+            if (window.innerWidth <= 992) {
+                const navContainer = document.querySelector('.nav-container');
+                let select = document.querySelector('.mobile-nav-select');
+                
+                if (!select) {
+                    select = document.createElement('select');
+                    select.className = 'mobile-nav-select';
+                    select.style.width = '100%';
+                    select.style.padding = '14px';
+                    select.style.marginBottom = '20px';
+                    select.style.borderRadius = '10px';
+                    select.style.border = '2px solid #2d74da';
+                    select.style.background = 'white';
+                    select.style.fontSize = '16px';
+                    select.style.fontWeight = '600';
+                    
+                    document.querySelectorAll('.nav-tab').forEach(tab => {
+                        const option = document.createElement('option');
+                        option.value = tab.getAttribute('data-target');
+                        option.textContent = tab.textContent;
+                        if (tab.classList.contains('active')) {
+                            option.selected = true;
+                        }
+                        select.appendChild(option);
+                    });
+                    
+                    select.addEventListener('change', (e) => {
+                        const targetId = e.target.value;
+                        document.querySelector(`.nav-tab[data-target="${targetId}"]`).click();
+                    });
+                    
+                    navContainer.insertBefore(select, navContainer.firstChild);
+                }
+            } else {
+                const mobileSelect = document.querySelector('.mobile-nav-select');
+                if (mobileSelect) {
+                    mobileSelect.remove();
+                }
+            }
+        }
+
+        // مقداردهی اولیه منوی موبایل
+        createMobileMenu();
+        window.addEventListener('resize', createMobileMenu);
+
+        // انیمیشن اسکرول نرم برای لینک‌های داخلی
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // نمایش نوتیفیکیشن در اولین بازدید
+        window.addEventListener('load', () => {
+            if (!localStorage.getItem('welcomeShown')) {
+                setTimeout(() => {
+                    alert('به بخش ششم آموزش تعمیرات نیم‌موتور خوش آمدید! برای بهترین تجربه یادگیری، ویدئوهای آموزشی را مشاهده کنید.');
+                    localStorage.setItem('welcomeShown', 'true');
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>

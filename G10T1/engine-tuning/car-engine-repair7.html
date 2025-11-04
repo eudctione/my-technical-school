@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بخش هفتم: تعمیر سیستم اگزوز خودرو - پایه دهم فنی و حرفه‌ای</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e74c3c;
+            --accent: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --gradient: linear-gradient(135deg, #e74c3c, #c0392b);
+            --gradient-secondary: linear-gradient(135deg, #3498db, #2980b9);
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --radius: 15px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        header:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Enhanced Navigation */
+        .nav-container {
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            margin-bottom: 2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-radius: var(--radius);
+            padding: 10px;
+            box-shadow: var(--shadow);
+            flex-wrap: wrap;
+            justify-content: center;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .nav-tabs:hover {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .nav-tab {
+            padding: 12px 24px;
+            margin: 5px;
+            background: var(--light);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .nav-tab:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .nav-tab:hover::before {
+            opacity: 1;
+        }
+
+        .nav-tab.active {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced Content Sections */
+        .content-section {
+            display: none;
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 0.6s ease;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+            transform: translateY(-5px);
+            transition: var(--transition);
+        }
+
+        .content-section:hover::before {
+            transform: translateY(0);
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--secondary);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        h4 {
+            color: var(--primary);
+            margin: 1.2rem 0 0.8rem 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Enhanced Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--light);
+            padding: 1.8rem;
+            border-radius: var(--radius);
+            border-left: 5px solid var(--secondary);
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+            transform: translateY(-5px);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .card:hover::before {
+            transform: translateY(0);
+        }
+
+        .card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        /* Enhanced Table Styles */
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: var(--radius);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .table-container:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 15px 18px;
+            text-align: right;
+            border-bottom: 1px solid #ddd;
+            transition: var(--transition);
+        }
+
+        th {
+            background: var(--gradient);
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:hover {
+            background-color: #f5f9ff;
+        }
+
+        /* Enhanced Features List */
+        .features-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .features-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-right: 35px;
+            transition: var(--transition);
+        }
+
+        .features-list li:hover {
+            background-color: #f8f9fa;
+            padding-right: 40px;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .features-list li:hover::before {
+            transform: scale(1.2);
+        }
+
+        /* Enhanced Interactive Elements */
+        .interactive-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 2rem 0;
+        }
+
+        .video-placeholder, .download-card, .quiz-card {
+            flex: 1;
+            min-width: 300px;
+            background: var(--light);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-placeholder:hover, .download-card:hover, .quiz-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .video-icon, .download-icon, .quiz-icon {
+            font-size: 3.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .video-placeholder:hover .video-icon,
+        .download-card:hover .download-icon,
+        .quiz-card:hover .quiz-icon {
+            transform: scale(1.1);
+        }
+
+        .video-placeholder h4, .download-card h4, .quiz-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            transform: translateX(-100%);
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn:hover::before {
+            transform: translateX(0);
+        }
+
+        /* Enhanced Progress Bar */
+        .progress-container {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .progress-container:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 10px;
+            transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Enhanced Footer */
+        footer {
+            text-align: center;
+            padding: 2.5rem 0;
+            color: white;
+            margin-top: 2rem;
+            background: rgba(0,0,0,0.1);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        footer:hover {
+            background: rgba(0,0,0,0.15);
+        }
+
+        /* Step Container */
+        .step-container {
+            counter-reset: step;
+            margin: 2rem 0;
+        }
+
+        .step {
+            position: relative;
+            padding: 1.5rem 1.5rem 1.5rem 4rem;
+            margin: 1rem 0;
+            background: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .step:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Warning and Info Boxes */
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-right: 5px solid #f39c12;
+            transition: var(--transition);
+        }
+
+        .warning-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.2);
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-right: 5px solid #17a2b8;
+            transition: var(--transition);
+        }
+
+        .info-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(23, 162, 184, 0.2);
+        }
+
+        .danger-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-right: 5px solid #e74c3c;
+            transition: var(--transition);
+        }
+
+        .danger-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.2);
+        }
+
+        /* Diagram Styles */
+        .diagram-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 2px dashed #dee2e6;
+            text-align: center;
+        }
+
+        .diagram-placeholder {
+            width: 100%;
+            height: 300px;
+            background: #e9ecef;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+
+        .quiz-question {
+            margin-bottom: 1rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            padding: 12px 15px;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            background: #e6f7ff;
+            border-color: #b3e0ff;
+        }
+
+        .quiz-option.correct {
+            background: #d4edda;
+            border: 2px solid #c3e6cb;
+        }
+
+        .quiz-option.incorrect {
+            background: #f8d7da;
+            border: 2px solid #f5c6cb;
+        }
+
+        /* Simulation Container */
+        .simulation-container {
+            background: #2c3e50;
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .simulation-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .simulation-btn {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .simulation-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Learning Path Styles */
+        .learning-path {
+            display: flex;
+            flex-direction: column;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .path-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .path-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .path-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-left: 1rem;
+            flex-shrink: 0;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .path-content {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            flex: 1;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .path-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        /* Achievement Badges */
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 2rem 0;
+            justify-content: center;
+        }
+
+        .badge {
+            width: 120px;
+            height: 120px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: var(--transition);
+        }
+
+        .badge:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .badge i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .badge span {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Responsive Improvements */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-tab {
+                margin: 3px 0;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .content-section {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .card-grid, .interactive-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .interactive-container {
+                flex-direction: column;
+            }
+            
+            .video-placeholder, .download-card, .quiz-card {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+            }
+            
+            .content-section {
+                padding: 1rem;
+                border-radius: 10px;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+            }
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Animation for elements */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1><i class="fas fa-car-crash"></i> بخش هفتم: تعمیر سیستم اگزوز خودرو</h1>
+                <p class="subtitle">آموزش جامع و تعاملی سیستم اگزوز خودرو - از شناخت اجزا تا عیب‌یابی و تعمیرات تخصصی برای دانش‌آموزان پایه دهم</p>
+            </div>
+        </header>
+
+        <div class="nav-container">
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-target="intro"><i class="fas fa-home"></i> معرفی بخش</button>
+                <button class="nav-tab" data-target="system-overview"><i class="fas fa-car-side"></i> آشنایی با سیستم اگزوز</button>
+                <button class="nav-tab" data-target="components"><i class="fas fa-cogs"></i> اجزای سیستم اگزوز</button>
+                <button class="nav-tab" data-target="catalytic"><i class="fas fa-filter"></i> مبدل کاتالیستی</button>
+                <button class="nav-tab" data-target="diagnosis"><i class="fas fa-stethoscope"></i> عیب‌یابی سیستم</button>
+                <button class="nav-tab" data-target="repair"><i class="fas fa-tools"></i> تعمیرات عملی</button>
+                <button class="nav-tab" data-target="environment"><i class="fas fa-leaf"></i> ملاحظات زیست‌محیطی</button>
+            </nav>
+        </div>
+
+        <section id="intro" class="content-section active">
+            <h2><i class="fas fa-info-circle"></i> معرفی بخش هفتم: تعمیر سیستم اگزوز خودرو</h2>
+            <p>سیستم اگزوز یکی از مهمترین سیستم‌های خودرو است که علاوه بر هدایت گازهای خروجی موتور، نقش کلیدی در کاهش آلودگی هوا، کاهش صدا و بهبود عملکرد موتور دارد. در این بخش به طور کامل با این سیستم آشنا خواهید شد.</p>
+            
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>پیشرفت دوره</span>
+                    <span>92% تکمیل شده</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 92%"></div>
+                </div>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-bullseye"></i> اهداف یادگیری</h4>
+                    <ul class="features-list">
+                        <li>شناخت کامل سیستم اگزوز و اجزای تشکیل‌دهنده آن</li>
+                        <li>آشنایی با عملکرد مبدل کاتالیستی و انواع آن</li>
+                        <li>یادگیری روش‌های عیب‌یابی صداهای غیرعادی اگزوز</li>
+                        <li>تشخیص و رفع نشتی‌های سیستم اگزوز</li>
+                        <li>تعمیر و تعویض قطعات معیوب سیستم اگزوز</li>
+                        <li>آشنایی با استانداردهای آلایندگی و ملاحظات زیست‌محیطی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-graduation-cap"></i> مهارت‌های کسب شده</h4>
+                    <ul class="features-list">
+                        <li>توانایی عیب‌یابی کامل سیستم اگزوز</li>
+                        <li>تشخیص عیوب با بررسی صدا و دود خروجی</li>
+                        <li>تعمیر و تعویض مبدل کاتالیستی</li>
+                        <li>تنظیم و تعمیر صدا خفه کن</li>
+                        <li>بررسی حسگر اکسیژن و عملکرد آن</li>
+                        <li>رعایت نکات ایمنی و زیست‌محیطی در تعمیرات</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-award"></i> پیش‌نیازها</h4>
+                    <ul class="features-list">
+                        <li>تسلط بر مباحث بخش‌های قبلی موتور</li>
+                        <li>دسترسی به ابزارهای تخصصی تعمیر اگزوز</li>
+                        <li>رعایت نکات ایمنی در کار با گازهای سمی</li>
+                        <li>آشنایی با استانداردهای آلایندگی</li>
+                        <li>دقت و توجه به جزئیات در تعمیرات</li>
+                        <li>پایبندی به دستورالعمل‌های سازنده</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h4><i class="fas fa-lightbulb"></i> نکته مهم برای دانش‌آموزان</h4>
+                <p>سیستم اگزوز مدرن علاوه بر هدایت گازهای خروجی، نقش مهمی در کاهش آلودگی هوا و بهبود عملکرد موتور دارد. آشنایی با این سیستم برای هر تکنسین خودرو ضروری است و در این بخش به صورت گام به گام با آن آشنا خواهید شد.</p>
+            </div>
+            
+            <div class="interactive-container">
+                <div class="video-placeholder">
+                    <div class="video-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>فیلم معرفی سیستم اگزوز</h4>
+                    <p>تماشای ویدئوی معرفی کامل سیستم اگزوز و عملکرد اجزای آن</p>
+                    <button class="btn"><i class="fas fa-play"></i> پخش ویدئو</button>
+                </div>
+                
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-file-download"></i>
+                    </div>
+                    <h4>جزوه آموزشی</h4>
+                    <p>دریافت جزوه کامل تعمیرات سیستم اگزوز</p>
+                    <button class="btn"><i class="fas fa-download"></i> دریافت PDF</button>
+                </div>
+                
+                <div class="quiz-card">
+                    <div class="quiz-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h4>آزمون سنجش دانش</h4>
+                    <p>شرکت در آزمون آنلاین برای سنجش دانش پیش‌نیاز</p>
+                    <button class="btn"><i class="fas fa-pencil-alt"></i> شروع آزمون</button>
+                </div>
+            </div>
+
+            <div class="badge-container">
+                <div class="badge">
+                    <i class="fas fa-cogs"></i>
+                    <span>شناخت اجزا</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-stethoscope"></i>
+                    <span>عیب‌یابی</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-tools"></i>
+                    <span>تعمیرات</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-leaf"></i>
+                    <span>محیط زیست</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="system-overview" class="content-section">
+            <h2><i class="fas fa-car-side"></i> آشنایی با سیستم اگزوز و عملکرد آن</h2>
+            <p>سیستم اگزوز یکی از سیستم‌های حیاتی خودرو است که مسئولیت مدیریت گازهای خروجی از موتور را بر عهده دارد. این سیستم نه تنها گازهای حاصل از احتراق را به بیرون هدایت می‌کند، بلکه نقش مهمی در کاهش آلودگی، کاهش صدا و بهبود عملکرد موتور ایفا می‌نماید.</p>
+            
+            <h3><i class="fas fa-tachometer-alt"></i> وظایف اصلی سیستم اگزوز</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-gas-pump"></i> هدایت گازهای خروجی</h4>
+                    <p>سیستم اگزوز گازهای سمی و خطرناک ناشی از احتراق را از موتور دور کرده و به محیط بیرون هدایت می‌کند. این کار از ورود گازهای سمی به کابین خودرو جلوگیری می‌نماید.</p>
+                    <ul class="features-list">
+                        <li>خروج گازهای CO، HC و NOx از موتور</li>
+                        <li>جلوگیری از ورود گازهای سمی به کابین</li>
+                        <li>هدایت گازها به پشت خودرو</li>
+                        <li>کاهش خطرات سلامتی برای سرنشینان</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-volume-mute"></i> کاهش صدای موتور</h4>
+                    <p>صدای ناشی از انفجارهای متوالی در سیلندرهای موتور بسیار بلند است. سیستم اگزوز با استفاده از صدا خفه کن این صدا را تا حد قابل قبولی کاهش می‌دهد.</p>
+                    <ul class="features-list">
+                        <li>کاهش صدای انفجارهای احتراق</li>
+                        <li>استفاده از محفظه‌های انبساط</li>
+                        <li>بهبود آسایش سرنشینان</li>
+                        <li>رعایت استانداردهای آلودگی صوتی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-wind"></i> بهبود عملکرد موتور</h4>
+                    <p>یک سیستم اگزوز بهینه می‌تواند با ایجاد خلأ نسبی در سیلندرها، به خروج بهتر گازهای احتراق کمک کرده و در نتیجه عملکرد موتور را بهبود بخشد.</p>
+                    <ul class="features-list">
+                        <li>ایجاد خلأ برای تخلیه بهتر گازها</li>
+                        <li>کاهش مقاومت در برابر خروج گازها</li>
+                        <li>بهبود راندمان حجمی موتور</li>
+                        <li>افزایش قدرت و گشتاور موتور</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-recycle"></i> کاهش آلایندگی زیست‌محیطی</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>کنترل گازهای سمی</h4>
+                    <p>سیستم اگزوز با استفاده از مبدل کاتالیستی، گازهای سمی خروجی از موتور را به گازهای کم‌خطرتر تبدیل می‌کند. این فرآیند نقش مهمی در کاهش آلودگی هوا دارد.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>مبدل کاتالیستی</h4>
+                    <p>مبدل کاتالیستی با استفاده از فلزات گران‌بها مانند پلاتین، پالادیوم و رودیم، واکنش‌های شیمیایی را تسریع کرده و گازهای سمی را به ترکیبات بی‌خطر تبدیل می‌کند.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>سیستم کنترل آلایندگی</h4>
+                    <p>حسگرهای اکسیژن و واحد کنترل الکترونیکی (ECU) به طور مداوم نسبت هوا به سوخت را تنظیم می‌کنند تا کارایی مبدل کاتالیستی در حداکثر سطح خود حفظ شود.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-exclamation-triangle"></i> اهمیت نگهداری سیستم اگزوز</h3>
+            <div class="warning-box">
+                <h4><i class="fas fa-exclamation-circle"></i> هشدار ایمنی</h4>
+                <p>خرابی سیستم اگزوز می‌تواند منجر به ورود گازهای سمی به داخل کابین خودرو شود که بسیار خطرناک است. همچنین اگزوز معیوب می‌تواند باعث کاهش عملکرد موتور و افزایش مصرف سوخت گردد.</p>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>مشکل احتمالی</th>
+                            <th>علائم</th>
+                            <th>عواقب</th>
+                            <th>راه حل</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>سوراخ شدن اگزوز</td>
+                            <td>صدای بلند، بوی گاز در کابین</td>
+                            <td>ورود گازهای سمی، افزایش آلودگی</td>
+                            <td>تعمیر یا تعویض بخش سوراخ شده</td>
+                        </tr>
+                        <tr>
+                            <td>خرابی مبدل کاتالیستی</td>
+                            <td>بوی تخم مرغ فاسد، کاهش شتاب</td>
+                            <td>افزایش آلایندگی، کاهش عملکرد</td>
+                            <td>تعویض مبدل کاتالیستی</td>
+                        </tr>
+                        <tr>
+                            <td>خرابی صدا خفه کن</td>
+                            <td>صدای بسیار بلند موتور</td>
+                            <td>آلودگی صوتی، discomfort سرنشینان</td>
+                            <td>تعویض صدا خفه کن</td>
+                        </tr>
+                        <tr>
+                            <td>شل بودن اتصالات</td>
+                            <td>صدای تق تق، لرزش</td>
+                            <td>آسیب به دیگر قطعات، خطر جدایی</td>
+                            <td>سفت کردن اتصالات</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="components" class="content-section">
+            <h2><i class="fas fa-cogs"></i> اجزای سیستم اگزوز</h2>
+            <p>سیستم اگزوز از چندین بخش اصلی تشکیل شده است که هر کدام وظیفه خاصی را بر عهده دارند. در این بخش با هر یک از این اجزا به طور کامل آشنا خواهید شد.</p>
+            
+            <h3><i class="fas fa-puzzle-piece"></i> بخش‌های اصلی سیستم اگزوز</h3>
+            
+            <div class="learning-path">
+                <div class="path-step">
+                    <div class="path-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="path-content">
+                        <h4>مانیفولد دود (Exhaust Manifold)</h4>
+                        <p>اولین بخش سیستم اگزوز که مستقیماً به سرسیلندر متصل است. این قطعه گازهای خروجی از تمام سیلندرها را جمع‌آوری کرده و به لوله اصلی اگزوز هدایت می‌کند.</p>
+                        <ul class="features-list">
+                            <li>جمع‌آوری گازهای خروجی از سیلندرها</li>
+                            <li>مقاوم در برابر حرارت بالا (تا ۸۰۰ درجه سانتی‌گراد)</li>
+                            <li>جنس معمول: چدن یا فولاد ضد زنگ</li>
+                            <li>اتصال به سنسور اکسیژن در برخی طراحی‌ها</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="path-step">
+                    <div class="path-icon">
+                        <i class="fas fa-filter"></i>
+                    </div>
+                    <div class="path-content">
+                        <h4>مبدل کاتالیستی (Catalytic Converter)</h4>
+                        <p>این بخش مسئول کاهش آلایندگی گازهای خروجی است. با استفاده از مواد کاتالیست، گازهای سمی را به گازهای بی‌خطر تبدیل می‌کند.</p>
+                        <ul class="features-list">
+                            <li>کاهش گازهای CO، HC و NOx</li>
+                            <li>استفاده از فلزات گران‌بها (پلاتین، پالادیوم، رودیم)</li>
+                            <li>دمای کاری بهینه: ۴۰۰-۶۰۰ درجه سانتی‌گراد</li>
+                            <li>طول عمر مفید: ۸۰,۰۰۰ تا ۱۶۰,۰۰۰ کیلومتر</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="path-step">
+                    <div class="path-icon">
+                        <i class="fas fa-volume-mute"></i>
+                    </div>
+                    <div class="path-content">
+                        <h4>صدا خفه کن (Muffler)</h4>
+                        <p>این بخش با ایجاد مسیرهای پیچیده برای گازهای خروجی، انرژی صوتی را جذب کرده و صدای موتور را کاهش می‌دهد.</p>
+                        <ul class="features-list">
+                            <li>کاهش صدای انفجارهای احتراق</li>
+                            <li>استفاده از محفظه‌های انبساط و جاذب‌های صوتی</li>
+                            <li>جنس: ورق فولادی با پوشش ضد خوردگی</li>
+                            <li>افزایش背 pressure در طراحی‌های نامناسب</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="path-step">
+                    <div class="path-icon">
+                        <i class="fas fa-ruler"></i>
+                    </div>
+                    <div class="path-content">
+                        <h4>لوله‌های اگزوز (Exhaust Pipes)</h4>
+                        <p>لوله‌هایی که اجزای مختلف سیستم اگزوز را به هم متصل می‌کنند و گازها را از ابتدا تا انتهای سیستم هدایت می‌کنند.</p>
+                        <ul class="features-list">
+                            <li>جنس: فولاد معمولی یا فولاد ضد زنگ</li>
+                            <li>قطر متناسب با حجم موتور</li>
+                            <li>ضخامت مناسب برای مقاومت در برابر خوردگی</li>
+                            <li>انعطاف‌پذیری برای جذب ارتعاشات</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-tachometer-alt"></i> اجزای کنترلی و جانبی</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-wave-square"></i> سنسور اکسیژن (O2 Sensor)</h4>
+                    <p>این سنسور میزان اکسیژن موجود در گازهای خروجی را اندازه‌گیری کرده و اطلاعات را به ECU ارسال می‌کند.</p>
+                    <ul class="features-list">
+                        <li>کنترل نسبت هوا به سوخت</li>
+                        <li>بهبود کارایی مبدل کاتالیستی</li>
+                        <li>کاهش مصرف سوخت</li>
+                        <li>کاهش آلایندگی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-compress-arrows-alt"></i> اتصالات انعطاف‌پذیر</h4>
+                    <p>این بخش‌ها برای جذب ارتعاشات بین موتور و سیستم اگزوز طراحی شده‌اند.</p>
+                    <ul class="features-list">
+                        <li>جذب ارتعاشات موتور</li>
+                        <li>جلوگیری از انتقال لرزش به بدنه</li>
+                        <li>کاهش استرس مکانیکی روی اتصالات</li>
+                        <li>افزایش عمر سیستم اگزوز</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-magnet"></i> نگهدارنده‌ها (Hangers)</h4>
+                    <p>سیستم اگزوز توسط نگهدارنده‌هایی به شاسی خودرو متصل می‌شود که معمولاً از جنس لاستیک هستند.</p>
+                    <ul class="features-list">
+                        <li>اتصال سیستم اگزوز به شاسی</li>
+                        <li>جذب ارتعاشات و لرزش‌ها</li>
+                        <li>جلوگیری از انتقال صدا به بدنه</li>
+                        <li>اجازه انبساط حرارتی</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">
+                    <p>کدام بخش از سیستم اگزوز مسئول کاهش آلایندگی گازهای خروجی است؟</p>
+                </div>
+                <div class="quiz-options">
+                    <div class="quiz-option">مانیفولد دود</div>
+                    <div class="quiz-option correct">مبدل کاتالیستی</div>
+                    <div class="quiz-option">صدا خفه کن</div>
+                    <div class="quiz-option">لوله اگزوز</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="catalytic" class="content-section">
+            <h2><i class="fas fa-filter"></i> مبدل کاتالیستی</h2>
+            <p>مبدل کاتالیستی یکی از مهمترین بخش‌های سیستم اگزوز است که نقش کلیدی در کاهش آلایندگی خودرو دارد. این قطعه گازهای سمی خروجی از موتور را به گازهای کم‌خطرتر تبدیل می‌کند.</p>
+            
+            <h3><i class="fas fa-cogs"></i> عملکرد مبدل کاتالیستی</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-exchange-alt"></i> واکنش‌های شیمیایی</h4>
+                    <p>مبدل کاتالیستی با استفاده از فلزات گران‌بها، واکنش‌های شیمیایی را تسریع می‌کند و گازهای سمی را به ترکیبات بی‌خطر تبدیل می‌نماید.</p>
+                    <ul class="features-list">
+                        <li>اکسیداسیون مونوکسید کربن (CO) به دی‌اکسید کربن (CO₂)</li>
+                        <li>اکسیداسیون هیدروکربن‌های نسوخته (HC) به CO₂ و H₂O</li>
+                        <li>احیاء اکسیدهای نیتروژن (NOx) به نیتروژن (N₂) و اکسیژن (O₂)</li>
+                        <li>تبدیل گازهای سمی به ترکیبات بی‌خطر</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-temperature-high"></i> دمای کاری</h4>
+                    <p>مبدل کاتالیستی برای عملکرد بهینه نیاز به دمای کاری مشخصی دارد. این دما معمولاً بین ۴۰۰ تا ۶۰۰ درجه سانتی‌گراد است.</p>
+                    <ul class="features-list">
+                        <li>دمای شروع فعالیت: ۲۵۰-۳۰۰ درجه سانتی‌گراد</li>
+                        <li>دمای بهینه کاری: ۴۰۰-۶۰۰ درجه سانتی‌گراد</li>
+                        <li>دمای تخریب: بالاتر از ۸۰۰ درجه سانتی‌گراد</li>
+                        <li>زمان گرم شدن: ۲-۳ دقیقه پس از روشن شدن موتور</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-layer-group"></i> ساختار داخلی</h4>
+                    <p>مبدل کاتالیستی از یک ساختار لانه زنبوری تشکیل شده که سطح تماس زیادی با گازهای خروجی ایجاد می‌کند.</p>
+                    <ul class="features-list">
+                        <li>ساختار لانه زنبوری از جنس سرامیک یا فلز</li>
+                        <li>پوشش داده شده با فلزات کاتالیست</li>
+                        <li>سطح فعال بسیار زیاد (حدود ۲۰,۰۰۰ m²/m³)</li>
+                        <li>مقاوم در برابر شوک حرارتی و لرزش</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-list"></i> انواع مبدل کاتالیستی</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>مبدل دوطرفه (Two-Way Catalytic Converter)</h4>
+                    <p>این نوع مبدل فقط قادر به اکسیداسیون گازهای CO و HC است و برای کاهش NOx طراحی نشده است. بیشتر در خودروهای قدیمی استفاده می‌شد.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>مبدل سه‌طرفه (Three-Way Catalytic Converter)</h4>
+                    <p>این مبدل پیشرفته قادر است همزمان سه گاز سمی CO، HC و NOx را کاهش دهد. برای عملکرد بهینه نیاز به کنترل دقیق نسبت هوا به سوخت دارد.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>مبدل کاتالیستی دیزلی (Diesel Oxidation Catalyst)</h4>
+                    <p>مخصوص خودروهای دیزلی طراحی شده و عمدتاً بر کاهش CO و HC متمرکز است. همچنین ذرات دوده را نیز اکسید می‌کند.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-exclamation-triangle"></i> علائم خرابی مبدل کاتالیستی</h3>
+            <div class="danger-box">
+                <h4><i class="fas fa-exclamation-circle"></i> هشدار مهم</h4>
+                <p>خرابی مبدل کاتالیستی نه تنها باعث افزایش آلایندگی می‌شود، بلکه می‌تواند بر عملکرد موتور نیز تأثیر منفی بگذارد.</p>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>علائم خرابی</th>
+                            <th>دلایل احتمالی</th>
+                            <th>راه حل</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>کاهش شتاب و قدرت موتور</td>
+                            <td>مسدود شدن مبدل</td>
+                            <td>تعویض مبدل کاتالیستی</td>
+                        </tr>
+                        <tr>
+                            <td>بوی تخم مرغ فاسد</td>
+                            <td>خرابی مبدل و تبدیل ناقص گازها</td>
+                            <td>بررسی و تعویض مبدل</td>
+                        </tr>
+                        <tr>
+                            <td>روشن شدن چراغ چک موتور</td>
+                            <td>خرابی سنسور اکسیژن یا مبدل</td>
+                            <td>عیب‌یابی سیستم</td>
+                        </tr>
+                        <tr>
+                            <td>افزایش مصرف سوخت</td>
+                            <td>کاهش کارایی مبدل</td>
+                            <td>بررسی و تعویض در صورت نیاز</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="info-box">
+                <h4><i class="fas fa-lightbulb"></i> نکته فنی</h4>
+                <p>طول عمر مفید مبدل کاتالیستی معمولاً بین ۸۰,۰۰۰ تا ۱۶۰,۰۰۰ کیلومتر است. با این حال، عوامل مختلفی مانند کیفیت سوخت، شرایط رانندگی و نگهداری می‌توانند بر عمر آن تأثیر بگذارند.</p>
+            </div>
+        </section>
+
+        <section id="diagnosis" class="content-section">
+            <h2><i class="fas fa-stethoscope"></i> عیب‌یابی سیستم اگزوز</h2>
+            <p>عیب‌یابی صحیح سیستم اگزوز اولین قدم در فرآیند تعمیرات است. در این بخش با روش‌های تشخیص عیوب مختلف سیستم اگزوز آشنا خواهید شد.</p>
+            
+            <h3><i class="fas fa-volume-up"></i> تشخیص صداهای غیرعادی</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-drum"></i> صدای تق تق یا کوبش</h4>
+                    <p>این صدا معمولاً ناشی از شل بودن اتصالات یا آسیب دیدگی نگهدارنده‌ها است.</p>
+                    <ul class="features-list">
+                        <li>شل بودن اتصالات مانیفولد</li>
+                        <li>آسیب دیدگی نگهدارنده‌های لاستیکی</li>
+                        <li>تماس سیستم اگزوز با شاسی</li>
+                        <li>خرابی اتصالات انعطاف‌پذیر</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-broadcast-tower"></i> صدای بلند و خشن</h4>
+                    <p>صدای بلند موتور معمولاً نشان‌دهنده خرابی صدا خفه کن یا سوراخ شدن لوله‌های اگزوز است.</p>
+                    <ul class="features-list">
+                        <li>سوراخ شدن صدا خفه کن</li>
+                        <li>پوسیدگی لوله‌های اگزوز</li>
+                        <li>جدایی اتصالات</li>
+                        <li>خرابی مبدل کاتالیستی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tint"></i> صدای سوت یا هیس</h4>
+                    <p>این صدا معمولاً ناشی از نشتی در سیستم اگزوز است که می‌تواند خطرناک باشد.</p>
+                    <ul class="features-list">
+                        <li>نشتی از اتصالات مانیفولد</li>
+                        <li>سوراخ شدن لوله‌های اگزوز</li>
+                        <li>خرابی واشرهای آب‌بندی</li>
+                        <li>ترک خوردگی مانیفولد</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-search"></i> روش‌های عیب‌یابی</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>بررسی چشمی</h4>
+                    <p>اولین قدم در عیب‌یابی، بررسی ظاهری سیستم اگزوز است. به دنبال علائم پوسیدگی، سوراخ شدن، ترک خوردگی و شل بودن اتصالات باشید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>تست دود</h4>
+                    <p>با روشن کردن موتور و مسدود کردن خروجی اگزوز، می‌توان نشتی‌های سیستم را تشخیص داد. دود از محل نشتی خارج می‌شود.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>بررسی با آینه</h4>
+                    <p>از آینه برای بررسی قسمت‌هایی از سیستم اگزوز که به راحتی قابل مشاهده نیستند استفاده کنید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>تست فشار</h4>
+                    <p>با استفاده از دستگاه فشارسنج می‌توان گرفتگی یا مسدود شدن سیستم اگزوز را تشخیص داد.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-tools"></i> ابزارهای عیب‌یابی</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ابزار</th>
+                            <th>کاربرد</th>
+                            <th>نحوه استفاده</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>گشتاورسنج</td>
+                            <td>بررسی گشتاور اتصالات</td>
+                            <td>سفت کردن اتصالات با گشتاور مشخص</td>
+                        </tr>
+                        <tr>
+                            <td>آینه بازرسی</td>
+                            <td>مشاهده قسمت‌های غیرقابل دسترس</td>
+                            <td>بررسی زیر خودرو و قسمت‌های پنهان</td>
+                        </tr>
+                        <tr>
+                            <td>دستگاه دودساز</td>
+                            <td>تشخیص نشتی‌های کوچک</td>
+                            <td>تزریق دود به سیستم و مشاهده خروج دود</td>
+                        </tr>
+                        <tr>
+                            <td>پروب نوری</td>
+                            <td>بررسی داخل صدا خفه کن و مبدل</td>
+                            <td>مشاهده مستقیم آسیب‌های داخلی</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="warning-box">
+                <h4><i class="fas fa-exclamation-circle"></i> نکته ایمنی</h4>
+                <p>هنگام عیب‌یابی سیستم اگزوز، همیشه از دستکش و عینک ایمنی استفاده کنید. سیستم اگزوز پس از روشن شدن موتور بسیار داغ می‌شود و تماس با آن می‌تواند باعث سوختگی شدید شود.</p>
+            </div>
+        </section>
+
+        <section id="repair" class="content-section">
+            <h2><i class="fas fa-tools"></i> تعمیرات عملی سیستم اگزوز</h2>
+            <p>پس از تشخیص عیوب، نوبت به تعمیرات می‌رسد. در این بخش با روش‌های تعمیر قطعات مختلف سیستم اگزوز آشنا خواهید شد.</p>
+            
+            <h3><i class="fas fa-wrench"></i> تعمیرات معمول سیستم اگزوز</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-bolt"></i> تعویض واشر مانیفولد</h4>
+                    <p>واشر مانیفولد دود یکی از قطعاتی است که به مرور زمان فرسوده شده و نیاز به تعویض دارد.</p>
+                    <ul class="features-list">
+                        <li>خاموش کردن موتور و سرد شدن کامل سیستم</li>
+                        <li>باز کردن اتصالات مانیفولد</li>
+                        <li>تمیز کردن سطح اتصال</li>
+                        <li>نصب واشر جدید و سفت کردن با گشتاور مناسب</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-cut"></i> تعمیر لوله‌های سوراخ شده</h4>
+                    <p>لوله‌های اگزوز به مرور زمان دچار پوسیدگی و سوراخ شدگی می‌شوند.</p>
+                    <ul class="features-list">
+                        <li>تعیین دقیق محل سوراخ</li>
+                        <li>تمیز کردن سطح اطراف سوراخ</li>
+                        <li>برش قسمت آسیب دیده در صورت نیاز</li>
+                        <li>جوشکاری یا استفاده از بست تعمیری</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-magnet"></i> تعویض نگهدارنده‌ها</h4>
+                    <p>نگهدارنده‌های لاستیکی با گذشت زمان خاصیت ارتجاعی خود را از دست می‌دهند.</p>
+                    <ul class="features-list">
+                        <li>بلند کردن خودرو با جک</li>
+                        <li>برداشتن فشار از روی نگهدارنده</li>
+                        <li>تعویض نگهدارنده فرسوده</li>
+                        <li>پایین آوردن خودرو و تست عملکرد</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-cog"></i> تعویض مبدل کاتالیستی</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>آماده‌سازی</h4>
+                    <p>خودرو را روی جک قرار داده و از سرد بودن کامل سیستم اگزوز اطمینان حاصل کنید. ابزارهای لازم را آماده نمایید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>جدا کردن اتصالات</h4>
+                    <p>اتصالات دو طرف مبدل کاتالیستی را باز کنید. ممکن است نیاز به استفاده از روان‌کننده داشته باشید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>جدا کردن سنسور اکسیژن</h4>
+                    <p>سنسور اکسیژن را با آچار مخصوص جدا کنید. مراقب باشید به سنسور آسیب نرسد.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>نصب مبدل جدید</h4>
+                    <p>مبدل جدید را نصب کرده و اتصالات را با گشتاور مناسب سفت کنید. سنسور اکسیژن را نیز مجدداً نصب نمایید.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-compress-alt"></i> تعمیر صدا خفه کن</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>نوع آسیب</th>
+                            <th>روش تعمیر</th>
+                            <th>ملاحظات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>سوراخ کوچک</td>
+                            <td>جوشکاری نقطهای یا چسب مخصوص اگزوز</td>
+                            <td>برای سوراخ‌های کمتر از ۱ سانتیمتر</td>
+                        </tr>
+                        <tr>
+                            <td>پوسیدگی گسترده</td>
+                            <td>تعویض کامل صدا خفه کن</td>
+                            <td>هنگامی که بیش از ۳۰٪ سطح آسیب دیده باشد</td>
+                        </tr>
+                        <tr>
+                            <td>جدایی اتصالات</td>
+                            <td>جوشکاری یا استفاده از بست تعمیری</td>
+                            <td>بازرسی کامل اتصالات مجاور</td>
+                        </tr>
+                        <tr>
+                            <td>آسیب داخلی</td>
+                            <td>تعویض کامل</td>
+                            <td>هنگامی که صفحات داخلی آسیب دیده باشند</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="info-box">
+                <h4><i class="fas fa-lightbulb"></i> نکته فنی</h4>
+                <p>پس از انجام هرگونه تعمیر روی سیستم اگزوز، حتماً موتور را روشن کرده و سیستم را از نظر نشتی و صداهای غیرعادی بررسی کنید. همچنین اطمینان حاصل کنید که سیستم اگزوز با بدنه یا دیگر قطعات تماس ندارد.</p>
+            </div>
+            
+            <div class="danger-box">
+                <h4><i class="fas fa-exclamation-circle"></i> هشدار ایمنی</h4>
+                <p>هرگز روی سیستم اگزوز داغ کار نکنید. دمای سیستم اگزوز می‌تواند به ۶۰۰ درجه سانتی‌گراد برسد و باعث سوختگی شدید شود. همیشه اجازه دهید سیستم کاملاً سرد شود.</p>
+            </div>
+        </section>
+
+        <section id="environment" class="content-section">
+            <h2><i class="fas fa-leaf"></i> ملاحظات زیست‌محیطی</h2>
+            <p>سیستم اگزوز نقش مهمی در کاهش آلودگی هوا دارد. در این بخش با تأثیرات زیست‌محیطی سیستم اگزوز و روش‌های کاهش آلایندگی آشنا خواهید شد.</p>
+            
+            <h3><i class="fas fa-industry"></i> گازهای خروجی و اثرات آن‌ها</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-lungs"></i> مونوکسید کربن (CO)</h4>
+                    <p>گازی بی‌بو و بی‌رنگ که برای انسان و حیوانات بسیار سمی است.</p>
+                    <ul class="features-list">
+                        <li>منشاء: احتراق ناقص سوخت</li>
+                        <li>اثرات: اختلال در انتقال اکسیژن در خون</li>
+                        <li>حد مجاز: کمتر از ۱٪ در گازهای خروجی</li>
+                        <li>روش کاهش: بهبود احتراق، مبدل کاتالیستی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-cloud"></i> اکسیدهای نیتروژن (NOx)</h4>
+                    <p>این گازها در تشکیل smog و باران اساسی نقش دارند.</p>
+                    <ul class="features-list">
+                        <li>منشاء: احتراق در دمای بالا</li>
+                        <li>اثرات: مشکلات تنفسی، باران اسیدی</li>
+                        <li>حد مجاز: کمتر از ۰.۲۵٪ در گازهای خروجی</li>
+                        <li>روش کاهش: EGR، مبدل کاتالیستی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-fire"></i> هیدروکربن‌های نسوخته (HC)</h4>
+                    <p>باقی‌مانده سوخت نسوخته که در تشکیل ازن نقش دارد.</p>
+                    <ul class="features-list">
+                        <li>منشاء: احتراق ناقص</li>
+                        <li>اثرات: سرطان‌زا، تشکیل smog</li>
+                        <li>حد مجاز: کمتر از ۱۰۰ ppm</li>
+                        <li>روش کاهش: بهبود احتراق، مبدل کاتالیستی</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-recycle"></i> روش‌های کاهش آلایندگی</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>بهبود کیفیت سوخت</h4>
+                    <p>استفاده از سوخت با کیفیت بهتر می‌تواند به کاهش قابل توجه آلایندگی کمک کند.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>تعمیر و نگهداری منظم</h4>
+                    <p>سیستم اگزوز سالم و بهینه می‌تواند آلایندگی را تا ۹۰٪ کاهش دهد.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>استفاده از فناوری‌های پیشرفته</h4>
+                    <p>فناوری‌هایی مانند مبدل کاتالیستی سه‌طرفه و سیستم‌های کنترل پیشرفته آلایندگی.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>رانندگی بهینه</h4>
+                    <p>پرهیز از شتاب‌گیری‌های ناگهانی و حفظ سرعت ثابت می‌تواند آلایندگی را کاهش دهد.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-clipboard-check"></i> استانداردهای آلایندگی</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>استاندارد</th>
+                            <th>سال اجرا</th>
+                            <th>محدودیت‌های اصلی</th>
+                            <th>ملاحظات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>یورو ۱</td>
+                            <td>۱۹۹۲</td>
+                            <td>CO: 2.72 g/km • HC+NOx: 0.97 g/km</td>
+                            <td>اولین استاندارد اروپایی</td>
+                        </tr>
+                        <tr>
+                            <td>یورو ۴</td>
+                            <td>۲۰۰۵</td>
+                            <td>CO: 1.0 g/km • HC: 0.1 g/km • NOx: 0.08 g/km</td>
+                            <td>اجباری شدن مبدل کاتالیستی</td>
+                        </tr>
+                        <tr>
+                            <td>یورو ۶</td>
+                            <td>۲۰۱۴</td>
+                            <td>CO: 1.0 g/km • HC: 0.1 g/km • NOx: 0.06 g/km</td>
+                            <td>سختگیرانه‌ترین استاندارد فعلی</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="info-box">
+                <h4><i class="fas fa-lightbulb"></i> نقش تکنسین خودرو در حفظ محیط زیست</h4>
+                <p>تکنسین‌های خودرو نقش مهمی در حفظ محیط زیست دارند. با تعمیر و نگهداری صحیح سیستم اگزوز، می‌توانند به کاهش آلودگی هوا کمک کنند. همچنین با بازیافت صحیح قطعات فرسوده، از آلودگی محیط زیست جلوگیری می‌کنند.</p>
+            </div>
+            
+            <div class="warning-box">
+                <h4><i class="fas fa-exclamation-circle"></i> مسئولیت اجتماعی</h4>
+                <p>هر خودرویی که سیستم اگزوز معیوب دارد، می‌تواند به اندازه ۲۰ خودروی سالم آلودگی ایجاد کند. بنابراین تعمیر به موقع سیستم اگزوز نه تنها یک ضرورت فنی، بلکه یک مسئولیت اجتماعی است.</p>
+            </div>
+        </section>
+        
+        <footer>
+            <p>پایه دهم - شاخه فنی و حرفه‌ای | رشته مکانیک خودرو | بخش هفتم: تعمیر سیستم اگزوز خودرو</p>
+            <p>تمامی حقوق محفوظ است © 2023</p>
+        </footer>
+    </div>
+
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // Enhanced Tab Navigation with History
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and sections
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding section
+                tab.classList.add('active');
+                const targetId = tab.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+                
+                // Update URL hash for bookmarking
+                window.location.hash = targetId;
+                
+                // Scroll to top of section with smooth behavior
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Handle initial load with hash
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const targetTab = document.querySelector(`.nav-tab[data-target="${hash}"]`);
+                if (targetTab) {
+                    targetTab.click();
+                }
+            }
+            
+            // Animate progress bar
+            const progressFill = document.querySelector('.progress-fill');
+            progressFill.style.width = '92%';
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Enhanced Button Interactions
+        document.querySelectorAll('.btn').forEach(btn => {
+            // Add loading state to buttons
+            btn.addEventListener('click', function(e) {
+                if (this.textContent.includes('دانلود') || this.textContent.includes('پخش')) {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<span class="loading"></span> در حال بارگذاری...';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        if (this.textContent.includes('دانلود')) {
+                            alert('فایل با موفقیت دانلود شد!');
+                        } else {
+                            alert('ویدئو در حال پخش است...');
+                        }
+                    }, 1500);
+                    
+                    e.preventDefault();
+                }
+            });
+        });
+
+        // Quiz Interaction
+        document.querySelectorAll('.quiz-option').forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove any existing correct/incorrect classes
+                option.parentElement.querySelectorAll('.quiz-option').forEach(o => {
+                    o.classList.remove('correct', 'incorrect');
+                });
+                
+                // Add correct/incorrect class based on data
+                if (option.classList.contains('correct')) {
+                    option.classList.add('correct');
+                } else {
+                    option.classList.add('incorrect');
+                }
+            });
+        });
+
+        // Card hover effects
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Table row highlighting
+        document.querySelectorAll('table tr').forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#f5f9ff';
+            });
+            
+            row.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = '';
+            });
+        });
+
+        // Keyboard navigation for tabs
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                const tabs = Array.from(document.querySelectorAll('.nav-tab'));
+                const currentTab = document.querySelector('.nav-tab.active');
+                const currentIndex = tabs.indexOf(currentTab);
+                
+                let nextIndex;
+                if (e.key === 'ArrowRight') {
+                    nextIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
+                } else {
+                    nextIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
+                }
+                
+                tabs[nextIndex].click();
+            }
+        });
+
+        // Responsive menu for small screens
+        function createMobileMenu() {
+            if (window.innerWidth <= 992) {
+                const navContainer = document.querySelector('.nav-container');
+                const select = document.createElement('select');
+                select.className = 'mobile-nav-select';
+                select.style.width = '100%';
+                select.style.padding = '12px';
+                select.style.marginBottom = '15px';
+                select.style.borderRadius = '8px';
+                select.style.border = '2px solid #e74c3c';
+                select.style.background = 'white';
+                select.style.fontSize = '16px';
+                
+                document.querySelectorAll('.nav-tab').forEach(tab => {
+                    const option = document.createElement('option');
+                    option.value = tab.getAttribute('data-target');
+                    option.textContent = tab.textContent;
+                    if (tab.classList.contains('active')) {
+                        option.selected = true;
+                    }
+                    select.appendChild(option);
+                });
+                
+                select.addEventListener('change', (e) => {
+                    const targetId = e.target.value;
+                    document.querySelector(`.nav-tab[data-target="${targetId}"]`).click();
+                });
+                
+                // Replace nav with select on mobile
+                if (!document.querySelector('.mobile-nav-select')) {
+                    navContainer.insertBefore(select, navContainer.firstChild);
+                }
+            } else {
+                // Remove select and show regular nav
+                const mobileSelect = document.querySelector('.mobile-nav-select');
+                if (mobileSelect) {
+                    mobileSelect.remove();
+                }
+            }
+        }
+
+        // Initialize mobile menu
+        createMobileMenu();
+        window.addEventListener('resize', createMobileMenu);
+
+        // Add animation to elements when they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and steps
+        document.querySelectorAll('.card, .step, .path-step, .badge').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بخش چهارم: کنترل‌های سرسیلندر و آماده‌سازی نصب - پایه دهم فنی و حرفه‌ای</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --gradient: linear-gradient(135deg, #3498db, #2c3e50);
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        header:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-20px, -20px) rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Enhanced Navigation */
+        .nav-container {
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            margin-bottom: 2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: var(--shadow);
+            flex-wrap: wrap;
+            justify-content: center;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .nav-tabs:hover {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .nav-tab {
+            padding: 12px 24px;
+            margin: 5px;
+            background: var(--light);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .nav-tab:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .nav-tab:hover::before {
+            opacity: 1;
+        }
+
+        .nav-tab.active {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced Content Sections */
+        .content-section {
+            display: none;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 0.6s ease;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+            transform: translateY(-5px);
+            transition: var(--transition);
+        }
+
+        .content-section:hover::before {
+            transform: translateY(0);
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--secondary);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        h4 {
+            color: var(--primary);
+            margin: 1.2rem 0 0.8rem 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Enhanced Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--light);
+            padding: 1.8rem;
+            border-radius: 15px;
+            border-left: 5px solid var(--secondary);
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+            transform: translateY(-5px);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .card:hover::before {
+            transform: translateY(0);
+        }
+
+        .card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        /* Enhanced Table Styles */
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .table-container:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 15px 18px;
+            text-align: right;
+            border-bottom: 1px solid #ddd;
+            transition: var(--transition);
+        }
+
+        th {
+            background: var(--gradient);
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:hover {
+            background-color: #f5f9ff;
+        }
+
+        /* Enhanced Progress and Status */
+        .status-indicator {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 5px;
+            transition: var(--transition);
+        }
+
+        .status-indicator:hover {
+            transform: scale(1.05);
+        }
+
+        .status-basic { 
+            background: #e74c3c; 
+            color: white; 
+            box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
+        }
+        .status-intermediate { 
+            background: #f39c12; 
+            color: white; 
+            box-shadow: 0 3px 10px rgba(243, 156, 18, 0.3);
+        }
+        .status-advanced { 
+            background: #27ae60; 
+            color: white; 
+            box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+        }
+
+        /* Enhanced Features List */
+        .features-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .features-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-right: 35px;
+            transition: var(--transition);
+        }
+
+        .features-list li:hover {
+            background-color: #f8f9fa;
+            padding-right: 40px;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .features-list li:hover::before {
+            transform: scale(1.2);
+        }
+
+        /* Enhanced Interactive Elements */
+        .interactive-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 2rem 0;
+        }
+
+        .video-placeholder, .download-card, .quiz-card {
+            flex: 1;
+            min-width: 300px;
+            background: var(--light);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-placeholder:hover, .download-card:hover, .quiz-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .video-icon, .download-icon, .quiz-icon {
+            font-size: 3.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .video-placeholder:hover .video-icon,
+        .download-card:hover .download-icon,
+        .quiz-card:hover .quiz-icon {
+            transform: scale(1.1);
+        }
+
+        .video-placeholder h4, .download-card h4, .quiz-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            transform: translateX(-100%);
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn:hover::before {
+            transform: translateX(0);
+        }
+
+        /* Enhanced Progress Bar */
+        .progress-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .progress-container:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 10px;
+            transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 100%;
+            background: rgba(255,255,255,0.3);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100px); }
+        }
+
+        /* Enhanced Footer */
+        footer {
+            text-align: center;
+            padding: 2.5rem 0;
+            color: white;
+            margin-top: 2rem;
+            background: rgba(0,0,0,0.1);
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+
+        footer:hover {
+            background: rgba(0,0,0,0.15);
+        }
+
+        /* Step Container */
+        .step-container {
+            counter-reset: step;
+            margin: 2rem 0;
+        }
+
+        .step {
+            position: relative;
+            padding: 1.5rem 1.5rem 1.5rem 4rem;
+            margin: 1rem 0;
+            background: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .step:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Warning and Info Boxes */
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-right: 5px solid #f39c12;
+            transition: var(--transition);
+        }
+
+        .warning-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.2);
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-right: 5px solid #17a2b8;
+            transition: var(--transition);
+        }
+
+        .info-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(23, 162, 184, 0.2);
+        }
+
+        /* Diagram Styles */
+        .diagram-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 2px dashed #dee2e6;
+            text-align: center;
+        }
+
+        .diagram-placeholder {
+            width: 100%;
+            height: 300px;
+            background: #e9ecef;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+
+        .quiz-question {
+            margin-bottom: 1rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            padding: 12px 15px;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            background: #e6f7ff;
+            border-color: #b3e0ff;
+        }
+
+        .quiz-option.correct {
+            background: #d4edda;
+            border: 2px solid #c3e6cb;
+        }
+
+        .quiz-option.incorrect {
+            background: #f8d7da;
+            border: 2px solid #f5c6cb;
+        }
+
+        /* Responsive Improvements */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-tab {
+                margin: 3px 0;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .content-section {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .card-grid, .interactive-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .interactive-container {
+                flex-direction: column;
+            }
+            
+            .video-placeholder, .download-card, .quiz-card {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+            }
+            
+            .content-section {
+                padding: 1rem;
+                border-radius: 10px;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+            }
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav-tabs, .back-to-top, .btn {
+                display: none;
+            }
+            
+            .content-section {
+                display: block !important;
+                box-shadow: none;
+                break-inside: avoid;
+            }
+            
+            body {
+                background: white;
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1><i class="fas fa-car"></i> بخش چهارم: کنترل‌های سرسیلندر و آماده‌سازی نصب</h1>
+                <p class="subtitle">آموزش تعاملی و پیشرفته برای دانش‌آموزان پایه دهم - شاخه فنی و حرفه‌ای</p>
+            </div>
+        </header>
+
+        <div class="nav-container">
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-target="intro"><i class="fas fa-home"></i> معرفی بخش چهارم</button>
+                <button class="nav-tab" data-target="controls"><i class="fas fa-tasks"></i> کنترل‌های سرسیلندر</button>
+                <button class="nav-tab" data-target="valve-system"><i class="fas fa-fan"></i> سیستم سوپاپ</button>
+                <button class="nav-tab" data-target="camshaft"><i class="fas fa-cogs"></i> میل سوپاپ و یاتاقان‌ها</button>
+                <button class="nav-tab" data-target="preparation"><i class="fas fa-toolbox"></i> آماده‌سازی نصب</button>
+                <button class="nav-tab" data-target="installation"><i class="fas fa-wrench"></i> نصب سرسیلندر</button>
+                <button class="nav-tab" data-target="testing"><i class="fas fa-vial"></i> تست و راه‌اندازی</button>
+                <button class="nav-tab" data-target="resources"><i class="fas fa-download"></i> منابع آموزشی</button>
+            </nav>
+        </div>
+
+        <section id="intro" class="content-section active">
+            <h2><i class="fas fa-info-circle"></i> معرفی بخش چهارم: کنترل‌های سرسیلندر و آماده‌سازی نصب</h2>
+            <p>در این بخش با مراحل کنترل سرسیلندر پس از دریافت از واحد تراشکاری و آماده‌سازی آن برای نصب روی موتور آشنا خواهید شد. این آموزش شامل نکات فنی، روش‌های کنترل و استانداردهای تعمیراتی است.</p>
+            
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>پیشرفت دوره</span>
+                    <span>75% تکمیل شده</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%"></div>
+                </div>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-bolt"></i> اهداف بخش چهارم</h4>
+                    <ul class="features-list">
+                        <li>کنترل آب‌بندی سوپاپ‌ها و فیلر سوپاپ‌ها</li>
+                        <li>کنترل ارتفاع برخاست سوپاپ‌ها</li>
+                        <li>کنترل عرض کمربند محل نشست سوپاپ</li>
+                        <li>کنترل روانی حرکت سوپاپ و گاید</li>
+                        <li>کنترل تاب میل سوپاپ و هم‌مرکزی باتاقان‌ها</li>
+                        <li>آماده‌سازی سرسیلندر قبل از نصب</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-graduation-cap"></i> مهارت‌های کسب شده</h4>
+                    <ul class="features-list">
+                        <li>توانایی کنترل کیفیت سرسیلندر پس از تراشکاری</li>
+                        <li>تشخیص عیوب سیستم سوپاپ</li>
+                        <li>استفاده از ابزارهای اندازه‌گیری تخصصی</li>
+                        <li>انجام تنظیمات دقیق سیستم سوپاپ</li>
+                        <li>آماده‌سازی صحیح سرسیلندر برای نصب</li>
+                        <li>نصب و تنظیم صحیح سرسیلندر</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-award"></i> الزامات بخش</h4>
+                    <ul class="features-list">
+                        <li>تسلط بر مباحث بخش‌های قبلی</li>
+                        <li>دسترسی به ابزارهای تخصصی کنترل</li>
+                        <li>رعایت نکات ایمنی و زیست‌محیطی</li>
+                        <li>پایبندی به دستورالعمل‌های سازنده</li>
+                        <li>آشنایی با ابزارهای اندازه‌گیری دقیق</li>
+                        <li>دقت و توجه به جزئیات</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h4><i class="fas fa-lightbulb"></i> نکته مهم</h4>
+                <p>برای دستیابی به بهترین نتیجه در این بخش، مطمئن شوید که بر مباحث بخش‌های قبلی تسلط کافی دارید. در صورت نیاز می‌توانید به بخش‌های قبلی مراجعه کنید.</p>
+            </div>
+            
+            <div class="interactive-container">
+                <div class="video-placeholder">
+                    <div class="video-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>مروری بر بخش چهارم</h4>
+                    <p>ویدئوی معرفی کامل بخش چهارم و سرفصل‌ها</p>
+                    <button class="btn"><i class="fas fa-play"></i> پخش ویدئو</button>
+                </div>
+                
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-file-download"></i>
+                    </div>
+                    <h4>چک‌لیست کنترل‌ها</h4>
+                    <p>دانلود چک‌لیست کامل کنترل‌های سرسیلندر</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود PDF</button>
+                </div>
+                
+                <div class="quiz-card">
+                    <div class="quiz-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h4>آزمون پیش‌نیاز</h4>
+                    <p>سنجش دانش پیش از شروع بخش چهارم</p>
+                    <button class="btn"><i class="fas fa-pencil-alt"></i> شروع آزمون</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="controls" class="content-section">
+            <h2><i class="fas fa-tasks"></i> کنترل‌های سرسیلندر پس از تراشکاری</h2>
+            <p>پس از دریافت سرسیلندر از واحد تراشکاری، انجام کنترل‌های دقیق برای اطمینان از کیفیت کار و آماده بودن برای نصب ضروری است.</p>
+            
+            <h3><i class="fas fa-check-circle"></i> کنترل آب‌بندی سوپاپ‌ها</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>بررسی نشیمنگاه سوپاپ</h4>
+                    <p>نشیمنگاه سوپاپ باید کاملاً صاف و بدون هرگونه خراش یا ناهمواری باشد. از خط‌کش مهندسی برای کنترل صافی سطح استفاده کنید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>کنترل پهنای کمربند آب‌بندی</h4>
+                    <p>پهنای کمربند آب‌بندی باید مطابق استانداردهای سازنده باشد. پهنای بیش از حد باعث کاهش فشار سطحی و پهنای کم باعث سوختن سوپاپ می‌شود.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>آزمایش آب‌بندی با رنگ</h4>
+                    <p>با استفاده از رنگ مخصوص، سطح تماس سوپاپ و نشیمنگاه را کنترل کنید. الگوی رنگ باید یکنواخت و پیوسته باشد.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-ruler-vertical"></i> کنترل ارتفاع برخاست سوپاپ‌ها</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-ruler-combined"></i> اهمیت کنترل ارتفاع</h4>
+                    <p>کنترل ارتفاع برخاست سوپاپ‌ها برای تشخیص سایش یا لنگی بادامک‌های میل سوپاپ ضروری است. ارتفاع نادرست باعث کاهش راندمان موتور می‌شود.</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tachometer-alt"></i> روش اندازه‌گیری</h4>
+                    <p>با استفاده از ساعت اندازه‌گیری (اندیکاتور) و پایه مخصوص، ارتفاع باز شدن سوپاپ‌ها را اندازه‌گیری کنید.</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-exclamation-triangle"></i> نکات مهم</h4>
+                    <p>در صورت استفاده از تایپیت هیدرولیکی، اطمینان حاصل کنید که مکانیزم از روغن خالی نشده باشد، زیرا این امر بر ارتفاع باز شدن سوپاپ تأثیر می‌گذارد.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-compress-arrows-alt"></i> کنترل فیلر سوپاپ‌ها</h3>
+            <div class="info-box">
+                <h4><i class="fas fa-info-circle"></i> اطلاعات فنی</h4>
+                <p>در سرسیلندرهای OHC/OHV دارای تنظیم‌کننده شیم، کنترل فیلر سوپاپ‌ها باید مطابق دستورالعمل‌های ارائه شده انجام شود. فیلر نادرست باعث ایجاد صدا در مکانیزم و کاهش عملکرد موتور می‌شود.</p>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>نوع موتور</th>
+                            <th>فیلر مجاز ورودی (میلی‌متر)</th>
+                            <th>فیلر مجاز خروجی (میلی‌متر)</th>
+                            <th>روش تنظیم</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>موتورهای 4 سیلندر</td>
+                            <td>0.15 - 0.25</td>
+                            <td>0.20 - 0.30</td>
+                            <td>تعویض شیم</td>
+                        </tr>
+                        <tr>
+                            <td>موتورهای 6 سیلندر</td>
+                            <td>0.18 - 0.28</td>
+                            <td>0.23 - 0.33</td>
+                            <td>تعویض شیم</td>
+                        </tr>
+                        <tr>
+                            <td>موتورهای 8 سیلندر</td>
+                            <td>0.20 - 0.30</td>
+                            <td>0.25 - 0.35</td>
+                            <td>تعویض شیم</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="warning-box">
+                <h4><i class="fas fa-exclamation-circle"></i> هشدار ایمنی</h4>
+                <p>در هنگام کنترل فیلر سوپاپ‌ها، اطمینان حاصل کنید که میل سوپاپ در موقعیت صحیح قرار دارد و موتور حداقل دو دور کامل چرخیده است تا از صحت اندازه‌گیری اطمینان حاصل کنید.</p>
+            </div>
+        </section>
+
+        <section id="valve-system" class="content-section">
+            <h2><i class="fas fa-fan"></i> سیستم سوپاپ و کنترل‌های مربوطه</h2>
+            <p>سیستم سوپاپ یکی از مهمترین بخش‌های موتور است که کنترل دقیق آن برای عملکرد بهینه موتور ضروری است.</p>
+            
+            <h3><i class="fas fa-search"></i> کنترل روانی حرکت سوپاپ و گاید</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>بررسی گاید سوپاپ</h4>
+                    <p>گاید سوپاپ باید بدون هرگونه سایش یا خراشیدگی باشد. از میکرومتر برای اندازه‌گیری قطر داخلی گاید استفاده کنید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>کنترل ساق سوپاپ</h4>
+                    <p>ساق سوپاپ باید کاملاً صاف و بدون هرگونه خمیدگی یا سایش باشد. از میکرومتر برای اندازه‌گیری قطر ساق سوپاپ استفاده کنید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>آزمایش حرکت آزاد</h4>
+                    <p>سوپاپ باید در گاید خود به راحتی و بدون گیر کردن حرکت کند. هرگونه گیرکردن نشان‌دهنده مشکل در گاید یا ساق سوپاپ است.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-compress-alt"></i> کنترل فنر سوپاپ</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-weight-hanging"></i> کنترل طول آزاد فنر</h4>
+                    <p>طول آزاد فنر سوپاپ باید مطابق استانداردهای سازنده باشد. کاهش طول نشان‌دهنده خستگی فلز و کاهش نیروی فنر است.</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-ruler"></i> کنترل میزان خمش فنر</h4>
+                    <p>فنر سوپاپ باید کاملاً صاف و بدون هرگونه خمیدگی باشد. فنرهای خمیده باعث ایجاد صدا و کاهش عملکرد می‌شوند.</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-vial"></i> آزمایش نیروی فنر</h4>
+                    <p>با استفاده از دستگاه تستر فنر، نیروی فنر در طول‌های مختلف را اندازه‌گیری کنید. نیروی فنر باید مطابق استانداردهای سازنده باشد.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-tachometer-alt"></i> کنترل نشیمنگاه سوپاپ</h3>
+            <div class="info-box">
+                <h4><i class="fas fa-info-circle"></i> اطلاعات فنی</h4>
+                <p>نشیمنگاه سوپاپ باید کاملاً هم‌مرکز با گاید سوپاپ باشد. عدم هم‌مرکزی باعث آب‌بندی نادرست و کاهش عمر سوپاپ می‌شود.</p>
+            </div>
+            
+            <div class="diagram-container">
+                <h4><i class="fas fa-project-diagram"></i> نمودار سیستم سوپاپ</h4>
+                <div class="diagram-placeholder">
+                    <p>در اینجا نمودار کامل سیستم سوپاپ نمایش داده می‌شود</p>
+                </div>
+                <p class="text-center mt-3">شکل 1: اجزای سیستم سوپاپ و نحوه عملکرد آن</p>
+            </div>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">
+                    <p>کدام یک از موارد زیر نشان‌دهنده مشکل در گاید سوپاپ است؟</p>
+                </div>
+                <div class="quiz-options">
+                    <div class="quiz-option">حرکت روان سوپاپ در گاید</div>
+                    <div class="quiz-option">سایش یکنواخت گاید</div>
+                    <div class="quiz-option correct">گیر کردن سوپاپ در گاید</div>
+                    <div class="quiz-option">صافی سطح نشیمنگاه</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="camshaft" class="content-section">
+            <h2><i class="fas fa-cogs"></i> میل سوپاپ و یاتاقان‌ها</h2>
+            <p>کنترل میل سوپاپ و یاتاقان‌های آن برای اطمینان از عملکرد صحیح سیستم سوپاپ ضروری است.</p>
+            
+            <h3><i class="fas fa-ruler-combined"></i> کنترل تاب میل سوپاپ</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>تنظیم میل سوپاپ روی پایه V شکل</h4>
+                    <p>میل سوپاپ را روی پایه V شکل قرار داده و با استفاده از ساعت اندازه‌گیری، میزان تاب آن را کنترل کنید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>اندازه‌گیری تاب</h4>
+                    <p>میزان تاب مجاز برای میل سوپاپ معمولاً کمتر از 0.05 میلی‌متر است. تاب بیش از حد مجاز باعث ایجاد صدا و سایش سریع یاتاقان‌ها می‌شود.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>کنترل بادامک‌ها</h4>
+                    <p>بادامک‌های میل سوپاپ باید بدون هرگونه سایش یا خراشیدگی باشند. سایش بادامک‌ها باعث کاهش ارتفاع برخاست سوپاپ می‌شود.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-compress-arrows-alt"></i> کنترل هم‌مرکزی یاتاقان‌ها</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-search"></i> بررسی یاتاقان‌ها</h4>
+                    <p>یاتاقان‌های میل سوپاپ باید بدون هرگونه سایش یا خراشیدگی باشند. سایش یاتاقان‌ها باعث کاهش فشار روغن و آسیب به میل سوپاپ می‌شود.</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-ruler"></i> کنترل لقی یاتاقان‌ها</h4>
+                    <p>لقی بین میل سوپاپ و یاتاقان‌ها باید مطابق استانداردهای سازنده باشد. لقی بیش از حد باعث ایجاد صدا و کاهش فشار روغن می‌شود.</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tools"></i> کنترل هم‌مرکزی</h4>
+                    <p>یاتاقان‌های میل سوپاپ باید کاملاً هم‌مرکز باشند. عدم هم‌مرکزی باعث سایش غیریکنواخت و کاهش عمر میل سوپاپ می‌شود.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-oil-can"></i> کنترل کانال‌های روغن</h3>
+            <div class="info-box">
+                <h4><i class="fas fa-info-circle"></i> اطلاعات فنی</h4>
+                <p>کانال‌های روغن میل سوپاپ باید کاملاً تمیز و بدون هرگونه گرفتگی باشند. گرفتگی کانال‌های روغن باعث خشک کار کردن یاتاقان‌ها و آسیب به میل سوپاپ می‌شود.</p>
+            </div>
+            
+            <div class="warning-box">
+                <h4><i class="fas fa-exclamation-circle"></i> هشدار ایمنی</h4>
+                <p>در هنگام کنترل میل سوپاپ، از دستکش استفاده کنید زیرا لبه‌های تیز بادامک‌ها می‌تواند باعث بریدگی شود. همچنین از افتادن میل سوپاپ جلوگیری کنید زیرا این امر می‌تواند باعث تاب برداشتن آن شود.</p>
+            </div>
+        </section>
+
+        <section id="preparation" class="content-section">
+            <h2><i class="fas fa-toolbox"></i> آماده‌سازی سرسیلندر قبل از نصب</h2>
+            <p>پس از اتمام کنترل‌ها، سرسیلندر باید برای نصب روی موتور آماده شود. این مرحله شامل تمیزکاری نهایی و کنترل‌های پایانی است.</p>
+            
+            <h3><i class="fas fa-broom"></i> تمیزکاری نهایی</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>شستشوی کامل سرسیلندر</h4>
+                    <p>سرسیلندر را با استفاده از حلال مناسب کاملاً شستشو دهید تا از پاک شدن تمامی ذرات و آلودگی‌ها اطمینان حاصل کنید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>تمیز کردن کانال‌های روغن و آب</h4>
+                    <p>کانال‌های روغن و آب را با استفاده از برس مخصوص کاملاً تمیز کنید تا از گرفتگی آن‌ها جلوگیری شود.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>تمیز کردن رزوه‌های پیچ‌ها</h4>
+                    <p>رزوه‌های تمامی پیچ‌ها را با استفاده از برس رزوه کاملاً تمیز کنید تا از چفت شدن صحیح پیچ‌ها اطمینان حاصل کنید.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-check-double"></i> کنترل‌های پایانی</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-search"></i> کنترل نهایی سطوح</h4>
+                    <p>سطوح تماس سرسیلندر با بلوک سیلندر را کنترل کنید تا مطمئن شوید کاملاً تمیز و بدون هرگونه خراشیدگی هستند.</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-ruler"></i> کنترل ابعاد نهایی</h4>
+                    <p>ابعاد مهم سرسیلندر را یکبار دیگر کنترل کنید تا مطمئن شوید مطابق استانداردهای سازنده هستند.</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-clipboard-check"></i> تکمیل چک‌لیست</h4>
+                    <p>چک‌لیست کنترل‌های سرسیلندر را تکمیل کنید و از انجام تمامی مراحل کنترل اطمینان حاصل کنید.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-oil-can"></i> روغن‌کاری قطعات</h3>
+            <div class="info-box">
+                <h4><i class="fas fa-info-circle"></i> اطلاعات فنی</h4>
+                <p>قبل از نصب سرسیلندر، تمامی قطعات متحرک را با روغن موتور مناسب روغن‌کاری کنید. این کار از خشک کار کردن قطعات در لحظه راه‌اندازی جلوگیری می‌کند.</p>
+            </div>
+            
+            <div class="warning-box">
+                <h4><i class="fas fa-exclamation-circle"></i> هشدار ایمنی</h4>
+                <p>از تماس حلال‌ها با پوست و چشم‌ها خودداری کنید و از تهویه مناسب در محیط کار اطمینان حاصل کنید. همچنین از دستکش و عینک محافظ استفاده کنید.</p>
+            </div>
+        </section>
+
+        <section id="installation" class="content-section">
+            <h2><i class="fas fa-wrench"></i> نصب سرسیلندر روی موتور</h2>
+            <p>نصب صحیح سرسیلندر روی موتور برای اطمینان از عملکرد بهینه و جلوگیری از نشتی ضروری است.</p>
+            
+            <h3><i class="fas fa-tools"></i> مراحل نصب سرسیلندر</h3>
+            <div class="step-container">
+                <div class="step">
+                    <h4>کنترل سطح بلوک سیلندر</h4>
+                    <p>سطح بلوک سیلندر را کنترل کنید تا مطمئن شوید کاملاً تمیز و صاف است. از خط‌کش مهندسی برای کنترل صافی سطح استفاده کنید.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>نصب واشر سرسیلندر</h4>
+                    <p>واشر سرسیلندر جدید را روی بلوک سیلندر قرار دهید. مطمئن شوید واشر در جهت صحیح قرار گرفته و کاملاً روی بلوک سیلندر نشسته است.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>نصب سرسیلندر</h4>
+                    <p>سرسیلندر را به آرامی روی بلوک سیلندر قرار دهید. مراقب باشید به واشر سرسیلندر آسیب نرسد.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>نصب پیچ‌های سرسیلندر</h4>
+                    <p>پیچ‌های سرسیلندر را با روغن مناسب روغن‌کاری کرده و با ترتیب صحیح و با گشتاور مشخص شده ببندید.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-cog"></i> تنظیم تایمینگ موتور</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-cogs"></i> تنظیم تسمه تایم</h4>
+                    <p>تسمه تایم را مطابق نشانه‌های روی چرخ دنده‌ها تنظیم کنید. تنظیم نادرست تایمینگ باعث برخورد سوپاپ‌ها با پیستون می‌شود.</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-sliders-h"></i> تنظیم زنجیر تایم</h4>
+                    <p>در موتورهای دارای زنجیر تایم، زنجیر را مطابق نشانه‌های روی چرخ دنده‌ها تنظیم کنید.</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-check-circle"></i> کنترل نهایی تایمینگ</h4>
+                    <p>پس از تنظیم تایمینگ، موتور را چند دور بچرخانید و دوباره نشانه‌ها را کنترل کنید تا از صحت تنظیم اطمینان حاصل کنید.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-tachometer-alt"></i> تنظیم گشتاور پیچ‌ها</h3>
+            <div class="info-box">
+                <h4><i class="fas fa-info-circle"></i> اطلاعات فنی</h4>
+                <p>گشتاور پیچ‌های سرسیلندر باید مطابق دستورالعمل‌های سازنده باشد. گشتاور نادرست باعث نشتی یا آسیب به سرسیلندر می‌شود.</p>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>مرحله</th>
+                            <th>گشتاور (Nm)</th>
+                            <th>ترتیب</th>
+                            <th>توضیحات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>مرحله اول</td>
+                            <td>40</td>
+                            <td>از مرکز به خارج</td>
+                            <td>گشتاور اولیه</td>
+                        </tr>
+                        <tr>
+                            <td>مرحله دوم</td>
+                            <td>80</td>
+                            <td>از مرکز به خارج</td>
+                            <td>گشتاور نهایی</td>
+                        </tr>
+                        <tr>
+                            <td>مرحله سوم</td>
+                            <td>90 درجه</td>
+                            <td>از مرکز به خارج</td>
+                            <td>گشتاور زاویه‌ای</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="testing" class="content-section">
+            <h2><i class="fas fa-vial"></i> تست و راه‌اندازی پس از نصب</h2>
+            <p>پس از نصب سرسیلندر، انجام تست‌های مختلف برای اطمینان از صحت عملکرد و رفع تمامی عیوب ضروری است.</p>
+            
+            <h3><i class="fas fa-check-double"></i> تست‌های پایانی</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-compress-arrows-alt"></i> تست فشار سیلندر</h4>
+                    <p>اندازه‌گیری فشار تراکم در هر سیلندر برای اطمینان از آب‌بندی صحیح</p>
+                    <ul class="features-list">
+                        <li>فشار استاندارد: 12-15 بار</li>
+                        <li>حداکثر اختلاف مجاز بین سیلندرها: 1 بار</li>
+                        <li>تست در حالت سرد و گرم</li>
+                        <li>بررسی نشتی از سوپاپ‌ها و رینگ‌ها</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tachometer-alt"></i> تست عملکرد موتور</h4>
+                    <p>بررسی عملکرد موتور در دورهای مختلف و تحت بارهای متفاوت</p>
+                    <ul class="features-list">
+                        <li>کنترل دور آرام موتور</li>
+                        <li>بررسی شتاب‌گیری موتور</li>
+                        <li>تست تحت بار در جاده</li>
+                        <li>کنترل مصرف سوخت و روغن</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-temperature-high"></i> تست حرارتی</h4>
+                    <p>بررسی عملکرد سیستم خنک‌کننده و دمای کاری موتور</p>
+                    <ul class="features-list">
+                        <li>کنترل دمای موتور در شرایط مختلف</li>
+                        <li>بررسی عملکرد ترموستات</li>
+                        <li>تست فن خنک‌کننده</li>
+                        <li>کنترل گردش مایع خنک‌کننده</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h4><i class="fas fa-exclamation-circle"></i> نکات مهم پس از تعمیر</h4>
+                <ul class="features-list">
+                    <li>در 500 کیلومتر اول از بارگذاری شدید روی موتور خودداری کنید</li>
+                    <li>روغن موتور را پس از 500 کیلومتر اول تعویض کنید</li>
+                    <li>گشتاور پیچ‌های سرسیلندر را پس از اولین گرم شدن موتور کنترل کنید</li>
+                    <li>میزان مایع خنک‌کننده را به طور مرتب کنترل کنید</li>
+                </ul>
+            </div>
+            
+            <div class="quiz-container">
+                <div class="quiz-question">
+                    <p>کدام یک از موارد زیر باید در 500 کیلومتر اول پس از تعمیر سرسیلندر رعایت شود؟</p>
+                </div>
+                <div class="quiz-options">
+                    <div class="quiz-option">بارگذاری شدید روی موتور</div>
+                    <div class="quiz-option">تعویض روغن پس از 1000 کیلومتر</div>
+                    <div class="quiz-option correct">خودداری از بارگذاری شدید روی موتور</div>
+                    <div class="quiz-option">عدم کنترل گشتاور پیچ‌های سرسیلندر</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="content-section">
+            <h2><i class="fas fa-download"></i> منابع آموزشی بخش چهارم</h2>
+            <p>در این بخش می‌توانید منابع آموزشی مختلف مربوط به بخش چهارم را دانلود و استفاده کنید.</p>
+            
+            <h3><i class="fas fa-file-pdf"></i> فایل‌های PDF</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-book"></i> راهنمای کامل کنترل‌های سرسیلندر</h4>
+                    <p>جزوه جامع شامل تمام مراحل کنترل سرسیلندر با تصاویر و جداول - 120 صفحه</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود (3.8 MB)</button>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-table"></i> جدول استانداردهای کنترل</h4>
+                    <p>جدول کامل استانداردهای کنترل برای انواع موتورهای مختلف</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود (1.5 MB)</button>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-clipboard-list"></i> چک‌لیست کنترل‌ها</h4>
+                    <p>چک‌لیست مرحله به مرحله برای کنترل‌های سرسیلندر</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود (0.9 MB)</button>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-film"></i> ویدئوهای آموزشی</h3>
+            <div class="interactive-container">
+                <div class="video-placeholder">
+                    <div class="video-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>کنترل آب‌بندی سوپاپ‌ها</h4>
+                    <p>ویدئوی کامل مراحل کنترل آب‌بندی سوپاپ‌ها (32 دقیقه)</p>
+                    <button class="btn"><i class="fas fa-play"></i> پخش ویدئو</button>
+                </div>
+                
+                <div class="video-placeholder">
+                    <div class="video-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>کنترل میل سوپاپ</h4>
+                    <p>روش‌های کنترل میل سوپاپ و یاتاقان‌ها (28 دقیقه)</p>
+                    <button class="btn"><i class="fas fa-play"></i> پخش ویدئو</button>
+                </div>
+                
+                <div class="video-placeholder">
+                    <div class="video-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>آماده‌سازی و نصب</h4>
+                    <p>مراحل آماده‌سازی و نصب سرسیلندر (45 دقیقه)</p>
+                    <button class="btn"><i class="fas fa-play"></i> پخش ویدئو</button>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-images"></i> گالری تصاویر</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-image"></i> ابزارهای کنترل</h4>
+                    <p>مجموعه تصاویر ابزارهای کنترل با توضیحات کامل</p>
+                    <button class="btn"><i class="fas fa-download"></i> دریافت مجموعه</button>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-image"></i> عیوب رایج</h4>
+                    <p>تصاویر عیوب رایج سیستم سوپاپ با نحوه تشخیص</p>
+                    <button class="btn"><i class="fas fa-download"></i> دریافت مجموعه</button>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-image"></i> مراحل کنترل</h4>
+                    <p>تصاویر مرحله به مرحله کنترل با کیفیت بالا</p>
+                    <button class="btn"><i class="fas fa-download"></i> دریافت مجموعه</button>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-gamepad"></i> ابزارهای تعاملی</h3>
+            <div class="interactive-container">
+                <div class="quiz-card">
+                    <div class="quiz-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h4>پازل قطعات</h4>
+                    <p>بازی آموزشی برای شناخت قطعات سیستم سوپاپ</p>
+                    <button class="btn"><i class="fas fa-play"></i> شروع بازی</button>
+                </div>
+                
+                <div class="quiz-card">
+                    <div class="quiz-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h4>آزمون نهایی</h4>
+                    <p>آزمون جامع بخش چهارم با 40 سوال</p>
+                    <button class="btn"><i class="fas fa-pencil-alt"></i> شروع آزمون</button>
+                </div>
+                
+                <div class="quiz-card">
+                    <div class="quiz-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h4>گواهینامه</h4>
+                    <p>دریافت گواهینامه پایان بخش چهارم</p>
+                    <button class="btn"><i class="fas fa-download"></i> دریافت گواهی</button>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>پایه دهم - شاخه فنی و حرفه‌ای | رشته مکانیک خودرو | بخش چهارم: کنترل‌های سرسیلندر و آماده‌سازی نصب</p>
+            <p>تمامی حقوق محفوظ است © 2023</p>
+        </footer>
+    </div>
+
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // Enhanced Tab Navigation with History
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and sections
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding section
+                tab.classList.add('active');
+                const targetId = tab.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+                
+                // Update URL hash for bookmarking
+                window.location.hash = targetId;
+                
+                // Scroll to top of section with smooth behavior
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Handle initial load with hash
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const targetTab = document.querySelector(`.nav-tab[data-target="${hash}"]`);
+                if (targetTab) {
+                    targetTab.click();
+                }
+            }
+            
+            // Animate progress bar
+            const progressFill = document.querySelector('.progress-fill');
+            progressFill.style.width = '75%';
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Enhanced Button Interactions
+        document.querySelectorAll('.btn').forEach(btn => {
+            // Add loading state to buttons
+            btn.addEventListener('click', function(e) {
+                if (this.textContent.includes('دانلود') || this.textContent.includes('پخش')) {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<span class="loading"></span> در حال بارگذاری...';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        if (this.textContent.includes('دانلود')) {
+                            alert('فایل با موفقیت دانلود شد!');
+                        } else {
+                            alert('ویدئو در حال پخش است...');
+                        }
+                    }, 1500);
+                    
+                    e.preventDefault();
+                }
+            });
+        });
+
+        // Quiz Interaction
+        document.querySelectorAll('.quiz-option').forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove any existing correct/incorrect classes
+                option.parentElement.querySelectorAll('.quiz-option').forEach(o => {
+                    o.classList.remove('correct', 'incorrect');
+                });
+                
+                // Add correct/incorrect class based on data
+                if (option.classList.contains('correct')) {
+                    option.classList.add('correct');
+                } else {
+                    option.classList.add('incorrect');
+                }
+            });
+        });
+
+        // Card hover effects
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Table row highlighting
+        document.querySelectorAll('table tr').forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#f5f9ff';
+            });
+            
+            row.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = '';
+            });
+        });
+
+        // Keyboard navigation for tabs
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                const tabs = Array.from(document.querySelectorAll('.nav-tab'));
+                const currentTab = document.querySelector('.nav-tab.active');
+                const currentIndex = tabs.indexOf(currentTab);
+                
+                let nextIndex;
+                if (e.key === 'ArrowRight') {
+                    nextIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
+                } else {
+                    nextIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
+                }
+                
+                tabs[nextIndex].click();
+            }
+        });
+
+        // Print functionality
+        const printButton = document.createElement('button');
+        printButton.className = 'btn';
+        printButton.innerHTML = '<i class="fas fa-print"></i> چاپ صفحه';
+        printButton.style.margin = '20px auto';
+        printButton.style.display = 'block';
+        
+        printButton.addEventListener('click', () => {
+            window.print();
+        });
+        
+        document.querySelector('footer').appendChild(printButton);
+
+        // Responsive menu for small screens
+        function createMobileMenu() {
+            if (window.innerWidth <= 992) {
+                const navContainer = document.querySelector('.nav-container');
+                const select = document.createElement('select');
+                select.className = 'mobile-nav-select';
+                select.style.width = '100%';
+                select.style.padding = '12px';
+                select.style.marginBottom = '15px';
+                select.style.borderRadius = '8px';
+                select.style.border = '2px solid #3498db';
+                select.style.background = 'white';
+                select.style.fontSize = '16px';
+                
+                document.querySelectorAll('.nav-tab').forEach(tab => {
+                    const option = document.createElement('option');
+                    option.value = tab.getAttribute('data-target');
+                    option.textContent = tab.textContent;
+                    if (tab.classList.contains('active')) {
+                        option.selected = true;
+                    }
+                    select.appendChild(option);
+                });
+                
+                select.addEventListener('change', (e) => {
+                    const targetId = e.target.value;
+                    document.querySelector(`.nav-tab[data-target="${targetId}"]`).click();
+                });
+                
+                // Replace nav with select on mobile
+                if (!document.querySelector('.mobile-nav-select')) {
+                    navContainer.insertBefore(select, navContainer.firstChild);
+                }
+            } else {
+                // Remove select and show regular nav
+                const mobileSelect = document.querySelector('.mobile-nav-select');
+                if (mobileSelect) {
+                    mobileSelect.remove();
+                }
+            }
+        }
+
+        // Initialize mobile menu
+        createMobileMenu();
+        window.addEventListener('resize', createMobileMenu);
+    </script>
+</body>
+</html>

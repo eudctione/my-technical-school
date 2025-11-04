@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بخش هشتم: تعمیر سیستم روغن‌کاری موتور - پایه دهم مکانیک خودرو</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --gradient: linear-gradient(135deg, #3498db, #2980b9);
+            --gradient-secondary: linear-gradient(135deg, #e74c3c, #c0392b);
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --radius: 15px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            margin-bottom: 2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-radius: var(--radius);
+            padding: 10px;
+            box-shadow: var(--shadow);
+            flex-wrap: wrap;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .nav-tab {
+            padding: 12px 24px;
+            margin: 5px;
+            background: var(--light);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-tab:hover {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .nav-tab.active {
+            background: var(--gradient);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--secondary);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h4 {
+            color: var(--primary);
+            margin: 1.2rem 0 0.8rem 0;
+            font-size: 1.2rem;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--light);
+            padding: 1.8rem;
+            border-radius: var(--radius);
+            border-left: 5px solid var(--secondary);
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        /* Features List */
+        .features-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .features-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-right: 30px;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* Interactive Container */
+        .interactive-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 2rem 0;
+        }
+
+        .video-placeholder, .download-card, .quiz-card {
+            flex: 1;
+            min-width: 300px;
+            background: var(--light);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+        }
+
+        .video-placeholder:hover, .download-card:hover, .quiz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .video-icon, .download-icon, .quiz-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: var(--radius);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: right;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: var(--gradient);
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Step Container */
+        .step-container {
+            counter-reset: step;
+            margin: 2rem 0;
+        }
+
+        .step {
+            position: relative;
+            padding: 1.5rem 1.5rem 1.5rem 4rem;
+            margin: 1rem 0;
+            background: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Warning and Info Boxes */
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-right: 5px solid #f39c12;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-right: 5px solid #17a2b8;
+        }
+
+        .danger-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-right: 5px solid #e74c3c;
+        }
+
+        /* Resource Grid */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 2rem 0;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* Exercise Container */
+        .exercise-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 5px solid var(--success);
+        }
+
+        .exercise-question {
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .exercise-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .exercise-option {
+            padding: 12px 15px;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .exercise-option:hover {
+            background: #e6f7ff;
+            border-color: #b3e0ff;
+        }
+
+        .exercise-option.correct {
+            background: #d4edda;
+            border: 2px solid #c3e6cb;
+        }
+
+        .exercise-option.incorrect {
+            background: #f8d7da;
+            border: 2px solid #f5c6cb;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 10px;
+            transition: width 0.8s ease;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: white;
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .nav-tab {
+                margin: 3px 0;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .card-grid, .interactive-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1><i class="fas fa-oil-can"></i> بخش هشتم: تعمیر سیستم روغن‌کاری موتور</h1>
+                <p class="subtitle">پایه دهم رشته مکانیک خودرو - آموزش جامع و عملی سیستم روغن‌کاری از پایه تا پیشرفته</p>
+            </div>
+        </header>
+
+        <div class="nav-container">
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-target="intro"><i class="fas fa-home"></i> معرفی بخش</button>
+                <button class="nav-tab" data-target="fundamentals"><i class="fas fa-book"></i> اصول پایه</button>
+                <button class="nav-tab" data-target="components"><i class="fas fa-cogs"></i> اجزای سیستم</button>
+                <button class="nav-tab" data-target="circuit"><i class="fas fa-project-diagram"></i> مدار روغن‌کاری</button>
+                <button class="nav-tab" data-target="diagnosis"><i class="fas fa-stethoscope"></i> عیب‌یابی</button>
+                <button class="nav-tab" data-target="repair"><i class="fas fa-tools"></i> تعمیرات</button>
+                <button class="nav-tab" data-target="resources"><i class="fas fa-download"></i> منابع آموزشی</button>
+                <button class="nav-tab" data-target="exercises"><i class="fas fa-pencil-alt"></i> تمرین‌ها</button>
+            </nav>
+        </div>
+
+        <section id="intro" class="content-section active">
+            <h2><i class="fas fa-info-circle"></i> معرفی بخش هشتم: سیستم روغن‌کاری موتور</h2>
+            <p>سیستم روغن‌کاری قلب تپنده موتور خودرو است که نقش حیاتی در افزایش طول عمر قطعات، کاهش اصطکاک، خنک‌کاری و بهبود عملکرد موتور دارد. در این بخش به صورت جامع و کاربردی با این سیستم آشنا خواهید شد.</p>
+            
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>پیشرفت دوره</span>
+                    <span>15% تکمیل شده</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 15%"></div>
+                </div>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-bullseye"></i> اهداف یادگیری</h4>
+                    <ul class="features-list">
+                        <li>شناخت کامل وظایف و اهمیت سیستم روغن‌کاری</li>
+                        <li>آشنایی با انواع سیستم‌های روغن‌کاری و کاربردهای آن‌ها</li>
+                        <li>یادگیری عملکرد اجزای مختلف سیستم روغن‌کاری</li>
+                        <li>تسلط بر روش‌های عیب‌یابی و تشخیص مشکلات</li>
+                        <li>یادگیری تعمیر و تعویض قطعات معیوب</li>
+                        <li>آشنایی با استانداردهای فنی و ایمنی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-graduation-cap"></i> مهارت‌های کسب شده</h4>
+                    <ul class="features-list">
+                        <li>توانایی سرویس و نگهداری سیستم روغن‌کاری</li>
+                        <li>مهارت در عیب‌یابی مشکلات رایج سیستم</li>
+                        <li>تسلط بر تعمیر و تعویض پمپ روغن</li>
+                        <li>توانایی تست فشار و عملکرد سیستم</li>
+                        <li>مهارت در تعویض فیلتر و روغن موتور</li>
+                        <li>آشنایی با سیستم‌های روغن‌کاری پیشرفته</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-award"></i> پیش‌نیازها</h4>
+                    <ul class="features-list">
+                        <li>آشنایی با اصول پایه موتور خودرو</li>
+                        <li>مبانی مکانیک و اصطکاک</li>
+                        <li>آشنایی با ابزارهای تعمیراتی پایه</li>
+                        <li>رعایت نکات ایمنی در کارگاه</li>
+                        <li>علاقه به یادگیری عملی</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4><i class="fas fa-lightbulb"></i> نکته مهم برای دانش‌آموزان</h4>
+                <p>سیستم روغن‌کاری یکی از مهمترین سیستم‌های موتور است که خرابی آن می‌تواند منجر به آسیب‌های جدی و هزینه‌بر شود. یادگیری اصولی این سیستم برای هر تکنسین خودرو ضروری است.</p>
+            </div>
+
+            <div class="interactive-container">
+                <div class="video-placeholder">
+                    <div class="video-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>فیلم معرفی سیستم روغن‌کاری</h4>
+                    <p>تماشای ویدئوی معرفی کامل سیستم روغن‌کاری و اهمیت آن در موتور</p>
+                    <button class="btn"><i class="fas fa-play"></i> پخش ویدئو</button>
+                </div>
+                
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-file-download"></i>
+                    </div>
+                    <h4>جزوه آموزشی</h4>
+                    <p>دریافت جزوه کامل سیستم روغن‌کاری موتور</p>
+                    <button class="btn"><i class="fas fa-download"></i> دریافت PDF</button>
+                </div>
+                
+                <div class="quiz-card">
+                    <div class="quiz-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h4>آزمون سنجش دانش</h4>
+                    <p>شرکت در آزمون آنلاین برای سنجش دانش پیش‌نیاز</p>
+                    <button class="btn"><i class="fas fa-pencil-alt"></i> شروع آزمون</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="fundamentals" class="content-section">
+            <h2><i class="fas fa-book"></i> اصول پایه سیستم روغن‌کاری</h2>
+            
+            <h3><i class="fas fa-tachometer-alt"></i> وظایف اصلی سیستم روغن‌کاری</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-oil-can"></i> روان‌کاری قطعات</h4>
+                    <p>کاهش اصطکاک بین قطعات متحرک موتور که در تماس با یکدیگر هستند.</p>
+                    <ul class="features-list">
+                        <li>کاهش سایش قطعات</li>
+                        <li>کاهش مصرف انرژی</li>
+                        <li>افزایش عمر مفید قطعات</li>
+                        <li>کاهش حرارت تولیدی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-fan"></i> خنک‌کاری موتور</h4>
+                    <p>جذب و انتقال حرارت از قطعات داغ موتور به محیط خارج.</p>
+                    <ul class="features-list">
+                        <li>جذب حرارت از پیستون و سیلندر</li>
+                        <li>خنک‌کاری یاتاقان‌ها</li>
+                        <li>تنظیم دمای کاری موتور</li>
+                        <li>جلوگیری از overheating</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-broom"></i> تمیزکاری و ضدزنگ</h4>
+                    <p>جلوگیری از تشکیل رسوب و زنگ‌زدگی در قطعات موتور.</p>
+                    <ul class="features-list">
+                        <li>جذب ناخالصی‌ها و ذرات فلزی</li>
+                        <li>جلوگیری از تشکیل لجن</li>
+                        <li>محافظت در برابر خوردگی</li>
+                        <li>حفظ کیفیت سطوح</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-vial"></i> انواع روغن موتور و مشخصات آن‌ها</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>نوع روغن</th>
+                            <th>ویژگی‌ها</th>
+                            <th>کاربرد</th>
+                            <th>مزایا</th>
+                            <th>معایب</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>معدنی (Mineral)</td>
+                            <td>پایه نفتی، ویسکوزیته ساده</td>
+                            <td>خودروهای قدیمی، موتورهای ساده</td>
+                            <td>قیمت مناسب، در دسترس</td>
+                            <td>عمر کوتاه، مقاومت حرارتی پایین</td>
+                        </tr>
+                        <tr>
+                            <td>نیمه سنتتیک (Semi-Synthetic)</td>
+                            <td>ترکیب معدنی و سنتتیک</td>
+                            <td>خودروهای معمولی</td>
+                            <td>تعادل قیمت و عملکرد</td>
+                            <td>کارایی محدود در شرایط سخت</td>
+                        </tr>
+                        <tr>
+                            <td>سنتتیک (Full Synthetic)</td>
+                            <td>پایه شیمیایی، ویسکوزیته پیشرفته</td>
+                            <td>خودروهای مدرن، شرایط سخت</td>
+                            <td>عمر طولانی، مقاومت حرارتی بالا</td>
+                            <td>قیمت بالا</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="info-box">
+                <h4><i class="fas fa-graduation-cap"></i> نکته فنی: درجه ویسکوزیته</h4>
+                <p>عدد SAE نشان‌دهنده غلظت روغن است. به عنوان مثال 5W-30 یعنی روغن در دمای سرد (Winter) مانند روغن SAE 5 عمل می‌کند و در دمای کارکرد معمولی مانند روغن SAE 30 عمل می‌نماید.</p>
+            </div>
+
+            <h3><i class="fas fa-exclamation-triangle"></i> اهمیت سرویس به موقع روغن</h3>
+            <div class="warning-box">
+                <h4><i class="fas fa-exclamation-circle"></i> هشدار مهم</h4>
+                <p>تعویض نابه‌موقع روغن موتور می‌تواند منجر به مشکلات زیر شود:</p>
+                <ul class="features-list">
+                    <li>فرسایش سریع قطعات موتور</li>
+                    <li>کاهش راندمان موتور</li>
+                    <li>افزایش مصرف سوخت</li>
+                    <li>آسیب‌های جدی و هزینه‌بر</li>
+                    <li>کاهش عمر مفید موتور</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="components" class="content-section">
+            <h2><i class="fas fa-cogs"></i> اجزای سیستم روغن‌کاری</h2>
+            
+            <h3><i class="fas fa-puzzle-piece"></i> بخش‌های اصلی سیستم</h3>
+            
+            <div class="step-container">
+                <div class="step">
+                    <h4>کارتر روغن (Oil Pan)</h4>
+                    <p>محفظه‌ای در زیر موتور که روغن در آن ذخیره می‌شود. معمولاً از جنس فولاد یا آلومینیوم ساخته می‌شود.</p>
+                    <ul class="features-list">
+                        <li>ظرفیت: ۳ تا ۶ لیتر بسته به نوع موتور</li>
+                        <li>دارای صفحه‌های آرامش برای جلوگیری از کف کردن روغن</li>
+                        <li>محل نصب پیچ تخلیه روغن</li>
+                        <li>مجهز به سنسور سطح روغن در برخی مدل‌ها</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h4>پمپ روغن (Oil Pump)</h4>
+                    <p>قلب سیستم روغن‌کاری که مسئول گردش روغن در مدار است.</p>
+                    <ul class="features-list">
+                        <li>انواع: چرخ دنده‌ای، روتوری، پره‌ای</li>
+                        <li>فشار کاری: ۲-۵ بار در دور آرام</li>
+                        <li>مکانیزم محرک: مستقیم از میل لنگ یا زنجیر</li>
+                        <li>دارای سوپاپ اطمینان برای کنترل فشار</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h4>فیلتر روغن (Oil Filter)</h4>
+                    <p>مسئول تصفیه روغن و جذب ناخالصی‌ها و ذرات فلزی.</p>
+                    <ul class="features-list">
+                        <li>جنس فیلتر: کاغذ مخصوص با تاخوردگی‌های زیاد</li>
+                        <li>دارای سوپاپ یکطرفه برای جلوگیری از خشک کار کردن موتور</li>
+                        <li>سوپاپ کنارگذر برای مواقع گرفتگی فیلتر</li>
+                        <li>عمر مفید: ۵۰۰۰ تا ۱۰۰۰۰ کیلومتر</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h4>خنک کن روغن (Oil Cooler)</h4>
+                    <p>رادیاتور کوچکی که برای خنک‌کاری روغن استفاده می‌شود.</p>
+                    <ul class="features-list">
+                        <li>مورد استفاده در خودروهای پرتوان و دیزلی</li>
+                        <li>اتصال به سیستم خنک‌کاری موتور</li>
+                        <li>کاهش دمای روغن تا ۲۰ درجه سانتی‌گراد</li>
+                        <li>افزایش عمر روغن و قطعات</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-tachometer-alt"></i> سنسورها و نشانگرها</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-gauge-high"></i> سنسور فشار روغن</h4>
+                    <p>فشار روغن را اندازه‌گیری کرده و به راننده اطلاع می‌دهد.</p>
+                    <ul class="features-list">
+                        <li>نصب روی مجرای اصلی روغن</li>
+                        <li>فشار هشدار: ۰.۳-۰.۸ بار</li>
+                        <li>انواع: مکانیکی، الکترونیکی</li>
+                        <li>اتصال به چراغ هشدار فشار روغن</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-temperature-low"></i> سنسور دمای روغن</h4>
+                    <p>دمای روغن را در سیستم اندازه‌گیری می‌کند.</p>
+                    <ul class="features-list">
+                        <li>دمای کاری بهینه: ۸۰-۱۱۰ درجه سانتی‌گراد</li>
+                        <li>هشدار دمای بالا: بالای ۱۲۰ درجه</li>
+                        <li>مهم برای خودروهای توربوcharged</li>
+                        <li>اطلاعات برای ECU موتور</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-ruler"></i> سنسور سطح روغن</h4>
+                    <p>میزان روغن موجود در کارتر را نشان می‌دهد.</p>
+                    <ul class="features-list">
+                        <li>انواع: میله‌ای، الکترونیکی</li>
+                        <li>کنترل سطح روغن قبل از روشن کردن</li>
+                        <li>هشدار سطح پایین روغن</li>
+                        <li>جلوگیری از خشک کار کردن موتور</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="circuit" class="content-section">
+            <h2><i class="fas fa-project-diagram"></i> مدار روغن‌کاری موتور</h2>
+            
+            <h3><i class="fas fa-sitemap"></i> مسیر گردش روغن در موتور</h3>
+            
+            <div class="step-container">
+                <div class="step">
+                    <h4>مرحله ۱: مکش از کارتر</h4>
+                    <p>پمپ روغن، روغن را از کارتر مکش کرده و به سمت فیلتر هدایت می‌کند.</p>
+                    <ul class="features-list">
+                        <li>صافی اولیه در ورودی پمپ</li>
+                        <li>جلوگیری از ورود ذرات درشت</li>
+                        <li>فشار منفی در مسیر مکش</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h4>مرحله ۲: فیلتراسیون</h4>
+                    <p>روغن از فیلتر اصلی عبور کرده و ناخالصی‌های آن گرفته می‌شود.</p>
+                    <ul class="features-list">
+                        <li>فشار ۲-۴ بار در ورودی فیلتر</li>
+                        <li>ذرات بالای ۲۰ میکرون گرفته می‌شوند</li>
+                        <li>سوپاپ کنارگذر در فشارهای بالا</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h4>مرحله ۳: توزیع در موتور</h4>
+                    <p>روغن تصفیه شده به مجاری اصلی روغن هدایت می‌شود.</p>
+                    <ul class="features-list">
+                        <li>یاتاقان‌های ثابت و متحرک</li>
+                        <li>بوش‌های میل سوپاپ</li>
+                        <li>سیلندرها و پیستون‌ها</li>
+                        <li>سیستم VVT و تایپت‌های هیدرولیک</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h4>مرحله ۴: بازگشت به کارتر</h4>
+                    <p>روغن پس از عبور از قطعات، به کارتر بازمی‌گردد.</p>
+                    <ul class="features-list">
+                        <li>خنک‌کاری طبیعی در کارتر</li>
+                        <li>ته‌نشینی ناخالصی‌ها</li>
+                        <li>آماده‌سازی برای چرخه جدید</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-wave-square"></i> انواع مدارهای روغن‌کاری</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-road"></i> مدار سری (Full Flow)</h4>
+                    <p>تمام روغن از فیلتر عبور می‌کند - رایج در خودروهای مدرن</p>
+                    <ul class="features-list">
+                        <li>محافظت کامل از قطعات</li>
+                        <li>فیلتراسیون ۱۰۰٪ روغن</li>
+                        <li>نیاز به فیلتر با کیفیت بالا</li>
+                        <li>حساس به گرفتگی فیلتر</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-code-branch"></i> مدار موازی (Bypass)</h4>
+                    <p>فقط بخشی از روغن از فیلتر عبور می‌کند - سیستم‌های قدیمی</p>
+                    <ul class="features-list">
+                        <li>مصرف کمتر فیلتر</li>
+                        <li>فشار ثابت در سیستم</li>
+                        <li>فیلتراسیون جزئی</li>
+                        <li>مناسب برای موتورهای کم فشار</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-oil-well"></i> کارتر خشک (Dry Sump)</h4>
+                    <p>روغن در مخزن جداگانه ذخیره می‌شود - خودروهای مسابقه‌ای</p>
+                    <ul class="features-list">
+                        <li>جلوگیری از پدیده Starvation</li>
+                        <li>کنترل بهتر دمای روغن</li>
+                        <li>کاهش ارتفاع مرکز ثقل</li>
+                        <li>سیستم پیچیده و گران</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="diagnosis" class="content-section">
+            <h2><i class="fas fa-stethoscope"></i> عیب‌یابی سیستم روغن‌کاری</h2>
+            
+            <h3><i class="fas fa-search"></i> روش‌های تشخیص مشکلات</h3>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-eye"></i> بررسی ظاهری روغن</h4>
+                    <p>تشخیص مشکلات از طریق رنگ و غلظت روغن</p>
+                    <ul class="features-list">
+                        <li>رنگ سیاه: احتراق ناقص، عمر طولانی</li>
+                        <li>رنگ شیری: نفوذ آب و مایع خنک‌کننده</li>
+                        <li>بوی بنزین: نفوذ سوخت به روغن</li>
+                        <li>غلظت کم: رقیق شدن با سوخت</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-ear-listen"></i> تشخیص صداهای غیرعادی</h4>
+                    <p>شنیدن صداهای هشداردهنده از موتور</p>
+                    <ul class="features-list">
+                        <li>صدای تق تق: یاتاقان‌های فرسوده</li>
+                        <li>صدای سوت: نشتی از اتصالات</li>
+                        <li>صدای زوزه: پمپ روغن معیوب</li>
+                        <li>کوبش: فشار پایین روغن</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-gauge"></i> تست فشار روغن</h4>
+                    <p>اندازه‌گیری دقیق فشار در مدار</p>
+                    <ul class="features-list">
+                        <li>فشار استاندارد: ۲-۵ بار</li>
+                        <li>فشار در دور آرام: حداقل ۰.۸ بار</li>
+                        <li>ابزار: فشارسنج مخصوص</li>
+                        <li>نقطه اتصال: جای فشنگی روغن</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-bug"></i> مشکلات رایج و راه حل‌ها</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>مشکل</th>
+                            <th>علائم</th>
+                            <th>دلایل احتمالی</th>
+                            <th>راه حل</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>فشار پایین روغن</td>
+                            <td>چراغ هشدار روشن، صدای تق تق</td>
+                            <td>روغن کم، پمپ معیوب، یاتاقان فرسوده</td>
+                            <td>بررسی سطح روغن، تست فشار، تعمیر پمپ</td>
+                        </tr>
+                        <tr>
+                            <td>مصرف بالای روغن</td>
+                            <td>کم شدن مداوم روغن، دود آبی اگزوز</td>
+                            <td>واشر سرسیلندر، رینگ پیستون فرسوده</td>
+                            <td>تعمیر موتور، تعویض رینگ‌ها</td>
+                        </tr>
+                        <tr>
+                            <td>روغن کف کرده</td>
+                            <td>رنگ شیری، عملکرد ضعیف موتور</td>
+                            <td>نفوذ آب، خرابی صفحه‌های کارتر</td>
+                            <td>تعویض روغن، تعمیر کارتر</td>
+                        </tr>
+                        <tr>
+                            <td>بوی سوختگی</td>
+                            <td>بوی تند، روغن سیاه سریع</td>
+                            <td>دمای بالای موتور، روغن نامناسب</td>
+                            <td>بررسی سیستم خنک‌کاری، تعویض روغن</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="danger-box">
+                <h4><i class="fas fa-exclamation-circle"></i> هشدار ایمنی</h4>
+                <p>هرگز با چراغ هشدار فشار روغن روشن رانندگی نکنید. این کار می‌تواند در عرض چند دقیقه باعث آسیب جدی به موتور شود.</p>
+            </div>
+        </section>
+
+        <section id="repair" class="content-section">
+            <h2><i class="fas fa-tools"></i> تعمیرات سیستم روغن‌کاری</h2>
+            
+            <h3><i class="fas fa-wrench"></i> تعمیرات معمول و دوره‌ای</h3>
+            
+            <div class="step-container">
+                <div class="step">
+                    <h4>تعویض روغن و فیلتر</h4>
+                    <p>اساسی‌ترین و مهمترین سرویس دوره‌ای سیستم روغن‌کاری</p>
+                    <ul class="features-list">
+                        <li>زمان تعویض: هر ۵۰۰۰ تا ۱۰۰۰۰ کیلومتر</li>
+                        <li>روغن مناسب با گرید SAE توصیه شده</li>
+                        <li>فیلتر با کیفیت OEM</li>
+                        <li>تخلیه کامل روغن قدیمی</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h4>تعمیر پمپ روغن</h4>
+                    <p>تعمیر یا تعویض پمپ روغن در صورت کاهش فشار</p>
+                    <ul class="features-list">
+                        <li>بررسی لقی روتورها</li>
+                        <li>تعویض سوپاپ کنترل فشار</li>
+                        <li>تمیزکاری مجاری پمپ</li>
+                        <li>تعویض واشرهای آب‌بندی</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h4>تعویض سنسورها</h4>
+                    <p>تعویض سنسورهای معیوب فشار و دمای روغن</p>
+                    <ul class="features-list">
+                        <li>سنسور فشار: تست با اهم‌متر</li>
+                        <li>سنسور دما: بررسی تغییرات مقاومت</li>
+                        <li>سنسور سطح: تست عملکرد میله</li>
+                        <li>استفاده از آچار مخصوص سنسورها</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h4>تعمیر کارتر روغن</h4>
+                    <p>رفع نشتی و تعویض واشر کارتر</p>
+                    <ul class="features-list">
+                        <li>تمیزکاری سطح اتصال</li>
+                        <li>استفاده از واشر جدید</li>
+                        <li>گشتاور مناسب پیچ‌ها</li>
+                        <li>بررسی صفحه‌های آرامش داخلی</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-cog"></i> ابزارهای تخصصی تعمیرات</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-toolbox"></i> فشارسنج روغن</h4>
+                    <p>برای اندازه‌گیری دقیق فشار در مدار روغن‌کاری</p>
+                    <ul class="features-list">
+                        <li>رنج اندازه‌گیری: ۰-۱۰ بار</li>
+                        <li>اتصال به جای فشنگی روغن</li>
+                        <li>قابلیت اندازه‌گیری در دورهای مختلف</li>
+                        <li>مقایسه با مقادیر استاندارد</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-fill-drip"></i> دستگاه تعویض روغن</h4>
+                    <p>برای تعویض سریع و کامل روغن موتور</p>
+                    <ul class="features-list">
+                        <li>تخلیه از طریق دهانه پرکن</li>
+                        <li>جلوگیری از ریختن روغن</li>
+                        <li>قابلیت ساکشن کامل</li>
+                        <li>مناسب برای کارگاه‌های مدرن</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-filter"></i> آچار فیلتر روغن</h4>
+                    <p>ابزار مخصوص باز کردن فیلتر روغن</p>
+                    <ul class="features-list">
+                        <li>انواع: تسمه‌ای، سه‌بازو، فکی</li>
+                        <li>مناسب برای فیلترهای مختلف</li>
+                        <li>جلوگیری از آسیب به فیلتر</li>
+                        <li>قابلیت استفاده در فضای محدود</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4><i class="fas fa-lightbulb"></i> نکته فنی مهم</h4>
+                <p>پس از تعویض روغن و فیلتر، حتماً موتور را به مدت ۲-۳ دقیقه در دور آرام روشن کنید تا روغن در تمام مدار گردش کند و فشار سیستم stabil شود. سپس سطح روغن را کنترل و در صورت نیاز تکمیل کنید.</p>
+            </div>
+        </section>
+
+        <section id="resources" class="content-section">
+            <h2><i class="fas fa-download"></i> منابع آموزشی</h2>
+            
+            <h3><i class="fas fa-film"></i> فیلم‌های آموزشی</h3>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>آموزش تعویض روغن</h4>
+                    <p>فیلم کامل تعویض روغن و فیلتر به صورت عملی</p>
+                    <p class="file-size">حجم: ۱۵۰ مگابایت</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>عیب‌یابی فشار روغن</h4>
+                    <p>تشخیص و رفع مشکلات فشار پایین روغن</p>
+                    <p class="file-size">حجم: ۲۲۰ مگابایت</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>تعمیر پمپ روغن</h4>
+                    <p>آموزش کامل تعمیر و بازسازی پمپ روغن</p>
+                    <p class="file-size">حجم: ۱۸۰ مگابایت</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>سیستم کارتر خشک</h4>
+                    <p>آشنایی با سیستم روغن‌کاری کارتر خشک</p>
+                    <p class="file-size">حجم: ۲۵۰ مگابایت</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-file-pdf"></i> جزوات و مستندات</h3>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h4>جزوه کامل سیستم روغن‌کاری</h4>
+                    <p>PDF جامع شامل تمام مباحث تئوری و عملی</p>
+                    <p class="file-size">حجم: ۸ مگابایت</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h4>کاتالوگ قطعات</h4>
+                    <p>کاتالوگ قطعات سیستم روغن‌کاری خودروهای مختلف</p>
+                    <p class="file-size">حجم: ۵ مگابایت</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h4>جدول استانداردها</h4>
+                    <p>جدول فشار و دماهای استاندارد خودروهای مختلف</p>
+                    <p class="file-size">حجم: ۳ مگابایت</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h4>چک لیست تعمیرات</h4>
+                    <p>چک لیست مرحله به مرحله تعمیرات سیستم</p>
+                    <p class="file-size">حجم: ۲ مگابایت</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-images"></i> نمودارها و دیاگرام‌ها</h3>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h4>دیاگرام مدار روغن‌کاری</h4>
+                    <p>نمودار کامل مسیر گردش روغن در موتور</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h4>نمودار فشار روغن</h4>
+                    <p>نمودار تغییرات فشار بر اساس دور موتور</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="exercises" class="content-section">
+            <h2><i class="fas fa-pencil-alt"></i> تمرین‌ها و آزمون‌ها</h2>
+            
+            <h3><i class="fas fa-question-circle"></i> سوالات تشریحی</h3>
+            
+            <div class="exercise-container">
+                <div class="exercise-question">
+                    ۱. وظایف اصلی سیستم روغن‌کاری را به طور کامل شرح دهید.
+                </div>
+                <div class="exercise-options">
+                    <div class="exercise-option">پاسخ: سیستم روغن‌کاری چهار وظیفه اصلی دارد: ۱- روان‌کاری قطعات متحرک و کاهش اصطکاک ۲- خنک‌کاری قطعات موتور ۳- تمیزکاری و جذب ناخالصی‌ها ۴- جلوگیری از خوردگی و زنگ‌زدگی</div>
+                </div>
+            </div>
+
+            <div class="exercise-container">
+                <div class="exercise-question">
+                    ۲. تفاوت سیستم روغن‌کاری با کارتر تر و خشک را بیان کنید.
+                </div>
+                <div class="exercise-options">
+                    <div class="exercise-option">پاسخ: در کارتر تر، روغن در کارتر زیر موتور ذخیره می‌شود و پمپ مستقیماً از آن مکش می‌کند. در کارتر خشک، روغن در مخزن جداگانه ذخیره شده و توسط پمپ مکش به مدار بازمی‌گردد. کارتر خشک برای خودروهای مسابقه‌ای مناسب است.</div>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-tasks"></i> سوالات چهارگزینه‌ای</h3>
+            
+            <div class="exercise-container">
+                <div class="exercise-question">
+                    ۳. فشار استاندارد روغن در دور آرام موتور چقدر باید باشد؟
+                </div>
+                <div class="exercise-options">
+                    <div class="exercise-option">الف) ۰.۱-۰.۳ بار</div>
+                    <div class="exercise-option correct">ب) ۰.۸-۱.۵ بار</div>
+                    <div class="exercise-option">ج) ۲-۳ بار</div>
+                    <div class="exercise-option">د) ۴-۵ بار</div>
+                </div>
+            </div>
+
+            <div class="exercise-container">
+                <div class="exercise-question">
+                    ۴. کدام یک از موارد زیر نشان‌دهنده نفوذ آب به روغن موتور است؟
+                </div>
+                <div class="exercise-options">
+                    <div class="exercise-option">الف) رنگ سیاه روغن</div>
+                    <div class="exercise-option correct">ب) رنگ شیری و کف کردن روغن</div>
+                    <div class="exercise-option">ج) بوی بنزین در روغن</div>
+                    <div class="exercise-option">د) افزایش غلظت روغن</div>
+                </div>
+            </div>
+
+            <div class="exercise-container">
+                <div class="exercise-question">
+                    ۵. عمر مفید فیلتر روغن معمولاً چقدر است؟
+                </div>
+                <div class="exercise-options">
+                    <div class="exercise-option">الف) ۱۰۰۰-۲۰۰۰ کیلومتر</div>
+                    <div class="exercise-option correct">ب) ۵۰۰۰-۱۰۰۰۰ کیلومتر</div>
+                    <div class="exercise-option">ج) ۱۵۰۰۰-۲۰۰۰۰ کیلومتر</div>
+                    <div class="exercise-option">د) ۲۵۰۰۰-۳۰۰۰۰ کیلومتر</div>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-tools"></i> تمرین‌های عملی</h3>
+            
+            <div class="exercise-container">
+                <div class="exercise-question">
+                    ۶. پروژه عملی: تعویض روغن و فیلتر یک خودرو
+                </div>
+                <div class="exercise-options">
+                    <div class="exercise-option">
+                        <strong>مراحل اجرا:</strong><br>
+                        ۱- آماده‌سازی ابزار و مواد<br>
+                        ۲- گرم کردن موتور به مدت ۵ دقیقه<br>
+                        ۳- تخلیه روغن قدیمی<br>
+                        ۴- تعویض فیلتر روغن<br>
+                        ۵- پر کردن روغن جدید<br>
+                        ۶- کنترل سطح و نشتی<br>
+                        ۷- تست عملکرد موتور
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-container">
+                <div class="exercise-question">
+                    ۷. پروژه عملی: تست فشار روغن با فشارسنج
+                </div>
+                <div class="exercise-options">
+                    <div class="exercise-option">
+                        <strong>مراحل اجرا:</strong><br>
+                        ۱- نصب فشارسنج به جای فشنگی روغن<br>
+                        ۲- روشن کردن موتور در دور آرام<br>
+                        ۳- ثبت فشار در دورهای مختلف<br>
+                        ۴- مقایسه با مقادیر استاندارد<br>
+                        ۵- تحلیل نتایج و تشخیص مشکلات
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4><i class="fas fa-graduation-cap"></i> راهنمای انجام تمرین‌ها</h4>
+                <p>برای انجام تمرین‌های عملی حتماً از استاد راهنما کمک بگیرید و نکات ایمنی را رعایت کنید. استفاده از لباس کار، دستکش و عینک ایمنی الزامی است.</p>
+            </div>
+        </section>
+        
+        <footer>
+            <p>پایه دهم - شاخه فنی و حرفه‌ای | رشته مکانیک خودرو | بخش هشتم: تعمیر سیستم روغن‌کاری موتور</p>
+            <p>تمامی حقوق محفوظ است © 2024</p>
+        </footer>
+    </div>
+
+    <script>
+        // Tab Navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and sections
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding section
+                tab.classList.add('active');
+                const targetId = tab.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+                
+                // Update progress based on section
+                updateProgress(targetId);
+            });
+        });
+
+        // Progress Tracking
+        function updateProgress(section) {
+            const progressMap = {
+                'intro': 15,
+                'fundamentals': 30,
+                'components': 45,
+                'circuit': 60,
+                'diagnosis': 75,
+                'repair': 90,
+                'resources': 95,
+                'exercises': 100
+            };
+            
+            if (progressMap[section]) {
+                const progressFill = document.querySelector('.progress-fill');
+                const progressText = document.querySelector('.progress-header span:last-child');
+                
+                progressFill.style.width = progressMap[section] + '%';
+                progressText.textContent = progressMap[section] + '% تکمیل شده';
+                
+                // Save progress to localStorage
+                localStorage.setItem('oilSystemProgress', progressMap[section]);
+            }
+        }
+
+        // Load saved progress
+        window.addEventListener('load', () => {
+            const savedProgress = localStorage.getItem('oilSystemProgress');
+            if (savedProgress) {
+                const progressFill = document.querySelector('.progress-fill');
+                const progressText = document.querySelector('.progress-header span:last-child');
+                
+                progressFill.style.width = savedProgress + '%';
+                progressText.textContent = savedProgress + '% تکمیل شده';
+            }
+        });
+
+        // Exercise Interaction
+        document.querySelectorAll('.exercise-option').forEach(option => {
+            option.addEventListener('click', function() {
+                if (this.classList.contains('correct')) {
+                    this.style.background = '#d4edda';
+                    this.style.borderColor = '#c3e6cb';
+                } else if (this.parentElement.classList.contains('exercise-options') && 
+                          this.parentElement.querySelector('.correct')) {
+                    this.style.background = '#f8d7da';
+                    this.style.borderColor = '#f5c6cb';
+                    this.parentElement.querySelector('.correct').style.background = '#d4edda';
+                    this.parentElement.querySelector('.correct').style.borderColor = '#c3e6cb';
+                }
+            });
+        });
+
+        // Download Buttons Simulation
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.textContent.includes('دانلود')) {
+                    e.preventDefault();
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال دانلود...';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        alert('فایل با موفقیت دانلود شد!');
+                    }, 2000);
+                } else if (this.textContent.includes('پخش')) {
+                    e.preventDefault();
+                    alert('ویدئو در حال پخش است...');
+                } else if (this.textContent.includes('آزمون')) {
+                    e.preventDefault();
+                    alert('آزمون آغاز شد!');
+                }
+            });
+        });
+
+        // Resource Card Hover Effects
+        document.querySelectorAll('.resource-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+            });
+        });
+
+        // Mobile Navigation
+        function handleMobileNav() {
+            if (window.innerWidth <= 768) {
+                const navContainer = document.querySelector('.nav-container');
+                const select = document.createElement('select');
+                select.style.width = '100%';
+                select.style.padding = '12px';
+                select.style.marginBottom = '15px';
+                select.style.borderRadius = '8px';
+                select.style.border = '2px solid #3498db';
+                select.style.background = 'white';
+                
+                document.querySelectorAll('.nav-tab').forEach(tab => {
+                    const option = document.createElement('option');
+                    option.value = tab.getAttribute('data-target');
+                    option.textContent = tab.textContent;
+                    if (tab.classList.contains('active')) {
+                        option.selected = true;
+                    }
+                    select.appendChild(option);
+                });
+                
+                select.addEventListener('change', (e) => {
+                    const targetId = e.target.value;
+                    document.querySelector(`.nav-tab[data-target="${targetId}"]`).click();
+                });
+                
+                if (!document.querySelector('.mobile-nav-select')) {
+                    select.className = 'mobile-nav-select';
+                    navContainer.insertBefore(select, navContainer.firstChild);
+                }
+            } else {
+                const mobileSelect = document.querySelector('.mobile-nav-select');
+                if (mobileSelect) {
+                    mobileSelect.remove();
+                }
+            }
+        }
+
+        // Initialize mobile nav
+        handleMobileNav();
+        window.addEventListener('resize', handleMobileNav);
+    </script>
+</body>
+</html>

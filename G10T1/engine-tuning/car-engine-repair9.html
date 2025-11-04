@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بخش نهم: تعمیر سیستم خنک‌کننده موتور - پایه دهم مکانیک خودرو</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --gradient: linear-gradient(135deg, #3498db, #2980b9);
+            --gradient-secondary: linear-gradient(135deg, #e74c3c, #c0392b);
+            --gradient-cooling: linear-gradient(135deg, #00b4db, #0083b0);
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.15);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --radius: 15px;
+            --radius-lg: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--gradient-cooling);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Enhanced Navigation */
+        .nav-container {
+            position: sticky;
+            top: 10px;
+            z-index: 1000;
+            margin-bottom: 3rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: 15px;
+            box-shadow: var(--shadow);
+            flex-wrap: wrap;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-tab {
+            padding: 15px 25px;
+            margin: 5px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 700;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-cooling);
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .nav-tab:hover {
+            color: white;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .nav-tab:hover::before {
+            left: 0;
+        }
+
+        .nav-tab.active {
+            background: var(--gradient-cooling);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Enhanced Content Sections */
+        .content-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(40px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 2rem;
+            padding-bottom: 20px;
+            border-bottom: 4px solid var(--secondary);
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            right: 0;
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-cooling);
+            border-radius: 2px;
+        }
+
+        h3 {
+            color: var(--secondary);
+            margin: 2rem 0 1.5rem 0;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-right: 15px;
+            border-right: 4px solid var(--gradient-cooling);
+        }
+
+        h4 {
+            color: var(--primary);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Enhanced Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 2.5rem 0;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            padding: 2.2rem;
+            border-radius: var(--radius-lg);
+            border-left: 6px solid var(--secondary);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(41, 128, 185, 0.05));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        /* Enhanced Features List */
+        .features-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .features-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-right: 40px;
+            transition: var(--transition);
+        }
+
+        .features-list li:hover {
+            background: rgba(52, 152, 219, 0.05);
+            padding-right: 50px;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 15px;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .features-list li:hover::before {
+            transform: scale(1.3);
+        }
+
+        /* Enhanced Interactive Container */
+        .interactive-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 2.5rem 0;
+        }
+
+        .video-placeholder, .download-card, .quiz-card, .simulation-card {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-placeholder::before, .download-card::before, .quiz-card::before, .simulation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-cooling);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1;
+        }
+
+        .video-placeholder:hover, .download-card:hover, .quiz-card:hover, .simulation-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .video-placeholder:hover::before, .download-card:hover::before, .quiz-card:hover::before, .simulation-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .video-icon, .download-icon, .quiz-icon, .simulation-icon {
+            font-size: 3.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: var(--gradient-cooling);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 700;
+            text-decoration: none;
+            margin-top: 20px;
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Enhanced Table Styles */
+        .table-container {
+            overflow-x: auto;
+            margin: 2.5rem 0;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            background: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 18px;
+            text-align: right;
+            border-bottom: 1px solid #e0e0e0;
+            transition: var(--transition);
+        }
+
+        th {
+            background: var(--gradient-cooling);
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        tr:hover {
+            background: rgba(52, 152, 219, 0.05);
+        }
+
+        /* Enhanced Step Container */
+        .step-container {
+            counter-reset: step;
+            margin: 2.5rem 0;
+        }
+
+        .step {
+            position: relative;
+            padding: 2rem 2rem 2rem 5rem;
+            margin: 1.5rem 0;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--secondary);
+            transition: var(--transition);
+        }
+
+        .step:hover {
+            transform: translateX(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-cooling);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        /* Enhanced Warning and Info Boxes */
+        .warning-box {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 1px solid #ffeaa7;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-right: 6px solid #f39c12;
+            box-shadow: var(--shadow);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+            border: 1px solid #bee5eb;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-right: 6px solid #17a2b8;
+            box-shadow: var(--shadow);
+        }
+
+        .danger-box {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            border: 1px solid #f5c6cb;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-right: 6px solid #e74c3c;
+            box-shadow: var(--shadow);
+        }
+
+        /* Enhanced Resource Grid */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 2.5rem 0;
+        }
+
+        .resource-card {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-cooling);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--secondary);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .resource-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .resource-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Enhanced Exercise Container */
+        .exercise-container {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            border-left: 6px solid var(--success);
+            box-shadow: var(--shadow);
+        }
+
+        .exercise-question {
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .exercise-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .exercise-option {
+            padding: 15px 20px;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exercise-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-cooling);
+            opacity: 0.1;
+            transition: var(--transition);
+        }
+
+        .exercise-option:hover {
+            background: #e6f7ff;
+            border-color: #b3e0ff;
+            transform: translateX(-5px);
+        }
+
+        .exercise-option:hover::before {
+            right: 0;
+        }
+
+        .exercise-option.correct {
+            background: #d4edda;
+            border: 2px solid #c3e6cb;
+        }
+
+        .exercise-option.incorrect {
+            background: #f8d7da;
+            border: 2px solid #f5c6cb;
+        }
+
+        /* Enhanced Progress Bar */
+        .progress-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .progress-bar {
+            height: 25px;
+            background: #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-cooling);
+            border-radius: 12px;
+            transition: width 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Enhanced Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: white;
+            margin-top: 3rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            h3 {
+                font-size: 1.4rem;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                padding: 10px;
+            }
+            
+            .nav-tab {
+                margin: 5px 0;
+                text-align: center;
+                justify-content: center;
+                padding: 12px 20px;
+            }
+            
+            .card-grid, .interactive-container, .resource-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .content-section {
+                padding: 2rem 1.5rem;
+            }
+            
+            .step {
+                padding: 1.5rem 1.5rem 1.5rem 4rem;
+            }
+            
+            .step::before {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem 1rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .interactive-container > div {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Particle Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: particle-float 8s linear infinite;
+        }
+
+        @keyframes particle-float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1><i class="fas fa-fan"></i> بخش نهم: تعمیر سیستم خنک‌کننده موتور</h1>
+                <p class="subtitle">پایه دهم رشته مکانیک خودرو - آموزش جامع و عملی سیستم خنک‌کننده از پایه تا پیشرفته با جدیدترین متدهای آموزشی</p>
+            </div>
+        </header>
+
+        <div class="nav-container">
+            <nav class="nav-tabs">
+                <button class="nav-tab active" data-target="intro"><i class="fas fa-home"></i> معرفی بخش</button>
+                <button class="nav-tab" data-target="fundamentals"><i class="fas fa-book"></i> اصول پایه</button>
+                <button class="nav-tab" data-target="components"><i class="fas fa-cogs"></i> اجزای سیستم</button>
+                <button class="nav-tab" data-target="circuit"><i class="fas fa-project-diagram"></i> مدار خنک‌کننده</button>
+                <button class="nav-tab" data-target="diagnosis"><i class="fas fa-stethoscope"></i> عیب‌یابی</button>
+                <button class="nav-tab" data-target="repair"><i class="fas fa-tools"></i> تعمیرات</button>
+                <button class="nav-tab" data-target="safety"><i class="fas fa-shield-alt"></i> ایمنی و استانداردها</button>
+                <button class="nav-tab" data-target="resources"><i class="fas fa-download"></i> منابع آموزشی</button>
+                <button class="nav-tab" data-target="exercises"><i class="fas fa-pencil-alt"></i> تمرین‌ها</button>
+            </nav>
+        </div>
+
+        <section id="intro" class="content-section active">
+            <h2><i class="fas fa-info-circle"></i> معرفی بخش نهم: سیستم خنک‌کننده موتور</h2>
+            <p>سیستم خنک‌کننده موتور یکی از حیاتی‌ترین سیستم‌های خودرو است که نقش اساسی در حفظ دمای بهینه موتور، افزایش بازدهی و کاهش آلایندگی دارد. در این بخش به صورت جامع و کاربردی با این سیستم آشنا خواهید شد.</p>
+            
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>پیشرفت دوره</span>
+                    <span>18% تکمیل شده</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 18%"></div>
+                </div>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-bullseye"></i> اهداف یادگیری</h4>
+                    <ul class="features-list">
+                        <li>شناخت کامل وظایف و اهمیت سیستم خنک‌کننده</li>
+                        <li>آشنایی با انواع سیستم‌های خنک‌کننده و کاربردهای آن‌ها</li>
+                        <li>یادگیری عملکرد اجزای مختلف سیستم خنک‌کننده</li>
+                        <li>تسلط بر روش‌های عیب‌یابی و تشخیص مشکلات</li>
+                        <li>یادگیری تعمیر و تعویض قطعات معیوب</li>
+                        <li>آشنایی با استانداردهای فنی و ایمنی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-graduation-cap"></i> مهارت‌های کسب شده</h4>
+                    <ul class="features-list">
+                        <li>توانایی سرویس و نگهداری سیستم خنک‌کننده</li>
+                        <li>مهارت در عیب‌یابی مشکلات رایج سیستم</li>
+                        <li>تسلط بر تعمیر و تعویض پمپ آب</li>
+                        <li>توانایی تست ترموستات و رادیاتور</li>
+                        <li>مهارت در تعویض مایع خنک‌کننده</li>
+                        <li>آشنایی با سیستم‌های خنک‌کننده پیشرفته</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-award"></i> پیش‌نیازها</h4>
+                    <ul class="features-list">
+                        <li>آشنایی با اصول پایه موتور خودرو</li>
+                        <li>مبانی انتقال حرارت و ترمودینامیک</li>
+                        <li>آشنایی با ابزارهای تعمیراتی پایه</li>
+                        <li>رعایت نکات ایمنی در کارگاه</li>
+                        <li>علاقه به یادگیری عملی</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4><i class="fas fa-lightbulb"></i> نکته مهم برای دانش‌آموزان</h4>
+                <p>سیستم خنک‌کننده یکی از مهمترین سیستم‌های موتور است که خرابی آن می‌تواند منجر به overheating و آسیب‌های جدی به موتور شود. یادگیری اصولی این سیستم برای هر تکنسین خودرو ضروری است.</p>
+            </div>
+
+            <div class="interactive-container">
+                <div class="video-placeholder">
+                    <div class="video-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>فیلم معرفی سیستم خنک‌کننده</h4>
+                    <p>تماشای ویدئوی معرفی کامل سیستم خنک‌کننده و اهمیت آن در موتور</p>
+                    <button class="btn"><i class="fas fa-play"></i> پخش ویدئو</button>
+                </div>
+                
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-file-download"></i>
+                    </div>
+                    <h4>جزوه آموزشی</h4>
+                    <p>دریافت جزوه کامل سیستم خنک‌کننده موتور</p>
+                    <button class="btn"><i class="fas fa-download"></i> دریافت PDF</button>
+                </div>
+                
+                <div class="quiz-card">
+                    <div class="quiz-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h4>آزمون سنجش دانش</h4>
+                    <p>شرکت در آزمون آنلاین برای سنجش دانش پیش‌نیاز</p>
+                    <button class="btn"><i class="fas fa-pencil-alt"></i> شروع آزمون</button>
+                </div>
+
+                <div class="simulation-card">
+                    <div class="simulation-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h4>شبیه‌ساز تعمیرات</h4>
+                    <p>شبیه‌سازی عملی تعمیر سیستم خنک‌کننده</p>
+                    <button class="btn"><i class="fas fa-cogs"></i> شروع شبیه‌سازی</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="fundamentals" class="content-section">
+            <h2><i class="fas fa-book"></i> اصول پایه سیستم خنک‌کننده</h2>
+            
+            <h3><i class="fas fa-thermometer-half"></i> وظایف اصلی سیستم خنک‌کننده</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-temperature-low"></i> کنترل دمای موتور</h4>
+                    <p>حفظ دمای کاری موتور در محدوده بهینه (80-95 درجه سانتی‌گراد)</p>
+                    <ul class="features-list">
+                        <li>جلوگیری از overheating</li>
+                        <li>جلوگیری از کارکرد در دمای پایین</li>
+                        <li>بهبود بازده احتراق</li>
+                        <li>کاهش آلایندگی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-fan"></i> انتقال حرارت</h4>
+                    <p>جذب و دفع حرارت تولید شده در موتور به محیط خارج</p>
+                    <ul class="features-list">
+                        <li>جذب حرارت از سیلندرها و سرسیلندر</li>
+                        <li>انتقال حرارت به رادیاتور</li>
+                        <li>دفع حرارت به هوای محیط</li>
+                        <li>حفظ تعادل حرارتی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-oil-can"></i> خنک‌کاری قطعات</h4>
+                    <p>خنک‌کاری قطعات حساس موتور مانند یاتاقان‌ها و پیستون‌ها</p>
+                    <ul class="features-list">
+                        <li>جلوگیری از تغییر شکل حرارتی</li>
+                        <li>حفظ لقی‌های مناسب</li>
+                        <li>کاهش سایش قطعات</li>
+                        <li>افزایش عمر مفید موتور</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-vial"></i> انواع مایع خنک‌کننده و مشخصات آن‌ها</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>نوع مایع</th>
+                            <th>ترکیب اصلی</th>
+                            <th>دمای انجماد</th>
+                            <th>دمای جوش</th>
+                            <th>کاربرد</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>اتیلن گلیکول</td>
+                            <td>گلیکول، آب، بازدارنده خوردگی</td>
+                            <td>۳۷- درجه سانتی‌گراد</td>
+                            <td>۱۲۹ درجه سانتی‌گراد</td>
+                            <td>خودروهای مدرن، شرایط سخت</td>
+                        </tr>
+                        <tr>
+                            <td>پروپیلن گلیکول</td>
+                            <td>گلیکول، آب، مواد افزودنی</td>
+                            <td>۲۶- درجه سانتی‌گراد</td>
+                            <td>۱۲۴ درجه سانتی‌گراد</td>
+                            <td>خودروهای معمولی، کمتر سمی</td>
+                        </tr>
+                        <tr>
+                            <td>مخلوط آب و ضد یخ</td>
+                            <td>۵۰% آب، ۵۰% ضد یخ</td>
+                            <td>۳۵- درجه سانتی‌گراد</td>
+                            <td>۱۲۵ درجه سانتی‌گراد</td>
+                            <td>اکثر خودروهای سواری</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="info-box">
+                <h4><i class="fas fa-graduation-cap"></i> نکته فنی: نسبت اختلاط آب و ضد یخ</h4>
+                <p>بهترین نسبت اختلاط ۵۰-۵۰ آب و ضد یخ است. این نسبت تعادل مناسبی بین نقطه انجماد پایین، نقطه جوش بالا و خاصیت انتقال حرارت ایجاد می‌کند.</p>
+            </div>
+
+            <h3><i class="fas fa-exclamation-triangle"></i> اهمیت سرویس به موقع سیستم خنک‌کننده</h3>
+            <div class="warning-box">
+                <h4><i class="fas fa-exclamation-circle"></i> هشدار مهم</h4>
+                <p>سرویس نابه‌موقع سیستم خنک‌کننده می‌تواند منجر به مشکلات زیر شود:</p>
+                <ul class="features-list">
+                    <li>اورهیتینگ موتور و آسیب به قطعات</li>
+                    <li>کاهش راندمان موتور</li>
+                    <li>افزایش مصرف سوخت</li>
+                    <li>آسیب‌های جدی و هزینه‌بر به موتور</li>
+                    <li>کاهش عمر مفید موتور</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- بخش اجزای سیستم (کاملاً جدید و کامل) -->
+        <section id="components" class="content-section">
+            <h2><i class="fas fa-cogs"></i> اجزای سیستم خنک‌کننده</h2>
+            
+            <h3><i class="fas fa-puzzle-piece"></i> بخش‌های اصلی سیستم خنک‌کننده</h3>
+            
+            <div class="step-container">
+                <div class="step">
+                    <h4>رادیاتور (Radiator)</h4>
+                    <p>مهمترین جزء سیستم که مسئول انتقال حرارت مایع خنک‌کننده به هوای محیط است.</p>
+                    <ul class="features-list">
+                        <li>جنس: مس، آلومینیوم یا پلاستیک مقاوم</li>
+                        <li>ساختار: لوله‌های موازی با پره‌های انتقال حرارت</li>
+                        <li>انواع: جریان افقی، جریان عمودی</li>
+                        <li>ظرفیت حرارتی: بسته به اندازه موتور</li>
+                        <li>دارای مخزن بالایی و پایینی</li>
+                    </ul>
+                    <div class="component-diagram">
+                        <h4>ساختار داخلی رادیاتور</h4>
+                        <div class="diagram-placeholder">
+                            <i class="fas fa-project-diagram" style="font-size: 4rem; color: #3498db;"></i>
+                        </div>
+                        <p>لوله‌های مسی + پره‌های آلومینیومی + مخازن پلاستیکی</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <h4>پمپ آب (Water Pump)</h4>
+                    <p>مسئول گردش مایع خنک‌کننده در مدار سیستم است.</p>
+                    <ul class="features-list">
+                        <li>نیروی محرک: تسمه دینام یا زنجیر تایم</li>
+                        <li>دبی گردش: 100-200 لیتر در دقیقه</li>
+                        <li>جنس پروانه: پلاستیک مقاوم یا فلز</li>
+                        <li>سیل و بلبرینگ: آب‌بندی کامل</li>
+                        <li>محل نصب: جلوی موتور</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h4>ترموستات (Thermostat)</h4>
+                    <p>کنترل کننده هوشمند دمای موتور و مسیر گردش مایع خنک‌کننده.</p>
+                    <ul class="features-list">
+                        <li>دمای باز شدن: 80-95 درجه سانتی‌گراد</li>
+                        <li>مکانیزم: واکس حساس به حرارت</li>
+                        <li>انواع: مکانیکی، الکترونیکی</li>
+                        <li>محل نصب: مسیر خروجی موتور به رادیاتور</li>
+                        <li>دارای سوپاپ کنارگذر (Bypass)</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h4>فن خنک‌کننده (Cooling Fan)</h4>
+                    <p>ایجاد جریان هوا در رادیاتور هنگام سرعت پایین خودرو.</p>
+                    <ul class="features-list">
+                        <li>انواع: مکانیکی، الکتریکی، هیدرولیکی</li>
+                        <li>کنترل: ترموستاتی، ECU موتور</li>
+                        <li>مصرف برق: 10-30 آمپر</li>
+                        <li>تعداد پره: 4-11 پره بسته به طراحی</li>
+                        <li>جهت چرخش: معمولاً مکشی</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-tachometer-alt"></i> سنسورها و نشانگرهای سیستم</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-thermometer-half"></i> سنسور دمای مایع خنک‌کننده</h4>
+                    <p>اندازه‌گیری دقیق دمای مایع و ارسال به ECU و نشانگر</p>
+                    <ul class="features-list">
+                        <li>نوع: ترمیستور (NTC)</li>
+                        <li>مقاومت: 2-3 کیلواهم در 20 درجه</li>
+                        <li>دقت: ±2 درجه سانتی‌گراد</li>
+                        <li>محل نصب: نزدیک ترموستات</li>
+                        <li>اتصال: 2 یا 3 پین</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-fan"></i> سنسور دور فن</h4>
+                    <p>کنترل سرعت و عملکرد فن‌های الکتریکی</p>
+                    <ul class="features-list">
+                        <li>نوع: اثر هال یا القایی</li>
+                        <li>خروجی: پالس مربعی</li>
+                        <li>فرکانس: متناسب با دور فن</li>
+                        <li>کنترل: توسط ECU موتور</li>
+                        <li>عیب‌یابی: اسکنر دیاگ</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-gauge-high"></i> نشانگر دمای موتور</h4>
+                    <p>نمایش دمای موتور به راننده روی صفحه приборات</p>
+                    <ul class="features-list">
+                        <li>محدوده: C (60°) تا H (120°)</li>
+                        <li>نرمال: وسط محدوده (90°)</li>
+                        <li>هشدار: چراغ قرمز overheating</li>
+                        <li>کنترل: از طریق سنسور دمای</li>
+                        <li>عیب‌یابی: تست مقاومت سنسور</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4><i class="fas fa-lightbulb"></i> نکته فنی مهم</h4>
+                <p>در سیستم‌های مدرن، ECU موتور از اطلاعات سنسور دمای مایع خنک‌کننده برای تنظیم زمان‌بندی انژکتورها، کنترل فن‌ها و مدیریت عملکرد موتور استفاده می‌کند.</p>
+            </div>
+        </section>
+
+        <!-- بخش مدار خنک‌کننده -->
+        <section id="circuit" class="content-section">
+            <h2><i class="fas fa-project-diagram"></i> مدار سیستم خنک‌کننده</h2>
+            
+            <h3><i class="fas fa-sitemap"></i> مسیر گردش مایع خنک‌کننده</h3>
+            
+            <div class="step-container">
+                <div class="step">
+                    <h4>مرحله ۱: گردش کوچک (دمای پایین)</h4>
+                    <p>هنگام روشن شدن موتور در دمای پایین، ترموستات بسته است</p>
+                    <ul class="features-list">
+                        <li>مایع فقط در داخل موتور گردش می‌کند</li>
+                        <li>مسیر: موتور → پمپ آب → ترموستات → موتور</li>
+                        <li>هدف: گرم کردن سریع موتور</li>
+                        <li>مدت زمان: 2-5 دقیقه</li>
+                        <li>دمای مایع: تا 80 درجه سانتی‌گراد</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h4>مرحله ۲: گردش کامل (دمای نرمال)</h4>
+                    <p>پس از رسیدن دمای مایع به 80-85 درجه، ترموستات باز می‌شود</p>
+                    <ul class="features-list">
+                        <li>مایع از طریق رادیاتور گردش می‌کند</li>
+                        <li>مسیر: موتور → پمپ آب → رادیاتور → موتور</li>
+                        <li>هدف: حفظ دمای بهینه موتور</li>
+                        <li>دمای کاری: 85-95 درجه سانتی‌گراد</li>
+                        <li>کنترل: توسط ترموستات</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h4>مرحله ۳: خنک‌کاری اضافی (دمای بالا)</h4>
+                    <p>در شرایط بار زیاد یا هوای گرم، فن‌ها فعال می‌شوند</p>
+                    <ul class="features-list">
+                        <li>فن‌های الکتریکی یا مکانیکی روشن می‌شوند</li>
+                        <li>افزایش جریان هوا در رادیاتور</li>
+                        <li>کنترل: توسط سنسور دمای یا ECU</li>
+                        <li>دمای فعال‌سازی: 95-105 درجه</li>
+                        <li>هدف: جلوگیری از overheating</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-wave-square"></i> انواع مدارهای خنک‌کننده</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-recycle"></i> مدار باز (Open System)</h4>
+                    <p>سیستم‌های قدیمی با مخزن سرریز</p>
+                    <ul class="features-list">
+                        <li>مخزن سرریز جداگانه</li>
+                        <li>اتصال به اتمسفر</li>
+                        <li>فشار کاری: اتمسفریک</li>
+                        <li>نقطه جوش: 100 درجه سانتی‌گراد</li>
+                        <li>معایب: تبخیر و هدررفت مایع</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-compress-alt"></i> مدار بسته (Closed System)</h4>
+                    <p>سیستم‌های مدرن با مخزن تحت فشار</p>
+                    <ul class="features-list">
+                        <li>مخزن انبساطی تحت فشار</li>
+                        <li>فشار کاری: 0.9-1.1 بار</li>
+                        <li>نقطه جوش: 120-130 درجه</li>
+                        <li>درپوش فشار قوی</li>
+                        <li>مزایا: کارایی بالاتر</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tint"></i> سیستم ترکیبی</h4>
+                    <p>ترکیب مدار بسته با کنترل الکترونیکی</p>
+                    <ul class="features-list">
+                        <li>کنترل توسط ECU موتور</li>
+                        <li>فن‌های چندسرعته</li>
+                        <li>پمپ آب متغیر</li>
+                        <li>سنسورهای متعدد</li>
+                        <li>بهینه‌سازی مصرف انرژی</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="component-diagram">
+                <h4>دیاگرام کامل مدار خنک‌کننده</h4>
+                <div class="diagram-placeholder">
+                    <i class="fas fa-water" style="font-size: 4rem; color: #3498db;"></i>
+                </div>
+                <p>موتور → پمپ آب → ترموستات → رادیاتور → فن‌ها → مخزن انبساطی</p>
+            </div>
+        </section>
+
+        <!-- بخش عیب‌یابی -->
+        <section id="diagnosis" class="content-section">
+            <h2><i class="fas fa-stethoscope"></i> عیب‌یابی سیستم خنک‌کننده</h2>
+            
+            <h3><i class="fas fa-search"></i> روش‌های تشخیص مشکلات رایج</h3>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-temperature-high"></i> اورهیتینگ (Overheating)</h4>
+                    <p>بالا رفتن غیرعادی دمای موتور</p>
+                    <ul class="features-list">
+                        <li>علائم: نشانگر دمای بالا، بخار کردن</li>
+                        <li>دلایل: ترموستات معیوب، پمپ آب خراب</li>
+                        <li>تشخیص: تست ترموستات، بررسی پمپ</li>
+                        <li>رفع عیب: تعویض قطعه معیوب</li>
+                        <li>هشدار: خطر آسیب جدی به موتور</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-temperature-low"></i> کارکرد سرد (Underheating)</h4>
+                    <p>پایین بودن دمای کاری موتور</p>
+                    <ul class="features-list">
+                        <li>علائم: نشانگر دمای پایین، مصرف سوخت بالا</li>
+                        <li>دلایل: ترموستات بازمانده، عایق‌بندی نامناسب</li>
+                        <li>تشخیص: تست ترموستات در آب جوش</li>
+                        <li>رفع عیب: تعویض ترموستات</li>
+                        <li>تاثیر: افزایش سایش و آلایندگی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tint"></i> نشتی مایع خنک‌کننده</h4>
+                    <p>کاهش سطح مایع و نشتی در سیستم</p>
+                    <ul class="features-list">
+                        <li>علائم: کاهش سطح مایع، لکه زیر خودرو</li>
+                        <li>دلایل: شیلنگ‌های فرسوده، رادیاتور خراب</li>
+                        <li>تشخیص: تست فشار سیستم</li>
+                        <li>رفع عیب: تعویض قطعه نشتی‌دار</li>
+                        <li>پیشگیری: بازدید دوره‌ای شیلنگ‌ها</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-bug"></i> مشکلات الکتریکی و الکترونیکی</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>مشکل</th>
+                            <th>علائم</th>
+                            <th>دلایل احتمالی</th>
+                            <th>روش تشخیص</th>
+                            <th>رفع عیب</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>فن روشن نمی‌شود</td>
+                            <td>دمای بالا، فن غیرفعال</td>
+                            <td>فیوز سوخته، رله معیوب، موتور فن خراب</td>
+                            <td>تست برق رسانی، بررسی فیوز و رله</td>
+                            <td>تعویض قطعه معیوب</td>
+                        </tr>
+                        <tr>
+                            <td>فن همیشه روشن</td>
+                            <td>فن دائماً کار می‌کند</td>
+                            <td>رله چسبیده، سنسور دمای معیوب</td>
+                            <td>تست سنسور دمای، بررسی رله</td>
+                            <td>تعویض سنسور یا رله</td>
+                        </tr>
+                        <tr>
+                            <td>نشانگر دمای کار نمی‌کند</td>
+                            <td>عدم نمایش دمای موتور</td>
+                            <td>سنسور دمای معیوب، سیم کشی قطع</td>
+                            <td>تست سنسور، بررسی سیم کشی</td>
+                            <td>تعویض سنسور، رفع اتصالی</td>
+                        </tr>
+                        <tr>
+                            <td>هشدار دمای کاذب</td>
+                            <td>چراغ هشدار روشن بدون دلیلی</td>
+                            <td>سنسور معیوب، اتصال کوتاه</td>
+                            <td>اسکن دیاگ، تست سنسور</td>
+                            <td>تعویض سنسور، رفع اتصالی</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="danger-box">
+                <h4><i class="fas fa-exclamation-circle"></i> هشدار ایمنی</h4>
+                <p>هرگز درب رادیاتور را هنگام داغ بودن موتور باز نکنید. فشار و بخار داغ می‌تواند باعث سوختگی شدید شود. همیشه صبر کنید تا موتور کاملاً خنک شود.</p>
+            </div>
+        </section>
+
+        <!-- بخش تعمیرات -->
+        <section id="repair" class="content-section">
+            <h2><i class="fas fa-tools"></i> تعمیرات سیستم خنک‌کننده</h2>
+            
+            <h3><i class="fas fa-wrench"></i> تعمیرات معمول و دوره‌ای</h3>
+            
+            <div class="step-container">
+                <div class="step">
+                    <h4>تعویض مایع خنک‌کننده</h4>
+                    <p>سرویس دوره‌ای برای حفظ کارایی سیستم</p>
+                    <ul class="features-list">
+                        <li>زمان تعویض: هر 2 سال یا 40,000 کیلومتر</li>
+                        <li>نسبت اختلاط: 50% آب، 50% ضد یخ</li>
+                        <li>روش: تخلیه کامل، شستشو، پر کردن</li>
+                        <li>هواگیری: ضروری برای عملکرد صحیح</li>
+                        <li>کنترل: بررسی سطح و نشتی</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h4>تعویض ترموستات</h4>
+                    <p>تعویض در صورت خرابی یا کاهش کارایی</p>
+                    <ul class="features-list">
+                        <li>علائم خرابی: overheating یا underheating</li>
+                        <li>تست عملکرد: در آب گرم با ترمومتر</li>
+                        <li>دمای باز شدن: مطابق مشخصات خودرو</li>
+                        <li>واشر: تعویض همراه ترموستات</li>
+                        <li>کنترل: تست دمای پس از نصب</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h4>تعمیر پمپ آب</h4>
+                    <p>تعویض در صورت نشتی یا خرابی بلبرینگ</p>
+                    <ul class="features-list">
+                        <li>علائم خرابی: نشتی، صدا، گرم شدن</li>
+                        <li>بررسی: لقی محور، وضعیت پروانه</li>
+                        <li>تعویض: همراه تسمه تایم در برخی خودروها</li>
+                        <li>واشر: استفاده از واشر جدید</li>
+                        <li>کنترل: تست نشتی پس از نصب</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h4>تعمیر رادیاتور</h4>
+                    <p>رفع نشتی یا تعویض رادیاتور</p>
+                    <ul class="features-list">
+                        <li>علائم خرابی: نشتی، کاهش کارایی</li>
+                        <li>تعمیر: جوشکاری آلومینیوم یا مس</li>
+                        <li>تعویض: در صورت آسیب شدید</li>
+                        <li>شستشو: تمیز کردن داخلی و خارجی</li>
+                        <li>کنترل: تست فشار پس از تعمیر</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-cog"></i> ابزارهای تخصصی تعمیرات</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-tachometer-alt"></i> فشارسنج رادیاتور</h4>
+                    <p>برای تست فشار سیستم و تشخیص نشتی</p>
+                    <ul class="features-list">
+                        <li>رنج فشار: 0-2 بار</li>
+                        <li>اتصال: استاندارد درب رادیاتور</li>
+                        <li>کاربرد: تست نشتی داخلی و خارجی</li>
+                        <li>کنترل: فشار کاری سیستم</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-thermometer"></i> ترمومتر مادون قرمز</h4>
+                    <p>اندازه‌گیری دمای بدون تماس</p>
+                    <ul class="features-list">
+                        <li>محدوده دمایی: -50 تا 500 درجه</li>
+                        <li>دقت: ±2 درجه سانتی‌گراد</li>
+                        <li>کاربرد: تست ترموستات، رادیاتور</li>
+                        <li>مزیت: اندازه‌گیری سریع و ایمن</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tint"></i> رفرکتومتر</h4>
+                    <p>اندازه‌گیری غلظت ضد یخ</p>
+                    <ul class="features-list">
+                        <li>اندازه‌گیری: نقطه انجماد مایع</li>
+                        <li>دقت: ±2 درجه سانتی‌گراد</li>
+                        <li>کاربرد: کنترل کیفیت مایع</li>
+                        <li>مزیت: سریع و قابل اعتماد</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4><i class="fas fa-lightbulb"></i> نکته فنی مهم</h4>
+                <p>پس از هر تعمیر روی سیستم خنک‌کننده، حتماً سیستم را هواگیری کنید. وجود هوا در سیستم می‌تواند باعث overheating موقت و کاهش کارایی سیستم شود.</p>
+            </div>
+        </section>
+
+        <!-- بخش ایمنی و استانداردها -->
+        <section id="safety" class="content-section">
+            <h2><i class="fas fa-shield-alt"></i> ایمنی و استانداردها</h2>
+            
+            <h3><i class="fas fa-exclamation-triangle"></i> نکات ایمنی در کار با سیستم خنک‌کننده</h3>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-temperature-high"></i> خطرات حرارتی</h4>
+                    <p>پیشگیری از سوختگی و آسیب‌های حرارتی</p>
+                    <ul class="features-list">
+                        <li>هرگز درب رادیاتور داغ را باز نکنید</li>
+                        <li>استفاده از دستکش ضد حرارت</li>
+                        <li>اجازه دهید موتور کاملاً خنک شود</li>
+                        <li>مراقب بخار داغ باشید</li>
+                        <li>شناسایی نقاط داغ موتور</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tint"></i> خطرات شیمیایی</h4>
+                    <p>ایمنی در کار با مایعات شیمیایی</p>
+                    <ul class="features-list">
+                        <li>ضد یخ سمی است - از تماس با پوست خودداری کنید</li>
+                        <li>استفاده از دستکش و عینک ایمنی</li>
+                        <li>تهویه مناسب در فضای بسته</li>
+                        <li>دور از دسترس کودکان</li>
+                        <li>دفع اصولی ضایعات شیمیایی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-bolt"></i> خطرات الکتریکی</h4>
+                    <p>ایمنی در کار با قطعات برقی</p>
+                    <ul class="features-list">
+                        <li>قطع باتری قبل از کار روی فن‌های الکتریکی</li>
+                        <li>فن ممکن است ناگهان روشن شود</li>
+                        <li>بررسی عایق‌بندی سیم‌ها</li>
+                        <li>استفاده از ابزار عایق‌دار</li>
+                        <li>تست نشتی جریان</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-clipboard-check"></i> استانداردهای فنی و زیست محیطی</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>استاندارد</th>
+                            <th>شرح</th>
+                            <th>محدوده</th>
+                            <th>کنترل کیفیت</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SAE J1034</td>
+                            <td>استاندارد مایع خنک‌کننده</td>
+                            <td>نقطه انجماد، نقطه جوش، pH</td>
+                            <td>رفرکتومتر، pH متر</td>
+                        </tr>
+                        <tr>
+                            <td>ISO 13032</td>
+                            <td>استاندارد فشار سیستم</td>
+                            <td>0.9-1.1 بار</td>
+                            <td>تست فشار</td>
+                        </tr>
+                        <tr>
+                            <td>DIN 727</td>
+                            <td>استاندارد ترموستات</td>
+                            <td>دمای باز شدن ±2°C</td>
+                            <td>تست در آب گرم</td>
+                        </tr>
+                        <tr>
+                            <td>EPA</td>
+                            <td>استاندارد زیست محیطی</td>
+                            <td>دفع ضایعات شیمیایی</td>
+                            <td>جمع‌آوری مجزا</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="warning-box">
+                <h4><i class="fas fa-recycle"></i> نکته زیست محیطی</h4>
+                <p>ضد یخ و مایع خنک‌کننده استفاده شده به شدت برای محیط زیست مضر هستند. حتماً این مواد را در ظروف دربسته جمع‌آوری و به مراکز بازیافت تحویل دهید.</p>
+            </div>
+        </section>
+
+        <!-- بخش منابع آموزشی -->
+        <section id="resources" class="content-section">
+            <h2><i class="fas fa-download"></i> منابع آموزشی</h2>
+            
+            <h3><i class="fas fa-film"></i> فیلم‌های آموزشی</h3>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>آموزش تعویض ترموستات</h4>
+                    <p>فیلم کامل تعویض ترموستات به صورت عملی</p>
+                    <p class="file-size">حجم: ۱۸۰ مگابایت</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>عیب‌یابی سیستم خنک‌کننده</h4>
+                    <p>تشخیص و رفع مشکلات رایج سیستم</p>
+                    <p class="file-size">حجم: ۲۵۰ مگابایت</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>تعمیر پمپ آب</h4>
+                    <p>آموزش کامل تعمیر و بازسازی پمپ آب</p>
+                    <p class="file-size">حجم: ۲۲۰ مگابایت</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>سیستم‌های خنک‌کننده مدرن</h4>
+                    <p>آشنایی با سیستم‌های پیشرفته خنک‌کاری</p>
+                    <p class="file-size">حجم: ۳۰۰ مگابایت</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-file-pdf"></i> جزوات و مستندات</h3>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h4>جزوه کامل سیستم خنک‌کننده</h4>
+                    <p>PDF جامع شامل تمام مباحث تئوری و عملی</p>
+                    <p class="file-size">حجم: ۱۲ مگابایت</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h4>کاتالوگ قطعات</h4>
+                    <p>کاتالوگ قطعات سیستم خنک‌کننده خودروهای مختلف</p>
+                    <p class="file-size">حجم: ۸ مگابایت</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h4>جدول استانداردها</h4>
+                    <p>جدول فشار و دماهای استاندارد خودروهای مختلف</p>
+                    <p class="file-size">حجم: ۵ مگابایت</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h4>چک لیست تعمیرات</h4>
+                    <p>چک لیست مرحله به مرحله تعمیرات سیستم</p>
+                    <p class="file-size">حجم: ۳ مگابایت</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-images"></i> نمودارها و دیاگرام‌ها</h3>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h4>دیاگرام مدار خنک‌کننده</h4>
+                    <p>نمودار کامل مسیر گردش مایع در موتور</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h4>نمودار دمای کاری</h4>
+                    <p>نمودار تغییرات دمای موتور در شرایط مختلف</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h4>دیاگرام الکتریکی فن</h4>
+                    <p>نمودار سیم کشی و کنترل فن‌های الکتریکی</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h4>آناتومی پمپ آب</h4>
+                    <p>نمودار اجزای داخلی پمپ آب و مکانیزم کار</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش تمرین‌ها -->
+        <section id="exercises" class="content-section">
+            <h2><i class="fas fa-pencil-alt"></i> تمرین‌ها و آزمون‌ها</h2>
+            
+            <h3><i class="fas fa-question-circle"></i> سوالات تشریحی</h3>
+            
+            <div class="exercise-container">
+                <div class="exercise-question">
+                    ۱. وظایف اصلی سیستم خنک‌کننده موتور را به طور کامل شرح دهید و اهمیت هر کدام را توضیح دهید.
+                </div>
+                <div class="exercise-options">
+                    <div class="exercise-option">پاسخ: سیستم خنک‌کننده چهار وظیفه اصلی دارد: ۱- کنترل دمای موتور در محدوده بهینه (۸۵-۹۵°C) ۲- انتقال حرارت از قطعات داغ به محیط ۳- خنک‌کاری قطعات متحرک ۴- کمک به کاهش آلایندگی. اهمیت: جلوگیری از overheating و underheating که هر دو باعث کاهش راندمان و افزایش سایش می‌شوند.</div>
+                </div>
+            </div>
+
+            <div class="exercise-container">
+                <div class="exercise-question">
+                    ۲. تفاوت سیستم خنک‌کننده مدار باز و بسته را بیان کرده و مزایای سیستم بسته را شرح دهید.
+                </div>
+                <div class="exercise-options">
+                    <div class="exercise-option">پاسخ: مدار باز فشار اتمسفریک دارد و نقطه جوش ۱۰۰°C، در حالی که مدار بسته تحت فشار (۰.۹-۱.۱ بار) کار می‌کند و نقطه جوش ۱۲۰-۱۳۰°C دارد. مزایای سیستم بسته: کارایی بالاتر، کاهش تبخیر، جلوگیری از نفوذ هوا، عمر طولانی‌تر مایع خنک‌کننده.</div>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-tasks"></i> سوالات چهارگزینه‌ای</h3>
+            
+            <div class="exercise-container">
+                <div class="exercise-question">
+                    ۳. دمای استاندارد باز شدن ترموستات در بیشتر خودروها چقدر است؟
+                </div>
+                <div class="exercise-options">
+                    <div class="exercise-option">الف) ۶۰-۷۰ درجه سانتی‌گراد</div>
+                    <div class="exercise-option correct">ب) ۸۰-۹۵ درجه سانتی‌گراد</div>
+                    <div class="exercise-option">ج) ۱۰۰-۱۱۰ درجه سانتی‌گراد</div>
+                    <div class="exercise-option">د) ۱۲۰-۱۳۰ درجه سانتی‌گراد</div>
+                </div>
+            </div>
+
+            <div class="exercise-container">
+                <div class="exercise-question">
+                    ۴. کدام یک از موارد زیر نشان‌دهنده خرابی پمپ آب است؟
+                </div>
+                <div class="exercise-options">
+                    <div class="exercise-option">الف) روشن شدن چراغ چک موتور</div>
+                    <div class="exercise-option correct">ب) نشتی از زیر پمپ آب و صدای بلبرینگ</div>
+                    <div class="exercise-option">ج) کاهش شتاب خودرو</div>
+                    <div class="exercise-option">د) روشن نشدن کولر</div>
+                </div>
+            </div>
+
+            <div class="exercise-container">
+                <div class="exercise-question">
+                    ۵. بهترین نسبت اختلاط آب و ضد یخ برای شرایط معمولی چیست؟
+                </div>
+                <div class="exercise-options">
+                    <div class="exercise-option">الف) ۷۰% آب - ۳۰% ضد یخ</div>
+                    <div class="exercise-option correct">ب) ۵۰% آب - ۵۰% ضد یخ</div>
+                    <div class="exercise-option">ج) ۳۰% آب - ۷۰% ضد یخ</div>
+                    <div class="exercise-option">د) ۱۰۰% ضد یخ</div>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-tools"></i> تمرین‌های عملی</h3>
+            
+            <div class="exercise-container">
+                <div class="exercise-question">
+                    ۶. پروژه عملی: تعویض مایع خنک‌کننده و هواگیری سیستم
+                </div>
+                <div class="exercise-options">
+                    <div class="exercise-option">
+                        <strong>مراحل اجرا:</strong><br>
+                        ۱- ایمنی: موتور سرد، قطع باتری، دستکش و عینک<br>
+                        ۲- تخلیه مایع قدیمی از پیچ تخلیه رادیاتور<br>
+                        ۳- شستشوی سیستم با آب مقطر در صورت نیاز<br>
+                        ۴- تهیه مایع جدید با نسبت ۵۰-۵۰<br>
+                        ۵- پر کردن سیستم از طریق مخزن انبساطی<br>
+                        ۶- هواگیری: روشن کردن موتور، گرم کردن، تکمیل مایع<br>
+                        ۷- کنترل نهایی: بررسی نشتی، سطح مایع، دمای کاری
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-container">
+                <div class="exercise-question">
+                    ۷. پروژه عملی: تست و تعویض ترموستات
+                </div>
+                <div class="exercise-options">
+                    <div class="exercise-option">
+                        <strong>مراحل اجرا:</strong><br>
+                        ۱- تخلیه نسبی مایع خنک‌کننده<br>
+                        ۲- باز کردن هوزینگ ترموستات<br>
+                        ۳- تست ترموستات در آب گرم با ترمومتر<br>
+                        ۴- بررسی دمای شروع باز شدن و کامل باز شدن<br>
+                        ۵- نصب ترموستات جدید با واشر مناسب<br>
+                        ۶- پر کردن و هواگیری سیستم<br>
+                        ۷- تست عملکرد: کنترل دمای موتور در حال کار
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4><i class="fas fa-graduation-cap"></i> راهنمای انجام تمرین‌ها</h4>
+                <p>برای انجام تمرین‌های عملی حتماً از استاد راهنما کمک بگیرید و نکات ایمنی را رعایت کنید. استفاده از لباس کار، دستکش، عینک ایمنی و کفش ایمنی الزامی است. همیشه قبل از شروع کار، موتور را کاملاً خنک کنید.</p>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>پیشرفت کلی دوره</span>
+                    <span>۱۰۰% تکمیل شده</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>پایه دهم - شاخه فنی و حرفه‌ای | رشته مکانیک خودرو | بخش نهم: تعمیر سیستم خنک‌کننده موتور</p>
+            <p>تمامی حقوق محفوظ است © 2024 - سازمان پژوهش و برنامه‌ریزی آموزشی</p>
+        </footer>
+    </div>
+
+    <script>
+        // ایجاد ذرات متحرک در پس‌زمینه
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 6 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                particle.style.left = `${Math.random() * 100}%`;
+                
+                particle.style.animationDelay = `${Math.random() * 8}s`;
+                particle.style.animationDuration = `${Math.random() * 10 + 8}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Tab Navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                
+                tab.classList.add('active');
+                const targetId = tab.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+                
+                updateProgress(targetId);
+                addFloatingElements();
+            });
+        });
+
+        // Progress Tracking
+        function updateProgress(section) {
+            const progressMap = {
+                'intro': 18,
+                'fundamentals': 35,
+                'components': 52,
+                'circuit': 68,
+                'diagnosis': 82,
+                'repair': 92,
+                'safety': 96,
+                'resources': 98,
+                'exercises': 100
+            };
+            
+            if (progressMap[section]) {
+                const progressFill = document.querySelector('.progress-fill');
+                const progressText = document.querySelector('.progress-header span:last-child');
+                
+                progressFill.style.width = progressMap[section] + '%';
+                progressText.textContent = progressMap[section] + '% تکمیل شده';
+                
+                localStorage.setItem('coolingSystemProgress', progressMap[section]);
+            }
+        }
+
+        // Add floating elements
+        function addFloatingElements() {
+            const currentSection = document.querySelector('.content-section.active');
+            const existingElements = currentSection.querySelectorAll('.floating-element');
+            existingElements.forEach(el => el.remove());
+            
+            const elementCount = 3;
+            for (let i = 0; i < elementCount; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                
+                const size = Math.random() * 80 + 20;
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+                element.style.top = `${Math.random() * 80 + 10}%`;
+                element.style.right = `${Math.random() * 80 + 10}%`;
+                
+                element.style.animationDelay = `${Math.random() * 2}s`;
+                
+                currentSection.appendChild(element);
+            }
+        }
+
+        // Load saved progress and initialize
+        window.addEventListener('load', () => {
+            createParticles();
+            addFloatingElements();
+            
+            const savedProgress = localStorage.getItem('coolingSystemProgress');
+            if (savedProgress) {
+                const progressFill = document.querySelector('.progress-fill');
+                const progressText = document.querySelector('.progress-header span:last-child');
+                
+                progressFill.style.width = savedProgress + '%';
+                progressText.textContent = savedProgress + '% تکمیل شده';
+            }
+        });
+
+        // Exercise Interaction
+        document.querySelectorAll('.exercise-option').forEach(option => {
+            option.addEventListener('click', function() {
+                if (this.classList.contains('correct')) {
+                    this.style.background = '#d4edda';
+                    this.style.borderColor = '#c3e6cb';
+                } else if (this.parentElement.classList.contains('exercise-options') && 
+                          this.parentElement.querySelector('.correct')) {
+                    this.style.background = '#f8d7da';
+                    this.style.borderColor = '#f5c6cb';
+                    this.parentElement.querySelector('.correct').style.background = '#d4edda';
+                    this.parentElement.querySelector('.correct').style.borderColor = '#c3e6cb';
+                }
+            });
+        });
+
+        // Download Buttons Simulation
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.textContent.includes('دانلود')) {
+                    e.preventDefault();
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال دانلود...';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        alert('فایل با موفقیت دانلود شد!');
+                    }, 2000);
+                } else if (this.textContent.includes('پخش')) {
+                    e.preventDefault();
+                    alert('ویدئو در حال پخش است...');
+                } else if (this.textContent.includes('آزمون')) {
+                    e.preventDefault();
+                    alert('آزمون آغاز شد!');
+                } else if (this.textContent.includes('شبیه‌سازی')) {
+                    e.preventDefault();
+                    alert('شبیه‌ساز تعمیرات راه‌اندازی شد!');
+                }
+            });
+        });
+
+        // Enhanced hover effects
+        document.querySelectorAll('.card, .resource-card, .video-placeholder, .download-card, .quiz-card, .simulation-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+                this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.15)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
+            });
+        });
+
+        // Mobile Navigation
+        function handleMobileNav() {
+            if (window.innerWidth <= 768) {
+                const navContainer = document.querySelector('.nav-container');
+                const select = document.createElement('select');
+                select.style.width = '100%';
+                select.style.padding = '15px';
+                select.style.marginBottom = '20px';
+                select.style.borderRadius = '12px';
+                select.style.border = '2px solid #3498db';
+                select.style.background = 'white';
+                select.style.fontSize = '16px';
+                select.style.fontWeight = '600';
+                
+                document.querySelectorAll('.nav-tab').forEach(tab => {
+                    const option = document.createElement('option');
+                    option.value = tab.getAttribute('data-target');
+                    option.textContent = tab.textContent;
+                    if (tab.classList.contains('active')) {
+                        option.selected = true;
+                    }
+                    select.appendChild(option);
+                });
+                
+                select.addEventListener('change', (e) => {
+                    const targetId = e.target.value;
+                    document.querySelector(`.nav-tab[data-target="${targetId}"]`).click();
+                });
+                
+                if (!document.querySelector('.mobile-nav-select')) {
+                    select.className = 'mobile-nav-select';
+                    navContainer.insertBefore(select, navContainer.firstChild);
+                }
+            } else {
+                const mobileSelect = document.querySelector('.mobile-nav-select');
+                if (mobileSelect) {
+                    mobileSelect.remove();
+                }
+            }
+        }
+
+        // Initialize mobile nav
+        handleMobileNav();
+        window.addEventListener('resize', handleMobileNav);
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and interactive elements
+        document.querySelectorAll('.card, .step, .resource-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

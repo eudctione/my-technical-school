@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آموزش سیستم تایمینگ متغیر و مکانیزم محرک سوپاپ - پایه دهم</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --gradient: linear-gradient(135deg, #3498db, #2c3e50);
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-20px, -20px) rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            flex-wrap: wrap;
+            justify-content: center;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+        }
+
+        .nav-tab {
+            padding: 12px 24px;
+            margin: 5px;
+            background: var(--light);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-tab:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-tab.active {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .content-section {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--secondary);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--secondary);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .features-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-right: 30px;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-right: 5px solid #f39c12;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-right: 5px solid #17a2b8;
+        }
+
+        .step-container {
+            counter-reset: step;
+            margin: 2rem 0;
+        }
+
+        .step {
+            position: relative;
+            padding: 1.5rem 1.5rem 1.5rem 4rem;
+            margin: 1rem 0;
+            background: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: var(--gradient);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .interactive-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 2rem 0;
+        }
+
+        .video-placeholder, .download-card, .quiz-card {
+            flex: 1;
+            min-width: 300px;
+            background: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .video-placeholder:hover, .download-card:hover, .quiz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .video-icon, .download-icon, .quiz-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .video-placeholder h4, .download-card h4, .quiz-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .diagram-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .diagram-part {
+            position: absolute;
+            padding: 10px;
+            background: white;
+            border: 2px solid var(--secondary);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .diagram-part:hover {
+            background: var(--secondary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .part-info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.95);
+            padding: 1.5rem;
+            border-radius: 10px;
+            display: none;
+            z-index: 10;
+        }
+
+        .part-info.active {
+            display: block;
+        }
+
+        .close-info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: white;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .nav-tab {
+                margin: 5px 0;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .card-grid, .interactive-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .simulation-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 2px dashed #dee2e6;
+        }
+        
+        .simulation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .simulation-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .simulation-area {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .simulation-step {
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+        
+        .simulation-step h5 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .simulation-visual {
+            width: 100%;
+            height: 200px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1><i class="fas fa-cogs"></i> سیستم تایمینگ متغیر و مکانیزم محرک سوپاپ</h1>
+                <p class="subtitle">آموزش پیشرفته برای دانش‌آموزان پایه دهم - شاخه فنی و حرفه‌ای</p>
+            </div>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-target="vvt-system"><i class="fas fa-sliders-h"></i> سیستم VVT</button>
+            <button class="nav-tab" data-target="rocker-arm"><i class="fas fa-fan"></i> مجموعه اسیک</button>
+            <button class="nav-tab" data-target="tappets"><i class="fas fa-compress-arrows-alt"></i> تایپیت‌ها</button>
+            <button class="nav-tab" data-target="timing-system"><i class="fas fa-link"></i> سیستم تایمینگ</button>
+            <button class="nav-tab" data-target="camshaft-repair"><i class="fas fa-cog"></i> تعمیر میل سوپاپ</button>
+            <button class="nav-tab" data-target="seals-gaskets"><i class="fas fa-oil-can"></i> کاسه نمد و واشرها</button>
+            <button class="nav-tab" data-target="workshop"><i class="fas fa-tools"></i> کارگاه عملی</button>
+        </nav>
+
+        <section id="vvt-system" class="content-section active">
+            <h2><i class="fas fa-sliders-h"></i> سیستم تایمینگ متغیر سوپاپ (VVT)</h2>
+            <p>سیستم VVT یکی از تکنولوژی‌های پیشرفته در موتورهای مدرن است که زمان باز و بسته شدن سوپاپ‌ها را بر اساس دور و بار موتور کنترل می‌کند.</p>
+            
+            <h3><i class="fas fa-cogs"></i> انواع سیستم‌های VVT در خودروهای موجود کشور</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>نوع سیستم تایمینگ متغیر</th>
+                            <th>مدل</th>
+                            <th>نوع خودرو</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>VVT-i (تویوتا)</td>
+                            <td>کمری، کورولا، هایلوکس</td>
+                            <td>بنزینی</td>
+                        </tr>
+                        <tr>
+                            <td>CVVT (کیا و هیوندای)</td>
+                            <td>سورنتو، سانتافه، النترا</td>
+                            <td>بنزینی</td>
+                        </tr>
+                        <tr>
+                            <td>VTC (هوندا)</td>
+                            <td>سیویک، آکورد، CR-V</td>
+                            <td>بنزینی</td>
+                        </tr>
+                        <tr>
+                            <td>VVL (نیسان)</td>
+                            <td>ماکسیما، ایکس-تریل</td>
+                            <td>بنزینی</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3><i class="fas fa-tachometer-alt"></i> عملکرد سیستم VVT</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-forward"></i> وضعیت آدوانس (Advance)</h4>
+                    <p>زمان باز شدن سوپاپ‌ها زودتر از حالت عادی اتفاق می‌افتد</p>
+                    <ul class="features-list">
+                        <li>افزایش توان در دورهای پایین</li>
+                        <li>بهبود شتاب‌گیری</li>
+                        <li>کاهش مصرف سوخت</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-backward"></i> وضعیت ریتارد (Retard)</h4>
+                    <p>زمان باز شدن سوپاپ‌ها دیرتر از حالت عادی اتفاق می‌افتد</p>
+                    <ul class="features-list">
+                        <li>افزایش توان در دورهای بالا</li>
+                        <li>کاهش آلایندگی</li>
+                        <li>بهبود کارایی موتور</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-expand-arrows-alt"></i> کنترل هیدرولیکی</h4>
+                    <p>کنترل موقعیت میل سوپاپ توسط فشار روغن موتور</p>
+                    <ul class="features-list">
+                        <li>شیر برقی کنترل جریان روغن</li>
+                        <li>پروانه‌ای در محفظه هیدرولیکی</li>
+                        <li>کنترل توسط ECU موتور</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-search"></i> عیب‌یابی سیستم VVT</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-bolt"></i> اشکالات الکتریکی</h4>
+                    <p>مشکلات مربوط به ECU و مدارهای الکتریکی</p>
+                    <ul class="features-list">
+                        <li>عملکرد نامناسب ECU</li>
+                        <li>مدار اتصال شیر برقی</li>
+                        <li>سنسور موقعیت میل سوپاپ</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tint"></i> اشکالات هیدرولیکی</h4>
+                    <p>مشکلات مربوط به مدار روغن و فشار</p>
+                    <ul class="features-list">
+                        <li>فشار نامناسب روغن</p>
+                        <li>نشتی در مدار هیدرولیک</li>
+                        <li>گرفتگی فیلترهای مستقل</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-cog"></i> اشکالات مکانیکی</h4>
+                    <p>مشکلات فیزیکی در قطعات سیستم</p>
+                    <ul class="features-list">
+                        <li>قفل شدن قطعات</li>
+                        <li>شکستگی و جدایش</li>
+                        <li>ضعیف شدن فنرها</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h4><i class="fas fa-exclamation-circle"></i> نکته مهم</h4>
+                <p>عیب‌یابی دقیق سیستم VVT نیاز به نصب دستگاه عیب‌یاب در شرایط حرکت و تحت بار بودن خودرو دارد، زیرا در حالت توقف و بدون بار، تست دقیق امکان‌پذیر نیست.</p>
+            </div>
+            
+            <div class="interactive-container">
+                <div class="video-placeholder">
+                    <div class="video-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>آموزش سیستم VVT</h4>
+                    <p>ویدئوی کامل عملکرد و عیب‌یابی سیستم VVT</p>
+                    <button class="btn"><i class="fas fa-play"></i> پخش ویدئو</button>
+                </div>
+                
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-file-download"></i>
+                    </div>
+                    <h4>راهنمای VVT</h4>
+                    <p>دانلود راهنمای کامل سیستم تایمینگ متغیر</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود راهنما</button>
+                </div>
+                
+                <div class="quiz-card">
+                    <div class="quiz-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h4>آزمون سیستم VVT</h4>
+                    <p>سنجش دانش مربوط به سیستم تایمینگ متغیر</p>
+                    <button class="btn"><i class="fas fa-pencil-alt"></i> شروع آزمون</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="rocker-arm" class="content-section">
+            <h2><i class="fas fa-fan"></i> مجموعه اسیک (Rocker Arm)</h2>
+            <p>مجموعه اسیک به عنوان واسطه انتقال حرکت از میل سوپاپ به سوپاپ عمل می‌کند و در انواع مختلفی تولید می‌شود.</p>
+            
+            <h3><i class="fas fa-project-diagram"></i> انواع مجموعه اسیک</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-cube"></i> اسیک معمولی</h4>
+                    <p>اسیک‌های ساده با جنس فولاد یا آلیاژ آلومینیوم</p>
+                    <ul class="features-list">
+                        <li>ساختار ساده و مستحکم</li>
+                        <li>قیمت مناسب</li>
+                        <li>نیاز به تنظیم دوره‌ای لقی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tint"></i> اسیک با تنظیم کننده هیدرولیکی</h4>
+                    <p>اسیک‌های مجهز به سیستم تنظیم خودکار لقی</p>
+                    <ul class="features-list">
+                        <li>عدم نیاز به تنظیم دستی</li>
+                        <li>عملکرد بی‌صدا</li>
+                        <li>حساس به کیفیت روغن</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-cogs"></i> اسیک غلتکی</h4>
+                    <p>اسیک‌های مجهز به غلتک برای کاهش اصطکاک</p>
+                    <ul class="features-list">
+                        <li>کاهش اصطکاک و سایش</li>
+                        <li>عمر کاری طولانی</li>
+                        <li>هزینه باالتر</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-tools"></i> عیب‌یابی و تعمیر مجموعه اسیک</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-file-medical-alt"></i> فرسایش سر اسیک</h4>
+                    <p>خوردگی در ناحیه تماس با سوپاپ</p>
+                    <ul class="features-list">
+                        <li>ایجاد صدا از مکانیزم</li>
+                        <li>اختلال در تنظیم فیلر</li>
+                        <li>روش تعمیر: تعویض یا سنگ‌زنی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-cog"></i> فرسایش غلتک اسیک</h4>
+                    <p>خوردگی در غلتک‌های کاهش اصطکاک</p>
+                    <ul class="features-list">
+                        <li>ایجاد صداهای غیرعادی</li>
+                        <li>کاهش عملکرد مکانیزم</li>
+                        <li>روش تعمیر: تعویض مجموعه</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-screwdriver"></i> هرز شدن پیچ تنظیم</h4>
+                    <p>خرابی پیچ و مهره‌های تنظیم فیلر</p>
+                    <ul class="features-list">
+                        <li>عدم حفظ تنظیم لقی</li>
+                        <li>ایجاد صدا و کاهش عملکرد</li>
+                        <li>روش تعمیر: تعویض پیچ‌ها</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-ruler-combined"></i> افزایش قطر داخلی یاتاقان اسیک</h3>
+            <div class="info-box">
+                <h4><i class="fas fa-info-circle"></i> اطلاعات فنی</h4>
+                <p>افزایش قطر داخلی محل نصب اسیک به میل اسیک به علت سرعت حرکت و اعمال نیروی زیاد ایجاد شده و باعث اختلال در تنظیم فیلر و افت فشار روغن می‌شود.</p>
+            </div>
+            
+            <div class="step-container">
+                <div class="step">
+                    <p>باز کردن مجموعه اسیک از روی سرسیلندر</p>
+                </div>
+                <div class="step">
+                    <p>اندازه‌گیری قطر داخلی اسیک‌ها با کولیس</p>
+                </div>
+                <div class="step">
+                    <p>اندازه‌گیری قطر میل اسیک با میکرومتر</p>
+                </div>
+                <div class="step">
+                    <p>مقایسه نتایج با مقادیر استاندارد</p>
+                </div>
+                <div class="step">
+                    <p>تعویض اسیک یا میل اسیک در صورت نیاز</p>
+                </div>
+            </div>
+            
+            <div class="interactive-container">
+                <div class="video-placeholder">
+                    <div class="video-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>تعمیر مجموعه اسیک</h4>
+                    <p>آموزش تصویری باز کردن و تعمیر اسیک‌ها</p>
+                    <button class="btn"><i class="fas fa-play"></i> پخش ویدئو</button>
+                </div>
+                
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-file-download"></i>
+                    </div>
+                    <h4>راهنمای اسیک</h4>
+                    <p>دانلود راهنمای کامل مجموعه اسیک‌ها</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود راهنما</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="tappets" class="content-section">
+            <h2><i class="fas fa-compress-arrows-alt"></i> تایپیت‌ها (Tappets)</h2>
+            <p>تایپیت‌ها وظیفه انتقال نیروی اعمال شده از میل سوپاپ به سوپاپ را بر عهده دارند و در انواع مختلفی تولید می‌شوند.</p>
+            
+            <h3><i class="fas fa-th"></i> انواع تایپیت</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-arrow-down"></i> تایپیت با شیم زیر</h4>
+                    <p>شیم تنظیم در زیر تایپیت قرار می‌گیرد</p>
+                    <ul class="features-list">
+                        <li>طراحی ساده</li>
+                        <li>هزینه تعمیرات کم</li>
+                        <li>نیاز به مجموعه شیم‌های مختلف</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-arrow-up"></i> تایپیت با شیم رو</h4>
+                    <p>شیم تنظیم روی تایپیت قرار می‌گیرد</p>
+                    <ul class="features-list">
+                        <li>دقت تنظیم باال</li>
+                        <li>امکان تنظیم دقیق‌تر</li>
+                        <li>هزینه باالتر</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tint"></i> تایپیت هیدرولیکی</h4>
+                    <p>تنظیم خودکار لقی توسط فشار روغن</p>
+                    <ul class="features-list">
+                        <li>عدم نیاز به تنظیم دستی</li>
+                        <li>عملکرد بی‌صدا</li>
+                        <li>حساس به کیفیت روغن</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-search"></i> عیب‌یابی تایپیت‌ها</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-file-medical-alt"></i> خوردگی کف تایپیت</h4>
+                    <p>سایش و تغییر فرم در ناحیه تماس با بادامک</p>
+                    <ul class="features-list">
+                        <li>ایجاد صدای تق تق</li>
+                        <li>تغییر مکرر مقدار فیلر</li>
+                        <li>روش تعمیر: تعویض تایپیت</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-compress-arrows-alt"></i> سایش محیط تایپیت</h4>
+                    <p>کاهش قطر محیط تایپیت به علت اعمال نیروی شعاعی</p>
+                    <ul class="features-list">
+                        <li>افت فشار روغن (در تایپیت هیدرولیکی)</li>
+                        <li>ایجاد لقی اضافی</li>
+                        <li>روش تعمیر: تعویض تایپیت</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tint"></i> خالی یا قفل کردن تایپیت هیدرولیکی</h4>
+                    <p>مشکلات در عملکرد پلانجر داخلی</p>
+                    <ul class="features-list">
+                        <li>نشتی روغن (خالی کردن)</li>
+                        <li>عدم حرکت پلانجر (قفل شدن)</li>
+                        <li>روش تعمیر: تعویض تایپیت</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h4><i class="fas fa-exclamation-circle"></i> هشدار مهم</h4>
+                <p>خوردگی محیط تایپیت‌های هیدرولیکی بسیار مهم بوده چرا که یکی از علت‌های افت فشار روغن مدار سرسیلندر از این ناحیه است.</p>
+            </div>
+            
+            <h3><i class="fas fa-vial"></i> آزمایش سلامت تایپیت هیدرولیکی</h3>
+            <div class="step-container">
+                <div class="step">
+                    <p>برداشتن تایپیت از سرسیلندر</p>
+                </div>
+                <div class="step">
+                    <p>شستشوی تایپیت با سوخت سبک</p>
+                </div>
+                <div class="step">
+                    <p>پر کردن تایپیت با روغن موتور</p>
+                </div>
+                <div class="step">
+                    <p>فشردن پلانجر با ابزار مخصوص</p>
+                </div>
+                <div class="step">
+                    <p>بررسی زمان بازگشت پلانجر به حالت اول</p>
+                </div>
+                <div class="step">
+                    <p>تعویض تایپیت در صورت مشاهده عیب</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="timing-system" class="content-section">
+            <h2><i class="fas fa-link"></i> سیستم تایمینگ موتور</h2>
+            <p>سیستم تایمینگ مسئول هماهنگی حرکت میل لنگ و میل سوپاپ است و در انواع تسمه‌ای، زنجیری و چرخ‌دنده‌ای تولید می‌شود.</p>
+            
+            <h3><i class="fas fa-exclamation-triangle"></i> فرسایش تسمه تایم</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-cracked-egg"></i> علائم فرسایش</h4>
+                    <p>نشانه‌های نیاز به تعویض تسمه تایم</p>
+                    <ul class="features-list">
+                        <li>وجود ترک در محیط تسمه</li>
+                        <li>سایش دندانه‌های تسمه</li>
+                        <li>پاره شدن تسمه</li>
+                        <li>کاهش عمر مفید از حد تعیین شده</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tools"></i> روش کنترل</h4>
+                    <p>روش‌های بررسی وضعیت تسمه تایم</p>
+                    <ul class="features-list">
+                        <li>بازدید بصری از ترک‌ها</li>
+                        <li>کنترل کشش تسمه</li>
+                        <li>بررسی هم‌راستایی چرخ‌ها</li>
+                        <li>کنترل لنگی چرخ تسمه</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-history"></i> زمان تعویض</h4>
+                    <p>عوامل مؤثر در کاهش عمر تسمه تایم</p>
+                    <ul class="features-list">
+                        <li>کارکرد زیاد موتور</li>
+                        <li>کیفیت پایین تسمه</li>
+                        <li>نقص در سیستم خنک‌کاری</li>
+                        <li>نقص در روغن‌کاری</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-link"></i> فرسایش زنجیر تایم</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-ruler"></i> کنترل طول زنجیر</h4>
+                    <p>اندازه‌گیری طول زنجیر برای تشخیص فرسایش</p>
+                    <ul class="features-list">
+                        <li>اندازه‌گیری طول تعداد مشخصی از دانه‌ها</li>
+                        <li>بررسی خالصی زنجیر</li>
+                        <li>کنترل عملکرد زنجیر سفت‌کن</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-eye"></i> کنترل ظاهری</h4>
+                    <p>بازدید بصری از زنجیر و چرخ‌زنجیر</p>
+                    <ul class="features-list">
+                        <li>بررسی سایش دندانه‌های چرخ‌زنجیر</li>
+                        <li>کنترل خوردگی زنجیر</li>
+                        <li>بررسی علائم تایمینگ</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-compress-arrows-alt"></i> کنترل لقی</h4>
+                    <p>اندازه‌گیری لقی زنجیر و چرخ‌زنجیر</p>
+                    <ul class="features-list">
+                        <li>اندازه‌گیری جابه‌جایی چرخ‌زنجیر</li>
+                        <li>کنترل لقی با فیلر یا ساعت اندازه‌گیر</li>
+                        <li>بررسی لقی در نواحی مختلف</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h4><i class="fas fa-lightbulb"></i> نکته فنی</h4>
+                <p>در موتورهای امروزی که میل سوپاپ دارای سنسور موقعیت است، در صورت تایم غلط هر یک از میل سوپاپ‌ها، چراغ چک موتور روشن شده و باید نسبت به رفع عیب اقدام کرد.</p>
+            </div>
+            
+            <div class="simulation-container">
+                <div class="simulation-header">
+                    <h3><i class="fas fa-cogs"></i> شبیه‌ساز تنظیم تایم موتور</h3>
+                    <div class="simulation-controls">
+                        <button class="btn" id="reset-timing-sim"><i class="fas fa-redo"></i> شروع مجدد</button>
+                        <button class="btn" id="hint-timing-sim"><i class="fas fa-lightbulb"></i> راهنمایی</button>
+                    </div>
+                </div>
+                
+                <div class="simulation-area">
+                    <div class="simulation-step">
+                        <h5>مرحله 1: قرار دادن موتور در TDC</h5>
+                        <p>میل لنگ را روی نقطه مرجع سیلندر شماره 1 تنظیم کنید.</p>
+                        <div class="simulation-visual">
+                            <i class="fas fa-cog fa-3x"></i>
+                        </div>
+                        <button class="btn simulation-action" data-step="1">انجام مرحله</button>
+                    </div>
+                    
+                    <div class="simulation-step" style="display: none;">
+                        <h5>مرحله 2: تنظیم میل سوپاپ‌ها</h5>
+                        <p>میل سوپاپ‌ها را مطابق علائم تایمینگ تنظیم کنید.</p>
+                        <div class="simulation-visual">
+                            <i class="fas fa-fan fa-3x"></i>
+                        </div>
+                        <button class="btn simulation-action" data-step="2">انجام مرحله</button>
+                    </div>
+                    
+                    <div class="simulation-step" style="display: none;">
+                        <h5>مرحله 3: نصب تسمه تایم</h5>
+                        <p>تسمه تایم را مطابق مسیر مشخص شده نصب کنید.</p>
+                        <div class="simulation-visual">
+                            <i class="fas fa-link fa-3x"></i>
+                        </div>
+                        <button class="btn simulation-action" data-step="3">انجام مرحله</button>
+                    </div>
+                    
+                    <div class="simulation-step" style="display: none;">
+                        <h5>مرحله 4: تنظیم کشش تسمه</h5>
+                        <p>کشش تسمه را با استفاده از سفت‌کن تنظیم کنید.</p>
+                        <div class="simulation-visual">
+                            <i class="fas fa-compress-arrows-alt fa-3x"></i>
+                        </div>
+                        <button class="btn simulation-action" data-step="4">انجام مرحله</button>
+                    </div>
+                    
+                    <div class="simulation-step" style="display: none;">
+                        <h5>مرحله 5: چرخاندن موتور</h5>
+                        <p>موتور را دو دور کامل بچرخانید و علائم را بررسی کنید.</p>
+                        <div class="simulation-visual">
+                            <i class="fas fa-sync fa-3x"></i>
+                        </div>
+                        <button class="btn simulation-action" data-step="5">انجام مرحله</button>
+                    </div>
+                    
+                    <div class="simulation-step" style="display: none;">
+                        <h5>مرحله 6: بررسی نهایی</h5>
+                        <p>از صحت تنظیم تایم و هماهنگی میل‌ها اطمینان حاصل کنید.</p>
+                        <div class="simulation-visual">
+                            <i class="fas fa-check-circle fa-3x"></i>
+                        </div>
+                        <button class="btn simulation-action" data-step="6">اتمام شبیه‌سازی</button>
+                    </div>
+                    
+                    <div id="timing-sim-complete" style="display: none; text-align: center;">
+                        <i class="fas fa-trophy fa-5x" style="color: #f39c12; margin-bottom: 1rem;"></i>
+                        <h4>تبریک! شبیه‌سازی با موفقیت به پایان رسید.</h4>
+                        <p>شما مراحل تنظیم تایم موتور را به درستی انجام دادید.</p>
+                        <button class="btn" id="restart-timing-sim">شبیه‌سازی مجدد</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="camshaft-repair" class="content-section">
+            <h2><i class="fas fa-cog"></i> تعمیرات میل سوپاپ</h2>
+            <p>تعمیرات تخصصی میل سوپاپ نیاز به دانش فنی، ابزار دقیق و رعایت مراحل کار دارد.</p>
+            
+            <h3><i class="fas fa-file-medical-alt"></i> عیوب رایج میل سوپاپ</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-mountain"></i> خوردگی بادامک‌ها</h4>
+                    <p>سایش و فرسایش در سطح بادامک‌های میل سوپاپ</p>
+                    <ul class="features-list">
+                        <li>علت: نرسیدن روغن، کارکرد زیاد</li>
+                        <li>علائم: صدای غیرعادی، کاهش قدرت</li>
+                        <li>روش تعمیر: تعویض میل سوپاپ</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-ruler-combined"></i> تاب میل سوپاپ</h4>
+                    <p>خارج از مرکزی شدن محور میل سوپاپ</p>
+                    <ul class="features-list">
+                        <li>علت: پاره شدن تسمه تایم، برخورد سوپاپ</li>
+                        <li>علائم: فرسایش یاتاقان‌ها، روغن‌ریزی</li>
+                        <li>روش تعمیر: تعویض میل سوپاپ</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-arrows-alt-v"></i> کاهش قطر محورها</h4>
+                    <p>کاهش قطر محورهای نصب باتاقان‌ها و کاسه نمدها</p>
+                    <ul class="features-list">
+                        <li>علت: سایش طبیعی، روغن‌کاری نامناسب</li>
+                        <li>علائم: افت فشار روغن، صدا از تایپیت‌ها</li>
+                        <li>روش تعمیر: تعویض میل سوپاپ</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-ruler"></i> روش‌های اندازه‌گیری میل سوپاپ</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-ruler-horizontal"></i> اندازه‌گیری مستقیم ارتفاع بادامک</h4>
+                    <p>اندازه‌گیری مستقیم توسط میکرومتر</p>
+                    <ul class="features-list">
+                        <li>اندازه‌گیری ارتفاع بادامک</li>
+                        <li>اندازه‌گیری قطر پایه بادامک</li>
+                        <li>محاسبه برجستگی بادامک</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-ruler-vertical"></i> اندازه‌گیری غیرمستقیم ارتفاع بادامک</h4>
+                    <p>اندازه‌گیری از طریق ارتفاع بازشدن سوپاپ</p>
+                    <ul class="features-list">
+                        <li>اندازه‌گیری در موتورهای OHV</li>
+                        <li>استفاده از ساعت اندازه‌گیر</li>
+                        <li>اندازه‌گیری روی سرسیلندر</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-compress-arrows-alt"></i> اندازه‌گیری تاب میل سوپاپ</h4>
+                    <p>اندازه‌گیری تاب با استفاده از پایه دو مرغک</p>
+                    <ul class="features-list">
+                        <li>نصب میل سوپاپ روی V بلوک</li>
+                        <li>استفاده از ساعت اندازه‌گیر</li>
+                        <li>چرخاندن میل سوپاپ و خواندن مقدار</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h4><i class="fas fa-exclamation-circle"></i> نکات ایمنی در تعمیر میل سوپاپ</h4>
+                <p>• موتور باید کاملاً سرد باشد (دمای محیط)<br>
+                   • باز کردن مرحله‌ای پیچ‌ها از خارج به داخل<br>
+                   • بستن مرحله‌ای پیچ‌ها از داخل به خارج<br>
+                   • استفاده از گشتاور صحیح برای بستن پیچ‌ها</p>
+            </div>
+            
+            <h3><i class="fas fa-question-circle"></i> سوالات کلاسی</h3>
+            <div class="card">
+                <h4><i class="fas fa-lightbulb"></i> مباحث بحث و تبادل نظر</h4>
+                <ul class="features-list">
+                    <li>آیا با اندازه‌گیری قطر محورها یا ارتفاع بادامک‌ها می‌توان به لنگی آنها پی برد؟</li>
+                    <li>روش کنترل لنگی محورها و بادامک‌های میل سوپاپ چگونه است؟</li>
+                    <li>لنگی در محور میل سوپاپ، محل نصب چرخ تسمه تایم چه تأثیری در کاهش عمر تسمه تایم دارد؟</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="seals-gaskets" class="content-section">
+            <h2><i class="fas fa-oil-can"></i> کاسه نمد و واشرها</h2>
+            <p>کاسه نمدها و واشرها نقش حیاتی در آب‌بندی سیستم‌های مختلف موتور دارند.</p>
+            
+            <h3><i class="fas fa-ring"></i> کاسه نمد میل سوپاپ</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-cube"></i> ساختمان کاسه نمد</h4>
+                    <p>اجزای تشکیل دهنده کاسه نمد</p>
+                    <ul class="features-list">
+                        <li>بدنه فلزی (نشیمنگاه)</li>
+                        <li>الاستیک مخصوص (لبه آب‌بند)</li>
+                        <li>فنر کششی (Garter Spring)</li>
+                        <li>لبه روغن‌گیر</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-info-circle"></i> مشخصات فنی</h4>
+                    <p>اطلاعات درج شده روی کاسه نمد</p>
+                    <ul class="features-list">
+                        <li>قطر خارجی (قطر محل نصب)</li>
+                        <li>قطر داخلی (قطر شفت یا محور)</li>
+                        <li>عرض (عرض پایه تا لبه)</li>
+                        <li>استاندارد جنس</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tools"></i> روش نصب</h4>
+                    <p>مراحل صحیح نصب کاسه نمد</p>
+                    <ul class="features-list">
+                        <li>استفاده از ابزار مخصوص</li>
+                        <li>آغشته کردن به روغن یا گریس</li>
+                        <li>جلوگیری از پیچش لبه</li>
+                        <li>نصب در جهت صحیح</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-layer-group"></i> انواع واشرهای سرسیلندر</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-gas-pump"></i> واشر مانیفولد هوا</h4>
+                    <p>آب‌بندی اتصال مانیفولد هوا به سرسیلندر</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-smog"></i> واشر مانیفولد دود</h4>
+                    <p>آب‌بندی اتصال مانیفولد دود به سرسیلندر</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-oil-can"></i> واشر درپوش سوپاپ</h4>
+                    <p>آب‌بندی درپوش سوپاپ‌ها روی سرسیلندر</p>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-tint"></i> واشر سرسیلندر</h4>
+                    <p>آب‌بندی اتصال سرسیلندر به بلوک سیلندر</p>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h4><i class="fas fa-lightbulb"></i> نکته مهم در نصب اورینگ</h4>
+                <p>جهت سهولت در نصب اورینگ روی قطعات و جلوگیری از صدمه به اورینگ، آغشته کردن قطعه به روان‌ساز مجاز در دستورالعمل تعمیرات توصیه شده است. هنگام نصب اورینگ‌ها در محل خود از پیچش آنها می‌بایست جلوگیری شود.</p>
+            </div>
+            
+            <h3><i class="fas fa-question-circle"></i> سوالات بحث کلاسی</h3>
+            <div class="card">
+                <h4><i class="fas fa-users"></i> مباحث برای تبادل نظر</h4>
+                <ul class="features-list">
+                    <li>با ضعیف و قوی‌تر کردن نیروی فنر کاسه نمدها از حد استاندارد چه مشکلاتی ایجاد می‌شود؟</li>
+                    <li>چه راهکار تعمیراتی برای خوردگی شفت یا محورها در محل کاسه نمد وجود دارد؟</li>
+                    <li>تأثیرات کاهش قطر محل استقرار کاسه نمد، سنسور و چرخ تسمه روی میل سوپاپ چیست؟</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="workshop" class="content-section">
+            <h2><i class="fas fa-tools"></i> فعالیت کارگاهی</h2>
+            <p>در این بخش می‌توانید مهارت‌های عملی خود را در تعمیرات سیستم محرک سوپاپ‌ها تقویت کنید.</p>
+            
+            <h3><i class="fas fa-list-check"></i> تجهیزات مورد نیاز</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-toolbox"></i> ابزارهای عمومی</h4>
+                    <ul class="features-list">
+                        <li>جعبه ابزار مکانیکی</li>
+                        <li>تورک متر</li>
+                        <li>گیره مکانیکی</li>
+                        <li>خط کش فلزی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-ruler"></i> ابزارهای اندازه‌گیری</h4>
+                    <ul class="features-list">
+                        <li>کولیس و میکرومتر</li>
+                        <li>ساعت اندازه‌گیری پایه دار</li>
+                        <li>فیلر مجموعه</li>
+                        <li>پایه دو مرغک و صفحه صافی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-cogs"></i> ابزارهای تخصصی</h4>
+                    <ul class="features-list">
+                        <li>ابزار مخصوص کنترل سرسیلندر</li>
+                        <li>ابزار نصب کاسه نمد</li>
+                        <li>سینگ سیناده</li>
+                        <li>کتاب راهنمای تعمیرات موتور</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-tasks"></i> فعالیت‌های کارگاهی</h3>
+            <div class="step-container">
+                <div class="step">
+                    <p>بررسی و آزمایش سیستم تایمینگ (تسمه، زنجیر، سیستم VVT)</p>
+                </div>
+                <div class="step">
+                    <p>تعمیرات مجموعه تسمه و چرخ تسمه تایم و چرخ زنجیر</p>
+                </div>
+                <div class="step">
+                    <p>بررسی و تعمیرات میل سوپاپ و مجموعه اسیک‌ها</p>
+                </div>
+                <div class="step">
+                    <p>تعمیرات انواع تایپیت‌های ساده و هیدرولیکی</p>
+                </div>
+                <div class="step">
+                    <p>تکمیل چک لیست بررسی مکانیزم محرک سوپاپ‌ها</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-exclamation-triangle"></i> نکات ایمنی و زیست‌محیطی</h3>
+            <div class="card-grid">
+                <div class="card">
+                    <h4><i class="fas fa-hard-hat"></i> ایمنی فردی</h4>
+                    <ul class="features-list">
+                        <li>استفاده از لباس کار در محیط کارگاهی</li>
+                        <li>استفاده از دستکش کار مناسب</li>
+                        <li>دقت در محل قرارگیری آچار</li>
+                        <li>عدم استفاده از آچار بادی برای آچارکشی</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4><i class="fas fa-recycle"></i> محیط زیست</h4>
+                    <ul class="features-list">
+                        <li>رعایت مسائل زیست‌محیطی</li>
+                        <li>جلوگیری از آلودگی محیط کار</li>
+                        <li>رعایت اصول آراستگی (5S)</li>
+                        <li>دفع صحیح ضایعات</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="interactive-container">
+                <div class="video-placeholder">
+                    <div class="video-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h4>فیلم کارگاهی</h4>
+                    <p>نمایش فیلم فعالیت‌های کارگاهی</p>
+                    <button class="btn"><i class="fas fa-play"></i> پخش ویدئو</button>
+                </div>
+                
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-file-download"></i>
+                    </div>
+                    <h4>چک لیست کارگاهی</h4>
+                    <p>دانلود چک لیست کامل فعالیت‌ها</p>
+                    <button class="btn"><i class="fas fa-download"></i> دانلود چک لیست</button>
+                </div>
+                
+                <div class="quiz-card">
+                    <div class="quiz-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h4>آزمون پایانی</h4>
+                    <p>سنجش نهایی مهارت‌های کسب شده</p>
+                    <button class="btn"><i class="fas fa-pencil-alt"></i> شروع آزمون</button>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2024 آموزش سیستم تایمینگ متغیر و مکانیزم محرک سوپاپ - پایه دهم فنی و حرفه‌ای - کلیه حقوق محفوظ است</p>
+        </footer>
+    </div>
+
+    <script>
+        // Tab navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const sections = document.querySelectorAll('.content-section');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    
+                    // Remove active class from all tabs and sections
+                    tabs.forEach(t => t.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    
+                    // Add active class to current tab and section
+                    this.classList.add('active');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+            
+            // Video placeholder functionality
+            const videoButtons = document.querySelectorAll('.video-placeholder .btn');
+            videoButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('در نسخه کامل، ویدئوی آموزشی نمایش داده خواهد شد.');
+                });
+            });
+            
+            // Download buttons functionality
+            const downloadButtons = document.querySelectorAll('.download-card .btn');
+            downloadButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('در نسخه کامل، فایل مورد نظر دانلود خواهد شد.');
+                });
+            });
+            
+            // Quiz card buttons functionality
+            const quizButtons = document.querySelectorAll('.quiz-card .btn');
+            quizButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('در نسخه کامل، آزمون مربوطه نمایش داده خواهد شد.');
+                });
+            });
+            
+            // Interactive diagram functionality
+            const diagramParts = document.querySelectorAll('.diagram-part');
+            const closeButtons = document.querySelectorAll('.close-info');
+            
+            diagramParts.forEach(part => {
+                part.addEventListener('click', function() {
+                    const partId = this.getAttribute('data-part');
+                    const infoElement = document.getElementById(`${partId}-info`);
+                    
+                    if (infoElement) {
+                        infoElement.classList.add('active');
+                    }
+                });
+            });
+            
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.parentElement.classList.remove('active');
+                });
+            });
+            
+            // Simulation functionality
+            const simulationActions = document.querySelectorAll('.simulation-action');
+            const resetButton = document.getElementById('reset-timing-sim');
+            const hintButton = document.getElementById('hint-timing-sim');
+            const restartButton = document.getElementById('restart-timing-sim');
+            
+            let currentStep = 1;
+            
+            simulationActions.forEach(action => {
+                action.addEventListener('click', function() {
+                    const step = parseInt(this.getAttribute('data-step'));
+                    
+                    // Hide current step
+                    document.querySelector(`.simulation-step:nth-child(${currentStep})`).style.display = 'none';
+                    
+                    if (step === 6) {
+                        // Show completion message
+                        document.getElementById('timing-sim-complete').style.display = 'block';
+                    } else {
+                        // Show next step
+                        currentStep = step + 1;
+                        document.querySelector(`.simulation-step:nth-child(${currentStep})`).style.display = 'block';
+                    }
+                });
+            });
+            
+            resetButton.addEventListener('click', function() {
+                // Hide all steps except first
+                document.querySelectorAll('.simulation-step').forEach((step, index) => {
+                    if (index === 0) {
+                        step.style.display = 'block';
+                    } else {
+                        step.style.display = 'none';
+                    }
+                });
+                
+                // Hide completion message
+                document.getElementById('timing-sim-complete').style.display = 'none';
+                
+                // Reset current step
+                currentStep = 1;
+            });
+            
+            hintButton.addEventListener('click', function() {
+                alert('برای انجام این مرحله، مطمئن شوید که تمام ابزارهای لازم را در اختیار دارید و نکات ایمنی را رعایت می‌کنید.');
+            });
+            
+            restartButton.addEventListener('click', function() {
+                // Hide completion message
+                document.getElementById('timing-sim-complete').style.display = 'none';
+                
+                // Show first step
+                document.querySelector('.simulation-step:nth-child(1)').style.display = 'block';
+                
+                // Reset current step
+                currentStep = 1;
+            });
+            
+            // Add animation to cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all cards for animation
+            document.querySelectorAll('.card, .video-placeholder, .download-card, .quiz-card').forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>
