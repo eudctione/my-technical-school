@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ثبت نام آنلاین - هنرستان فنی حرفه‌ای دانشمند قلم چی</title>
+    <title>ثبت نام آنلاین - هنرستان فنی حرفه‌ای دانشمند</title>
     <style>
         :root {
             --primary: #06b6d4;
@@ -16,6 +16,8 @@
             --error: #ef4444;
             --quantum-blue: #00f7ff;
             --quantum-purple: #b400ff;
+            --gold: #ffd700;
+            --gold-dark: #b8860b;
         }
 
         * {
@@ -112,7 +114,7 @@
 
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 800px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -136,25 +138,9 @@
                 0 0 40px rgba(6, 182, 212, 0.1);
             border: 1px solid rgba(6, 182, 212, 0.5);
             transition: all 0.4s ease;
-            animation: glow-pulse 4s infinite alternate, quantum-flicker 8s infinite;
+            animation: glow-pulse 4s infinite alternate;
             position: relative;
             overflow: hidden;
-        }
-
-        /* جلوه کوانتومی چشمک زن */
-        @keyframes quantum-flicker {
-            0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
-                box-shadow: 
-                    0 10px 30px rgba(0, 0, 0, 0.5),
-                    0 0 20px rgba(6, 182, 212, 0.3),
-                    0 0 40px rgba(6, 182, 212, 0.1);
-            }
-            20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
-                box-shadow: 
-                    0 10px 30px rgba(0, 0, 0, 0.5),
-                    0 0 30px rgba(6, 182, 212, 0.6),
-                    0 0 60px rgba(6, 182, 212, 0.3);
-            }
         }
 
         @keyframes glow-pulse {
@@ -171,33 +157,6 @@
                     0 0 30px rgba(6, 182, 212, 0.5),
                     0 0 60px rgba(6, 182, 212, 0.2);
                 border-color: rgba(6, 182, 212, 0.8);
-            }
-        }
-
-        /* جلوه نور پس زمینه کارت */
-        .card-light {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, transparent 70%);
-            filter: blur(40px);
-            animation: card-light-move 15s infinite alternate ease-in-out;
-            z-index: -1;
-        }
-
-        .card-light:nth-child(2) {
-            background: radial-gradient(circle, rgba(250, 204, 21, 0.3) 0%, transparent 70%);
-            animation-delay: -3s;
-            animation-duration: 12s;
-        }
-
-        @keyframes card-light-move {
-            0% {
-                transform: translate(-50px, -50px);
-            }
-            100% {
-                transform: translate(50px, 50px);
             }
         }
 
@@ -220,7 +179,6 @@
             display: inline-block;
         }
 
-        /* جلوه نور زیر عنوان */
         .title::after {
             content: '';
             position: absolute;
@@ -266,6 +224,20 @@
             }
         }
 
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 640px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+
         .form-group {
             margin-bottom: 24px;
             position: relative;
@@ -298,7 +270,6 @@
             box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.3), 
                         0 0 20px rgba(250, 204, 21, 0.2);
             background: rgba(8, 145, 178, 0.2);
-            animation: input-glow 1.5s infinite alternate;
         }
 
         .form-input.error {
@@ -311,21 +282,8 @@
             font-size: 0.85rem;
             margin-top: 5px;
             display: none;
-            animation: fadeIn 0.3s ease;
         }
 
-        @keyframes input-glow {
-            0% {
-                box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.3), 
-                            0 0 20px rgba(250, 204, 21, 0.2);
-            }
-            100% {
-                box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.5), 
-                            0 0 30px rgba(250, 204, 21, 0.3);
-            }
-        }
-
-        /* جلوه کوانتومی برای دکمه‌ها */
         .btn {
             width: 100%;
             padding: 14px;
@@ -369,7 +327,6 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(6, 182, 212, 0.6), 
                         0 0 15px rgba(6, 182, 212, 0.4);
-            animation: btn-pulse 1.5s infinite alternate;
         }
 
         .btn-accent {
@@ -383,19 +340,9 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(250, 204, 21, 0.6), 
                         0 0 15px rgba(250, 204, 21, 0.4);
-            animation: btn-pulse 1.5s infinite alternate;
         }
 
-        @keyframes btn-pulse {
-            0% {
-                transform: translateY(-3px) scale(1);
-            }
-            100% {
-                transform: translateY(-3px) scale(1.02);
-            }
-        }
-
-        /* بخش نتایج با جلوه ویژه */
+        /* بخش نتایج */
         .result-section {
             width: 100%;
             background: rgba(8, 47, 73, 0.6);
@@ -409,12 +356,194 @@
                 0 0 40px rgba(250, 204, 21, 0.1);
             border: 1px solid rgba(250, 204, 21, 0.5);
             display: none;
-            animation: fadeIn 0.5s ease forwards, 
-                       glow-pulse-gold 4s infinite alternate,
-                       quantum-flicker-gold 8s infinite;
             margin-top: 20px;
             position: relative;
             overflow: hidden;
+        }
+
+        .pdf-card {
+            background: linear-gradient(135deg, #1a2f3f 0%, #0f2a3a 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pdf-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .pdf-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 20px;
+        }
+
+        .pdf-header h1 {
+            font-size: 2rem;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .pdf-header h2 {
+            font-size: 1.3rem;
+            color: var(--light);
+            opacity: 0.9;
+        }
+
+        .pdf-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 640px) {
+            .pdf-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pdf-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .pdf-section h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .pdf-info-item {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .pdf-info-label {
+            color: var(--text-muted);
+            width: 120px;
+            font-size: 0.9rem;
+        }
+
+        .pdf-info-value {
+            color: var(--light);
+            font-weight: 500;
+            flex: 1;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .tracking-code-pdf {
+            font-size: 2rem;
+            text-align: center;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid var(--gold);
+            margin: 20px 0;
+            letter-spacing: 5px;
+            font-weight: bold;
+            animation: gold-glow 2s infinite alternate;
+        }
+
+        @keyframes gold-glow {
+            0% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            }
+            100% {
+                box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+                text-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+            }
+        }
+
+        .photo-placeholder {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 2px dashed var(--gold);
+            border-radius: 10px;
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .photo-placeholder p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .photo-placeholder i {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .benefits-section {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid var(--gold);
+        }
+
+        .benefits-section h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefits-list li {
+            margin-bottom: 10px;
+            padding-right: 25px;
+            position: relative;
+            color: var(--light);
+        }
+
+        .benefits-list li::before {
+            content: '✨';
+            position: absolute;
+            right: 0;
+            color: var(--gold);
+        }
+
+        .btn-pdf {
+            background: linear-gradient(to right, var(--gold), var(--gold-dark));
+            color: var(--dark);
+            font-weight: bold;
+            margin-top: 20px;
+            border: none;
+        }
+
+        .btn-pdf:hover {
+            background: linear-gradient(to right, var(--gold-dark), var(--gold));
         }
 
         .duplicate-section {
@@ -430,90 +559,11 @@
                 0 0 40px rgba(239, 68, 68, 0.1);
             border: 1px solid rgba(239, 68, 68, 0.5);
             display: none;
-            animation: fadeIn 0.5s ease forwards, 
-                       glow-pulse-red 4s infinite alternate,
-                       quantum-flicker-red 8s infinite;
             margin-top: 20px;
             position: relative;
             overflow: hidden;
         }
 
-        @keyframes quantum-flicker-gold {
-            0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
-                box-shadow: 
-                    0 10px 30px rgba(0, 0, 0, 0.5),
-                    0 0 20px rgba(250, 204, 21, 0.4),
-                    0 0 40px rgba(250, 204, 21, 0.1);
-            }
-            20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
-                box-shadow: 
-                    0 10px 30px rgba(0, 0, 0, 0.5),
-                    0 0 30px rgba(250, 204, 21, 0.7),
-                    0 0 60px rgba(250, 204, 21, 0.3);
-            }
-        }
-
-        @keyframes quantum-flicker-red {
-            0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
-                box-shadow: 
-                    0 10px 30px rgba(0, 0, 0, 0.5),
-                    0 0 20px rgba(239, 68, 68, 0.4),
-                    0 0 40px rgba(239, 68, 68, 0.1);
-            }
-            20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
-                box-shadow: 
-                    0 10px 30px rgba(0, 0, 0, 0.5),
-                    0 0 30px rgba(239, 68, 68, 0.7),
-                    0 0 60px rgba(239, 68, 68, 0.3);
-            }
-        }
-
-        @keyframes glow-pulse-gold {
-            0% {
-                box-shadow: 
-                    0 10px 30px rgba(0, 0, 0, 0.5),
-                    0 0 20px rgba(250, 204, 21, 0.4),
-                    0 0 40px rgba(250, 204, 21, 0.1);
-                border-color: rgba(250, 204, 21, 0.5);
-            }
-            100% {
-                box-shadow: 
-                    0 10px 40px rgba(0, 0, 0, 0.6),
-                    0 0 30px rgba(250, 204, 21, 0.6),
-                    0 0 60px rgba(250, 204, 21, 0.2);
-                border-color: rgba(250, 204, 21, 0.8);
-            }
-        }
-
-        @keyframes glow-pulse-red {
-            0% {
-                box-shadow: 
-                    0 10px 30px rgba(0, 0, 0, 0.5),
-                    0 0 20px rgba(239, 68, 68, 0.4),
-                    0 0 40px rgba(239, 68, 68, 0.1);
-                border-color: rgba(239, 68, 68, 0.5);
-            }
-            100% {
-                box-shadow: 
-                    0 10px 40px rgba(0, 0, 0, 0.6),
-                    0 0 30px rgba(239, 68, 68, 0.6),
-                    0 0 60px rgba(239, 68, 68, 0.2);
-                border-color: rgba(239, 68, 68, 0.8);
-            }
-        }
-
-        @keyframes fadeIn {
-            from { 
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* جلوه ویژه برای کد رهگیری */
         .info-title {
             color: var(--accent);
             margin-bottom: 16px;
@@ -529,210 +579,6 @@
             text-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
         }
 
-        .info-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            border-radius: 3px;
-            animation: title-line-grow 2s infinite;
-        }
-
-        .error-title::after {
-            background: linear-gradient(to right, var(--error), #991b1b);
-        }
-
-        @keyframes title-line-grow {
-            0% {
-                width: 60px;
-                opacity: 0.7;
-            }
-            50% {
-                width: 120px;
-                opacity: 1;
-            }
-            100% {
-                width: 60px;
-                opacity: 0.7;
-            }
-        }
-
-        .tracking-code {
-            font-family: 'Courier New', monospace;
-            font-size: 2rem;
-            letter-spacing: 3px;
-            color: var(--accent);
-            text-align: center;
-            margin: 20px 0;
-            font-weight: bold;
-            background: rgba(250, 204, 21, 0.1);
-            padding: 12px 20px;
-            border-radius: 8px;
-            display: inline-block;
-            border: 1px solid rgba(250, 204, 21, 0.5);
-            box-shadow: 0 0 15px rgba(250, 204, 21, 0.2);
-            text-shadow: 0 0 10px rgba(250, 204, 21, 0.3);
-            animation: code-glow 2s infinite alternate;
-            position: relative;
-            overflow: hidden;
-        }
-
-        @keyframes code-glow {
-            0% {
-                box-shadow: 0 0 15px rgba(250, 204, 21, 0.2);
-                text-shadow: 0 0 10px rgba(250, 204, 21, 0.3);
-            }
-            100% {
-                box-shadow: 0 0 25px rgba(250, 204, 21, 0.4);
-                text-shadow: 0 0 15px rgba(250, 204, 21, 0.5);
-            }
-        }
-
-        .tracking-code::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                transparent,
-                transparent,
-                transparent,
-                rgba(250, 204, 21, 0.1),
-                transparent,
-                transparent,
-                transparent
-            );
-            transform: rotate(30deg);
-            animation: code-shine 3s infinite;
-        }
-
-        @keyframes code-shine {
-            0% {
-                left: -50%;
-            }
-            100% {
-                left: 150%;
-            }
-        }
-
-        .payment-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px dashed rgba(6, 182, 212, 0.5);
-            position: relative;
-        }
-
-        .payment-item:last-child {
-            border-bottom: none;
-        }
-
-        .payment-item::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        .payment-item:hover::after {
-            width: 100%;
-        }
-
-        .payment-label {
-            color: var(--text-muted);
-            transition: all 0.3s ease;
-        }
-
-        .payment-item:hover .payment-label {
-            color: var(--primary);
-            text-shadow: 0 0 5px rgba(6, 182, 212, 0.3);
-        }
-
-        .payment-value {
-            color: var(--light);
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .payment-item:hover .payment-value {
-            color: var(--accent);
-            text-shadow: 0 0 5px rgba(250, 204, 21, 0.3);
-        }
-
-        .payment-card {
-            font-family: 'Courier New', monospace;
-            letter-spacing: 1px;
-            color: var(--accent);
-            direction: ltr;
-            font-weight: bold;
-            text-shadow: 0 0 5px rgba(250, 204, 21, 0.3);
-            position: relative;
-        }
-
-        .payment-card::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: var(--accent);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.3s ease;
-        }
-
-        .payment-card:hover::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        .note {
-            margin-top: 24px;
-            padding: 16px;
-            background: rgba(250, 204, 21, 0.1);
-            border-right: 4px solid var(--accent);
-            border-radius: 0 8px 8px 0;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-            box-shadow: 0 0 10px rgba(250, 204, 21, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .error-note {
-            background: rgba(239, 68, 68, 0.1);
-            border-right: 4px solid var(--error);
-            box-shadow: 0 0 10px rgba(239, 68, 68, 0.1);
-        }
-
-        .note::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--accent);
-            opacity: 0.3;
-        }
-
-        .error-note::before {
-            background: var(--error);
-        }
-
         .footer {
             text-align: center;
             margin-top: 30px;
@@ -743,18 +589,6 @@
             position: relative;
         }
 
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
-        }
-
         .footer-link {
             color: var(--accent);
             text-decoration: none;
@@ -763,24 +597,9 @@
             position: relative;
         }
 
-        .footer-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-
         .footer-link:hover {
             color: var(--primary);
             text-shadow: 0 0 5px rgba(6, 182, 212, 0.3);
-        }
-
-        .footer-link:hover::after {
-            width: 100%;
         }
 
         /* جلوه انتقال کوانتومی */
@@ -797,38 +616,221 @@
             transition: opacity 0.5s ease;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px 0;
-            }
-            
-            .registration-card, .result-section, .duplicate-section {
-                padding: 30px;
-            }
-            
-            .title {
-                font-size: 1.8rem;
-            }
-            
-            .tracking-code {
-                font-size: 1.6rem;
-            }
-        }
+       /* بخش کد رهگیری - طراحی آموزشی پویا */
+.tracking-section {
+    text-align: center;
+    margin: 30px 0;
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(0, 180, 216, 0.08), rgba(0, 131, 176, 0.12));
+    border-radius: 25px;
+    border: 2px solid #00b4d8;
+    box-shadow: 0 10px 30px rgba(0, 180, 216, 0.15);
+    position: relative;
+    overflow: hidden;
+}
 
-        @media (max-width: 480px) {
-            .registration-card, .result-section, .duplicate-section {
-                padding: 20px;
-            }
-            
-            .title {
-                font-size: 1.6rem;
-            }
-            
-            .form-input, .btn {
-                padding: 12px;
-            }
-        }
+.tracking-section::before {
+    content: "📚";
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    font-size: 80px;
+    opacity: 0.1;
+    transform: rotate(15deg);
+}
+
+.tracking-section::after {
+    content: "✏️";
+    position: absolute;
+    left: -10px;
+    bottom: -10px;
+    font-size: 80px;
+    opacity: 0.1;
+    transform: rotate(-15deg);
+}
+
+.tracking-code {
+    font-size: 2.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #00b4d8, #0077b6, #00b4d8);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 5px 15px rgba(0, 180, 216, 0.4);
+    letter-spacing: 6px;
+    direction: ltr;
+    display: inline-block;
+    padding: 15px 35px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    margin: 15px 0;
+    border: 3px solid #00b4d8;
+    box-shadow: 0 8px 25px rgba(0, 119, 182, 0.25),
+                0 0 0 5px rgba(0, 180, 216, 0.1);
+    position: relative;
+    animation: glowPulse 2s infinite, gradientShift 3s infinite;
+}
+
+.tracking-code::before {
+    content: "🔑";
+    position: absolute;
+    left: -10px;
+    top: -10px;
+    font-size: 30px;
+    filter: drop-shadow(0 4px 6px #0077b6);
+    animation: bounce 1s infinite;
+}
+
+.tracking-code::after {
+    content: "✨";
+    position: absolute;
+    right: -10px;
+    top: -15px;
+    font-size: 35px;
+    filter: drop-shadow(0 4px 6px #00b4d8);
+    animation: sparkle 1.5s infinite;
+}
+
+/* انیمیشن‌های پویا و آموزشی */
+@keyframes glowPulse {
+    0% {
+        box-shadow: 0 8px 25px rgba(0, 119, 182, 0.25),
+                    0 0 0 5px rgba(0, 180, 216, 0.1);
+    }
+    50% {
+        box-shadow: 0 15px 35px rgba(0, 180, 216, 0.45),
+                    0 0 0 8px rgba(0, 119, 182, 0.2);
+    }
+    100% {
+        box-shadow: 0 8px 25px rgba(0, 119, 182, 0.25),
+                    0 0 0 5px rgba(0, 180, 216, 0.1);
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(10deg);
+    }
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.2) rotate(15deg);
+    }
+}
+
+/* استایل‌های تکمیلی آموزشی */
+.tracking-section h3 {
+    color: #0077b6;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.tracking-section h3::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #00b4d8, #0077b6, #00b4d8);
+    border-radius: 10px;
+    animation: underlineWidth 2s infinite;
+}
+
+@keyframes underlineWidth {
+    0%, 100% {
+        width: 60px;
+        opacity: 0.8;
+    }
+    50% {
+        width: 100px;
+        opacity: 1;
+    }
+}
+
+.tracking-section p {
+    color: #023e8a;
+    font-size: 1.2rem;
+    margin: 10px 0;
+    font-weight: 500;
+    background: linear-gradient(135deg, #00b4d8, #0077b6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: textFade 2s infinite;
+}
+
+@keyframes textFade {
+    0%, 100% {
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 1;
+        letter-spacing: 1px;
+    }
+}
+
+/* المان‌های تعاملی آموزشی */
+.tracking-section:hover {
+    border-color: #0077b6;
+    box-shadow: 0 15px 40px rgba(0, 119, 182, 0.25);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.tracking-section:hover .tracking-code {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+    box-shadow: 0 15px 40px rgba(0, 180, 216, 0.35);
+}
+
+/* نسخه واکنش‌گرا برای موبایل */
+@media (max-width: 768px) {
+    .tracking-code {
+        font-size: 2rem;
+        letter-spacing: 3px;
+        padding: 12px 20px;
+    }
+    
+    .tracking-section {
+        padding: 15px;
+    }
+    
+    .tracking-section::before,
+    .tracking-section::after {
+        font-size: 60px;
+    }
+}
     </style>
+    <!-- کتابخانه html2canvas برای تولید PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <!-- ذرات کوانتومی -->
@@ -848,49 +850,81 @@
 
     <div class="container">
         <div class="registration-card" id="registrationCard">
-            <!-- نور پس زمینه کارت -->
-            <div class="card-light" style="top: -50px; right: -50px;"></div>
-            <div class="card-light" style="bottom: -50px; left: -50px;"></div>
-
             <div class="header">
                 <h1 class="title">ثبت نام آنلاین</h1>
-                <p class="subtitle">هنرستان فنی حرفه‌ای دانشمند قلم چی</p>
+                <p class="subtitle">هنرستان فنی حرفه‌ای دانشمند</p>
+                <p class="subtitle" style="font-size: 0.9rem;">سال تحصیلی 1405-1406</p>
             </div>
             
             <form id="registrationForm">
-                <div class="form-group">
-                    <label for="fullname" class="form-label">نام و نام خانوادگی</label>
-                    <input type="text" id="fullname" class="form-input" placeholder="نام کامل خود را وارد کنید" required>
-                    <div class="error-message" id="fullnameError"></div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullname" class="form-label">نام و نام خانوادگی</label>
+                        <input type="text" id="fullname" class="form-input" placeholder="نام کامل خود را وارد کنید" required>
+                        <div class="error-message" id="fullnameError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fatherName" class="form-label">نام پدر</label>
+                        <input type="text" id="fatherName" class="form-input" placeholder="نام پدر" required>
+                        <div class="error-message" id="fatherNameError"></div>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="nationalId" class="form-label">کد ملی</label>
-                    <input type="text" id="nationalId" class="form-input" placeholder="کد ملی 10 رقمی" required maxlength="10">
-                    <div class="error-message" id="nationalIdError"></div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nationalId" class="form-label">کد ملی</label>
+                        <input type="text" id="nationalId" class="form-input" placeholder="کد ملی 10 رقمی" required maxlength="10">
+                        <div class="error-message" id="nationalIdError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" class="form-label">شماره تماس</label>
+                        <input type="tel" id="phone" class="form-input" placeholder="09xxxxxxxxx" required>
+                        <div class="error-message" id="phoneError"></div>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="phone" class="form-label">شماره تماس</label>
-                    <input type="tel" id="phone" class="form-input" placeholder="09xxxxxxxxx" required>
-                    <div class="error-message" id="phoneError"></div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="schoolName" class="form-label">نام مدرسه</label>
+                        <input type="text" id="schoolName" class="form-input" placeholder="نام مدرسه محل تحصیل" required>
+                        <div class="error-message" id="schoolNameError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gpa" class="form-label">معدل پایه نهم</label>
+                        <input type="number" id="gpa" class="form-input" placeholder="معدل (0-20)" step="0.01" min="0" max="20" required>
+                        <div class="error-message" id="gpaError"></div>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="field" class="form-label">رشته مورد نظر</label>
-                    <select id="field" class="form-input" required>
-                        <option value="" disabled selected>-- انتخاب کنید --</option>
-                        <option value="computer">شبکه و نرم‌افزار رایانه‌ای</option>
-                        <option value="electronics">الکتروتکنیک (برق صنعتی)</option>
-                        <option value="electronics">الکترونیک</option>
-                        <option value="mechanics">مکانیک خودرو</option>
-                        <option value="construction">تاسیسات مکانیکی</option>
-                        <option value="electronics">ساختمان</option>
-                        <option value="mechanics">ماشین ابزار</option>
-                        <option value="construction">جوشکاری (صنایع فلز)</option>
-                        <option value="mechatronics">مکاترونیک</option>
-                    </select>
-                    <div class="error-message" id="fieldError"></div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstField" class="form-label">رشته اولویت اول</label>
+                        <select id="firstField" class="form-input" required>
+                            <option value="" disabled selected>-- انتخاب کنید --</option>
+                            <option value="شبکه و نرم‌افزار رایانه‌ای">شبکه و نرم‌افزار رایانه‌ای</option>
+                            <option value="الکتروتکنیک (برق صنعتی)">الکتروتکنیک (برق صنعتی)</option>
+                                                       <option value="مکانیک خودرو">مکانیک خودرو</option>
+                                                                                              
+                            <option value="مکاترونیک">مکاترونیک</option>
+                        </select>
+                        <div class="error-message" id="firstFieldError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="secondField" class="form-label">رشته اولویت دوم</label>
+                        <select id="secondField" class="form-input" required>
+                            <option value="" disabled selected>-- انتخاب کنید --</option>
+                            <option value="شبکه و نرم‌افزار رایانه‌ای">شبکه و نرم‌افزار رایانه‌ای</option>
+                            <option value="الکتروتکنیک (برق صنعتی)">الکتروتکنیک (برق صنعتی)</option>
+                                                        <option value="مکانیک خودرو">مکانیک خودرو</option>
+                                             
+                            <option value="مکاترونیک">مکاترونیک</option>
+                        </select>
+                        <div class="error-message" id="secondFieldError"></div>
+                    </div>
                 </div>
                 
                 <button type="submit" class="btn btn-primary">تکمیل ثبت نام</button>
@@ -898,72 +932,106 @@
         </div>
         
         <div class="result-section" id="resultSection">
-            <!-- نور پس زمینه کارت -->
-            <div class="card-light" style="top: -50px; right: -50px; background: radial-gradient(circle, rgba(250, 204, 21, 0.3) 0%, transparent 70%);"></div>
-            <div class="card-light" style="bottom: -50px; left: -50px; background: radial-gradient(circle, rgba(250, 204, 21, 0.3) 0%, transparent 70%);"></div>
-
             <div class="header">
-                <h1 class="title">اطلاعات ثبت نام</h1>
-                <p class="subtitle">هنرستان فنی حرفه‌ای دانشمند قلم چی</p>
+                <h1 class="title">ثبت نام با موفقیت انجام شد</h1>
+                <p class="subtitle">هنرستان فنی حرفه‌ای دانشمند</p>
+            </div>
+
+            <div class="tracking-section">
+                <h2 style="color: var(--gold); margin-bottom: 20px;">✅ کد رهگیری ثبت نام</h2>
+                <div class="tracking-code" id="displayTrackingCode">AB-1234</div>
+                <p style="color: var(--text-muted); margin-top: 10px;">این کد را نزد خود نگه دارید</p>
             </div>
             
-            <div id="trackingSection">
-                <h3 class="info-title">کد رهگیری ثبت نام شما</h3>
-                <div id="trackingCode" class="tracking-code">
-                    <span id="trackingLetters">AB</span>-<span id="trackingNumbers">1234</span>
+            <!-- کارت PDF برای نمایش و دانلود -->
+            <div id="pdfContent" class="pdf-card">
+                <div class="pdf-header">
+                    <h1>هنرستان فنی حرفه‌ای دانشمند</h1>
+                    <h2>رسید ثبت نام سال تحصیلی 1405-1406</h2>
                 </div>
-                <p style="text-align: center; color: var(--text-muted); margin-top: 15px; animation: text-flicker 3s infinite;">
-                    این کد را یادداشت کنید یا با همراه عکس بگیرد و در صورت نیاز به پشتیبانی ارائه دهید.
-                </p>
+
+               
+
+                <div class="tracking-code-pdf" id="trackingCodePdf">
+                    <span id="pdfTrackingLetters">AB</span>-<span id="pdfTrackingNumbers">1234</span>
+                </div>
+
+                <div class="pdf-content">
+                    <div class="pdf-section">
+                        <h3>📋 مشخصات فردی</h3>
+                        <div class="pdf-info-item">
+                            <span class="pdf-info-label">نام و نام خانوادگی:</span>
+                            <span class="pdf-info-value" id="pdfFullname">-</span>
+                        </div>
+                        <div class="pdf-info-item">
+                            <span class="pdf-info-label">نام پدر:</span>
+                            <span class="pdf-info-value" id="pdfFatherName">-</span>
+                        </div>
+                        <div class="pdf-info-item">
+                            <span class="pdf-info-label">کد ملی:</span>
+                            <span class="pdf-info-value" id="pdfNationalId">-</span>
+                        </div>
+                        <div class="pdf-info-item">
+                            <span class="pdf-info-label">شماره تماس:</span>
+                            <span class="pdf-info-value" id="pdfPhone">-</span>
+                        </div>
+                    </div>
+
+                    <div class="pdf-section">
+                        <h3>🏫 مشخصات تحصیلی</h3>
+                        <div class="pdf-info-item">
+                            <span class="pdf-info-label">نام مدرسه:</span>
+                            <span class="pdf-info-value" id="pdfSchoolName">-</span>
+                        </div>
+                        <div class="pdf-info-item">
+                            <span class="pdf-info-label">معدل پایه نهم:</span>
+                            <span class="pdf-info-value" id="pdfGpa">-</span>
+                        </div>
+                        <div class="pdf-info-item">
+                            <span class="pdf-info-label">اولویت اول:</span>
+                            <span class="pdf-info-value" id="pdfFirstField">-</span>
+                        </div>
+                        <div class="pdf-info-item">
+                            <span class="pdf-info-label">اولویت دوم:</span>
+                            <span class="pdf-info-value" id="pdfSecondField">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="benefits-section">
+                    <h3>✨ خدمات و تسهیلات ویژه ✨</h3>
+                    <ul class="benefits-list">
+                        <li>شرکت در کلاس و کارگاههای فنی و حرفه ای  تابستانه رایگان  </li>
+                        <li>مشاوره تحصیلی و شغلی  و برگذاری آزمونهای رایگان  </li>
+                        <li>برگزاری دوره‌های فنی و حرفه‌ای با مدرک معتبر</li>
+                        <li>امکان پرداخت شهریه به صورت اقساط</li>
+                        <li>تخفیف ویژه برای ثبت‌نام‌های گروهی</li>
+                        <li>برگزاری دوره‌های فنی و حرفه‌ای با مدرک معتبر</li>
+						<li>صنعت محور و مبتنی بر هوش مصنوعی </li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px; color: var(--gold); font-size: 0.9rem;">
+                    <p>📞 پشتیبانی: 031-33582147 | 09133255422</p>
+                    <p>🌐 www.daneshmand.ir</p>
+                    <p>📧 info@daneshmand.ir</p>
+                </div>
             </div>
-            
-            <div id="paymentSection">
-                <h3 class="info-title">اطلاعات پرداخت هزینه آزمون</h3>
-                
-                <div class="payment-details">
-                    <div class="payment-item">
-                        <span class="payment-label">مبلغ قابل پرداخت (هزینه آزمون کتبی و مهارتی و تغذیه):</span>
-                        <span class="payment-value">150,000 تومان</span>
-                    </div>
-                    <div class="payment-item">
-                        <span class="payment-label">مهلت پرداخت:</span>
-                        <span class="payment-value">تا 72 ساعت پس از ثبت نام</span>
-                    </div>
-                    <div class="payment-item">
-                        <span class="payment-label">به نام مدیر موسسه (پیمان هزاریان):</span>
-                        <span class="payment-value">
-                           <span class="payment-card">
-                                <span class="bank-card-container" style="display: inline-block; position: relative; padding-right: 30px;">
-                                    <span class="bank-logo" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgMjQwIj48c3R5bGU+LnN0MHtmaWxsOiNmZmY7fTwvc3R5bGU+PHBhdGggY2xhc3M9InN0MCIgZD0iTTEyMCAxNjBjMzMgMCA2MC0yNyA2MC02MHMtMjctNjAtNjAtNjAtNjAgMjctNjAgNjAgMjcgNjAgNjAgNjB6bTAtMTAwYzIyIDAgNDAgMTggNDAgNDBzLTE4IDQwLTQwIDQwLTQwLTE4LTQwLTQwIDE4LTQwIDQwLTQwem0wIDYwYzExIDAgMjAtOSAyMC0yMHMtOS0yMC0yMC0yMC0yMCA5LTIwIDIwIDkgMjAgMjAgMjB6Ii8+PC9zdmc+'); background-size: contain; background-repeat: no-repeat; filter: drop-shadow(0 0 2px rgba(255,255,255,0.7));"></span>
-                                    <span class="card-number" style="font-family: Arial, sans-serif; font-size: 16px; letter-spacing: 1px; text-shadow: 0 0 5px rgba(255,255,255,0.9), 0 0 10px rgba(255,255,255,0.5); animation: glow 1.5s ease-in-out infinite alternate; display: inline-block; padding: 2px 5px; border-radius: 3px; background-color: rgba(0,0,0,0.2);">6037 7015 6942 9787</span>
-                                </span>
-                            </span>
-                        </span>
-                    </div>
-                    <div class="payment-item">
-                        <span class="payment-label">شماره تماس پشتیبانی:</span>
-                        <span class="payment-value">📞 تلفن: 031-33582147 | 📱 همراه: 09133255422</span>
-                    </div>
-                </div>
-                
-                <div class="note">
-                    لطفاً کد رهگیری را در زمان تکمیل فرم ثبت نام وارد نموده و فیش واریزی 150,000 تومانی را در روز آزمون همراه داشته باشید.
-                </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button id="downloadPdf" class="btn btn-accent btn-pdf">
+                    📥 دانلود رسید ثبت نام (PDF)
+                </button>
+                <button id="continueToGoogleForm" class="btn btn-primary">
+                    ادامه ثبت نام
+                </button>
             </div>
-            
-            <button id="continueToGoogleForm" class="btn btn-accent">
-                تکمیل فرم ثبت نام
-            </button>
         </div>
         
         <div class="duplicate-section" id="duplicateSection">
-            <!-- نور پس زمینه کارت -->
-            <div class="card-light" style="top: -50px; right: -50px; background: radial-gradient(circle, rgba(239, 68, 68, 0.3) 0%, transparent 70%);"></div>
-            <div class="card-light" style="bottom: -50px; left: -50px; background: radial-gradient(circle, rgba(239, 68, 68, 0.3) 0%, transparent 70%);"></div>
-
             <div class="header">
                 <h1 class="title">خطا در ثبت نام</h1>
-                <p class="subtitle">هنرستان فنی حرفه‌ای دانشمند قلم چی</p>
+                <p class="subtitle">هنرستان فنی حرفه‌ای دانشمند</p>
             </div>
             
             <div id="duplicateMessage">
@@ -980,10 +1048,10 @@
                 </p>
             </div>
             
-            <div class="error-note">
+            <div style="background: rgba(239, 68, 68, 0.1); padding: 20px; border-radius: 10px; border-right: 4px solid var(--error); margin-bottom: 20px;">
                 <p>در صورتی که این خطا را اشتباه می‌دانید یا نیاز به راهنمایی دارید، لطفاً با پشتیبانی تماس بگیرید:</p>
                 <p style="margin-top: 10px; font-weight: 500; color: var(--light);">
-                    📞 تلفن: 031-33582147 | 📱 همراه: 09336932409
+                    📞 تلفن: 031-33582147 | 📱 همراه: 09133255422
                 </p>
             </div>
             
@@ -993,12 +1061,12 @@
         </div>
         
         <div class="footer">
-            <p>قبلاً ثبت‌نام کرده‌اید؟ <a href="index.html" class="footer-link">ورود به حساب کاربری</a></p>
+            <p>قبلاً ثبت‌نام کرده‌اید؟ <a href="#" class="footer-link" onclick="document.getElementById('duplicateSection').style.display='block';document.getElementById('registrationCard').style.display='none';">ورود به حساب کاربری</a></p>
         </div>
     </div>
 
     <script>
-        // ایجاد ذرات کوانتومی پویا
+        // ایجاد ذرات کوانتومی
         function createQuantumParticles() {
             const particlesCount = 12;
             const container = document.body;
@@ -1007,22 +1075,18 @@
                 const particle = document.createElement('div');
                 particle.classList.add('quantum-particle');
                 
-                // موقعیت تصادفی
                 const top = Math.random() * 100;
                 const left = Math.random() * 100;
                 particle.style.top = `${top}%`;
                 particle.style.left = `${left}%`;
                 
-                // اندازه تصادفی
                 const size = Math.random() * 4 + 2;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 
-                // مدت زمان انیمیشن تصادفی
                 const duration = Math.random() * 20 + 10;
                 particle.style.animationDuration = `${duration}s`;
                 
-                // تأخیر تصادفی
                 const delay = Math.random() * 10;
                 particle.style.animationDelay = `-${delay}s`;
                 
@@ -1047,39 +1111,57 @@
             
             return {
                 letters: codeLetters,
-                numbers: codeNumbers
+                numbers: codeNumbers,
+                full: codeLetters + '-' + codeNumbers
             };
         }
 
         // اعتبارسنجی کد ملی
         function validateNationalId(nationalId) {
-            // بررسی طول کد ملی
-            if (nationalId.length !== 10) {
+            if (!nationalId || nationalId.length !== 10) {
                 return false;
             }
             
-            // بررسی اینکه تمام ارقام عدد هستند
             if (!/^\d+$/.test(nationalId)) {
                 return false;
             }
             
-            // الگوریتم اعتبارسنجی کد ملی
-            const check = parseInt(nationalId[9]);
-            let sum = 0;
-            
-            for (let i = 0; i < 9; i++) {
-                sum += parseInt(nationalId[i]) * (10 - i);
+            // الگوریتم ساده برای اعتبارسنجی کد ملی
+            if (nationalId === '0000000000' || nationalId === '1111111111' || 
+                nationalId === '2222222222' || nationalId === '3333333333' || 
+                nationalId === '4444444444' || nationalId === '5555555555' || 
+                nationalId === '6666666666' || nationalId === '7777777777' || 
+                nationalId === '8888888888' || nationalId === '9999999999') {
+                return false;
             }
             
-            const remainder = sum % 11;
-            const isValid = (remainder < 2 && check === remainder) || (remainder >= 2 && check === (11 - remainder));
-            
-            return isValid;
+            try {
+                const check = parseInt(nationalId[9]);
+                let sum = 0;
+                
+                for (let i = 0; i < 9; i++) {
+                    sum += parseInt(nationalId[i]) * (10 - i);
+                }
+                
+                const remainder = sum % 11;
+                const isValid = (remainder < 2 && check === remainder) || (remainder >= 2 && check === (11 - remainder));
+                
+                return isValid;
+            } catch (e) {
+                return false;
+            }
         }
 
         // اعتبارسنجی شماره تلفن
         function validatePhone(phone) {
             return /^09\d{9}$/.test(phone);
+        }
+
+        // اعتبارسنجی معدل
+        function validateGPA(gpa) {
+            if (!gpa) return false;
+            const gpaNum = parseFloat(gpa);
+            return !isNaN(gpaNum) && gpaNum >= 0 && gpaNum <= 20;
         }
 
         // ذخیره کد ملی در localStorage
@@ -1096,69 +1178,6 @@
             const registeredIds = JSON.parse(localStorage.getItem('registeredNationalIds')) || [];
             return registeredIds.includes(nationalId);
         }
-
-        // مدیریت ارسال فرم
-        document.getElementById('registrationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // دریافت مقادیر فرم
-            const fullname = document.getElementById('fullname').value.trim();
-            const nationalId = document.getElementById('nationalId').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const field = document.getElementById('field').value;
-            
-            // ریست خطاهای قبلی
-            document.querySelectorAll('.error-message').forEach(el => {
-                el.style.display = 'none';
-                el.textContent = '';
-            });
-            
-            document.querySelectorAll('.form-input').forEach(el => {
-                el.classList.remove('error');
-            });
-            
-            // اعتبارسنجی فیلدها
-            let isValid = true;
-            
-            if (fullname.length < 3) {
-                document.getElementById('fullnameError').textContent = 'نام و نام خانوادگی باید حداقل 3 حرف داشته باشد';
-                document.getElementById('fullnameError').style.display = 'block';
-                document.getElementById('fullname').classList.add('error');
-                isValid = false;
-            }
-            
-            if (!validateNationalId(nationalId)) {
-                document.getElementById('nationalIdError').textContent = 'کد ملی وارد شده معتبر نیست';
-                document.getElementById('nationalIdError').style.display = 'block';
-                document.getElementById('nationalId').classList.add('error');
-                isValid = false;
-            } else if (isNationalIdRegistered(nationalId)) {
-                // اگر کد ملی تکراری باشد
-                showDuplicateSection();
-                return;
-            }
-            
-            if (!validatePhone(phone)) {
-                document.getElementById('phoneError').textContent = 'شماره تلفن همراه معتبر نیست (مثال: 09123456789)';
-                document.getElementById('phoneError').style.display = 'block';
-                document.getElementById('phone').classList.add('error');
-                isValid = false;
-            }
-            
-            if (!field) {
-                document.getElementById('fieldError').textContent = 'لطفاً یک رشته را انتخاب کنید';
-                document.getElementById('fieldError').style.display = 'block';
-                document.getElementById('field').classList.add('error');
-                isValid = false;
-            }
-            
-            if (!isValid) {
-                return;
-            }
-            
-            // اگر فرم معتبر بود
-            processRegistration(fullname, nationalId, phone, field);
-        });
 
         // نمایش بخش ثبت نام تکراری
         function showDuplicateSection() {
@@ -1183,33 +1202,102 @@
             }, 500);
         }
 
+        // به‌روزرسانی اطلاعات PDF
+        function updatePDFInfo(data) {
+            document.getElementById('pdfFullname').textContent = data.fullname;
+            document.getElementById('pdfFatherName').textContent = data.fatherName;
+            document.getElementById('pdfNationalId').textContent = data.nationalId;
+            document.getElementById('pdfPhone').textContent = data.phone;
+            document.getElementById('pdfSchoolName').textContent = data.schoolName;
+            document.getElementById('pdfGpa').textContent = data.gpa;
+            document.getElementById('pdfFirstField').textContent = data.firstField;
+            document.getElementById('pdfSecondField').textContent = data.secondField;
+            
+            // به‌روزرسانی کد رهگیری
+            document.getElementById('pdfTrackingLetters').textContent = data.trackingCode.letters;
+            document.getElementById('pdfTrackingNumbers').textContent = data.trackingCode.numbers;
+            document.getElementById('displayTrackingCode').textContent = data.trackingCode.full;
+        }
+
+        // تابع دانلود PDF
+        function downloadPDF() {
+            const element = document.getElementById('pdfContent');
+            const transition = document.getElementById('quantumTransition');
+            
+            transition.style.opacity = '1';
+            transition.style.pointerEvents = 'auto';
+            
+            html2canvas(element, {
+                scale: 2,
+                backgroundColor: '#0f2a3a',
+                allowTaint: true,
+                useCORS: true,
+                logging: false
+            }).then((canvas) => {
+                const imgData = canvas.toDataURL('image/png');
+                
+                // استفاده از jsPDF
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+                
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height;
+                const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+                const width = imgWidth * ratio;
+                const height = imgHeight * ratio;
+                
+                pdf.addImage(imgData, 'PNG', (pdfWidth - width) / 2, 0, width, height);
+                pdf.save('رسید_ثبت_نام_هنرستان_دانشمند.pdf');
+                
+                setTimeout(() => {
+                    transition.style.opacity = '0';
+                    transition.style.pointerEvents = 'none';
+                }, 500);
+            }).catch(error => {
+                console.error('خطا در تولید PDF:', error);
+                alert('خطا در تولید PDF. لطفاً دوباره تلاش کنید.');
+                transition.style.opacity = '0';
+                transition.style.pointerEvents = 'none';
+            });
+        }
+
         // پردازش ثبت نام
-        function processRegistration(fullname, nationalId, phone, field) {
+        function processRegistration(formData) {
             const transition = document.getElementById('quantumTransition');
             transition.style.opacity = '1';
             transition.style.pointerEvents = 'auto';
             
             setTimeout(() => {
                 // ذخیره کد ملی
-                saveNationalId(nationalId);
+                saveNationalId(formData.nationalId);
                 
                 // تولید کد رهگیری
                 const trackingCode = generateTrackingCode();
-                document.getElementById('trackingLetters').textContent = trackingCode.letters;
-                document.getElementById('trackingNumbers').textContent = trackingCode.numbers;
                 
-                // مخفی کردن فرم و نمایش نتایج
+                const data = {
+                    ...formData,
+                    trackingCode: trackingCode
+                };
+                
+                // به‌روزرسانی اطلاعات در صفحه
+                updatePDFInfo(data);
+                
+                // نمایش بخش نتیجه و مخفی کردن فرم
                 document.getElementById('registrationCard').style.display = 'none';
                 document.getElementById('duplicateSection').style.display = 'none';
                 document.getElementById('resultSection').style.display = 'block';
                 
-                // اسکرول به بالای صفحه نتایج
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
                 });
                 
-                // پنهان کردن افکت انتقال
                 setTimeout(() => {
                     transition.style.opacity = '0';
                     transition.style.pointerEvents = 'none';
@@ -1217,7 +1305,127 @@
             }, 500);
         }
 
-        // بازگشت به فرم از بخش تکراری
+        // مدیریت ارسال فرم
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // دریافت مقادیر فرم
+            const fullname = document.getElementById('fullname').value.trim();
+            const fatherName = document.getElementById('fatherName').value.trim();
+            const nationalId = document.getElementById('nationalId').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const schoolName = document.getElementById('schoolName').value.trim();
+            const gpa = document.getElementById('gpa').value.trim();
+            const firstField = document.getElementById('firstField').value;
+            const secondField = document.getElementById('secondField').value;
+            
+            // پاک کردن خطاهای قبلی
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.style.display = 'none';
+                el.textContent = '';
+            });
+            
+            document.querySelectorAll('.form-input').forEach(el => {
+                el.classList.remove('error');
+            });
+            
+            let isValid = true;
+            
+            // اعتبارسنجی نام
+            if (fullname.length < 3) {
+                document.getElementById('fullnameError').textContent = 'نام و نام خانوادگی باید حداقل 3 حرف داشته باشد';
+                document.getElementById('fullnameError').style.display = 'block';
+                document.getElementById('fullname').classList.add('error');
+                isValid = false;
+            }
+            
+            // اعتبارسنجی نام پدر
+            if (fatherName.length < 2) {
+                document.getElementById('fatherNameError').textContent = 'نام پدر باید حداقل 2 حرف داشته باشد';
+                document.getElementById('fatherNameError').style.display = 'block';
+                document.getElementById('fatherName').classList.add('error');
+                isValid = false;
+            }
+            
+            // اعتبارسنجی کد ملی
+            if (!validateNationalId(nationalId)) {
+                document.getElementById('nationalIdError').textContent = 'کد ملی وارد شده معتبر نیست';
+                document.getElementById('nationalIdError').style.display = 'block';
+                document.getElementById('nationalId').classList.add('error');
+                isValid = false;
+            } else if (isNationalIdRegistered(nationalId)) {
+                showDuplicateSection();
+                return;
+            }
+            
+            // اعتبارسنجی شماره تلفن
+            if (!validatePhone(phone)) {
+                document.getElementById('phoneError').textContent = 'شماره تلفن همراه معتبر نیست (مثال: 09123456789)';
+                document.getElementById('phoneError').style.display = 'block';
+                document.getElementById('phone').classList.add('error');
+                isValid = false;
+            }
+            
+            // اعتبارسنجی نام مدرسه
+            if (schoolName.length < 3) {
+                document.getElementById('schoolNameError').textContent = 'نام مدرسه باید حداقل 3 حرف داشته باشد';
+                document.getElementById('schoolNameError').style.display = 'block';
+                document.getElementById('schoolName').classList.add('error');
+                isValid = false;
+            }
+            
+            // اعتبارسنجی معدل
+            if (!validateGPA(gpa)) {
+                document.getElementById('gpaError').textContent = 'معدل باید بین 0 تا 20 باشد';
+                document.getElementById('gpaError').style.display = 'block';
+                document.getElementById('gpa').classList.add('error');
+                isValid = false;
+            }
+            
+            // اعتبارسنجی رشته اول
+            if (!firstField) {
+                document.getElementById('firstFieldError').textContent = 'لطفاً رشته اولویت اول را انتخاب کنید';
+                document.getElementById('firstFieldError').style.display = 'block';
+                document.getElementById('firstField').classList.add('error');
+                isValid = false;
+            }
+            
+            // اعتبارسنجی رشته دوم
+            if (!secondField) {
+                document.getElementById('secondFieldError').textContent = 'لطفاً رشته اولویت دوم را انتخاب کنید';
+                document.getElementById('secondFieldError').style.display = 'block';
+                document.getElementById('secondField').classList.add('error');
+                isValid = false;
+            }
+            
+            // بررسی تکراری نبودن رشته‌ها
+            if (firstField && secondField && firstField === secondField) {
+                document.getElementById('secondFieldError').textContent = 'رشته اولویت دوم باید متفاوت از اولویت اول باشد';
+                document.getElementById('secondFieldError').style.display = 'block';
+                document.getElementById('secondField').classList.add('error');
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                return;
+            }
+            
+            // پردازش ثبت نام
+            processRegistration({
+                fullname: fullname,
+                fatherName: fatherName,
+                nationalId: nationalId,
+                phone: phone,
+                schoolName: schoolName,
+                gpa: gpa,
+                firstField: firstField,
+                secondField: secondField
+            });
+        });
+
+        // رویدادهای دکمه‌ها
+        document.getElementById('downloadPdf').addEventListener('click', downloadPDF);
+
         document.getElementById('backToForm').addEventListener('click', function() {
             const transition = document.getElementById('quantumTransition');
             transition.style.opacity = '1';
@@ -1240,9 +1448,7 @@
             }, 500);
         });
 
-        // هدایت به گوگل فرم
         document.getElementById('continueToGoogleForm').addEventListener('click', function() {
-            // افکت انتقال کوانتومی
             const transition = document.getElementById('quantumTransition');
             transition.style.opacity = '1';
             transition.style.pointerEvents = 'auto';
@@ -1256,12 +1462,11 @@
         window.addEventListener('load', function() {
             createQuantumParticles();
             
-            // افکت ورود تدریجی
             const container = document.querySelector('.container');
             container.style.opacity = '0';
             container.style.animation = 'fadeIn 1s ease forwards';
             
-            // اعتبارسنجی لحظه‌ای کد ملی
+            // اعتبارسنجی لحظه‌ای
             document.getElementById('nationalId').addEventListener('input', function(e) {
                 const value = e.target.value;
                 if (value.length === 10 && !validateNationalId(value)) {
@@ -1274,7 +1479,6 @@
                 }
             });
             
-            // اعتبارسنجی لحظه‌ای شماره تلفن
             document.getElementById('phone').addEventListener('input', function(e) {
                 const value = e.target.value;
                 if (value.length > 0 && !validatePhone(value)) {
@@ -1286,7 +1490,29 @@
                     e.target.classList.remove('error');
                 }
             });
+
+            document.getElementById('gpa').addEventListener('input', function(e) {
+                const value = e.target.value;
+                if (value && !validateGPA(value)) {
+                    document.getElementById('gpaError').textContent = 'معدل باید بین 0 تا 20 باشد';
+                    document.getElementById('gpaError').style.display = 'block';
+                    e.target.classList.add('error');
+                } else {
+                    document.getElementById('gpaError').style.display = 'none';
+                    e.target.classList.remove('error');
+                }
+            });
         });
+
+        // اضافه کردن انیمیشن fadeIn
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
